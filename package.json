@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack && npx babel server.js -d dist",
+    "build": "webpack && babel server.js -d dist",
     "start": "npm run build && node dist/server.js"
   },
   "keywords": [],
