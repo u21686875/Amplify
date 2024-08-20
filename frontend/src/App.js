@@ -4,7 +4,7 @@ const App = () => {
     console.log('App component rendered');
     return (
         <div>
-            <h1>Welcome to Amplify</h1>
+            <h2>Welcome to Amplify</h2>
         </div>
     );
 };
