@@ -2,10 +2,10 @@
   "name": "amplify",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "frontend/src/index.js",
   "scripts": {
-    "build": "webpack && babel server.js -d dist",
-    "start": "npm run build && node dist/server.js && npm nodemon"
+    "build": "webpack && babel backend/server.js -d backend/dist",
+    "start": "npm run build && node backend/dist/server.js"
   },
   "keywords": [],
   "author": "",
