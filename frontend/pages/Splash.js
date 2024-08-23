@@ -20,8 +20,10 @@ class SplashPage extends React.Component {
                 <style jsx>{`
                     @font-face {
                         font-family: 'DevilBreeze';
-                        src: url('../public/assets/fonts/devil_breeze/Devil_Breeze_Demi.ttf') format('truetype');
+                        src: url('../public/assets/fonts/devil_breeze/Devil_Breeze_Demi.ttf');
                         /* Add additional font formats if needed */
+                        font-weight: normal;
+                        font-style: normal;
                     }
 
                     * {
