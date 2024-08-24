@@ -12,8 +12,7 @@ class SplashPage extends React.Component {
     }
 
     handleAuth = (isLogin) => {
-        // Use the navigate prop instead of this.props.history.push
-        this.props.navigate('/auth', { state: { isLogin } });
+        this.props.history.push('/auth', { isLogin });
     }
 
     componentDidMount() {
