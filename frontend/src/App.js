@@ -1,14 +1,36 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SplashPage from '../pages/Splash/Splash';
+import Auth from '../pages/auth/Auth';
 
 class App extends React.Component {
     render() {
         return (
             <div>
-                <SplashPage/>
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<SplashPage />} />
+                        <Route path="/auth" element={<Auth />} />
+                        <Route path="/home" element={<Auth />} />
+                    </Routes>
+                </Router>
+                <style jsx>{`
+                    * {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                    }
+
+                    body, html {
+                        height: 100%;
+                        width: 100%;
+                        overflow: hidden;
+                    }
+                `}</style>
             </div>
         );
+
     }
 }
 
-export default App;  // Make sure to export the class
+export default App;

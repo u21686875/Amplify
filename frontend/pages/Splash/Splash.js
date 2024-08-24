@@ -1,5 +1,6 @@
 import React from 'react';
 import WebFont from 'webfontloader';
+import { useNavigate } from 'react-router-dom';
 
 class SplashPage extends React.Component {
 
@@ -8,6 +9,11 @@ class SplashPage extends React.Component {
         this.state = {
             fontLoaded: false
         };
+    }
+
+    handleAuth = (isLogin) => {
+        // Use the navigate prop instead of this.props.history.push
+        this.props.navigate('/auth', { state: { isLogin } });
     }
 
     componentDidMount() {
@@ -36,8 +42,8 @@ class SplashPage extends React.Component {
                 <div className="content-container">
                     <h1 className="company-name" style={{ fontFamily }}>AMPLIFY</h1>
                     <div className="button-container">
-                        <button className="login-button">Log in</button>
-                        <button className="signin-button">Sign in</button>
+                        <button className="login-button" onClick={() => this.handleAuth(true)}>Log in</button>
+                        <button className="signin-button"onClick={() => this.handleAuth(false)}>Sign in</button>
                     </div>
                 </div>
                 <style jsx>{`
@@ -197,4 +203,10 @@ class SplashPage extends React.Component {
     }
 }
 
-export default SplashPage;
+// Wrapper function to use hooks with class component
+function SplashPageWithRouter(props) {
+    const navigate = useNavigate();
+    return <SplashPage {...props} navigate={navigate} />;
+}
+
+export default SplashPageWithRouter;
