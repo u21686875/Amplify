@@ -1,5 +1,5 @@
 import React from 'react';
-import SplashPage from '../pages/Splash';
+import SplashPage from '../pages/Splash/Splash';
 
 class App extends React.Component {
     render() {
