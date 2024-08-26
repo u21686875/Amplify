@@ -35,7 +35,6 @@ class Sidebar extends React.Component {
                     {
                         `
                             .sidebar {
-                            width: 250px;
                             background-color: #0F0F0F;
                             padding: 20px;
                             }

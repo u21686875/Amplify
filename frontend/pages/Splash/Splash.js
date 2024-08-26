@@ -12,7 +12,7 @@ class SplashPage extends React.Component {
     }
 
     handleAuth = (isLogin) => {
-        this.props.history.push('/auth', { isLogin });
+        this.props.navigate('/auth', { isLogin });
     }
 
     componentDidMount() {

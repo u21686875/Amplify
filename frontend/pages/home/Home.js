@@ -1,16 +1,19 @@
 import React from 'react';
 import Sidebar from '../../components/sidebar/sideBar';
 import SearchBar from '../../components/search/searchBar';
+import FeaturedSong from '../../components/featuredsong/feature';
+import NewReleases from '../../components/newrelease/release';
+
 class Home extends React.Component {
     render() {
         return (
             <div className="app-container">
                 <div className="main-content">
                     <SearchBar />
-                    {/* <div style={{padding: '20px'}}>
+                    <div style={{padding: '20px'}}>
                     <FeaturedSong />
                     <NewReleases />
-                    </div> */}
+                    </div>
                 </div>
                 <Sidebar />
                 <style jsx>
@@ -32,7 +35,7 @@ class Home extends React.Component {
                             }
 
                             .sidebar {
-                                width: 250px;
+                                width: 600px;
                                 padding: 20px;
                                 height: 100vh;
                                 overflow-y: auto;
