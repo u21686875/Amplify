@@ -34,19 +34,12 @@ class Home extends React.Component {
                                 flex-direction: row-reverse;
                             }
 
-                            .sidebar {
-                                width: 600px;
-                                padding: 20px;
-                                height: 100vh;
-                                overflow-y: auto;
-                                box-sizing: border-box;
-                            }
-
                             .main-content {
                             flex-grow: 1;
                             display: flex;
                             flex-direction: column;
                             height: 100vh;
+                            overflow: auto;
                             }
 
                             .content-area {

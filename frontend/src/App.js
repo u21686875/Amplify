@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SplashPage from '../pages/Splash/Splash';
 import Auth from '../pages/auth/Auth';
 import Home from '../pages/home/Home';
+import ProfileSettings from '../pages/profile/profile';
 
 class App extends React.Component {
     render() {
@@ -13,6 +14,7 @@ class App extends React.Component {
                         <Route path="/" element={<SplashPage />} />
                         <Route path="/auth" element={<Auth />} />
                         <Route path="/home" element={<Home />} />
+                        <Route path="/profile" element={<ProfileSettings />} />
                     </Routes>
                 </Router>
                 <style jsx>{`

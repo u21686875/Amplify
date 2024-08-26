@@ -1,7 +1,12 @@
 import React from 'react';
-import { Home, Music, Album, TrendingUp, Star } from 'lucide-react';
+import { Home, Music, Album, TrendingUp, Star, Settings } from 'lucide-react';
+
 
 class Sidebar extends React.Component {
+    handleSettingsClick = () => {
+        this.props.history.push('/settings');
+    }
+
     render() {
         return (
             <div className="sidebar">
@@ -31,12 +36,28 @@ class Sidebar extends React.Component {
                 <div className="playlist-item"><span className="playlist-color" style={{ backgroundColor: 'green' }}></span> Electro</div>
                 <div className="playlist-item"><span className="playlist-color" style={{ backgroundColor: 'yellow' }}></span> Funk</div>
                 <div className="playlist-item"><span className="playlist-color" style={{ backgroundColor: 'purple' }}></span> EDM</div>
+                <div className="settings" onClick={this.handleSettingsClick}><Settings />Settings</div>
                 <style jsx>
                     {
                         `
                             .sidebar {
                             background-color: #0F0F0F;
                             padding: 20px;
+                            width: 600px;
+                            }
+
+                            h3{
+                                color: white;
+                            }
+
+                            .settings {
+                                display: flex;
+                                align-items: center;
+                                gap: 7px;
+                                position: absolute;
+                                bottom: 0;
+                                margin-bottom: 40px;
+                                color: grey;
                             }
 
                             .sidebar-header {
@@ -75,6 +96,7 @@ class Sidebar extends React.Component {
                             display: flex;
                             align-items: center;
                             margin-bottom: 10px;
+                            color: #888;
                             }
 
                             .playlist-color {

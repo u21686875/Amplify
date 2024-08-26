@@ -13,7 +13,10 @@ class NewReleases extends React.Component {
 
         return (
             <div className="new-releases">
-                <h2>NEW RELEASES</h2>
+                <div className="details">
+                    <h2 className="new-releases">NEW RELEASES</h2>
+                    <h3 className="see-more">See more</h3>
+                </div>
                 <div className="releases-grid">
                     {releases.map((release, index) => (
                         <div key={index} className="release-card">
@@ -28,6 +31,16 @@ class NewReleases extends React.Component {
                 <style jsx>
                     {
                         `
+                            h3.see-more {
+                                color: #F3777D;
+                            }
+                            .details {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin-bottom: 10px;
+                            }
                             .new-releases {
                             margin-top: 30px;
                             }

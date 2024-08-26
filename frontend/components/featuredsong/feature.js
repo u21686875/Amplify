@@ -7,7 +7,7 @@ class FeaturedSong extends React.Component {
                 <img src="/assets/images/featured/BJA7RzO.jpeg" alt="Featured Song" />
                 <div className="featured-song-info">
                 <div className="featured-song-label">FEATURED SONGS</div>
-                <h2 className="featured-song-title">Doomer Scape</h2>
+                <h4 className="featured-song-title">Doomer Scape</h4>
                 <h3 className="featured-song-artist">Zangetsu</h3>
                 <div className="featured-song-controls">
                     <Heart className="heart-icon" size={24} />
@@ -21,7 +21,7 @@ class FeaturedSong extends React.Component {
                         `
                             .featured-song {
                             position: relative;
-                            height: 30%;
+                            height: 45%;
                             margin-bottom: 30px;
                             border-radius: 8px;
                             overflow: hidden;
@@ -33,22 +33,44 @@ class FeaturedSong extends React.Component {
                             object-fit: cover;
                             }
 
+                            .featured-song-label {
+                                padding-bottom: 40px;
+                                font-weight: 500;
+                                float: right;
+                            }
+
+                            h3.featured-song-artist {
+                                font-size: 46px;
+                            }
+                            h4.featured-song-title {
+                                font-size: 29px;
+                                font-weight: lighter;
+                            }
                             .featured-song-info {
                             position: absolute;
                             bottom: 0;
-                            left: 0;
                             right: 0;
-                            padding: 20px;
+                            padding: 40px;
                             background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
                             }
 
                             .play-button {
-                            background-color: #1db954;
-                            color: #fff;
-                            border: none;
-                            padding: 10px 20px;
-                            border-radius: 20px;
-                            cursor: pointer;
+                                background-color: #1db954;
+                                color: #fff;
+                                border: none;
+                                padding: 12px 32px;
+                                border-radius: 8px;
+                                cursor: pointer;
+                                font-size: 17px;
+                                font-weight: 700;   
+                            }
+
+                            .featured-song-controls {
+                                float: right;
+                                padding-top: 40px;
+                                display: flex;
+                                align-items: center;
+                                gap: 40px;
                             }
                         `
                     }
