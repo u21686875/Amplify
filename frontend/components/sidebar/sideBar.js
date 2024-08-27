@@ -1,10 +1,14 @@
 import React from 'react';
 import { Home, Music, Album, TrendingUp, Star, Settings } from 'lucide-react';
-
+import { useNavigate } from 'react-router-dom';
 
 class Sidebar extends React.Component {
     handleSettingsClick = () => {
-        this.props.history.push('/settings');
+        this.props.navigate('/settings');
+    }
+
+    handlePlayList = () => {
+        this.props.navigate('/playList');
     }
 
     render() {
@@ -17,7 +21,7 @@ class Sidebar extends React.Component {
                 <hr style={{height: '0.2px', borderWidth: '0', color: '#252727', backgroundColor: '#252727', marginBottom: '25px', marginTop: '25px', width: '80%'}}/>
                 <nav>
                     <div className="nav-item active"><Home /> Home</div>
-                    <div className="nav-item"><Music /> Playlist</div>
+                    <div className="nav-item" onClick={this.handlePlayList}><Music /> Playlist</div>
                     <div className="nav-item"><Album /> Album</div>
                 </nav>
 
@@ -113,4 +117,10 @@ class Sidebar extends React.Component {
     }
 }
 
-export default Sidebar;
+// Wrapper function to use hooks with class component
+function SideBarWithRouter(props) {
+    const navigate = useNavigate();
+    return <Sidebar {...props} navigate={navigate} />;
+}
+
+export default SideBarWithRouter;

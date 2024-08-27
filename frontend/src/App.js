@@ -4,7 +4,7 @@ import SplashPage from '../pages/Splash/Splash';
 import Auth from '../pages/auth/Auth';
 import Home from '../pages/home/Home';
 import ProfileSettings from '../pages/profile/profile';
-
+import PlayList from '../components/playlist/playlist';
 class App extends React.Component {
     render() {
         return (
@@ -15,6 +15,7 @@ class App extends React.Component {
                         <Route path="/auth" element={<Auth />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/profile" element={<ProfileSettings />} />
+                        <Route path="/playList" element={<PlayList />} />
                     </Routes>
                 </Router>
                 <style jsx>{`
