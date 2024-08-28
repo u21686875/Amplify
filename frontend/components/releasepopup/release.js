@@ -131,6 +131,9 @@ class ReleasePopup extends React.Component {
 
                     .popup-header {
                         margin-bottom: 20px;
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
                     }
 
                     .popup-header h2 {

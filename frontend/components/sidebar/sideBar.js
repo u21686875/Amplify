@@ -1,14 +1,15 @@
 import React from 'react';
 import { Home, Music, Album, TrendingUp, Star, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
+import { useEffect } from 'react';
 class Sidebar extends React.Component {
     handleSettingsClick = () => {
         this.props.navigate('/settings');
     }
 
-    handlePlayList = () => {
-        this.props.navigate('/playList');
+    handleRouting = (route) => {
+        // Dynamically navigate based on the route provided
+        this.props.navigate('/' + route);
     }
 
     render() {
@@ -20,8 +21,8 @@ class Sidebar extends React.Component {
                 </div>
                 <hr style={{height: '0.2px', borderWidth: '0', color: '#252727', backgroundColor: '#252727', marginBottom: '25px', marginTop: '25px', width: '80%'}}/>
                 <nav>
-                    <div className="nav-item active"><Home /> Home</div>
-                    <div className="nav-item" onClick={this.handlePlayList}><Music /> Playlist</div>
+                    <div className="nav-item active" onClick={() => this.handleRouting('home')}><Home /> Home</div>
+                    <div className="nav-item" onClick={() => this.handleRouting('playlist')}><Music /> Playlist</div>
                     <div className="nav-item"><Album /> Album</div>
                 </nav>
 
@@ -47,7 +48,9 @@ class Sidebar extends React.Component {
                             .sidebar {
                             background-color: #0F0F0F;
                             padding: 20px;
-                            width: 600px;
+                            width: 300px;
+                            font-family: Arial, sans-serif;
+                            height: 900px;
                             }
 
                             h3{
@@ -81,11 +84,13 @@ class Sidebar extends React.Component {
                             color: #fff;
                             }
 
-                            .nav-item {
-                            display: flex;
-                            align-items: center;
-                            margin-bottom: 10px;
-                            color: #888;
+                           .nav-item {
+                                display: flex;
+                                align-items: center;
+                                margin-bottom: 10px;
+                                color: #888;
+                                cursor: pointer;
+                                width: fit-content;
                             }
 
                             .nav-item.active {

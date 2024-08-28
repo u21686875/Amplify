@@ -20,8 +20,6 @@ class Home extends React.Component {
                     {
                         `
                             body, html {
-                                margin: 0;
-                                padding: 0;
                                 height: 100%;
                                 font-family: Arial, sans-serif;
                                 background-color: #000807;
