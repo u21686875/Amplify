@@ -215,7 +215,7 @@ class NewReleases extends React.Component {
         return (
             <div className="new-releases">
                 <div className="details">
-                    <h2 className="new-releases">NEW RELEASES</h2>
+                    <h2>NEW RELEASES</h2>
                     <h3 className="see-more">See more</h3>
                 </div>
                 <div className="releases-grid">
@@ -245,7 +245,7 @@ class NewReleases extends React.Component {
                         flex-direction: row;
                         justify-content: space-between;
                         align-items: center;
-                        margin-bottom: 10px;
+                        margin-bottom: 20px;
                     }
                     .new-releases {
                         margin-top: 30px;

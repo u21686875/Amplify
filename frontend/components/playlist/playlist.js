@@ -1,5 +1,6 @@
 import React from 'react';
 import SideBarWithRouter from '../sidebar/sideBar';
+import SearchBar from '../search/searchBar';
 import { X } from 'lucide-react';
 class PlayList extends React.Component {
     constructor(props) {
@@ -32,10 +33,10 @@ class PlayList extends React.Component {
     }
 
     toggleSongPanel = (playlist) => {
-        this.setState(prevState => ({ 
-            showSongPanel: !prevState.showSongPanel, 
+        this.setState(prevState => ({
+            showSongPanel: !prevState.showSongPanel,
             showSidePanel: false,
-            selectedPlaylist: playlist 
+            selectedPlaylist: playlist
         }));
     }
 
@@ -77,10 +78,10 @@ class PlayList extends React.Component {
 
             onCreatePlaylist(newPlaylist);
 
-            this.setState({ 
-                showSidePanel: false, 
-                selectedReleases: [], 
-                newPlaylistName: '' 
+            this.setState({
+                showSidePanel: false,
+                selectedReleases: [],
+                newPlaylistName: ''
             });
         } else {
             alert('Please enter a playlist name and select at least one release.');
@@ -93,9 +94,11 @@ class PlayList extends React.Component {
         const { showSidePanel, showSongSidePanel, selectedReleases, newPlaylistName, selectedPlaylist } = this.state;
         return (
             <div className="playlist-container">
+
                 <SideBarWithRouter />
                 <div className="main-content">
-                    <h1>NEW RELEASES</h1>
+                    <SearchBar />
+                    <h1>RELEASES</h1>
                     <div className="card-container">
                         {newReleases.map((release) => (
                             <div key={release.id} className="card">
@@ -104,8 +107,10 @@ class PlayList extends React.Component {
                             </div>
                         ))}
                     </div>
-                    <h1>PERSONAL</h1>
-                    <button onClick={this.toggleSidePanel} className="create-playlist-btn">Create Playlist</button>
+                    <div className="playlist-personal">
+                        <h1>PERSONAL</h1>
+                        <button onClick={this.toggleSidePanel} className="create-playlist-btn2">Create Playlist</button>
+                    </div>
                     {personalPlaylists.length === 0 ? (
                         <div className="no-playlists">
                             <p>You have no playlists</p>
@@ -126,7 +131,7 @@ class PlayList extends React.Component {
                     <div className="side-panel">
                         <div className='header'>
                             <h2 className='header-title'>Add To Playlist</h2>
-                            <X className='close' onClick={this.toggleSidePanel}/>
+                            <X className='close' onClick={this.toggleSidePanel} />
                         </div>
                         <input
                             type="text"
@@ -150,11 +155,11 @@ class PlayList extends React.Component {
                         <button onClick={this.createPlaylist} className="done-button">Done</button>
                     </div>
                 )}
-                 {showSongSidePanel && selectedPlaylist && (
+                {showSongSidePanel && selectedPlaylist && (
                     <div className="side-panel song-panel">
                         <div className='header'>
                             <h2 className='header-title'>{selectedPlaylist.title}</h2>
-                            <X className='close' onClick={this.closeSongSidePanel}/>
+                            <X className='close' onClick={this.closeSongSidePanel} />
                         </div>
                         <div className="song-list">
                             {selectedPlaylist.songs && selectedPlaylist.songs.length > 0 ? (
@@ -176,6 +181,16 @@ class PlayList extends React.Component {
                     </div>
                 )}
                 <style jsx>{`
+                    .playlist-personal {
+                        display: flex;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 20px;
+                    }
+                    .playlist-personal h1{
+                        margin: 0;
+                    }
                     .close:hover{
                         cursor: pointer;
                     }
@@ -240,6 +255,15 @@ class PlayList extends React.Component {
                         cursor: pointer;
                         font-size: 16px;
                         margin-top: 20px;
+                    }
+                    .create-playlist-btn2, .done-button {
+                        background-color: #1DB954;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 20px;
+                        cursor: pointer;
+                        font-size: 16px;
                     }
                     .side-panel {
                         position: fixed;
