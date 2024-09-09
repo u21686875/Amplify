@@ -14,22 +14,15 @@ class ReleasePopup extends React.Component {
     }
 
     handleCommentSubmit = () => {
+        const { onAddComment, release, currentUser } = this.props;
         if (this.state.newComment.trim() !== '') {
             const newCommentObj = {
-                userName: "Cruzer7", // TODO: Replace with actual user data
-                userImage: "/assets/images/user/user.jpg", // TODO: Replace with actual user image
                 text: this.state.newComment,
                 likes: 0,
                 dislikes: 0
             };
 
-            // Call the onAddComment prop function if it exists
-            if (this.props.onAddComment) {
-                this.props.onAddComment(this.props.release.title, newCommentObj);
-            } else {
-                console.log('onAddComment function not provided');
-                // TODO: Implement proper error handling or user feedback
-            }
+            onAddComment(release.id, newCommentObj);
 
             // Clear the input field
             this.setState({ newComment: '' });
@@ -38,7 +31,7 @@ class ReleasePopup extends React.Component {
 
 
     render() {
-        const { release, onClose } = this.props;
+        const { release, onClose, currentUser } = this.props;
 
         if (!release) return null;
 
@@ -58,19 +51,23 @@ class ReleasePopup extends React.Component {
                         <div className="popup-left">
                             <h3>Comments</h3>
                             <div className="comments-container">
-                                {release.comments.map((comment, index) => (
-                                    <div key={index} className="comment">
-                                        <div className="comment-header">
-                                            <img src={comment.userImage} alt={comment.userName} className="user-image" />
-                                            <span className="user-name">@{comment.userName}</span>
+                                {release.comments && release.comments.length > 0 ? (
+                                    release.comments.map((comment, index) => (
+                                        <div key={index} className="comment">
+                                            <div className="comment-header">
+                                                <img src={comment.userImage} alt={comment.userName} className="user-image" />
+                                                <span className="user-name">@{comment.userName}</span>
+                                            </div>
+                                            <p className="comment-text">{comment.text}</p>
+                                            <div className="comment-actions">
+                                                <button className="action-button"><ThumbsUp size={16} /> {comment.likes}</button>
+                                                <button className="action-button"><ThumbsDown size={16} /> {comment.dislikes}</button>
+                                            </div>
                                         </div>
-                                        <p className="comment-text">{comment.text}</p>
-                                        <div className="comment-actions">
-                                            <button className="action-button"><ThumbsUp size={16} /> {comment.likes}</button>
-                                            <button className="action-button"><ThumbsDown size={16} /> {comment.dislikes}</button>
-                                        </div>
-                                    </div>
-                                ))}
+                                    ))
+                                ) : (
+                                    <p>No comments</p>
+                                )}
                             </div>
                         </div>
                         <div className="popup-right">
@@ -78,9 +75,9 @@ class ReleasePopup extends React.Component {
                         </div>
                     </div>
                     <div className="comment-input-container">
-                        <input 
-                            type="text" 
-                            placeholder="Add a comment..." 
+                        <input
+                            type="text"
+                            placeholder="Add a comment..."
                             className="comment-input"
                             value={this.state.newComment}
                             onChange={this.handleCommentChange}
@@ -91,6 +88,7 @@ class ReleasePopup extends React.Component {
                         </button>
                     </div>
                 </div>
+
 
                 <style jsx>{`
                     .popup-overlay {

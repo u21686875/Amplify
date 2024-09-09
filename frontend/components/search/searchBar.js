@@ -56,7 +56,7 @@ const SearchBar = () => {
                 .search-icon {
                     position: absolute;
                     left: 10px;
-                    top: 49%;
+                    top: 40%;
                     transform: translateY(-50%);
                     color: #888;
                     margin-left: 10px;

@@ -68,7 +68,7 @@ class PlayList extends React.Component {
             const newPlaylist = {
                 id: Date.now(),
                 title: newPlaylistName,
-                imageUrl: selectedReleases[0].imageUrl,
+                image: selectedReleases[0].image,
                 songs: selectedReleases.map(release => ({
                     id: Date.now() + Math.random(),
                     title: release.title,
@@ -102,7 +102,7 @@ class PlayList extends React.Component {
                     <div className="card-container">
                         {newReleases.map((release) => (
                             <div key={release.id} className="card">
-                                <img src={release.imageUrl} alt={release.title} />
+                                <img src={release.image} alt={release.title} />
                                 <h3>{release.title}</h3>
                             </div>
                         ))}
@@ -120,7 +120,7 @@ class PlayList extends React.Component {
                         <div className="card-container">
                             {personalPlaylists.map((playlist) => (
                                 <div key={playlist.id} className="card" onClick={() => this.openSongSidePanel(playlist)}>
-                                    <img src={playlist.imageUrl} alt={playlist.title} />
+                                    <img src={playlist.image} alt={playlist.title} />
                                     <h3>{playlist.title}</h3>
                                 </div>
                             ))}
@@ -146,7 +146,7 @@ class PlayList extends React.Component {
                                     className={`release-card ${selectedReleases.includes(release) ? 'selected' : ''}`}
                                     onClick={() => this.toggleReleaseSelection(release)}
                                 >
-                                    <img src={release.imageUrl} alt={release.title} />
+                                    <img src={release.image} alt={release.title} />
                                     <h3>{release.title}</h3>
                                     {selectedReleases.includes(release) && <div className="tick">✓</div>}
                                 </div>
@@ -188,6 +188,10 @@ class PlayList extends React.Component {
                         align-items: center;
                         margin-bottom: 20px;
                     }
+                    .search-icon {
+                        top: 37%;
+                        padding: 0px;
+                    }
                     .playlist-personal h1{
                         margin: 0;
                     }
@@ -210,7 +214,6 @@ class PlayList extends React.Component {
                     }
                     .main-content {
                         flex-grow: 1;
-                        padding: 20px;
                         padding-left: 70px;
                         overflow-y: auto;
                         height: 100vh;

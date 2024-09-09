@@ -1,186 +1,18 @@
 import React from "react";
 import ReleasePopup from "../releasepopup/release";
+import { X } from 'lucide-react';
 class NewReleases extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selectedRelease: null,
-            releases: [
-                {
-                    title: "Not Like Us",
-                    artist: "Kendrick Lamar",
-                    image: "/assets/images/newReleases/NotLikeUs.png",
-                    hashtags: ["#HipHop", "#NewMusic"],
-                    comments: [
-                        {
-                            userName: "hiphopFan23",
-                            userImage: "/assets/images/users/user1.jpg",
-                            text: "Great beat!",
-                            likes: 15,
-                            dislikes: 1
-                        },
-                        {
-                            userName: "kdotLover",
-                            userImage: "/assets/images/users/user2.jpg",
-                            text: "Kendrick does it again!",
-                            likes: 22,
-                            dislikes: 0
-                        },
-                        {
-                            userName: "musicCritic101",
-                            userImage: "/assets/images/users/user3.jpg",
-                            text: "On repeat!",
-                            likes: 8,
-                            dislikes: 2
-                        }
-                    ]
-                },
-                {
-                    title: "I feel the rain",
-                    artist: "Soulscape",
-                    image: "/assets/images/newReleases/Ifealtherain.png",
-                    hashtags: ["#Ambient", "#Chill"],
-                    comments: [
-                        {
-                            userName: "chillVibes",
-                            userImage: "/assets/images/users/user4.jpg",
-                            text: "So relaxing",
-                            likes: 10,
-                            dislikes: 0
-                        },
-                        {
-                            userName: "studyGuru",
-                            userImage: "/assets/images/users/user5.jpg",
-                            text: "Perfect for studying",
-                            likes: 18,
-                            dislikes: 1
-                        },
-                        {
-                            userName: "ambientLover",
-                            userImage: "/assets/images/users/user6.jpg",
-                            text: "Love the atmosphere",
-                            likes: 7,
-                            dislikes: 0
-                        }
-                    ]
-                },
-                {
-                    title: "Phonk Ultra",
-                    artist: "Montagem",
-                    image: "/assets/images/newReleases/phonk.png",
-                    hashtags: ["#Phonk", "#Electronic"],
-                    comments: [
-                        {
-                            userName: "bassHead",
-                            userImage: "/assets/images/users/user7.jpg",
-                            text: "Sick bassline!",
-                            likes: 25,
-                            dislikes: 2
-                        },
-                        {
-                            userName: "phonkMaster",
-                            userImage: "/assets/images/users/user8.jpg",
-                            text: "This goes hard",
-                            likes: 30,
-                            dislikes: 1
-                        },
-                        {
-                            userName: "clubberQueen",
-                            userImage: "/assets/images/users/user9.jpg",
-                            text: "Club banger for sure",
-                            likes: 20,
-                            dislikes: 0
-                        }
-                    ]
-                },
-                {
-                    title: "HIT MACHINE",
-                    artist: "Soundwave",
-                    image: "/assets/images/newReleases/hitmachine.png",
-                    hashtags: ["#Pop", "#Dance"],
-                    comments: [
-                        {
-                            userName: "popLover99",
-                            userImage: "/assets/images/users/user10.jpg",
-                            text: "Catchy chorus",
-                            likes: 12,
-                            dislikes: 1
-                        },
-                        {
-                            userName: "summerVibes",
-                            userImage: "/assets/images/users/user11.jpg",
-                            text: "Summer anthem",
-                            likes: 16,
-                            dislikes: 0
-                        },
-                        {
-                            userName: "danceFloorKing",
-                            userImage: "/assets/images/users/user12.jpg",
-                            text: "Can't stop dancing to this",
-                            likes: 19,
-                            dislikes: 2
-                        }
-                    ]
-                },
-                {
-                    title: "Tobey",
-                    artist: "Eminem",
-                    image: "/assets/images/newReleases/tobey.png",
-                    hashtags: ["#Rap", "#Wordplay"],
-                    comments: [
-                        {
-                            userName: "slimShadyFan",
-                            userImage: "/assets/images/users/user13.jpg",
-                            text: "Em's still got it",
-                            likes: 35,
-                            dislikes: 3
-                        },
-                        {
-                            userName: "lyricGenius",
-                            userImage: "/assets/images/users/user14.jpg",
-                            text: "Clever lyrics as always",
-                            likes: 28,
-                            dislikes: 1
-                        },
-                        {
-                            userName: "rapGod",
-                            userImage: "/assets/images/users/user15.jpg",
-                            text: "That flow is insane",
-                            likes: 22,
-                            dislikes: 0
-                        }
-                    ]
-                },
-                {
-                    title: "LOQ",
-                    artist: "LOCKED",
-                    image: "/assets/images/newReleases/image.png",
-                    hashtags: ["#Alternative", "#Indie"],
-                    comments: [
-                        {
-                            userName: "indieExplorer",
-                            userImage: "/assets/images/users/user16.jpg",
-                            text: "Unique sound",
-                            likes: 8,
-                            dislikes: 1
-                        },
-                        {
-                            userName: "musicScout",
-                            userImage: "/assets/images/users/user17.jpg",
-                            text: "This band is underrated",
-                            likes: 14,
-                            dislikes: 0
-                        },
-                        {
-                            userName: "guitarHero",
-                            userImage: "/assets/images/users/user18.jpg",
-                            text: "Love the guitar riffs",
-                            likes: 11,
-                            dislikes: 1
-                        }
-                    ]
-                }
-            ]
+            showAddReleasePanel: false,
+            newRelease: {
+                title: "",
+                artist: "",
+                image: "",
+                hashtags: [],
+            }
         };
     }
 
@@ -192,34 +24,78 @@ class NewReleases extends React.Component {
         this.setState({ selectedRelease: null });
     }
 
-    onAddComment = (releaseTitle, newComment) => {
-        this.setState(prevState => {
-            const updatedReleases = prevState.releases.map(release => {
-                if (release.title === releaseTitle) {
-                    return {
-                        ...release,
-                        comments: [...(release.comments || []), newComment]
-                    };
+    onAddComment = (releaseId, newComment) => {
+        if (this.props.onAddComment) {
+            this.props.onAddComment(releaseId, newComment);
+            // Update the selected release with the new comment
+            this.setState(prevState => ({
+                selectedRelease: prevState.selectedRelease && prevState.selectedRelease.id === releaseId
+                    ? {
+                        ...prevState.selectedRelease,
+                        comments: [...(prevState.selectedRelease.comments || []), newComment]
+                    }
+                    : prevState.selectedRelease
+            }));
+        } else {
+            console.error("onAddComment prop is not defined");
+        }
+    }
+
+    handleHashtagChange = (event) => {
+        const hashtags = event.target.value.split(',').map(tag => tag.trim());
+        this.setState(prevState => ({
+            newRelease: {
+                ...prevState.newRelease,
+                hashtags
+            }
+        }));
+    }
+
+    handleAddRelease = () => {
+        const { newRelease } = this.state;
+        if (newRelease.title && newRelease.artist) {
+            this.props.onAddRelease(newRelease);
+            this.setState({
+                showAddReleasePanel: false,
+                newRelease: {
+                    title: "",
+                    artist: "",
+                    imageUrl: "",
+                    hashtags: [],
                 }
-                return release;
             });
-            return { 
-                releases: updatedReleases,
-                selectedRelease: updatedReleases.find(r => r.title === releaseTitle)
-            };
-        });
+        } else {
+            alert('Please enter at least a title and an artist for the new release.');
+        }
+    }
+
+    toggleAddReleasePanel = () => {
+        this.setState(prevState => ({ showAddReleasePanel: !prevState.showAddReleasePanel }));
+    }
+
+    handleInputChange = (event) => {
+        const { name, value } = event.target;
+        this.setState(prevState => ({
+            newRelease: {
+                ...prevState.newRelease,
+                [name]: value
+            }
+        }));
     }
 
 
     render() {
+        const { selectedRelease, showAddReleasePanel, newRelease } = this.state;
+        const { releases, currentUser } = this.props;
+
         return (
             <div className="new-releases">
                 <div className="details">
                     <h2>NEW RELEASES</h2>
-                    <h3 className="see-more">See more</h3>
+                    <h3 className="see-more" onClick={this.toggleAddReleasePanel}>Add release</h3>
                 </div>
                 <div className="releases-grid">
-                    {this.state.releases.map((release, index) => (
+                    {releases.map((release, index) => (
                         <div key={index} className="release-card" onClick={() => this.handleReleaseClick(release)}>
                             <img src={release.image} alt={release.title} />
                             <div className="release-info">
@@ -230,13 +106,54 @@ class NewReleases extends React.Component {
                     ))}
                 </div>
 
-                <ReleasePopup 
-                    release={this.state.selectedRelease}
+                <ReleasePopup
+                    release={selectedRelease}
                     onClose={this.closePopup}
                     onAddComment={this.onAddComment}
+                    currentUser={currentUser}
                 />
 
+                {showAddReleasePanel && (
+                    <div className="side-panel">
+                        <div className='header'>
+                            <h2 className='header-title'>Add New Release</h2>
+                            <X className='close' onClick={this.toggleAddReleasePanel} />
+                        </div>
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="Release Title"
+                            value={newRelease.title}
+                            onChange={this.handleInputChange}
+                        />
+                        <input
+                            type="text"
+                            name="artist"
+                            placeholder="Artist Name"
+                            value={newRelease.artist}
+                            onChange={this.handleInputChange}
+                        />
+                        <input
+                            type="text"
+                            name="image"
+                            placeholder="Image URL"
+                            value={newRelease.image}
+                            onChange={this.handleInputChange}
+                        />
+                        <input
+                            type="text"
+                            name="hashtags"
+                            placeholder="Hashtags (comma-separated)"
+                            value={newRelease.hashtags.join(', ')}
+                            onChange={this.handleHashtagChange}
+                        />
+                        <button onClick={this.handleAddRelease} className="done-button">Add Release</button>
+                    </div>
+                )}
                 <style jsx>{`
+                    h3.see-more:hover{
+                        cursor: pointer;
+                    }
                     h3.see-more {
                         color: #F3777D;
                     }
@@ -280,6 +197,57 @@ class NewReleases extends React.Component {
                     .release-artist {
                         font-size: 0.9em;
                         color: #888;
+                    }
+                    .side-panel {
+                        position: fixed;
+                        right: -10px;
+                        top: 0;
+                        width: 300px;
+                        height: 100%;
+                        background-color: #000807;
+                        padding: 30px;
+                        overflow-y: auto;
+                        transition: transform 0.3s ease-in-out;
+                        border-radius: 40px 0px 0px 40px;
+                        border: 1px solid #fff;
+                    }
+
+                    .header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 20px;
+                    }
+
+                    .header-title {
+                        font-size: 24px;
+                        margin: 0;
+                    }
+
+                    .close {
+                        cursor: pointer;
+                    }
+
+                    input {
+                        width: 100%;
+                        padding: 10px;
+                        margin-bottom: 15px;
+                        background-color: #333;
+                        border: 1px solid #00E469;
+                        color: #fff;
+                        border-radius: 5px;
+                    }
+
+                    .done-button {
+                        background-color: #1DB954;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 20px;
+                        cursor: pointer;
+                        font-size: 16px;
+                        width: 100%;
+                        margin-top: 20px;
                     }
                 `}</style>
             </div>

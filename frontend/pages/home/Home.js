@@ -10,9 +10,13 @@ class Home extends React.Component {
             <div className="app-container">
                 <div className="main-content">
                     <SearchBar />
-                    <div style={{padding: '20px'}}>
-                    <FeaturedSong />
-                    <NewReleases />
+                    <div style={{ padding: '20px' }}>
+                        <FeaturedSong />
+                        <NewReleases
+                            releases={this.props.newReleases}
+                            onAddRelease={this.props.onAddRelease}
+                            onAddComment={this.props.onAddComment}
+                        />
                     </div>
                 </div>
                 <Sidebar />
