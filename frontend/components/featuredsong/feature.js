@@ -16,8 +16,7 @@ class FeaturedSong extends React.Component {
                     </button>
                 </div>
                 </div>
-                <style jsx>
-                    {
+                <style jsx>{
                         `
                             .featured-song {
                             position: relative;
