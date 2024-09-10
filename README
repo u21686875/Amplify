@@ -1,0 +1,10 @@
+# React Babel Docker Project
+
+## Building and Running the Docker Image
+
+To build the Docker image, run:
+docker build -t react-babel-app .
+To run the Docker container, use:
+docker run -p 3000:3000 react-babel-app
+
+The application will be available at http://localhost:3000
