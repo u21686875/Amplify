@@ -23,7 +23,6 @@ class Sidebar extends React.Component {
                 <nav>
                     <div className="nav-item active" onClick={() => this.handleRouting('home')}><Home /> Home</div>
                     <div className="nav-item" onClick={() => this.handleRouting('playlist')}><Music /> Playlist</div>
-                    <div className="nav-item"><Album /> Album</div>
                 </nav>
 
                 <hr style={{height: '0.2px', borderWidth: '0', color: '#252727', backgroundColor: '#252727', marginBottom: '25px', marginTop: '25px', width: '80%'}}/>

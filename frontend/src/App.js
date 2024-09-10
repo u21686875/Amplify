@@ -12,6 +12,7 @@ class App extends React.Component {
         this.state = {
             newReleases: [
                 {
+                    id: 1,
                     title: "Not Like Us",
                     artist: "Kendrick Lamar",
                     image: "/assets/images/newReleases/NotLikeUs.png",
@@ -41,6 +42,7 @@ class App extends React.Component {
                     ]
                 },
                 {
+                    id: 2,
                     title: "I feel the rain",
                     artist: "Soulscape",
                     image: "/assets/images/newReleases/Ifealtherain.png",
@@ -70,6 +72,7 @@ class App extends React.Component {
                     ]
                 },
                 {
+                    id: 3,
                     title: "Phonk Ultra",
                     artist: "Montagem",
                     image: "/assets/images/newReleases/phonk.png",
@@ -99,6 +102,7 @@ class App extends React.Component {
                     ]
                 },
                 {
+                    id: 4,
                     title: "HIT MACHINE",
                     artist: "Soundwave",
                     image: "/assets/images/newReleases/hitmachine.png",
@@ -128,6 +132,7 @@ class App extends React.Component {
                     ]
                 },
                 {
+                    id: 5,
                     title: "Tobey",
                     artist: "Eminem",
                     image: "/assets/images/newReleases/tobey.png",
@@ -157,6 +162,7 @@ class App extends React.Component {
                     ]
                 },
                 {
+                    id: 6,
                     title: "LOQ",
                     artist: "LOCKED",
                     image: "/assets/images/newReleases/image.png",
@@ -230,6 +236,16 @@ class App extends React.Component {
         }));
     }
 
+    handleAddSongToPlaylist = (playlistId, newSong) => {
+        this.setState(prevState => ({
+            personalPlaylists: prevState.personalPlaylists.map(playlist =>
+                playlist.id === playlistId
+                    ? { ...playlist, songs: [...playlist.songs, newSong] }
+                    : playlist
+            )
+        }));
+    }
+
     handleRemoveSongFromPlaylist = (playlistId, songId) => {
         this.setState(prevState => ({
             personalPlaylists: prevState.personalPlaylists.map(playlist =>
@@ -273,7 +289,7 @@ class App extends React.Component {
                         <Route path="/" element={<SplashPage />} />
                         <Route path="/auth" element={<Auth />} />
                         <Route path="/home" element={
-                            <Home 
+                            <Home
                                 newReleases={this.state.newReleases}
                                 onAddRelease={this.handleAddRelease}
                                 onAddComment={this.handleAddComment}
@@ -287,6 +303,7 @@ class App extends React.Component {
                                 personalPlaylists={this.state.personalPlaylists}
                                 onCreatePlaylist={this.handleCreatePlaylist}
                                 onRemoveSongFromPlaylist={this.handleRemoveSongFromPlaylist}
+                                onAddSongToPlaylist={this.handleAddSongToPlaylist}
                             />
                         } />
                     </Routes>

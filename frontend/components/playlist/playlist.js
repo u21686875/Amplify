@@ -1,6 +1,8 @@
 import React from 'react';
 import SideBarWithRouter from '../sidebar/sideBar';
 import SearchBar from '../search/searchBar';
+import { ChevronDown } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { X } from 'lucide-react';
 class PlayList extends React.Component {
     constructor(props) {
@@ -11,12 +13,52 @@ class PlayList extends React.Component {
             selectedReleases: [],
             newPlaylistName: '',
             selectedPlaylist: null,
+            showAddSongsDropdown: false,
         };
     }
 
     toggleSidePanel = () => {
         this.setState(prevState => ({ showSidePanel: !prevState.showSidePanel }));
     }
+
+    toggleAddSongsDropdown = () => {
+        this.setState(prevState => ({ showAddSongsDropdown: !prevState.showAddSongsDropdown }));
+    }
+
+    handleAddSongToPlaylist = (release) => {
+        const { selectedPlaylist } = this.state;
+        const { onAddSongToPlaylist } = this.props;
+
+        console.log('Selected Playlist:', selectedPlaylist);
+        console.log('onAddSongToPlaylist prop:', onAddSongToPlaylist);
+
+        if (selectedPlaylist && onAddSongToPlaylist) {
+            const newSong = {
+                id: Date.now(),
+                title: release.title,
+                artist: release.artist
+            };
+
+            onAddSongToPlaylist(selectedPlaylist.id, newSong);
+
+            // Update local state
+            this.setState(prevState => ({
+                selectedPlaylist: {
+                    ...prevState.selectedPlaylist,
+                    songs: [...prevState.selectedPlaylist.songs, newSong]
+                },
+                showAddSongsDropdown: false
+            }));
+
+            console.log('Song added successfully');
+        } else {
+            console.error('Unable to add song: selectedPlaylist or onAddSongToPlaylist is missing');
+            console.log('selectedPlaylist:', selectedPlaylist);
+            console.log('onAddSongToPlaylist:', onAddSongToPlaylist);
+            alert('Unable to add song to playlist. Please try again or contact support.');
+        }
+    }
+
 
     closeSongSidePanel = () => {
         this.setState({
@@ -57,6 +99,14 @@ class PlayList extends React.Component {
         const { selectedPlaylist } = this.state;
         if (onRemoveSongFromPlaylist && selectedPlaylist) {
             onRemoveSongFromPlaylist(selectedPlaylist.id, songId);
+
+            // Update the local state to reflect the change immediately
+            this.setState(prevState => ({
+                selectedPlaylist: {
+                    ...prevState.selectedPlaylist,
+                    songs: prevState.selectedPlaylist.songs.filter(song => song.id !== songId)
+                }
+            }));
         }
     }
 
@@ -90,26 +140,27 @@ class PlayList extends React.Component {
 
 
     render() {
-        const { newReleases = [], personalPlaylists = [] } = this.props;
-        const { showSidePanel, showSongSidePanel, selectedReleases, newPlaylistName, selectedPlaylist } = this.state;
+        const { newReleases, personalPlaylists = [] } = this.props;
+        const { showSidePanel, showSongSidePanel, selectedReleases, newPlaylistName, selectedPlaylist, showAddSongsDropdown } = this.state;
         return (
             <div className="playlist-container">
-
                 <SideBarWithRouter />
                 <div className="main-content">
                     <SearchBar />
                     <h1>RELEASES</h1>
-                    <div className="card-container">
+                    <div className="card-grid">
                         {newReleases.map((release) => (
                             <div key={release.id} className="card">
-                                <img src={release.image} alt={release.title} />
+                                <div className="card-image-container">
+                                    <img src={release.image} alt={release.title} />
+                                </div>
                                 <h3>{release.title}</h3>
                             </div>
                         ))}
                     </div>
                     <div className="playlist-personal">
                         <h1>PERSONAL</h1>
-                        <button onClick={this.toggleSidePanel} className="create-playlist-btn2">Create Playlist</button>
+                        <button onClick={this.toggleSidePanel} className="create-playlist-btn">Create Playlist</button>
                     </div>
                     {personalPlaylists.length === 0 ? (
                         <div className="no-playlists">
@@ -117,10 +168,12 @@ class PlayList extends React.Component {
                             <button onClick={this.toggleSidePanel} className="create-playlist-btn">Create Playlist</button>
                         </div>
                     ) : (
-                        <div className="card-container">
+                        <div className="card-grid">
                             {personalPlaylists.map((playlist) => (
                                 <div key={playlist.id} className="card" onClick={() => this.openSongSidePanel(playlist)}>
-                                    <img src={playlist.image} alt={playlist.title} />
+                                    <div className="card-image-container">
+                                        <img src={playlist.image} alt={playlist.title} />
+                                    </div>
                                     <h3>{playlist.title}</h3>
                                 </div>
                             ))}
@@ -139,14 +192,16 @@ class PlayList extends React.Component {
                             value={newPlaylistName}
                             onChange={this.handlePlaylistNameChange}
                         />
-                        <div className="releases-container">
+                        <div className="card-grid">
                             {newReleases.map((release) => (
                                 <div
                                     key={release.id}
-                                    className={`release-card ${selectedReleases.includes(release) ? 'selected' : ''}`}
+                                    className={`card ${selectedReleases.includes(release) ? 'selected' : ''}`}
                                     onClick={() => this.toggleReleaseSelection(release)}
                                 >
-                                    <img src={release.image} alt={release.title} />
+                                    <div className="card-image-container">
+                                        <img src={release.image} alt={release.title} />
+                                    </div>
                                     <h3>{release.title}</h3>
                                     {selectedReleases.includes(release) && <div className="tick">✓</div>}
                                 </div>
@@ -160,6 +215,22 @@ class PlayList extends React.Component {
                         <div className='header'>
                             <h2 className='header-title'>{selectedPlaylist.title}</h2>
                             <X className='close' onClick={this.closeSongSidePanel} />
+                        </div>
+                        <div className="add-songs-container">
+                            <button onClick={this.toggleAddSongsDropdown} className="add-songs-button">
+                                Add Songs <ChevronDown />
+                            </button>
+                            {showAddSongsDropdown && (
+                                <div className="add-songs-dropdown">
+                                    {newReleases.map((release) => (
+                                        <div key={release.id} className="add-song-item" onClick={() => this.handleAddSongToPlaylist(release)}>
+                                            <img src={release.image} alt={release.title} className="add-song-image" />
+                                            <span>{release.title} - {release.artist}</span>
+                                            <Plus className="add-icon" />
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                         <div className="song-list">
                             {selectedPlaylist.songs && selectedPlaylist.songs.length > 0 ? (
@@ -181,32 +252,54 @@ class PlayList extends React.Component {
                     </div>
                 )}
                 <style jsx>{`
-                    .playlist-personal {
-                        display: flex;
-                        flex-wrap: wrap;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 20px;
-                    }
-                    .search-icon {
-                        top: 37%;
-                        padding: 0px;
-                    }
-                    .playlist-personal h1{
-                        margin: 0;
-                    }
-                    .close:hover{
-                        cursor: pointer;
-                    }
-                    .header {
-                        display: flex;
-                        align-items: flex-start;
-                        justify-content: space-between;
-                    }
-                    .header-title{
-                        font-size: 35px;
-                    }
-                    .playlist-container {
+                 .add-songs-container {
+                    margin-bottom: 20px;
+                    position: relative;
+                }
+                .add-songs-button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    width: 100%;
+                    padding: 10px;
+                    background-color: #1DB954;
+                    color: white;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+                .add-songs-dropdown {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                    max-height: 300px;
+                    overflow-y: auto;
+                    background-color: #282828;
+                    border: 1px solid #333;
+                    border-radius: 5px;
+                    z-index: 10;
+                }
+                .add-song-item {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px;
+                    cursor: pointer;
+                    transition: background-color 0.2s;
+                }
+                .add-song-item:hover {
+                    background-color: #333;
+                }
+                .add-song-image {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: cover;
+                    margin-right: 10px;
+                }
+                .add-icon {
+                    margin-left: auto;
+                }
+                .playlist-container {
                         display: flex;
                         background-color: #000;
                         color: #fff;
@@ -214,7 +307,7 @@ class PlayList extends React.Component {
                     }
                     .main-content {
                         flex-grow: 1;
-                        padding-left: 70px;
+                        padding: 20px 20px 20px 90px;
                         overflow-y: auto;
                         height: 100vh;
                     }
@@ -222,44 +315,49 @@ class PlayList extends React.Component {
                         font-size: 24px;
                         margin-bottom: 20px;
                     }
-                    .card-container, .releases-container {
-                        display: flex;
-                        gap: 50px;
+                    .card-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                        gap: 20px;
                         margin-bottom: 40px;
                     }
-                    .card, .release-card {
-                        width: 210px;
+                    .card, .side-panel-card {
+                        width: 100%;
                         transition: transform 0.2s;
                         cursor: pointer;
+                        position: relative;
                     }
-                    .card:hover, .release-card:hover {
+                    .card:hover, .side-panel-card:hover {
                         transform: scale(1.05);
                     }
-                    .card img, .release-card img {
+                    .card-image-container {
                         width: 100%;
-                        height: auto;
+                        padding-top: 100%; /* 1:1 Aspect Ratio */
+                        position: relative;
+                        overflow: hidden;
                     }
-                    .card h3, .release-card h3 {
+                    .card img, .side-panel-card img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                    .card h3, .side-panel-card h3 {
                         font-size: 14px;
                         margin-top: 10px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
-                    .no-playlists {
-                        text-align: center;
-                        position: relative;
-                        top: 10%;
-                        bottom: 0px;
+                    .playlist-personal {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 20px;
                     }
                     .create-playlist-btn, .done-button {
-                        background-color: #1DB954;
-                        color: white;
-                        border: none;
-                        padding: 10px 20px;
-                        border-radius: 20px;
-                        cursor: pointer;
-                        font-size: 16px;
-                        margin-top: 20px;
-                    }
-                    .create-playlist-btn2, .done-button {
                         background-color: #1DB954;
                         color: white;
                         border: none;
@@ -270,17 +368,36 @@ class PlayList extends React.Component {
                     }
                     .side-panel {
                         position: fixed;
-                        right: -10px;
+                        right: 0;
                         top: 0;
-                        width: fit-content;
+                        width: 50%;
                         height: 100%;
                         background-color: #000807;
                         padding: 30px;
-                        padding-left: 50px;
                         overflow-y: auto;
-                        transition: transform 3s ease-in-out;
-                        border-radius: 40px 0px 0px 40px;
-                        border: 1px solid #fff;
+                        border: 1px solid #333;
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    .side-panel-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                        gap: 15px;
+                        overflow-y: auto;
+                        max-height: calc(100vh - 200px);
+                        margin-bottom: 20px;
+                    }
+                    .header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 20px;
+                    }
+                    .close:hover {
+                        cursor: pointer;
+                    }
+                    .header-title {
+                        font-size: 24px;
                     }
                     input {
                         width: 100%;
@@ -290,22 +407,15 @@ class PlayList extends React.Component {
                         border: 1px solid #00E469;
                         color: #fff;
                         border-radius: 15px;
-                        text-align: center;
                     }
                     .done-button {
-                        width: 20%;
-                        display: flex;
-                        justify-content: space-evenly;
-                        align-items: stretch;
-                        position: absolute;
-                        right: 50%;
-                        left: 40%;
+                        width: 100%;
+                        margin-top: auto;
                     }
                     .tick {
                         position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
+                        top: 10px;
+                        right: 10px;
                         background-color: rgba(0,0,0,0.7);
                         border-radius: 50%;
                         width: 30px;
@@ -318,12 +428,7 @@ class PlayList extends React.Component {
                     .selected {
                         border: 2px solid #1DB954;
                     }
-
-
-
-
                     .song-panel {
-                        right: -9px;
                         width: 50%;
                     }
                     .song-list {
@@ -333,12 +438,12 @@ class PlayList extends React.Component {
                         display: flex;
                         justify-content: space-between;
                         align-items: center;
-                        padding: 12px 10px 10px;
+                        padding: 12px 10px;
                         border-bottom: 1px solid #333;
-                        border-radius: 20px;
                     }
                     .song-options {
-                        position: relative;
+                        position: static;
+                        width: 3%;
                     }
                     .options-trigger {
                         cursor: pointer;
@@ -346,11 +451,10 @@ class PlayList extends React.Component {
                     .options-dropdown {
                         display: none;
                         position: absolute;
-                        right: -16px;
+                        right: 0;
                         background-color: #222;
                         border: 1px solid #444;
                         z-index: 1;
-                        width: 100px;
                     }
                     .song-options:hover .options-dropdown {
                         display: block;
@@ -368,7 +472,7 @@ class PlayList extends React.Component {
                     .options-dropdown button:hover {
                         background-color: #333;
                     }
-                        .song-item:hover {
+                    .song-item:hover {
                         background-color: #071816;
                     }
                 `}</style>
