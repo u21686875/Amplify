@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from '../components/AuthContext/authContext';
 import SplashPage from '../pages/Splash/Splash';
 import Auth from '../pages/auth/Auth';
 import Home from '../pages/home/Home';
@@ -20,7 +21,7 @@ class App extends React.Component {
         this.fetchNewReleases();
         this.fetchPersonalPlaylists();
         // Assume we have a method to get the current user
-        this.fetchCurrentUser();
+        // this.fetchCurrentUser();
     }
 
     fetchNewReleases = async () => {
@@ -149,45 +150,46 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <Router>
-                    <Routes>
-                        <Route path="/" element={<SplashPage />} />
-                        <Route path="/auth" element={<Auth />} />
-                        <Route path="/home" element={
-                            <Home
-                                newReleases={this.state.newReleases}
-                                onAddRelease={this.handleAddRelease}
-                                onAddComment={this.handleAddComment}
-                                currentUser={this.state.currentUser}
-                            />
-                        } />
-                        <Route path="/profile" element={<ProfileSettings />} />
-                        <Route path="/playlist" element={
-                            <PlayList
-                                newReleases={this.state.newReleases}
-                                personalPlaylists={this.state.personalPlaylists}
-                                onCreatePlaylist={this.handleCreatePlaylist}
-                                onRemoveSongFromPlaylist={this.handleRemoveSongFromPlaylist}
-                                onAddSongToPlaylist={this.handleAddSongToPlaylist}
-                            />
-                        } />
-                    </Routes>
-                </Router>
-                <style jsx>{`
-                    * {
-                        margin: 0;
-                        padding: 0;
-                        box-sizing: border-box;
-                    }
+            <AuthProvider>
+                <div>
+                    <Router>
+                        <Routes>
+                            <Route path="/" element={<SplashPage />} />
+                            <Route path="/auth" element={<Auth />} />
+                            <Route path="/home" element={
+                                <Home
+                                    newReleases={this.state.newReleases}
+                                    onAddRelease={this.handleAddRelease}
+                                    onAddComment={this.handleAddComment}
+                                />
+                            } />
+                            <Route path="/profile" element={<ProfileSettings />} />
+                            <Route path="/playlist" element={
+                                <PlayList
+                                    newReleases={this.state.newReleases}
+                                    personalPlaylists={this.state.personalPlaylists}
+                                    onCreatePlaylist={this.handleCreatePlaylist}
+                                    onRemoveSongFromPlaylist={this.handleRemoveSongFromPlaylist}
+                                    onAddSongToPlaylist={this.handleAddSongToPlaylist}
+                                />
+                            } />
+                        </Routes>
+                    </Router>
+                    <style jsx>{`
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
 
-                    body, html {
-                        height: 100%;
-                        width: 100%;
-                        overflow: hidden;
-                    }
-                `}</style>
-            </div>
+                        body, html {
+                            height: 100%;
+                            width: 100%;
+                            overflow: hidden;
+                        }
+                    `}</style>
+                </div>
+            </AuthProvider>
         );
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SHA256 } from 'crypto-js';
-
+import { useAuth } from '../../components/AuthContext/authContext'; // Adjust the import path as needed
 function hashPassword(password) {
     return SHA256(password).toString();
 }
@@ -34,6 +34,7 @@ class Auth extends React.Component {
     handleSubmit = async (event) => {
         event.preventDefault();
         const { isLogin, username, password, confirmPassword } = this.state;
+        const { login, navigate } = this.props; // Destructure login and navigate from props
 
         if (!isLogin && password !== confirmPassword) {
             this.setState({ error: "Passwords don't match" });
@@ -51,7 +52,10 @@ class Auth extends React.Component {
                     body: JSON.stringify({ username, password: hashedPassword })
                 });
                 if (response.ok) {
-                    this.props.navigate('/home');
+                    const userData = await response.json();
+                    console.log("Received user data:", userData); // Debugging log
+                    login({ username: username }); // Use the login function from AuthContext
+                    navigate('/home');
                 } else {
                     const errorData = await response.json();
                     this.setState({ error: errorData.message || 'Login failed' });
@@ -68,7 +72,10 @@ class Auth extends React.Component {
                     body: JSON.stringify({ username, password: hashedPassword })
                 });
                 if (response.ok) {
-                    this.setState({ isLogin: true, error: 'Account created. Please log in.' });
+                    const userData = await response.json();
+                    console.log("Received user data:", userData); // Debugging log
+                    login({ username: username }); // Use the login function from AuthContext
+                    navigate('/home');
                 } else {
                     const errorData = await response.json();
                     this.setState({ error: errorData.message || 'Sign up failed' });
@@ -78,7 +85,6 @@ class Auth extends React.Component {
             }
         }
     }
-
 
 
     toggleAuthMode = () => {
@@ -218,7 +224,9 @@ class Auth extends React.Component {
 function AuthWithRouter(props) {
     const location = useLocation();
     const navigate = useNavigate();
-    return <Auth {...props} location={location} navigate={navigate} />;
+    const { login } = useAuth();
+
+    return <Auth {...props} location={location} navigate={navigate} login={login} />;
 }
 
 export default AuthWithRouter;

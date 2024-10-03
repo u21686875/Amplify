@@ -1,19 +1,31 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
+import { useAuth } from '../AuthContext/authContext';
 const SearchBar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const navigate = useNavigate();
+    const { logout } = useAuth(); // Get the logout function from AuthContext
+
 
     const toggleDropdown = () => {
         setIsDropdownOpen(prevState => !prevState);
     };
 
-    const handleOptionClick = (path) => {
+    const handleOptionClick = (option) => {
         setIsDropdownOpen(false);
-        navigate(path);
+        if (option === 'profile') {
+            navigate('/profile');
+        } else if (option === 'logout') {
+            handleLogout();
+        }
     };
+
+    const handleLogout = () => {
+        logout(); // Call the logout function from AuthContext
+        navigate('/auth'); // Redirect to the auth page after logout
+    };
+
 
     return (
         <div className="search-bar">
@@ -27,8 +39,8 @@ const SearchBar = () => {
                 </div>
                 {isDropdownOpen && (
                     <div className="dropdown">
-                        <div className="dropdown-option" onClick={() => handleOptionClick('/profile')}>Profile page</div>
-                        <div className="dropdown-option" onClick={() => handleOptionClick('/auth')}>Log out</div>
+                        <div className="dropdown-option" onClick={() => handleOptionClick('profile')}>Profile page</div>
+                        <div className="dropdown-option" onClick={() => handleOptionClick('logout')}>Log out</div>
                     </div>
                 )}
             </div>

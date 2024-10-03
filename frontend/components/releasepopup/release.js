@@ -5,7 +5,10 @@ class ReleasePopup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newComment: ''
+            newComment: '',
+            showFriendRequestPopup: false,
+            selectedUser: null,
+            friendRequestStatus: 'Friend'
         };
     }
 
@@ -14,11 +17,15 @@ class ReleasePopup extends React.Component {
     }
 
     handleCommentSubmit = () => {
-        const { onAddComment, release, currentUser } = this.props;
+        const { onAddComment, release } = this.props;
         if (this.state.newComment.trim() !== '' && release && release._id) {
+            // Retrieve user data from localStorage
+            const userData = JSON.parse(localStorage.getItem('user'));
+            const username = userData ? userData.username : 'Anonymous';
+
             const newCommentObj = {
                 text: this.state.newComment,
-                userName: currentUser ? currentUser.username : 'Anonymous',
+                userName: username,
                 likes: 0,
                 dislikes: 0
             };
@@ -32,11 +39,50 @@ class ReleasePopup extends React.Component {
         }
     }
 
+    handleUsernameClick = (username) => {
+        this.setState({
+            showFriendRequestPopup: true,
+            selectedUser: username,
+            friendRequestStatus: 'Friend' // Reset status for each new user clicked
+        });
+    }
+
+    handleFriendRequest = async () => {
+        const currentUser = JSON.parse(localStorage.getItem('user')); // Get current user from localStorage
+        const { selectedUser } = this.state;
+    
+        try {
+            if (this.state.friendRequestStatus === 'Friend') {
+                await fetch('/api/users/friend-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fromUsername: currentUser.username, toUsername: selectedUser })
+                });
+                this.setState({ friendRequestStatus: 'Pending' });
+            } else if (this.state.friendRequestStatus === 'Unfriend') {
+                await fetch('/api/users/unfriend', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: currentUser.username, friendUsername: selectedUser })
+                });
+                this.setState({ friendRequestStatus: 'Friend' });
+            }
+        } catch (error) {
+            console.error('Error handling friend request:', error);
+        }
+    }
+
+    closeFriendRequestPopup = () => {
+        this.setState({
+            showFriendRequestPopup: false,
+            selectedUser: null
+        });
+    }
 
 
     render() {
-        const { release, onClose, currentUser } = this.props;
-
+        const { release, onClose } = this.props;
+        const { showFriendRequestPopup, selectedUser, friendRequestStatus } = this.state;
         if (!release) return null;
 
         return (
@@ -62,7 +108,7 @@ class ReleasePopup extends React.Component {
                                                 {comment.userImage && (
                                                     <img src={comment.userImage} alt={comment.userName || 'User'} className="user-image" />
                                                 )}
-                                                <span className="user-name">@{comment.userName || 'Anonymous'}</span>
+                                                <span className="user-name" onClick={() => this.handleUsernameClick(comment.userName)}>@{comment.userName || 'Anonymous'}</span>
                                             </div>
                                             <p className="comment-text">{comment.text}</p>
                                             <div className="comment-actions">
@@ -95,8 +141,64 @@ class ReleasePopup extends React.Component {
                     </div>
                 </div>
 
+                {showFriendRequestPopup && (
+                    <div className="friend-request-popup">
+                        <div className="friend-request-content">
+                            <h3>{selectedUser}</h3>
+                            <button onClick={this.handleFriendRequest}>{friendRequestStatus}</button>
+                            <button onClick={this.closeFriendRequestPopup}>Cancel</button>
+                        </div>
+                    </div>
+                )}
+
 
                 <style jsx>{`
+                    .user-name {
+                        font-weight: bold;
+                        color: #1DB954;
+                        cursor: pointer;
+                    }
+
+                    .user-name:hover {
+                        text-decoration: underline;
+                    }
+
+                    .friend-request-popup {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background-color: #333;
+                        padding: 20px;
+                        border-radius: 10px;
+                        z-index: 1001;
+                    }
+
+                    .friend-request-content {
+                        text-align: center;
+                    }
+
+                    .friend-request-content h3 {
+                        margin-bottom: 20px;
+                    }
+
+                    .friend-request-content button {
+                        margin: 0 10px;
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+
+                    .friend-request-content button:first-of-type {
+                        background-color: #1DB954;
+                        color: white;
+                    }
+
+                    .friend-request-content button:last-of-type {
+                        background-color: #555;
+                        color: white;
+                    }
                     .popup-overlay {
                         position: fixed;
                         top: 0;
