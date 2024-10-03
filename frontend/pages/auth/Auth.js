@@ -1,5 +1,11 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { SHA256 } from 'crypto-js';
+
+function hashPassword(password) {
+    return SHA256(password).toString();
+}
+
 
 class Auth extends React.Component {
     constructor(props) {
@@ -8,7 +14,8 @@ class Auth extends React.Component {
             isLogin: true,
             username: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            error: ''
         };
     }
 
@@ -21,26 +28,58 @@ class Auth extends React.Component {
 
     handleInputChange = (event) => {
         const { name, value } = event.target;
-        this.setState({ [name]: value });
+        this.setState({ [name]: value, error: '' });
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Form submitted', this.state);
-        
-        if (this.state.isLogin) {
-            // Check login credentials
-            if (this.state.username === 'admin' && this.state.password === 'password') {
-                // Redirect to home page
-                this.props.navigate('/home');
-            } else {
-                alert('Invalid credentials');
+        const { isLogin, username, password, confirmPassword } = this.state;
+
+        if (!isLogin && password !== confirmPassword) {
+            this.setState({ error: "Passwords don't match" });
+            return;
+        }
+
+        const hashedPassword = hashPassword(password);
+
+        if (isLogin) {
+            // Login
+            try {
+                const response = await fetch('http://localhost:3000/api/users/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password: hashedPassword })
+                });
+                if (response.ok) {
+                    this.props.navigate('/home');
+                } else {
+                    const errorData = await response.json();
+                    this.setState({ error: errorData.message || 'Login failed' });
+                }
+            } catch (error) {
+                this.setState({ error: 'Network error' });
             }
         } else {
-            // Handle sign up logic here
-            console.log('Sign up logic to be implemented');
+            // Sign up
+            try {
+                const response = await fetch('http://localhost:3000/api/users', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password: hashedPassword })
+                });
+                if (response.ok) {
+                    this.setState({ isLogin: true, error: 'Account created. Please log in.' });
+                } else {
+                    const errorData = await response.json();
+                    this.setState({ error: errorData.message || 'Sign up failed' });
+                }
+            } catch (error) {
+                this.setState({ error: 'Network error' });
+            }
         }
     }
+
+
 
     toggleAuthMode = () => {
         this.setState(prevState => ({ isLogin: !prevState.isLogin }));
@@ -54,7 +93,8 @@ class Auth extends React.Component {
                 </div>
                 <div className="right-column">
                     <div className="content">
-                        <h1>Lets Amp it up <br/> with AMPLIFY</h1>
+                        <h1>Lets Amp it up <br /> with AMPLIFY</h1>
+                        {this.state.error && <p className="error">{this.state.error}</p>}
                         <form onSubmit={this.handleSubmit}>
                             <input
                                 type="text"
@@ -99,6 +139,10 @@ class Auth extends React.Component {
                     background-color: black;
                     color: white;
                     font-family: Arial, sans-serif;
+                }
+                .error {
+                    color: red;
+                    margin-top: 1rem;
                 }
                 .left-column {
                     width: 50%;

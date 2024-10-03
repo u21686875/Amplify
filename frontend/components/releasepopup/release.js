@@ -15,19 +15,23 @@ class ReleasePopup extends React.Component {
 
     handleCommentSubmit = () => {
         const { onAddComment, release, currentUser } = this.props;
-        if (this.state.newComment.trim() !== '') {
+        if (this.state.newComment.trim() !== '' && release && release._id) {
             const newCommentObj = {
                 text: this.state.newComment,
+                userName: currentUser ? currentUser.username : 'Anonymous',
                 likes: 0,
                 dislikes: 0
             };
 
-            onAddComment(release.id, newCommentObj);
+            onAddComment(release._id, newCommentObj);
 
             // Clear the input field
             this.setState({ newComment: '' });
+        } else {
+            console.error('Unable to add comment: Release ID is missing or comment is empty');
         }
     }
+
 
 
     render() {
@@ -55,13 +59,15 @@ class ReleasePopup extends React.Component {
                                     release.comments.map((comment, index) => (
                                         <div key={index} className="comment">
                                             <div className="comment-header">
-                                                <img src={comment.userImage} alt={comment.userName} className="user-image" />
-                                                <span className="user-name">@{comment.userName}</span>
+                                                {comment.userImage && (
+                                                    <img src={comment.userImage} alt={comment.userName || 'User'} className="user-image" />
+                                                )}
+                                                <span className="user-name">@{comment.userName || 'Anonymous'}</span>
                                             </div>
                                             <p className="comment-text">{comment.text}</p>
                                             <div className="comment-actions">
-                                                <button className="action-button"><ThumbsUp size={16} /> {comment.likes}</button>
-                                                <button className="action-button"><ThumbsDown size={16} /> {comment.dislikes}</button>
+                                                <button className="action-button"><ThumbsUp size={16} /> {comment.likes || 0}</button>
+                                                <button className="action-button"><ThumbsDown size={16} /> {comment.dislikes || 0}</button>
                                             </div>
                                         </div>
                                     ))
