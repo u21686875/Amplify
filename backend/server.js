@@ -7,13 +7,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/amplify_music_db', {
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/amplify_music_db';
+mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 5000,
 })
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Could not connect to MongoDB', err));
-
 // User model
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
@@ -211,11 +212,11 @@ app.delete('/api/newReleases/:id', async (req, res) => {
     try {
         const releaseId = req.params.id;
         const deletedRelease = await NewRelease.findByIdAndDelete(releaseId);
-        
+
         if (!deletedRelease) {
             return res.status(404).json({ message: 'Release not found' });
         }
-        
+
         res.json({ message: 'Release deleted successfully', deletedRelease });
     } catch (error) {
         console.error('Error deleting release:', error);
@@ -303,15 +304,15 @@ app.post('/api/personalPlaylists/:id/songs', async (req, res) => {
 app.delete('/api/personalPlaylists/:playlistId/songs/:songId', async (req, res) => {
     try {
         const { playlistId, songId } = req.params;
-        
+
         const playlist = await PersonalPlaylist.findById(playlistId);
-        
+
         if (!playlist) {
             return res.status(404).json({ message: 'Playlist not found' });
         }
-        
+
         playlist.songs = playlist.songs.filter(song => song._id.toString() !== songId);
-        
+
         const updatedPlaylist = await playlist.save();
         res.json(updatedPlaylist);
     } catch (error) {
@@ -324,11 +325,11 @@ app.delete('/api/personalPlaylists/:id', async (req, res) => {
     try {
         const playlistId = req.params.id;
         const deletedPlaylist = await PersonalPlaylist.findByIdAndDelete(playlistId);
-        
+
         if (!deletedPlaylist) {
             return res.status(404).json({ message: 'Playlist not found' });
         }
-        
+
         res.json({ message: 'Playlist deleted successfully', deletedPlaylist });
     } catch (error) {
         console.error('Error deleting playlist:', error);

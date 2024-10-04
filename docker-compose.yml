@@ -4,12 +4,8 @@ services:
     build: .
     ports:
       - "3000:3000"
-    volumes:
-      - .:/app
-      - /app/node_modules
     environment:
-      - NODE_ENV=development
-    command: npm run dev
+      - MONGODB_URI=mongodb://mongo:27017/amplify_music_db
     depends_on:
       - mongo
 
@@ -18,7 +14,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongo-data:/data/db
+      - mongodb_data:/data/db
 
 volumes:
-  mongo-data:
+  mongodb_data:
