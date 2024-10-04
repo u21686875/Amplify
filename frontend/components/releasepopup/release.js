@@ -5,7 +5,10 @@ class ReleasePopup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newComment: ''
+            newComment: '',
+            showFriendRequestPopup: false,
+            selectedUser: null,
+            friendRequestStatus: 'Friend'
         };
     }
 
@@ -14,83 +17,243 @@ class ReleasePopup extends React.Component {
     }
 
     handleCommentSubmit = () => {
-        const { onAddComment, release, currentUser } = this.props;
-        if (this.state.newComment.trim() !== '') {
+        const { onAddComment, release } = this.props;
+        if (this.state.newComment.trim() !== '' && release && release._id) {
+            const userData = JSON.parse(localStorage.getItem('user'));
+            const username = userData ? userData.username : 'Anonymous';
+
             const newCommentObj = {
                 text: this.state.newComment,
+                userName: username,
                 likes: 0,
                 dislikes: 0
             };
 
-            onAddComment(release.id, newCommentObj);
-
-            // Clear the input field
+            onAddComment(release._id, newCommentObj);
             this.setState({ newComment: '' });
+        } else {
+            console.error('Unable to add comment: Release ID is missing or comment is empty');
         }
     }
 
+    handleUsernameClick = (username) => {
+        this.setState({
+            showFriendRequestPopup: true,
+            selectedUser: username,
+            friendRequestStatus: 'Friend'
+        });
+    }
+
+    handleFriendRequest = async () => {
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+        const { selectedUser } = this.state;
+
+        try {
+            if (this.state.friendRequestStatus === 'Friend') {
+                await fetch('/api/users/friend-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fromUsername: currentUser.username, toUsername: selectedUser })
+                });
+                this.setState({ friendRequestStatus: 'Pending' });
+            } else if (this.state.friendRequestStatus === 'Unfriend') {
+                await fetch('/api/users/unfriend', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: currentUser.username, friendUsername: selectedUser })
+                });
+                this.setState({ friendRequestStatus: 'Friend' });
+            }
+        } catch (error) {
+            console.error('Error handling friend request:', error);
+        }
+    }
+
+    closeFriendRequestPopup = () => {
+        this.setState({
+            showFriendRequestPopup: false,
+            selectedUser: null
+        });
+    }
 
     render() {
-        const { release, onClose, currentUser } = this.props;
-
+        const { release, onClose } = this.props;
+        const { showFriendRequestPopup, selectedUser, friendRequestStatus } = this.state;
         if (!release) return null;
+
+        const isRelease = release.type === 'release' || !release.type;
+        const isPlaylist = release.type === 'playlist';
+        const isUser = release.type === 'user';
 
         return (
             <div className="popup-overlay">
                 <div className="popup-content">
                     <button className="close-button" onClick={onClose}><X /></button>
                     <div className="popup-header">
-                        <h2>{release.title}</h2>
-                        <div className="hashtags">
-                            {release.hashtags.map((tag, index) => (
-                                <span key={index} className="hashtag">{tag}</span>
-                            ))}
-                        </div>
+                        <h2>{isUser ? release.username : release.title}</h2>
+                        {isRelease && (
+                            <div className="hashtags">
+                                {release.hashtags && release.hashtags.map((tag, index) => (
+                                    <span key={index} className="hashtag">{tag}</span>
+                                ))}
+                            </div>
+                        )}
                     </div>
                     <div className="popup-body">
                         <div className="popup-left">
-                            <h3>Comments</h3>
-                            <div className="comments-container">
-                                {release.comments && release.comments.length > 0 ? (
-                                    release.comments.map((comment, index) => (
-                                        <div key={index} className="comment">
-                                            <div className="comment-header">
-                                                <img src={comment.userImage} alt={comment.userName} className="user-image" />
-                                                <span className="user-name">@{comment.userName}</span>
+                            {isRelease && (
+                                <>
+                                    <h3>Comments</h3>
+                                    <div className="comments-container">
+                                        {release.comments && release.comments.length > 0 ? (
+                                            release.comments.map((comment, index) => (
+                                                <div key={index} className="comment">
+                                                    <div className="comment-header">
+                                                        {comment.userImage && (
+                                                            <img src={comment.userImage} alt={comment.userName || 'User'} className="user-image" />
+                                                        )}
+                                                        <span className="user-name" onClick={() => this.handleUsernameClick(comment.userName)}>@{comment.userName || 'Anonymous'}</span>
+                                                    </div>
+                                                    <p className="comment-text">{comment.text}</p>
+                                                    <div className="comment-actions">
+                                                        <button className="action-button"><ThumbsUp size={16} /> {comment.likes || 0}</button>
+                                                        <button className="action-button"><ThumbsDown size={16} /> {comment.dislikes || 0}</button>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>No comments</p>
+                                        )}
+                                    </div>
+                                </>
+                            )}
+                            {isPlaylist && (
+                                <>
+                                    <h3>Songs</h3>
+                                    <div className="songs-container">
+                                        {release.songs && release.songs.map((song, index) => (
+                                            <div key={index} className="song-item">
+                                                <span>{song.title}</span>
+                                                <span>{song.artist}</span>
                                             </div>
-                                            <p className="comment-text">{comment.text}</p>
-                                            <div className="comment-actions">
-                                                <button className="action-button"><ThumbsUp size={16} /> {comment.likes}</button>
-                                                <button className="action-button"><ThumbsDown size={16} /> {comment.dislikes}</button>
-                                            </div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <p>No comments</p>
-                                )}
-                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+                            {isUser && (
+                                <>
+                                    <h3>User Profile</h3>
+                                    <div className="user-info">
+                                        <p>Username: {release.username}</p>
+                                    </div>
+                                </>
+                            )}
                         </div>
                         <div className="popup-right">
-                            <img src={release.image} alt={release.title} />
+                            {(isRelease || isPlaylist) && (
+                                <img src={release.image} alt={release.title} />
+                            )}
+                            {isUser && (
+                                <img src="/assets/images/user/user.jpg" alt={release.username} />
+                            )}
                         </div>
                     </div>
-                    <div className="comment-input-container">
-                        <input
-                            type="text"
-                            placeholder="Add a comment..."
-                            className="comment-input"
-                            value={this.state.newComment}
-                            onChange={this.handleCommentChange}
-                            onKeyPress={(e) => e.key === 'Enter' && this.handleCommentSubmit()}
-                        />
-                        <button className="send-button" onClick={this.handleCommentSubmit}>
-                            <Send size={20} />
-                        </button>
-                    </div>
+                    {isRelease && (
+                        <div className="comment-input-container">
+                            <input
+                                type="text"
+                                placeholder="Add a comment..."
+                                className="comment-input"
+                                value={this.state.newComment}
+                                onChange={this.handleCommentChange}
+                                onKeyPress={(e) => e.key === 'Enter' && this.handleCommentSubmit()}
+                            />
+                            <button className="send-button" onClick={this.handleCommentSubmit}>
+                                <Send size={20} />
+                            </button>
+                        </div>
+                    )}
                 </div>
+
+                {showFriendRequestPopup && (
+                    <div className="friend-request-popup">
+                        <div className="friend-request-content">
+                            <h3>{selectedUser}</h3>
+                            <button onClick={this.handleFriendRequest}>{friendRequestStatus}</button>
+                            <button onClick={this.closeFriendRequestPopup}>Cancel</button>
+                        </div>
+                    </div>
+                )}
+
 
 
                 <style jsx>{`
+                    .songs-container {
+                        flex-grow: 1;
+                        overflow-y: auto;
+                        margin-bottom: 20px;
+                    }
+
+                    .song-item {
+                        background-color: #333;
+                        padding: 10px;
+                        border-radius: 5px;
+                        margin-bottom: 10px;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+
+                    .user-info {
+                        background-color: #333;
+                        padding: 15px;
+                        border-radius: 8px;
+                    }
+                    .user-name {
+                        font-weight: bold;
+                        color: #1DB954;
+                        cursor: pointer;
+                    }
+
+                    .user-name:hover {
+                        text-decoration: underline;
+                    }
+
+                    .friend-request-popup {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background-color: #333;
+                        padding: 20px;
+                        border-radius: 10px;
+                        z-index: 1001;
+                    }
+
+                    .friend-request-content {
+                        text-align: center;
+                    }
+
+                    .friend-request-content h3 {
+                        margin-bottom: 20px;
+                    }
+
+                    .friend-request-content button {
+                        margin: 0 10px;
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+
+                    .friend-request-content button:first-of-type {
+                        background-color: #1DB954;
+                        color: white;
+                    }
+
+                    .friend-request-content button:last-of-type {
+                        background-color: #555;
+                        color: white;
+                    }
                     .popup-overlay {
                         position: fixed;
                         top: 0;

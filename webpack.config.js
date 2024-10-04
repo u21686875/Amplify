@@ -1,4 +1,5 @@
 const path = require("path");
+
 module.exports = {
     entry: path.join(__dirname, 'frontend', 'src', 'index.js'),
     output: {
@@ -14,6 +15,24 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                plugins: [
+                                    require('tailwindcss'),
+                                    require('autoprefixer'),
+                                ],
+                            },
+                        },
+                    },
+                ],
             }
         ]
     }

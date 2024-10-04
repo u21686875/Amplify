@@ -1,9 +1,7 @@
 import React from 'react';
 import SideBarWithRouter from '../sidebar/sideBar';
 import SearchBar from '../search/searchBar';
-import { ChevronDown } from 'lucide-react';
-import { Plus } from 'lucide-react';
-import { X } from 'lucide-react';
+import { ChevronDown, Plus, X, Trash2 } from 'lucide-react';
 class PlayList extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +12,57 @@ class PlayList extends React.Component {
             newPlaylistName: '',
             selectedPlaylist: null,
             showAddSongsDropdown: false,
+            newReleases: [],
+            personalPlaylists: props.personalPlaylists || [],
+            isDeleteMode: false,
         };
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.personalPlaylists !== this.props.personalPlaylists) {
+            this.setState({ personalPlaylists: this.props.personalPlaylists || [] });
+        }
+        this.fetchNewReleases();
+    }
+
+    toggleDeleteMode = () => {
+        this.setState(prevState => ({ isDeleteMode: !prevState.isDeleteMode }));
+    }
+
+    handleDeleteRelease = async (releaseId) => {
+        try {
+            const response = await fetch(`/api/newReleases/${releaseId}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            // Remove the deleted release from the state
+            this.setState(prevState => ({
+                newReleases: prevState.newReleases.filter(release => release._id !== releaseId)
+            }));
+
+            console.log('Release deleted successfully');
+        } catch (error) {
+            console.error('Error deleting release:', error);
+            alert('Unable to delete release. Please try again or contact support.');
+        }
+    }
+
+
+    fetchNewReleases = async () => {
+        try {
+            const response = await fetch('/api/newReleases');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            this.setState({ newReleases: data });
+        } catch (error) {
+            console.error('Error fetching new releases:', error);
+        }
     }
 
     toggleSidePanel = () => {
@@ -25,39 +73,79 @@ class PlayList extends React.Component {
         this.setState(prevState => ({ showAddSongsDropdown: !prevState.showAddSongsDropdown }));
     }
 
-    handleAddSongToPlaylist = (release) => {
+    handleDeletePlaylist = async () => {
         const { selectedPlaylist } = this.state;
-        const { onAddSongToPlaylist } = this.props;
+        if (selectedPlaylist && selectedPlaylist._id) {
+            try {
+                const response = await fetch(`/api/personalPlaylists/${selectedPlaylist._id}`, {
+                    method: 'DELETE',
+                });
 
-        console.log('Selected Playlist:', selectedPlaylist);
-        console.log('onAddSongToPlaylist prop:', onAddSongToPlaylist);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
 
-        if (selectedPlaylist && onAddSongToPlaylist) {
+                // Remove the deleted playlist from the state
+                this.setState(prevState => ({
+                    personalPlaylists: prevState.personalPlaylists.filter(playlist => playlist._id !== selectedPlaylist._id),
+                    showSongSidePanel: false,
+                    selectedPlaylist: null
+                }));
+
+                // Notify the parent component about the deletion
+                if (this.props.onDeletePlaylist) {
+                    this.props.onDeletePlaylist(selectedPlaylist._id);
+                }
+
+                console.log('Playlist deleted successfully');
+            } catch (error) {
+                console.error('Error deleting playlist:', error);
+                alert('Unable to delete playlist. Please try again or contact support.');
+            }
+        }
+    }
+
+
+    handleAddSongToPlaylist = async (release) => {
+        const { selectedPlaylist } = this.state;
+
+        if (selectedPlaylist && selectedPlaylist._id) {
             const newSong = {
-                id: Date.now(),
                 title: release.title,
                 artist: release.artist
             };
 
-            onAddSongToPlaylist(selectedPlaylist.id, newSong);
+            try {
+                const response = await fetch(`/api/personalPlaylists/${selectedPlaylist._id}/songs`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newSong),
+                });
 
-            // Update local state
-            this.setState(prevState => ({
-                selectedPlaylist: {
-                    ...prevState.selectedPlaylist,
-                    songs: [...prevState.selectedPlaylist.songs, newSong]
-                },
-                showAddSongsDropdown: false
-            }));
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
 
-            console.log('Song added successfully');
+                const updatedPlaylist = await response.json();
+
+                this.setState(prevState => ({
+                    selectedPlaylist: updatedPlaylist,
+                    showAddSongsDropdown: false
+                }));
+
+                console.log('Song added successfully');
+            } catch (error) {
+                console.error('Error adding song to playlist:', error);
+                alert('Unable to add song to playlist. Please try again or contact support.');
+            }
         } else {
-            console.error('Unable to add song: selectedPlaylist or onAddSongToPlaylist is missing');
-            console.log('selectedPlaylist:', selectedPlaylist);
-            console.log('onAddSongToPlaylist:', onAddSongToPlaylist);
+            console.error('Unable to add song: selectedPlaylist is missing or invalid');
             alert('Unable to add song to playlist. Please try again or contact support.');
         }
     }
+
 
 
     closeSongSidePanel = () => {
@@ -94,65 +182,105 @@ class PlayList extends React.Component {
         this.setState({ newPlaylistName: event.target.value });
     }
 
-    handleRemoveSong = (songId) => {
-        const { onRemoveSongFromPlaylist } = this.props;
+    handleRemoveSong = async (song) => {
         const { selectedPlaylist } = this.state;
-        if (onRemoveSongFromPlaylist && selectedPlaylist) {
-            onRemoveSongFromPlaylist(selectedPlaylist.id, songId);
+        if (selectedPlaylist && selectedPlaylist._id && song && song._id) {
+            try {
+                const response = await fetch(`/api/personalPlaylists/${selectedPlaylist._id}/songs/${song._id}`, {
+                    method: 'DELETE',
+                });
 
-            // Update the local state to reflect the change immediately
-            this.setState(prevState => ({
-                selectedPlaylist: {
-                    ...prevState.selectedPlaylist,
-                    songs: prevState.selectedPlaylist.songs.filter(song => song.id !== songId)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-            }));
+
+                const updatedPlaylist = await response.json();
+
+                this.setState({
+                    selectedPlaylist: updatedPlaylist
+                });
+            } catch (error) {
+                console.error('Error removing song from playlist:', error);
+                alert('Unable to remove song from playlist. Please try again or contact support.');
+            }
+        } else {
+            console.error('Unable to remove song: Missing playlist ID or song ID');
+            alert('Unable to remove song from playlist. Please try again or contact support.');
         }
     }
 
-    createPlaylist = () => {
-        const { newPlaylistName, selectedReleases } = this.state;
-        const { onCreatePlaylist } = this.props;
 
-        if (newPlaylistName && selectedReleases.length > 0 && onCreatePlaylist) {
+    createPlaylist = async () => {
+        const { newPlaylistName, selectedReleases } = this.state;
+
+        if (newPlaylistName && selectedReleases.length > 0) {
             const newPlaylist = {
-                id: Date.now(),
                 title: newPlaylistName,
                 image: selectedReleases[0].image,
                 songs: selectedReleases.map(release => ({
-                    id: Date.now() + Math.random(),
                     title: release.title,
-                    artist: 'Unknown Artist'
+                    artist: release.artist
                 }))
             };
 
-            onCreatePlaylist(newPlaylist);
+            try {
+                const response = await fetch('/api/personalPlaylists', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(newPlaylist),
+                });
 
-            this.setState({
-                showSidePanel: false,
-                selectedReleases: [],
-                newPlaylistName: ''
-            });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const savedPlaylist = await response.json();
+
+                this.setState({
+                    showSidePanel: false,
+                    selectedReleases: [],
+                    newPlaylistName: ''
+                });
+
+                // Refresh the list of playlists
+                if (this.props.onCreatePlaylist) {
+                    this.props.onCreatePlaylist(savedPlaylist);
+                }
+            } catch (error) {
+                console.error('Error creating playlist:', error);
+                alert('Unable to create playlist. Please try again or contact support.');
+            }
         } else {
             alert('Please enter a playlist name and select at least one release.');
         }
     }
 
-
     render() {
-        const { newReleases, personalPlaylists = [] } = this.props;
-        const { showSidePanel, showSongSidePanel, selectedReleases, newPlaylistName, selectedPlaylist, showAddSongsDropdown } = this.state;
+        const { newReleases } = this.props;
+        const { showSidePanel, showSongSidePanel, selectedReleases, newPlaylistName, selectedPlaylist, showAddSongsDropdown, personalPlaylists, isDeleteMode } = this.state;
         return (
             <div className="playlist-container">
                 <SideBarWithRouter />
                 <div className="main-content">
                     <SearchBar />
-                    <h1>RELEASES</h1>
+                    <div className="releases-header">
+                        <h1>RELEASES</h1>
+                        <button onClick={this.toggleDeleteMode} className="delete-mode-btn">
+                            {isDeleteMode ? 'Cancel' : 'Delete Releases'}
+                        </button>
+                    </div>
                     <div className="card-grid">
                         {newReleases.map((release) => (
-                            <div key={release.id} className="card">
+                            <div key={release._id} className="card">
                                 <div className="card-image-container">
                                     <img src={release.image} alt={release.title} />
+                                    {isDeleteMode && (
+                                        <div className="delete-overlay" onClick={() => this.handleDeleteRelease(release._id)}>
+                                            <Trash2 size={24} />
+                                        </div>
+                                    )}
                                 </div>
                                 <h3>{release.title}</h3>
                             </div>
@@ -235,12 +363,12 @@ class PlayList extends React.Component {
                         <div className="song-list">
                             {selectedPlaylist.songs && selectedPlaylist.songs.length > 0 ? (
                                 selectedPlaylist.songs.map((song) => (
-                                    <div key={song.id} className="song-item">
+                                    <div key={song._id} className="song-item">
                                         <span>{song.title} - {song.artist || 'Unknown Artist'}</span>
                                         <div className="song-options">
                                             <span className="options-trigger">:</span>
                                             <div className="options-dropdown">
-                                                <button onClick={() => this.handleRemoveSong(song.id)}>Remove from playlist</button>
+                                                <button onClick={() => this.handleRemoveSong(song)}>Remove from playlist</button>
                                             </div>
                                         </div>
                                     </div>
@@ -249,12 +377,68 @@ class PlayList extends React.Component {
                                 <p>No songs in this playlist yet.</p>
                             )}
                         </div>
+                        <div className="delete-playlist-container">
+                            <button onClick={this.handleDeletePlaylist} className="delete-playlist-btn">
+                                <Trash2 size={20} />
+                            </button>
+                        </div>
                     </div>
                 )}
                 <style jsx>{`
+                .delete-playlist-container {
+                    position: absolute;
+                    bottom: 20px;
+                    right: 20px;
+                }
+                .delete-playlist-btn {
+                    background-color: #e74c3c;
+                    color: white;
+                    border: none;
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    transition: background-color 0.2s;
+                }
+                .delete-playlist-btn:hover {
+                    background-color: #c0392b;
+                }
                  .add-songs-container {
                     margin-bottom: 20px;
                     position: relative;
+                }
+                .releases-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
+                .delete-mode-btn {
+                    background-color: #e74c3c;
+                    color: white;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    font-size: 16px;
+                }
+                .delete-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+                .delete-overlay:hover {
+                    background-color: rgba(0, 0, 0, 0.7);
                 }
                 .add-songs-button {
                     display: flex;

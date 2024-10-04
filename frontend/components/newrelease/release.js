@@ -1,6 +1,6 @@
 import React from "react";
 import ReleasePopup from "../releasepopup/release";
-import { X } from 'lucide-react';
+import { X, Upload } from 'lucide-react';
 class NewReleases extends React.Component {
     constructor(props) {
         super(props);
@@ -26,18 +26,39 @@ class NewReleases extends React.Component {
 
     onAddComment = (releaseId, newComment) => {
         if (this.props.onAddComment) {
-            this.props.onAddComment(releaseId, newComment);
-            // Update the selected release with the new comment
-            this.setState(prevState => ({
-                selectedRelease: prevState.selectedRelease && prevState.selectedRelease.id === releaseId
-                    ? {
-                        ...prevState.selectedRelease,
-                        comments: [...(prevState.selectedRelease.comments || []), newComment]
-                    }
-                    : prevState.selectedRelease
-            }));
+            // Ensure releaseId is not undefined
+            if (releaseId) {
+                this.props.onAddComment(releaseId, newComment);
+                // Update the selected release with the new comment
+                this.setState(prevState => ({
+                    selectedRelease: prevState.selectedRelease && prevState.selectedRelease._id === releaseId
+                        ? {
+                            ...prevState.selectedRelease,
+                            comments: [...(prevState.selectedRelease.comments || []), newComment]
+                        }
+                        : prevState.selectedRelease
+                }));
+            } else {
+                console.error("releaseId is undefined");
+            }
         } else {
             console.error("onAddComment prop is not defined");
+        }
+    }
+
+    handleImageChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                this.setState(prevState => ({
+                    newRelease: {
+                        ...prevState.newRelease,
+                        image: reader.result
+                    }
+                }));
+            };
+            reader.readAsDataURL(file);
         }
     }
 
@@ -106,12 +127,14 @@ class NewReleases extends React.Component {
                     ))}
                 </div>
 
-                <ReleasePopup
-                    release={selectedRelease}
-                    onClose={this.closePopup}
-                    onAddComment={this.onAddComment}
-                    currentUser={currentUser}
-                />
+                {selectedRelease && (
+                    <ReleasePopup
+                        release={selectedRelease}
+                        onClose={this.closePopup}
+                        onAddComment={this.onAddComment}
+                        currentUser={currentUser}
+                    />
+                )}
 
                 {showAddReleasePanel && (
                     <div className="side-panel">
@@ -133,13 +156,26 @@ class NewReleases extends React.Component {
                             value={newRelease.artist}
                             onChange={this.handleInputChange}
                         />
-                        <input
-                            type="text"
-                            name="image"
-                            placeholder="Image URL"
-                            value={newRelease.image}
-                            onChange={this.handleInputChange}
-                        />
+                        <div className="image-upload">
+                            <label htmlFor="image-upload" className="image-upload-label">
+                                <Upload size={20} />
+                                {newRelease.image ? 'Change Image' : 'Upload Image'}
+                            </label>
+                            <input
+                                id="image-upload"
+                                type="file"
+                                accept="image/*"
+                                onChange={this.handleImageChange}
+                                style={{ display: 'none' }}
+                            />
+                            {newRelease.image && (
+                                <img
+                                    src={newRelease.image}
+                                    alt="Preview"
+                                    className="image-preview"
+                                />
+                            )}
+                        </div>
                         <input
                             type="text"
                             name="hashtags"
@@ -156,6 +192,35 @@ class NewReleases extends React.Component {
                     }
                     h3.see-more {
                         color: #F3777D;
+                    }
+                        .image-upload {
+                        margin-bottom: 15px;
+                    }
+
+                    .image-upload-label {
+                        display: inline-flex;
+                        align-items: center;
+                        background-color: #333;
+                        color: #fff;
+                        padding: 10px 15px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: background-color 0.3s;
+                    }
+
+                    .image-upload-label:hover {
+                        background-color: #444;
+                    }
+
+                    .image-upload-label svg {
+                        margin-right: 10px;
+                    }
+
+                    .image-preview {
+                        max-width: 100%;
+                        max-height: 200px;
+                        margin-top: 10px;
+                        border-radius: 5px;
                     }
                     .details {
                         display: flex;
