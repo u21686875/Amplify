@@ -50,7 +50,7 @@ class ReleasePopup extends React.Component {
     handleFriendRequest = async () => {
         const currentUser = JSON.parse(localStorage.getItem('user')); // Get current user from localStorage
         const { selectedUser } = this.state;
-    
+
         try {
             if (this.state.friendRequestStatus === 'Friend') {
                 await fetch('/api/users/friend-request', {
@@ -85,45 +85,82 @@ class ReleasePopup extends React.Component {
         const { showFriendRequestPopup, selectedUser, friendRequestStatus } = this.state;
         if (!release) return null;
 
+        const isRelease = release.type === 'release';
+        const isPlaylist = release.type === 'playlist';
+        const isUser = release.type === 'user';
+
         return (
             <div className="popup-overlay">
                 <div className="popup-content">
                     <button className="close-button" onClick={onClose}><X /></button>
                     <div className="popup-header">
-                        <h2>{release.title}</h2>
-                        <div className="hashtags">
-                            {release.hashtags.map((tag, index) => (
-                                <span key={index} className="hashtag">{tag}</span>
-                            ))}
-                        </div>
+                        <h2>{isUser ? release.username : release.title}</h2>
+                        {isRelease && (
+                            <div className="hashtags">
+                                {release.hashtags && release.hashtags.map((tag, index) => (
+                                    <span key={index} className="hashtag">{tag}</span>
+                                ))}
+                            </div>
+                        )}
                     </div>
                     <div className="popup-body">
                         <div className="popup-left">
-                            <h3>Comments</h3>
-                            <div className="comments-container">
-                                {release.comments && release.comments.length > 0 ? (
-                                    release.comments.map((comment, index) => (
-                                        <div key={index} className="comment">
-                                            <div className="comment-header">
-                                                {comment.userImage && (
-                                                    <img src={comment.userImage} alt={comment.userName || 'User'} className="user-image" />
-                                                )}
-                                                <span className="user-name" onClick={() => this.handleUsernameClick(comment.userName)}>@{comment.userName || 'Anonymous'}</span>
+                            {isRelease && (
+                                <>
+                                    <h3>Comments</h3>
+                                    <div className="comments-container">
+                                        {release.comments && release.comments.length > 0 ? (
+                                            release.comments.map((comment, index) => (
+                                                <div key={index} className="comment">
+                                                    <div className="comment-header">
+                                                        {comment.userImage && (
+                                                            <img src={comment.userImage} alt={comment.userName || 'User'} className="user-image" />
+                                                        )}
+                                                        <span className="user-name" onClick={() => this.handleUsernameClick(comment.userName)}>@{comment.userName || 'Anonymous'}</span>
+                                                    </div>
+                                                    <p className="comment-text">{comment.text}</p>
+                                                    <div className="comment-actions">
+                                                        <button className="action-button"><ThumbsUp size={16} /> {comment.likes || 0}</button>
+                                                        <button className="action-button"><ThumbsDown size={16} /> {comment.dislikes || 0}</button>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>No comments</p>
+                                        )}
+                                    </div>
+                                </>
+                            )}
+                            {isPlaylist && (
+                                <>
+                                    <h3>Songs</h3>
+                                    <div className="songs-container">
+                                        {release.songs && release.songs.map((song, index) => (
+                                            <div key={index} className="song-item">
+                                                <span>{song.title}</span>
+                                                <span>{song.artist}</span>
                                             </div>
-                                            <p className="comment-text">{comment.text}</p>
-                                            <div className="comment-actions">
-                                                <button className="action-button"><ThumbsUp size={16} /> {comment.likes || 0}</button>
-                                                <button className="action-button"><ThumbsDown size={16} /> {comment.dislikes || 0}</button>
-                                            </div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <p>No comments</p>
-                                )}
-                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+                            {isUser && (
+                                <>
+                                    <h3>User Profile</h3>
+                                    <div className="user-info">
+                                        <p>Username: {release.username}</p>
+                                        {/* Add more user information here */}
+                                    </div>
+                                </>
+                            )}
                         </div>
                         <div className="popup-right">
-                            <img src={release.image} alt={release.title} />
+                            {(isRelease || isPlaylist) && (
+                                <img src={release.image} alt={release.title} />
+                            )}
+                            {isUser && (
+                                <img src="/assets/images/user/user.jpg" alt={release.username} />
+                            )}
                         </div>
                     </div>
                     <div className="comment-input-container">
@@ -153,6 +190,26 @@ class ReleasePopup extends React.Component {
 
 
                 <style jsx>{`
+                    .songs-container {
+                        flex-grow: 1;
+                        overflow-y: auto;
+                        margin-bottom: 20px;
+                    }
+
+                    .song-item {
+                        background-color: #333;
+                        padding: 10px;
+                        border-radius: 5px;
+                        margin-bottom: 10px;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+
+                    .user-info {
+                        background-color: #333;
+                        padding: 15px;
+                        border-radius: 8px;
+                    }
                     .user-name {
                         font-weight: bold;
                         color: #1DB954;

@@ -12,12 +12,16 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://mongo:27017/amplify_music_db').then(function () {
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/amplify_music_db';
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000
+}).then(function () {
   return console.log('Connected to MongoDB');
 })["catch"](function (err) {
   return console.error('Could not connect to MongoDB', err);
 });
-
 // User model
 var userSchema = new mongoose.Schema({
   username: {
