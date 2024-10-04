@@ -19,7 +19,6 @@ class ReleasePopup extends React.Component {
     handleCommentSubmit = () => {
         const { onAddComment, release } = this.props;
         if (this.state.newComment.trim() !== '' && release && release._id) {
-            // Retrieve user data from localStorage
             const userData = JSON.parse(localStorage.getItem('user'));
             const username = userData ? userData.username : 'Anonymous';
 
@@ -31,8 +30,6 @@ class ReleasePopup extends React.Component {
             };
 
             onAddComment(release._id, newCommentObj);
-
-            // Clear the input field
             this.setState({ newComment: '' });
         } else {
             console.error('Unable to add comment: Release ID is missing or comment is empty');
@@ -43,12 +40,12 @@ class ReleasePopup extends React.Component {
         this.setState({
             showFriendRequestPopup: true,
             selectedUser: username,
-            friendRequestStatus: 'Friend' // Reset status for each new user clicked
+            friendRequestStatus: 'Friend'
         });
     }
 
     handleFriendRequest = async () => {
-        const currentUser = JSON.parse(localStorage.getItem('user')); // Get current user from localStorage
+        const currentUser = JSON.parse(localStorage.getItem('user'));
         const { selectedUser } = this.state;
 
         try {
@@ -79,13 +76,12 @@ class ReleasePopup extends React.Component {
         });
     }
 
-
     render() {
         const { release, onClose } = this.props;
         const { showFriendRequestPopup, selectedUser, friendRequestStatus } = this.state;
         if (!release) return null;
 
-        const isRelease = release.type === 'release';
+        const isRelease = release.type === 'release' || !release.type;
         const isPlaylist = release.type === 'playlist';
         const isUser = release.type === 'user';
 
@@ -149,7 +145,6 @@ class ReleasePopup extends React.Component {
                                     <h3>User Profile</h3>
                                     <div className="user-info">
                                         <p>Username: {release.username}</p>
-                                        {/* Add more user information here */}
                                     </div>
                                 </>
                             )}
@@ -163,19 +158,21 @@ class ReleasePopup extends React.Component {
                             )}
                         </div>
                     </div>
-                    <div className="comment-input-container">
-                        <input
-                            type="text"
-                            placeholder="Add a comment..."
-                            className="comment-input"
-                            value={this.state.newComment}
-                            onChange={this.handleCommentChange}
-                            onKeyPress={(e) => e.key === 'Enter' && this.handleCommentSubmit()}
-                        />
-                        <button className="send-button" onClick={this.handleCommentSubmit}>
-                            <Send size={20} />
-                        </button>
-                    </div>
+                    {isRelease && (
+                        <div className="comment-input-container">
+                            <input
+                                type="text"
+                                placeholder="Add a comment..."
+                                className="comment-input"
+                                value={this.state.newComment}
+                                onChange={this.handleCommentChange}
+                                onKeyPress={(e) => e.key === 'Enter' && this.handleCommentSubmit()}
+                            />
+                            <button className="send-button" onClick={this.handleCommentSubmit}>
+                                <Send size={20} />
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 {showFriendRequestPopup && (
@@ -187,6 +184,7 @@ class ReleasePopup extends React.Component {
                         </div>
                     </div>
                 )}
+
 
 
                 <style jsx>{`

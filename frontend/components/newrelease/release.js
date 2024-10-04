@@ -107,7 +107,7 @@ class NewReleases extends React.Component {
 
     render() {
         const { selectedRelease, showAddReleasePanel, newRelease } = this.state;
-        const { releases, currentUser, onAddComment } = this.props;
+        const { releases, currentUser } = this.props;
 
         return (
             <div className="new-releases">
@@ -127,23 +127,16 @@ class NewReleases extends React.Component {
                     ))}
                 </div>
 
-                <ReleasePopup
+                {selectedRelease && (
+                    <ReleasePopup
                         release={selectedRelease}
                         onClose={this.closePopup}
-                        onAddComment={(releaseId, newComment) => {
-                            onAddComment(releaseId, newComment);
-                            // Update local state
-                            this.setState(prevState => ({
-                                selectedRelease: {
-                                    ...prevState.selectedRelease,
-                                    comments: [...(prevState.selectedRelease.comments || []), newComment]
-                                }
-                            }));
-                        }}
+                        onAddComment={this.onAddComment}
                         currentUser={currentUser}
                     />
+                )}
 
-{showAddReleasePanel && (
+                {showAddReleasePanel && (
                     <div className="side-panel">
                         <div className='header'>
                             <h2 className='header-title'>Add New Release</h2>
@@ -176,10 +169,10 @@ class NewReleases extends React.Component {
                                 style={{ display: 'none' }}
                             />
                             {newRelease.image && (
-                                <img 
-                                    src={newRelease.image} 
-                                    alt="Preview" 
-                                    className="image-preview" 
+                                <img
+                                    src={newRelease.image}
+                                    alt="Preview"
+                                    className="image-preview"
                                 />
                             )}
                         </div>
