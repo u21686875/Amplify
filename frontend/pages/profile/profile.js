@@ -53,6 +53,11 @@ const ProfileSettings = () => {
         });
     };
 
+    const handleLogout = () => {
+        logout(); // Call logout from AuthContext
+        navigate('/auth'); // Immediately navigate to auth page
+    };
+
     const handleSave = async (section) => {
         if (section === 'Personal information') {
             try {
@@ -175,7 +180,7 @@ const ProfileSettings = () => {
                                     className="w-48 h-48 rounded-full border-2 border-green-500 mb-4"
                                 />
                                 <h3 className="text-lg font-medium">
-                                    {user ? user.username : 'Loading...'}
+                                    {user?.username}  {/* Use optional chaining instead of ternary */}
                                 </h3>
                             </div>
 
@@ -301,7 +306,7 @@ const ProfileSettings = () => {
                                 {/* Bottom Buttons */}
                                 <div className="space-y-3 mt-8">
                                     <button
-                                        onClick={logout}
+                                        onClick={handleLogout}  // Use the new handler
                                         className="w-full py-3 bg-red-900 hover:bg-red-800 text-white rounded-full transition-colors"
                                     >
                                         LOG OUT
