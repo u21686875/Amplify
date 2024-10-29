@@ -8,6 +8,7 @@ var express = require('express');
 var path = require('path');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 var app = express();
 var PORT = process.env.PORT || 3000;
 
@@ -76,10 +77,12 @@ app.use(bodyParser.urlencoded({
 
 // Serve static files from the 'public' directory in the frontend folder
 app.use(express["static"](path.join(__dirname, '..', '..', 'frontend', 'public')));
+app.use(cors());
+app.use(express.json());
 
 // User routes
 app.post('/api/users', /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
+  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
     var _req$body, username, password, existingUser, user;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
@@ -130,7 +133,7 @@ app.post('/api/users', /*#__PURE__*/function () {
   };
 }());
 app.post('/api/users/login', /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
     var _req$body2, username, password, user;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
@@ -173,7 +176,7 @@ app.post('/api/users/login', /*#__PURE__*/function () {
   };
 }());
 app.get('/api/users', /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
     var user;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
@@ -215,7 +218,7 @@ app.get('/api/users', /*#__PURE__*/function () {
   };
 }());
 app.put('/api/users', /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(req, res) {
+  var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(req, res) {
     var user, username;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
@@ -264,7 +267,7 @@ app.put('/api/users', /*#__PURE__*/function () {
 
 // Songs and Playlist
 app.get('/api/newReleases', /*#__PURE__*/function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(req, res) {
+  var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(req, res) {
     var newReleases;
     return _regeneratorRuntime().wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
@@ -294,7 +297,7 @@ app.get('/api/newReleases', /*#__PURE__*/function () {
   };
 }());
 app.post('/api/newReleases', /*#__PURE__*/function () {
-  var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(req, res) {
+  var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6(req, res) {
     var newRelease, savedRelease;
     return _regeneratorRuntime().wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
@@ -325,7 +328,7 @@ app.post('/api/newReleases', /*#__PURE__*/function () {
   };
 }());
 app.put('/api/users', /*#__PURE__*/function () {
-  var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7(req, res) {
+  var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(req, res) {
     var user, username, existingUser;
     return _regeneratorRuntime().wrap(function _callee7$(_context7) {
       while (1) switch (_context7.prev = _context7.next) {
@@ -398,7 +401,7 @@ app.put('/api/users', /*#__PURE__*/function () {
   };
 }());
 app["delete"]('/api/users', /*#__PURE__*/function () {
-  var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(req, res) {
+  var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(req, res) {
     var username, deletedUser;
     return _regeneratorRuntime().wrap(function _callee8$(_context8) {
       while (1) switch (_context8.prev = _context8.next) {
@@ -453,7 +456,7 @@ app["delete"]('/api/users', /*#__PURE__*/function () {
   };
 }());
 app["delete"]('/api/newReleases/:id', /*#__PURE__*/function () {
-  var _ref9 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(req, res) {
+  var _ref9 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9(req, res) {
     var releaseId, deletedRelease;
     return _regeneratorRuntime().wrap(function _callee9$(_context9) {
       while (1) switch (_context9.prev = _context9.next) {
@@ -497,7 +500,7 @@ app["delete"]('/api/newReleases/:id', /*#__PURE__*/function () {
   };
 }());
 app.post('/api/newReleases/:id/comments', /*#__PURE__*/function () {
-  var _ref10 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10(req, res) {
+  var _ref10 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee10(req, res) {
     var releaseId, release, newComment, updatedRelease;
     return _regeneratorRuntime().wrap(function _callee10$(_context10) {
       while (1) switch (_context10.prev = _context10.next) {
@@ -557,7 +560,7 @@ app.post('/api/newReleases/:id/comments', /*#__PURE__*/function () {
   };
 }());
 app.get('/api/personalPlaylists', /*#__PURE__*/function () {
-  var _ref11 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11(req, res) {
+  var _ref11 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee11(req, res) {
     var playlists;
     return _regeneratorRuntime().wrap(function _callee11$(_context11) {
       while (1) switch (_context11.prev = _context11.next) {
@@ -593,7 +596,7 @@ app.get('/api/personalPlaylists', /*#__PURE__*/function () {
   };
 }());
 app.get('/api/debug/personalPlaylists', /*#__PURE__*/function () {
-  var _ref12 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee12(req, res) {
+  var _ref12 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee12(req, res) {
     var playlists;
     return _regeneratorRuntime().wrap(function _callee12$(_context12) {
       while (1) switch (_context12.prev = _context12.next) {
@@ -623,7 +626,7 @@ app.get('/api/debug/personalPlaylists', /*#__PURE__*/function () {
   };
 }());
 app.post('/api/personalPlaylists', /*#__PURE__*/function () {
-  var _ref13 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee13(req, res) {
+  var _ref13 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee13(req, res) {
     var playlist, savedPlaylist;
     return _regeneratorRuntime().wrap(function _callee13$(_context13) {
       while (1) switch (_context13.prev = _context13.next) {
@@ -654,7 +657,7 @@ app.post('/api/personalPlaylists', /*#__PURE__*/function () {
   };
 }());
 app.post('/api/personalPlaylists/:id/songs', /*#__PURE__*/function () {
-  var _ref14 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee14(req, res) {
+  var _ref14 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee14(req, res) {
     var playlist, updatedPlaylist;
     return _regeneratorRuntime().wrap(function _callee14$(_context14) {
       while (1) switch (_context14.prev = _context14.next) {
@@ -689,7 +692,7 @@ app.post('/api/personalPlaylists/:id/songs', /*#__PURE__*/function () {
   };
 }());
 app["delete"]('/api/personalPlaylists/:playlistId/songs/:songId', /*#__PURE__*/function () {
-  var _ref15 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee15(req, res) {
+  var _ref15 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee15(req, res) {
     var _req$params, playlistId, songId, playlist, updatedPlaylist;
     return _regeneratorRuntime().wrap(function _callee15$(_context15) {
       while (1) switch (_context15.prev = _context15.next) {
@@ -737,7 +740,7 @@ app["delete"]('/api/personalPlaylists/:playlistId/songs/:songId', /*#__PURE__*/f
   };
 }());
 app["delete"]('/api/personalPlaylists/:id', /*#__PURE__*/function () {
-  var _ref16 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee16(req, res) {
+  var _ref16 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee16(req, res) {
     var playlistId, deletedPlaylist;
     return _regeneratorRuntime().wrap(function _callee16$(_context16) {
       while (1) switch (_context16.prev = _context16.next) {
@@ -783,7 +786,7 @@ app["delete"]('/api/personalPlaylists/:id', /*#__PURE__*/function () {
 
 // Send a friend request
 app.post('/api/users/friend-request', /*#__PURE__*/function () {
-  var _ref17 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee17(req, res) {
+  var _ref17 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee17(req, res) {
     var _req$body3, fromUsername, toUsername, fromUser, toUser;
     return _regeneratorRuntime().wrap(function _callee17$(_context17) {
       while (1) switch (_context17.prev = _context17.next) {
@@ -848,7 +851,7 @@ app.post('/api/users/friend-request', /*#__PURE__*/function () {
 
 // Accept a friend request
 app.post('/api/users/accept-friend', /*#__PURE__*/function () {
-  var _ref18 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee18(req, res) {
+  var _ref18 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee18(req, res) {
     var _req$body4, username, friendUsername, user, friend;
     return _regeneratorRuntime().wrap(function _callee18$(_context18) {
       while (1) switch (_context18.prev = _context18.next) {
@@ -920,7 +923,7 @@ app.post('/api/users/accept-friend', /*#__PURE__*/function () {
 
 // Unfriend a user
 app.post('/api/users/unfriend', /*#__PURE__*/function () {
-  var _ref19 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee19(req, res) {
+  var _ref19 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee19(req, res) {
     var _req$body5, username, friendUsername, user, friend;
     return _regeneratorRuntime().wrap(function _callee19$(_context19) {
       while (1) switch (_context19.prev = _context19.next) {
@@ -983,7 +986,7 @@ app.post('/api/users/unfriend', /*#__PURE__*/function () {
   };
 }());
 app.get('/api/users/:username/friends', /*#__PURE__*/function () {
-  var _ref20 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee20(req, res) {
+  var _ref20 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee20(req, res) {
     var user;
     return _regeneratorRuntime().wrap(function _callee20$(_context20) {
       while (1) switch (_context20.prev = _context20.next) {
@@ -1031,6 +1034,9 @@ app.get('/api/users/:username/friends', /*#__PURE__*/function () {
     return _ref20.apply(this, arguments);
   };
 }());
+
+// Serve static files from the frontend/public directory
+app.use(express["static"](path.join(__dirname, '../../frontend/public')));
 
 // Serve the main HTML file for all routes
 app.get('*', function (req, res) {

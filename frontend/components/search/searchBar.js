@@ -101,173 +101,82 @@ const SearchBar = () => {
 
 
     return (
-        <div className="search-bar">
-            <div className="search-input-container">
-                <Search className="search-icon" />
-                <input 
-                    type="text" 
-                    placeholder="Search playlists, releases, or users" 
-                    className="search-input"
-                    value={searchTerm}
-                    onChange={handleSearchInputChange}
-                />
+        <div className="flex items-center justify-between p-4 w-full box-border">
+            <div className="relative flex-grow">
+                <div className="relative w-2/5">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                    <input 
+                        type="text" 
+                        placeholder="Search playlists, releases, or users" 
+                        className="w-full py-5 px-10 rounded-full border-none bg-neutral-800 text-white placeholder:text-lg placeholder:pl-4 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        value={searchTerm}
+                        onChange={handleSearchInputChange}
+                    />
+                </div>
+
+                {/* Search Suggestions Dropdown */}
                 {suggestions.length > 0 && (
-                    <div className="search-suggestions">
+                    <div className="absolute top-full left-0 right-0 w-2/5 bg-neutral-800 rounded-b-lg shadow-lg z-10 max-h-72 overflow-y-auto">
                         {suggestions.map((suggestion, index) => (
                             <div 
                                 key={index} 
-                                className="suggestion-item"
+                                className="flex justify-between items-center px-4 py-3 hover:bg-neutral-700 cursor-pointer"
                                 onClick={() => handleSuggestionClick(suggestion)}
                             >
-                                <span>{suggestion.title || suggestion.username}</span>
-                                <span className="suggestion-type">{suggestion.type}</span>
+                                <span className="text-white">
+                                    {suggestion.title || suggestion.username}
+                                </span>
+                                <span className="text-sm text-gray-400">
+                                    {suggestion.type}
+                                </span>
                             </div>
                         ))}
                     </div>
                 )}
+
+                {/* Modal */}
                 {isModalOpen && selectedItem && (
-                <ReleasePopup
-                    release={selectedItem}
-                    onClose={handleCloseModal}
-                    onAddComment={(id, comment) => {
-                        // Implement comment addition logic here
-                        console.log('Adding comment to', id, comment);
-                    }}
-                />
-            )}
+                    <ReleasePopup
+                        release={selectedItem}
+                        onClose={handleCloseModal}
+                        onAddComment={(id, comment) => {
+                            console.log('Adding comment to', id, comment);
+                        }}
+                    />
+                )}
             </div>
-            <div className="profile-container">
-                <div className="profile-image" onClick={toggleDropdown}>
-                    <img src="/assets/images/user/user.jpg" alt="User image" />
+
+            {/* Profile Section */}
+            <div className="relative">
+                <div 
+                    className="w-14 h-14 rounded-full border-2 border-green-500 overflow-hidden cursor-pointer mr-10"
+                    onClick={toggleDropdown}
+                >
+                    <img 
+                        src="/assets/images/user/user.jpg" 
+                        alt="User image" 
+                        className="w-full h-full object-cover"
+                    />
                 </div>
+
+                {/* Profile Dropdown */}
                 {isDropdownOpen && (
-                    <div className="dropdown">
-                        <div className="dropdown-option" onClick={() => handleOptionClick('profile')}>Profile page</div>
-                        <div className="dropdown-option" onClick={() => handleOptionClick('logout')}>Log out</div>
+                    <div className="absolute w-[126%] top-[104%] right-8 bg-neutral-800 rounded-lg shadow-lg z-10">
+                        <div 
+                            className="px-5 py-3 text-white cursor-pointer hover:bg-neutral-700"
+                            onClick={() => handleOptionClick('profile')}
+                        >
+                            Profile page
+                        </div>
+                        <div 
+                            className="px-5 py-3 text-white cursor-pointer hover:bg-neutral-700"
+                            onClick={() => handleOptionClick('logout')}
+                        >
+                            Log out
+                        </div>
                     </div>
                 )}
             </div>
-            <style jsx>{`
-            .search-suggestions {
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
-                    right: 0;
-                    background-color: #333;
-                    border-radius: 0 0 5px 5px;
-                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-                    z-index: 10;
-                    max-height: 300px;
-                    overflow-y: auto;
-                }
-                .suggestion-item {
-                    padding: 10px;
-                    cursor: pointer;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-                .suggestion-item:hover {
-                    background-color: #444;
-                }
-                .suggestion-type {
-                    font-size: 0.8em;
-                    color: #888;
-                }
-                .search-bar {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 15px;
-                    width: 100%;
-                    box-sizing: border-box;
-                }
-                .search-input-container {
-                    position: relative;
-                    flex-grow: 1;
-                }
-                .search-input {
-                    width: 40%;
-                    padding: 20px 10px 20px 40px;
-                    border-radius: 20px;
-                    border: none;
-                    background-color: #222;
-                    color: #fff;
-                }
-                .search-icon {
-                    position: absolute;
-                    left: 10px;
-                    top: 40%;
-                    transform: translateY(-50%);
-                    color: #888;
-                    margin-left: 10px;
-                }
-                .profile-container {
-                    position: relative;
-                }
-                .profile-image {
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
-                    border: 2px solid #1db954;
-                    margin-right: 40px;
-                    overflow: hidden;
-                    cursor: pointer;
-                }
-                .profile-image img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-                .dropdown {
-                    position: absolute;
-                    width: 126%;
-                    top: 104%;
-                    right: 30px;
-                    background-color: #333;
-                    border-radius: 5px;
-                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-                    z-index: 10;
-                }
-                .dropdown-option {
-                    padding: 10px 20px;
-                    color: #fff;
-                    cursor: pointer;
-                }
-                .dropdown-option:hover {
-                    background-color: #444;
-                }
-                ::placeholder {
-                    font-size: 17px;
-                    padding-left: 15px;
-                }
-                    .search-results {
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
-                    right: 0;
-                    background-color: #333;
-                    border-radius: 0 0 5px 5px;
-                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-                    z-index: 10;
-                    max-height: 300px;
-                    overflow-y: auto;
-                }
-                .search-result-item {
-                    padding: 10px;
-                    cursor: pointer;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-                .search-result-item:hover {
-                    background-color: #444;
-                }
-                .result-type {
-                    font-size: 0.8em;
-                    color: #888;
-                }
-            `}</style>
         </div>
     );
 };

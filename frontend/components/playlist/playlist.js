@@ -19,9 +19,19 @@ class PlayList extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
+        // Only update personalPlaylists if they've changed
         if (prevProps.personalPlaylists !== this.props.personalPlaylists) {
             this.setState({ personalPlaylists: this.props.personalPlaylists || [] });
         }
+
+        // Only fetch new releases if they've changed
+        if (prevProps.newReleases !== this.props.newReleases && !this.state.newReleases.length) {
+            this.fetchNewReleases();
+        }
+    }
+
+    // Move initial fetch to componentDidMount
+    componentDidMount() {
         this.fetchNewReleases();
     }
 
@@ -259,407 +269,214 @@ class PlayList extends React.Component {
 
     render() {
         const { newReleases } = this.props;
-        const { showSidePanel, showSongSidePanel, selectedReleases, newPlaylistName, selectedPlaylist, showAddSongsDropdown, personalPlaylists, isDeleteMode } = this.state;
+        const {
+            showSidePanel,
+            showSongSidePanel,
+            selectedReleases,
+            newPlaylistName,
+            selectedPlaylist,
+            showAddSongsDropdown,
+            personalPlaylists,
+            isDeleteMode
+        } = this.state;
+
         return (
-            <div className="playlist-container">
+            <div className="flex h-screen overflow-hidden bg-[#000807] text-white font-sans">
                 <SideBarWithRouter />
-                <div className="main-content">
+                <div className="flex-1 ml-[300px] flex flex-col">
                     <SearchBar />
-                    <div className="releases-header">
-                        <h1>RELEASES</h1>
-                        <button onClick={this.toggleDeleteMode} className="delete-mode-btn">
-                            {isDeleteMode ? 'Cancel' : 'Delete Releases'}
-                        </button>
-                    </div>
-                    <div className="card-grid">
-                        {newReleases.map((release) => (
-                            <div key={release._id} className="card">
-                                <div className="card-image-container">
-                                    <img src={release.image} alt={release.title} />
-                                    {isDeleteMode && (
-                                        <div className="delete-overlay" onClick={() => this.handleDeleteRelease(release._id)}>
-                                            <Trash2 size={24} />
-                                        </div>
-                                    )}
-                                </div>
-                                <h3>{release.title}</h3>
+                    <div className="flex-1 overflow-y-auto">
+                        <div className="p-5">
+                            <div className="flex justify-between items-center mb-5">
+                                <h1 className="text-2xl">RELEASES</h1>
+                                <button
+                                    onClick={this.toggleDeleteMode}
+                                    className="bg-red-600 text-white px-5 py-2 rounded-full text-base cursor-pointer hover:bg-red-700"
+                                >
+                                    {isDeleteMode ? 'Cancel' : 'Delete Releases'}
+                                </button>
                             </div>
-                        ))}
-                    </div>
-                    <div className="playlist-personal">
-                        <h1>PERSONAL</h1>
-                        <button onClick={this.toggleSidePanel} className="create-playlist-btn">Create Playlist</button>
-                    </div>
-                    {personalPlaylists.length === 0 ? (
-                        <div className="no-playlists">
-                            <p>You have no playlists</p>
-                            <button onClick={this.toggleSidePanel} className="create-playlist-btn">Create Playlist</button>
-                        </div>
-                    ) : (
-                        <div className="card-grid">
-                            {personalPlaylists.map((playlist) => (
-                                <div key={playlist.id} className="card" onClick={() => this.openSongSidePanel(playlist)}>
-                                    <div className="card-image-container">
-                                        <img src={playlist.image} alt={playlist.title} />
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mb-10">
+                                {newReleases.map((release) => (
+                                    <div key={release._id} className="w-full relative group">
+                                        <div className="relative w-full pt-[100%] overflow-hidden">
+                                            <img
+                                                src={release.image}
+                                                alt={release.title}
+                                                className="absolute top-0 left-0 w-full h-full object-cover"
+                                            />
+                                            {isDeleteMode && (
+                                                <div
+                                                    className="absolute inset-0 bg-black/50 flex items-center justify-center cursor-pointer hover:bg-black/70"
+                                                    onClick={() => this.handleDeleteRelease(release._id)}
+                                                >
+                                                    <Trash2 size={24} />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <h3 className="text-sm mt-2 truncate">{release.title}</h3>
                                     </div>
-                                    <h3>{playlist.title}</h3>
+                                ))}
+                            </div>
+
+                            <div className="flex justify-between items-center mb-5">
+                                <h1 className="text-2xl">PERSONAL</h1>
+                                <button
+                                    onClick={this.toggleSidePanel}
+                                    className="bg-green-500 text-white px-5 py-2 rounded-full text-base cursor-pointer hover:bg-green-600"
+                                >
+                                    Create Playlist
+                                </button>
+                            </div>
+
+                            {personalPlaylists.length === 0 ? (
+                                <div className="text-center py-10">
+                                    <p className="mb-4">You have no playlists</p>
+                                    <button
+                                        onClick={this.toggleSidePanel}
+                                        className="bg-green-500 text-white px-5 py-2 rounded-full text-base cursor-pointer hover:bg-green-600"
+                                    >
+                                        Create Playlist
+                                    </button>
                                 </div>
-                            ))}
+                            ) : (
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+                                    {personalPlaylists.map((playlist) => (
+                                        <div
+                                            key={playlist._id} // Changed from playlist.id to playlist._id
+                                            className="w-full transform transition-transform duration-200 hover:scale-105 cursor-pointer"
+                                            onClick={() => this.openSongSidePanel(playlist)}
+                                        >
+                                            <div className="relative w-full pt-[100%]">
+                                                <img
+                                                    src={playlist.image}
+                                                    alt={playlist.title}
+                                                    className="absolute top-0 left-0 w-full h-full object-cover"
+                                                />
+                                            </div>
+                                            <h3 className="text-sm mt-2 truncate">
+                                                {playlist.title}
+                                            </h3>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
-                    )}
+                    </div>
                 </div>
+
                 {showSidePanel && (
-                    <div className="side-panel">
-                        <div className='header'>
-                            <h2 className='header-title'>Add To Playlist</h2>
-                            <X className='close' onClick={this.toggleSidePanel} />
+                    <div className="fixed right-0 top-0 w-1/2 h-full bg-[#000807] p-8 overflow-y-auto border border-neutral-700 flex flex-col">
+                        <div className="flex justify-between items-center mb-5">
+                            <h2 className="text-2xl">Add To Playlist</h2>
+                            <X className="cursor-pointer" onClick={this.toggleSidePanel} />
                         </div>
                         <input
                             type="text"
                             placeholder="Playlist Name"
                             value={newPlaylistName}
                             onChange={this.handlePlaylistNameChange}
+                            className="w-full p-2 mb-5 bg-neutral-800 border border-green-500 text-white rounded-2xl"
                         />
-                        <div className="card-grid">
+                        <div className="grid grid-cols-2 gap-4 mb-5">
                             {newReleases.map((release) => (
                                 <div
                                     key={release.id}
-                                    className={`card ${selectedReleases.includes(release) ? 'selected' : ''}`}
+                                    className={`relative cursor-pointer ${selectedReleases.includes(release) ? 'border-2 border-green-500' : ''}`}
                                     onClick={() => this.toggleReleaseSelection(release)}
                                 >
-                                    <div className="card-image-container">
-                                        <img src={release.image} alt={release.title} />
+                                    <div className="relative w-full pt-[100%]">
+                                        <img
+                                            src={release.image}
+                                            alt={release.title}
+                                            className="absolute top-0 left-0 w-full h-full object-cover"
+                                        />
                                     </div>
-                                    <h3>{release.title}</h3>
-                                    {selectedReleases.includes(release) && <div className="tick">✓</div>}
+                                    <h3 className="text-sm mt-2 truncate">{release.title}</h3>
+                                    {selectedReleases.includes(release) && (
+                                        <div className="absolute top-2 right-2 w-8 h-8 bg-black/70 rounded-full flex items-center justify-center text-green-500">✓</div>
+                                    )}
                                 </div>
                             ))}
                         </div>
-                        <button onClick={this.createPlaylist} className="done-button">Done</button>
+                        <button
+                            onClick={this.createPlaylist}
+                            className="w-full bg-green-500 text-white py-2 rounded-full mt-auto hover:bg-green-600"
+                        >
+                            Done
+                        </button>
                     </div>
                 )}
+
                 {showSongSidePanel && selectedPlaylist && (
-                    <div className="side-panel song-panel">
-                        <div className='header'>
-                            <h2 className='header-title'>{selectedPlaylist.title}</h2>
-                            <X className='close' onClick={this.closeSongSidePanel} />
+                    <div className="fixed right-0 top-0 w-1/2 h-full bg-[#000807] p-8 overflow-y-auto border border-neutral-700">
+                        <div className="flex justify-between items-center mb-5">
+                            <h2 className="text-2xl">{selectedPlaylist.title}</h2>
+                            <X className="cursor-pointer" onClick={this.closeSongSidePanel} />
                         </div>
-                        <div className="add-songs-container">
-                            <button onClick={this.toggleAddSongsDropdown} className="add-songs-button">
+
+                        <div className="relative mb-5">
+                            <button
+                                onClick={this.toggleAddSongsDropdown}
+                                className="flex items-center justify-between w-full p-2 bg-green-500 text-white rounded hover:bg-green-600"
+                            >
                                 Add Songs <ChevronDown />
                             </button>
                             {showAddSongsDropdown && (
-                                <div className="add-songs-dropdown">
+                                <div className="absolute top-full left-0 w-full max-h-72 overflow-y-auto bg-neutral-800 border border-neutral-700 rounded mt-1 z-10">
                                     {newReleases.map((release) => (
-                                        <div key={release.id} className="add-song-item" onClick={() => this.handleAddSongToPlaylist(release)}>
-                                            <img src={release.image} alt={release.title} className="add-song-image" />
-                                            <span>{release.title} - {release.artist}</span>
-                                            <Plus className="add-icon" />
+                                        <div
+                                            key={release.id}
+                                            className="flex items-center p-2 hover:bg-neutral-700 cursor-pointer"
+                                            onClick={() => this.handleAddSongToPlaylist(release)}
+                                        >
+                                            <img
+                                                src={release.image}
+                                                alt={release.title}
+                                                className="w-10 h-10 object-cover mr-2"
+                                            />
+                                            <span className="flex-grow">{release.title} - {release.artist}</span>
+                                            <Plus className="ml-2" />
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </div>
-                        <div className="song-list">
+
+                        <div className="space-y-1">
                             {selectedPlaylist.songs && selectedPlaylist.songs.length > 0 ? (
                                 selectedPlaylist.songs.map((song) => (
-                                    <div key={song._id} className="song-item">
+                                    <div key={song._id} className="flex justify-between items-center p-3 hover:bg-[#071816] group">
                                         <span>{song.title} - {song.artist || 'Unknown Artist'}</span>
-                                        <div className="song-options">
-                                            <span className="options-trigger">:</span>
-                                            <div className="options-dropdown">
-                                                <button onClick={() => this.handleRemoveSong(song)}>Remove from playlist</button>
+                                        <div className="relative group">
+                                            <span className="cursor-pointer">:</span>
+                                            <div className="hidden group-hover:block absolute right-0 bg-neutral-800 border border-neutral-700 w-48">
+                                                <button
+                                                    onClick={() => this.handleRemoveSong(song)}
+                                                    className="w-full px-4 py-2 text-left hover:bg-neutral-700"
+                                                >
+                                                    Remove from playlist
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 ))
                             ) : (
-                                <p>No songs in this playlist yet.</p>
+                                <p className="text-center py-4">No songs in this playlist yet.</p>
                             )}
                         </div>
-                        <div className="delete-playlist-container">
-                            <button onClick={this.handleDeletePlaylist} className="delete-playlist-btn">
+
+                        <div className="absolute bottom-5 right-5">
+                            <button
+                                onClick={this.handleDeletePlaylist}
+                                className="w-10 h-10 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center"
+                            >
                                 <Trash2 size={20} />
                             </button>
                         </div>
                     </div>
                 )}
-                <style jsx>{`
-                .delete-playlist-container {
-                    position: absolute;
-                    bottom: 20px;
-                    right: 20px;
-                }
-                .delete-playlist-btn {
-                    background-color: #e74c3c;
-                    color: white;
-                    border: none;
-                    border-radius: 50%;
-                    width: 40px;
-                    height: 40px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    transition: background-color 0.2s;
-                }
-                .delete-playlist-btn:hover {
-                    background-color: #c0392b;
-                }
-                 .add-songs-container {
-                    margin-bottom: 20px;
-                    position: relative;
-                }
-                .releases-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 20px;
-                }
-                .delete-mode-btn {
-                    background-color: #e74c3c;
-                    color: white;
-                    border: none;
-                    padding: 10px 20px;
-                    border-radius: 20px;
-                    cursor: pointer;
-                    font-size: 16px;
-                }
-                .delete-overlay {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgba(0, 0, 0, 0.5);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    cursor: pointer;
-                }
-                .delete-overlay:hover {
-                    background-color: rgba(0, 0, 0, 0.7);
-                }
-                .add-songs-button {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    width: 100%;
-                    padding: 10px;
-                    background-color: #1DB954;
-                    color: white;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                }
-                .add-songs-dropdown {
-                    position: absolute;
-                    top: 100%;
-                    left: 0;
-                    width: 100%;
-                    max-height: 300px;
-                    overflow-y: auto;
-                    background-color: #282828;
-                    border: 1px solid #333;
-                    border-radius: 5px;
-                    z-index: 10;
-                }
-                .add-song-item {
-                    display: flex;
-                    align-items: center;
-                    padding: 10px;
-                    cursor: pointer;
-                    transition: background-color 0.2s;
-                }
-                .add-song-item:hover {
-                    background-color: #333;
-                }
-                .add-song-image {
-                    width: 40px;
-                    height: 40px;
-                    object-fit: cover;
-                    margin-right: 10px;
-                }
-                .add-icon {
-                    margin-left: auto;
-                }
-                .playlist-container {
-                        display: flex;
-                        background-color: #000;
-                        color: #fff;
-                        font-family: Arial, sans-serif;
-                    }
-                    .main-content {
-                        flex-grow: 1;
-                        padding: 20px 20px 20px 90px;
-                        overflow-y: auto;
-                        height: 100vh;
-                    }
-                    h1, h2 {
-                        font-size: 24px;
-                        margin-bottom: 20px;
-                    }
-                    .card-grid {
-                        display: grid;
-                        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                        gap: 20px;
-                        margin-bottom: 40px;
-                    }
-                    .card, .side-panel-card {
-                        width: 100%;
-                        transition: transform 0.2s;
-                        cursor: pointer;
-                        position: relative;
-                    }
-                    .card:hover, .side-panel-card:hover {
-                        transform: scale(1.05);
-                    }
-                    .card-image-container {
-                        width: 100%;
-                        padding-top: 100%; /* 1:1 Aspect Ratio */
-                        position: relative;
-                        overflow: hidden;
-                    }
-                    .card img, .side-panel-card img {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-                    .card h3, .side-panel-card h3 {
-                        font-size: 14px;
-                        margin-top: 10px;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                    }
-                    .playlist-personal {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 20px;
-                    }
-                    .create-playlist-btn, .done-button {
-                        background-color: #1DB954;
-                        color: white;
-                        border: none;
-                        padding: 10px 20px;
-                        border-radius: 20px;
-                        cursor: pointer;
-                        font-size: 16px;
-                    }
-                    .side-panel {
-                        position: fixed;
-                        right: 0;
-                        top: 0;
-                        width: 50%;
-                        height: 100%;
-                        background-color: #000807;
-                        padding: 30px;
-                        overflow-y: auto;
-                        border: 1px solid #333;
-                        display: flex;
-                        flex-direction: column;
-                    }
-                    .side-panel-grid {
-                        display: grid;
-                        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                        gap: 15px;
-                        overflow-y: auto;
-                        max-height: calc(100vh - 200px);
-                        margin-bottom: 20px;
-                    }
-                    .header {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 20px;
-                    }
-                    .close:hover {
-                        cursor: pointer;
-                    }
-                    .header-title {
-                        font-size: 24px;
-                    }
-                    input {
-                        width: 100%;
-                        padding: 10px;
-                        margin-bottom: 20px;
-                        background-color: #333;
-                        border: 1px solid #00E469;
-                        color: #fff;
-                        border-radius: 15px;
-                    }
-                    .done-button {
-                        width: 100%;
-                        margin-top: auto;
-                    }
-                    .tick {
-                        position: absolute;
-                        top: 10px;
-                        right: 10px;
-                        background-color: rgba(0,0,0,0.7);
-                        border-radius: 50%;
-                        width: 30px;
-                        height: 30px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        color: #1DB954;
-                    }
-                    .selected {
-                        border: 2px solid #1DB954;
-                    }
-                    .song-panel {
-                        width: 50%;
-                    }
-                    .song-list {
-                        margin-top: 20px;
-                    }
-                    .song-item {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding: 12px 10px;
-                        border-bottom: 1px solid #333;
-                    }
-                    .song-options {
-                        position: static;
-                        width: 3%;
-                    }
-                    .options-trigger {
-                        cursor: pointer;
-                    }
-                    .options-dropdown {
-                        display: none;
-                        position: absolute;
-                        right: 0;
-                        background-color: #222;
-                        border: 1px solid #444;
-                        z-index: 1;
-                    }
-                    .song-options:hover .options-dropdown {
-                        display: block;
-                    }
-                    .options-dropdown button {
-                        display: block;
-                        width: 100%;
-                        padding: 10px;
-                        text-align: left;
-                        background: none;
-                        border: none;
-                        color: white;
-                        cursor: pointer;
-                    }
-                    .options-dropdown button:hover {
-                        background-color: #333;
-                    }
-                    .song-item:hover {
-                        background-color: #071816;
-                    }
-                `}</style>
             </div>
         );
     }

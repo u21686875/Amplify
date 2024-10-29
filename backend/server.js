@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -56,6 +57,9 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // Serve static files from the 'public' directory in the frontend folder
 app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'public')));
+
+app.use(cors());
+app.use(express.json());
 
 // User routes
 app.post('/api/users', async (req, res) => {
@@ -447,7 +451,8 @@ app.get('/api/users/:username/friends', async (req, res) => {
 });
 
 
-
+// Serve static files from the frontend/public directory
+app.use(express.static(path.join(__dirname, '../../frontend/public')));
 
 // Serve the main HTML file for all routes
 app.get('*', (req, res) => {

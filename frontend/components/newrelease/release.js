@@ -110,23 +110,40 @@ class NewReleases extends React.Component {
         const { releases, currentUser } = this.props;
 
         return (
-            <div className="new-releases">
-                <div className="details">
-                    <h2>NEW RELEASES</h2>
-                    <h3 className="see-more" onClick={this.toggleAddReleasePanel}>Add release</h3>
+            <div className="mt-8">
+                {/* Header Section */}
+                <div className="flex justify-between items-center mb-5">
+                    <h2 className="text-xl font-bold">NEW RELEASES</h2>
+                    <h3
+                        className="text-[#F3777D] hover:text-[#f55963] cursor-pointer transition-colors"
+                        onClick={this.toggleAddReleasePanel}
+                    >
+                        Add release
+                    </h3>
                 </div>
-                <div className="releases-grid">
+
+                {/* Releases Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                     {releases.map((release, index) => (
-                        <div key={index} className="release-card" onClick={() => this.handleReleaseClick(release)}>
-                            <img src={release.image} alt={release.title} />
-                            <div className="release-info">
-                                <div className="release-title">{release.title}</div>
-                                <div className="release-artist">{release.artist}</div>
+                        <div
+                            key={index}
+                            className="bg-neutral-800 rounded-lg overflow-hidden cursor-pointer transform transition-transform duration-200 hover:scale-105"
+                            onClick={() => this.handleReleaseClick(release)}
+                        >
+                            <img
+                                src={release.image}
+                                alt={release.title}
+                                className="w-full aspect-square object-cover"
+                            />
+                            <div className="p-2.5">
+                                <div className="font-bold mb-1">{release.title}</div>
+                                <div className="text-sm text-gray-400">{release.artist}</div>
                             </div>
                         </div>
                     ))}
                 </div>
 
+                {/* Release Popup */}
                 {selectedRelease && (
                     <ReleasePopup
                         release={selectedRelease}
@@ -136,29 +153,43 @@ class NewReleases extends React.Component {
                     />
                 )}
 
+                {/* Add Release Side Panel */}
                 {showAddReleasePanel && (
-                    <div className="side-panel">
-                        <div className='header'>
-                            <h2 className='header-title'>Add New Release</h2>
-                            <X className='close' onClick={this.toggleAddReleasePanel} />
+                    <div className="fixed right-0 top-0 w-[300px] h-full bg-[#000807] p-8 overflow-y-auto border border-white rounded-l-[40px] shadow-lg">
+                        <div className="flex justify-between items-center mb-5">
+                            <h2 className="text-2xl font-bold">Add New Release</h2>
+                            <X
+                                className="cursor-pointer hover:text-gray-300"
+                                onClick={this.toggleAddReleasePanel}
+                            />
                         </div>
+
+                        {/* Input Fields */}
                         <input
                             type="text"
                             name="title"
                             placeholder="Release Title"
                             value={newRelease.title}
                             onChange={this.handleInputChange}
+                            className="w-full p-2.5 mb-4 bg-neutral-800 border border-green-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
+
                         <input
                             type="text"
                             name="artist"
                             placeholder="Artist Name"
                             value={newRelease.artist}
                             onChange={this.handleInputChange}
+                            className="w-full p-2.5 mb-4 bg-neutral-800 border border-green-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
-                        <div className="image-upload">
-                            <label htmlFor="image-upload" className="image-upload-label">
-                                <Upload size={20} />
+
+                        {/* Image Upload */}
+                        <div className="mb-4">
+                            <label
+                                htmlFor="image-upload"
+                                className="inline-flex items-center bg-neutral-800 text-white px-4 py-2.5 rounded cursor-pointer hover:bg-neutral-700 transition-colors"
+                            >
+                                <Upload size={20} className="mr-2" />
                                 {newRelease.image ? 'Change Image' : 'Upload Image'}
                             </label>
                             <input
@@ -166,155 +197,36 @@ class NewReleases extends React.Component {
                                 type="file"
                                 accept="image/*"
                                 onChange={this.handleImageChange}
-                                style={{ display: 'none' }}
+                                className="hidden"
                             />
                             {newRelease.image && (
                                 <img
                                     src={newRelease.image}
                                     alt="Preview"
-                                    className="image-preview"
+                                    className="mt-2.5 max-w-full max-h-[200px] rounded"
                                 />
                             )}
                         </div>
+
+                        {/* Hashtags Input */}
                         <input
                             type="text"
                             name="hashtags"
                             placeholder="Hashtags (comma-separated)"
                             value={newRelease.hashtags.join(', ')}
                             onChange={this.handleHashtagChange}
+                            className="w-full p-2.5 mb-4 bg-neutral-800 border border-green-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
-                        <button onClick={this.handleAddRelease} className="done-button">Add Release</button>
+
+                        {/* Add Button */}
+                        <button
+                            onClick={this.handleAddRelease}
+                            className="w-full bg-green-500 text-white py-2.5 px-5 rounded-full text-base cursor-pointer hover:bg-green-600 transition-colors mt-5"
+                        >
+                            Add Release
+                        </button>
                     </div>
                 )}
-                <style jsx>{`
-                    h3.see-more:hover{
-                        cursor: pointer;
-                    }
-                    h3.see-more {
-                        color: #F3777D;
-                    }
-                        .image-upload {
-                        margin-bottom: 15px;
-                    }
-
-                    .image-upload-label {
-                        display: inline-flex;
-                        align-items: center;
-                        background-color: #333;
-                        color: #fff;
-                        padding: 10px 15px;
-                        border-radius: 5px;
-                        cursor: pointer;
-                        transition: background-color 0.3s;
-                    }
-
-                    .image-upload-label:hover {
-                        background-color: #444;
-                    }
-
-                    .image-upload-label svg {
-                        margin-right: 10px;
-                    }
-
-                    .image-preview {
-                        max-width: 100%;
-                        max-height: 200px;
-                        margin-top: 10px;
-                        border-radius: 5px;
-                    }
-                    .details {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 20px;
-                    }
-                    .new-releases {
-                        margin-top: 30px;
-                    }
-                    .releases-grid {
-                        display: grid;
-                        grid-template-columns: repeat(6, 1fr);
-                        gap: 15px;
-                    }
-                    .release-card {
-                        background-color: #222;
-                        border-radius: 8px;
-                        overflow: hidden;
-                        cursor: pointer;
-                        transition: transform 0.2s;
-                    }
-                    .release-card:hover {
-                        transform: scale(1.05);
-                    }
-                    .release-card img {
-                        width: 100%;
-                        aspect-ratio: 1;
-                        object-fit: cover;
-                    }
-                    .release-info {
-                        padding: 10px;
-                    }
-                    .release-title {
-                        font-weight: bold;
-                        margin-bottom: 5px;
-                    }
-                    .release-artist {
-                        font-size: 0.9em;
-                        color: #888;
-                    }
-                    .side-panel {
-                        position: fixed;
-                        right: -10px;
-                        top: 0;
-                        width: 300px;
-                        height: 100%;
-                        background-color: #000807;
-                        padding: 30px;
-                        overflow-y: auto;
-                        transition: transform 0.3s ease-in-out;
-                        border-radius: 40px 0px 0px 40px;
-                        border: 1px solid #fff;
-                    }
-
-                    .header {
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        margin-bottom: 20px;
-                    }
-
-                    .header-title {
-                        font-size: 24px;
-                        margin: 0;
-                    }
-
-                    .close {
-                        cursor: pointer;
-                    }
-
-                    input {
-                        width: 100%;
-                        padding: 10px;
-                        margin-bottom: 15px;
-                        background-color: #333;
-                        border: 1px solid #00E469;
-                        color: #fff;
-                        border-radius: 5px;
-                    }
-
-                    .done-button {
-                        background-color: #1DB954;
-                        color: white;
-                        border: none;
-                        padding: 10px 20px;
-                        border-radius: 20px;
-                        cursor: pointer;
-                        font-size: 16px;
-                        width: 100%;
-                        margin-top: 20px;
-                    }
-                `}</style>
             </div>
         );
     }
