@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, UserMinus, UserPlus, X } from 'lucide-react';
+import { ChevronLeft, UserMinus, UserPlus, X, Pencil } from 'lucide-react';
 import Sidebar from '../../components/sidebar/sideBar';
 import { useAuth } from '../../components/AuthContext/authContext';
 
@@ -14,13 +14,31 @@ const ProfileSettings = () => {
     const [friends, setFriends] = useState([]);
     const [friendRequests, setFriendRequests] = useState([]);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+    const [profileImage, setProfileImage] = useState('/assets/images/user/user.jpg');
+    const [isHovering, setIsHovering] = useState(false);
+    const fileInputRef = useRef(null);
 
     useEffect(() => {
         if (user && user.username) {
             setFormData({ username: user.username });
             fetchFriendsData();
+            fetchUserProfile();
         }
     }, [user]);
+
+    const fetchUserProfile = async () => {
+        try {
+            const response = await fetch(`/api/users/${user.username}`);
+            if (response.ok) {
+                const userData = await response.json();
+                if (userData.profileImage) {
+                    setProfileImage(userData.profileImage);
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching user profile:', error);
+        }
+    };
 
     const fetchFriendsData = async () => {
         try {
@@ -37,6 +55,15 @@ const ProfileSettings = () => {
         }
     };
 
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = (error) => reject(error);
+        });
+    };
+
     const toggleSection = (section, event) => {
         if (event.target.tagName.toLowerCase() === 'input' ||
             event.target.tagName.toLowerCase() === 'select' ||
@@ -51,6 +78,42 @@ const ProfileSettings = () => {
             ...formData,
             [e.target.name]: e.target.value
         });
+    };
+
+    const handleImageUpload = async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        try {
+            // Convert to base64
+            const base64 = await convertToBase64(file);
+
+            // Send to server
+            const response = await fetch(`/api/users/${user.username}/profile-image`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    image: base64
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setProfileImage(data.imageUrl);
+                // Update the user context
+                login({ ...user, profileImage: data.imageUrl });
+            } else {
+                console.error('Error uploading image');
+            }
+        } catch (error) {
+            console.error('Error processing image:', error);
+        }
+    };
+
+    const triggerFileInput = () => {
+        fileInputRef.current.click();
     };
 
     const handleLogout = () => {
@@ -174,13 +237,39 @@ const ProfileSettings = () => {
                         <div className="flex gap-8">
                             {/* Sidebar */}
                             <div className="w-64 flex flex-col items-center border-r border-neutral-800 pr-6">
-                                <img
-                                    src="/assets/images/user/user.jpg"
-                                    alt="User"
-                                    className="w-48 h-48 rounded-full border-2 border-green-500 mb-4"
-                                />
+                                <div
+                                    className="relative cursor-pointer group"
+                                    onMouseEnter={() => setIsHovering(true)}
+                                    onMouseLeave={() => setIsHovering(false)}
+                                    onClick={triggerFileInput}
+                                >
+                                    <div
+                                        className="relative w-48 h-48 group cursor-pointer"
+                                        onClick={triggerFileInput}
+                                    >
+                                        <img
+                                            src={profileImage}
+                                            alt="User"
+                                            className="w-full h-full rounded-full border-2 border-green-500 object-cover transition-opacity duration-200"
+                                        />
+
+                                        {/* Hover Overlay */}
+                                        <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center">
+                                            <Pencil className="w-6 h-6 text-white mb-2" />
+                                            <span className="text-white text-sm">Upload</span>
+                                        </div>
+
+                                        <input
+                                            ref={fileInputRef}
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleImageUpload}
+                                            className="hidden"
+                                        />
+                                    </div>
+                                </div>
                                 <h3 className="text-lg font-medium">
-                                    {user?.username}  {/* Use optional chaining instead of ternary */}
+                                    {user?.username}
                                 </h3>
                             </div>
 

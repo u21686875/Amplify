@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider } from '../components/AuthContext/authContext';
 import SplashPage from '../pages/Splash/Splash';
 import Auth from '../pages/auth/Auth';
 import Home from '../pages/home/Home';
 import ProfileSettings from '../pages/profile/profile';
 import PlayList from '../components/playlist/playlist';
+import PrivateRouteWithHooks from '../components/PrivateRoute/privateroute';
 
 class App extends React.Component {
     constructor(props) {
@@ -154,25 +155,48 @@ class App extends React.Component {
                 <div>
                     <Router>
                         <Routes>
+                            {/* Public routes */}
                             <Route path="/" element={<SplashPage />} />
                             <Route path="/auth" element={<Auth />} />
-                            <Route path="/home" element={
-                                <Home
-                                    newReleases={this.state.newReleases}
-                                    onAddRelease={this.handleAddRelease}
-                                    onAddComment={this.handleAddComment}
-                                />
-                            } />
-                            <Route path="/profile" element={<ProfileSettings />} />
-                            <Route path="/playlist" element={
-                                <PlayList
-                                    newReleases={this.state.newReleases}
-                                    personalPlaylists={this.state.personalPlaylists}
-                                    onCreatePlaylist={this.handleCreatePlaylist}
-                                    onRemoveSongFromPlaylist={this.handleRemoveSongFromPlaylist}
-                                    onAddSongToPlaylist={this.handleAddSongToPlaylist}
-                                />
-                            } />
+
+                            {/* Protected routes */}
+                            <Route
+                                path="/home"
+                                element={
+                                    <PrivateRouteWithHooks>
+                                        <Home
+                                            newReleases={this.state.newReleases}
+                                            onAddRelease={this.handleAddRelease}
+                                            onAddComment={this.handleAddComment}
+                                        />
+                                    </PrivateRouteWithHooks>
+                                }
+                            />
+                            <Route
+                                path="/profile"
+                                element={
+                                    <PrivateRouteWithHooks>
+                                        <ProfileSettings />
+                                    </PrivateRouteWithHooks>
+                                }
+                            />
+                            <Route
+                                path="/playlist"
+                                element={
+                                    <PrivateRouteWithHooks>
+                                        <PlayList
+                                            newReleases={this.state.newReleases}
+                                            personalPlaylists={this.state.personalPlaylists}
+                                            onCreatePlaylist={this.handleCreatePlaylist}
+                                            onRemoveSongFromPlaylist={this.handleRemoveSongFromPlaylist}
+                                            onAddSongToPlaylist={this.handleAddSongToPlaylist}
+                                        />
+                                    </PrivateRouteWithHooks>
+                                }
+                            />
+
+                            {/* Catch all other routes and redirect to splash page */}
+                            <Route path="*" element={<Navigate to="/" replace />} />
                         </Routes>
                     </Router>
                     <style jsx>{`

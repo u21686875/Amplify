@@ -6,12 +6,16 @@ class SplashPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            fontLoaded: false
+            fontLoaded: false,
+            typewriterText: '',
+            isDeleting: false,
+            phraseIndex: 0,
+            typingSpeed: 100
         };
-    }
 
-    handleAuth = (isLogin) => {
-        this.props.navigate('/auth', { state: { isLogin } });
+        this.constantPrefix = 'MUSIC TO ';
+        this.phrases = ['SHARE', 'DISCOVER', 'ENJOY'];
+        this.typewriterTimeout = null;
     }
 
     componentDidMount() {
@@ -22,14 +26,62 @@ class SplashPage extends React.Component {
             },
             active: () => {
                 this.setState({ fontLoaded: true });
-                this.forceUpdate();
+                // Start typewriter immediately without waiting for setState callback
+                this.typewriterTick();
             }
         });
     }
 
+    componentWillUnmount() {
+        if (this.typewriterTimeout) {
+            clearTimeout(this.typewriterTimeout);
+        }
+    }
+
+    typewriterTick = () => {
+        const { isDeleting, phraseIndex, typewriterText } = this.state;
+        const currentPhrase = this.phrases[phraseIndex];
+
+        // Calculate new text
+        let newText;
+        if (isDeleting) {
+            newText = typewriterText.slice(0, -1);
+        } else {
+            newText = currentPhrase.slice(0, typewriterText.length + 1);
+        }
+
+        // Calculate typing speed
+        let typingSpeed = isDeleting ? 50 : 100;
+
+        // Update state with new text
+        this.setState({ typewriterText: newText }, () => {
+            // Check if we need to change direction or move to next word
+            if (!isDeleting && newText === currentPhrase) {
+                // Start deleting after a pause
+                typingSpeed = 2000; // Pause at end of word
+                this.setState({ isDeleting: true });
+            } else if (isDeleting && newText === '') {
+                // Move to next word
+                this.setState({
+                    isDeleting: false,
+                    phraseIndex: (phraseIndex + 1) % this.phrases.length
+                });
+                typingSpeed = 500; // Pause before starting next word
+            }
+
+            // Schedule next tick
+            this.typewriterTimeout = setTimeout(this.typewriterTick, typingSpeed);
+        });
+    };
+
+    handleAuth = (isLogin) => {
+        this.props.navigate('/auth', { state: { isLogin } });
+    }
+
     render() {
         const fontFamily = this.state.fontLoaded ? "'Devil Breeze Demi', sans-serif" : "sans-serif";
-
+        const { typewriterText } = this.state;
+        
         return (
             <div className="relative flex min-h-screen w-full bg-black text-white overflow-hidden md:flex-row flex-col">
                 {/* Logo Section */}
@@ -58,12 +110,21 @@ class SplashPage extends React.Component {
 
                 {/* Content Section */}
                 <div className="flex-1 flex flex-col justify-center items-center p-8">
-                    <h1
-                        className="text-4xl md:text-6xl font-bold mb-8 text-center"
-                        style={{ fontFamily }}
-                    >
-                        AMPLIFY
-                    </h1>
+                    <div className="text-center mb-8">
+                        <h1
+                            className="text-4xl md:text-6xl font-bold mb-2"
+                            style={{ fontFamily }}
+                        >
+                            AMPLIFY
+                        </h1>
+                        <div className="h-8 flex justify-center items-center min-h-[2rem]">
+                            <p className="text-lg md:text-xl whitespace-nowrap">
+                                <span className="text-cyan-400">{this.constantPrefix}</span>
+                                <span className="text-green-400">{typewriterText}</span>
+                                <span className="animate-pulse ml-1 text-cyan-400">|</span>
+                            </p>
+                        </div>
+                    </div>
 
                     {/* Buttons Container */}
                     <div className="flex flex-col gap-4 w-48">

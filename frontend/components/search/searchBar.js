@@ -12,7 +12,7 @@ const SearchBar = () => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
-    const { logout } = useAuth();
+    const { user, logout } = useAuth(); // Add user from AuthContext
 
     useEffect(() => {
         if (searchTerm) {
@@ -114,7 +114,7 @@ const SearchBar = () => {
                     />
                 </div>
 
-                {/* Search Suggestions Dropdown */}
+                {/* Search Suggestions Dropdown - Keep unchanged */}
                 {suggestions.length > 0 && (
                     <div className="absolute top-full left-0 right-0 w-2/5 bg-neutral-800 rounded-b-lg shadow-lg z-10 max-h-72 overflow-y-auto">
                         {suggestions.map((suggestion, index) => (
@@ -134,7 +134,7 @@ const SearchBar = () => {
                     </div>
                 )}
 
-                {/* Modal */}
+                {/* Modal - Keep unchanged */}
                 {isModalOpen && selectedItem && (
                     <ReleasePopup
                         release={selectedItem}
@@ -146,20 +146,20 @@ const SearchBar = () => {
                 )}
             </div>
 
-            {/* Profile Section */}
+            {/* Profile Section - Updated with user profile image */}
             <div className="relative">
                 <div 
-                    className="w-14 h-14 rounded-full border-2 border-green-500 overflow-hidden cursor-pointer mr-10"
+                    className="w-14 h-14 rounded-full border-2 border-green-500 overflow-hidden cursor-pointer mr-10 group"
                     onClick={toggleDropdown}
                 >
                     <img 
-                        src="/assets/images/user/user.jpg" 
-                        alt="User image" 
-                        className="w-full h-full object-cover"
+                        src={user?.profileImage || '/assets/images/user/user.jpg'}
+                        alt="User image"
+                        className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
                     />
                 </div>
 
-                {/* Profile Dropdown */}
+                {/* Profile Dropdown - Kept original structure */}
                 {isDropdownOpen && (
                     <div className="absolute w-[126%] top-[104%] right-8 bg-neutral-800 rounded-lg shadow-lg z-10">
                         <div 
@@ -182,3 +182,4 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+

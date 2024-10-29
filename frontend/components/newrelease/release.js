@@ -12,6 +12,7 @@ class NewReleases extends React.Component {
                 artist: "",
                 image: "",
                 hashtags: [],
+                createdAt: new Date().toISOString() // Add timestamp for new releases
             }
         };
     }
@@ -23,6 +24,15 @@ class NewReleases extends React.Component {
     closePopup = () => {
         this.setState({ selectedRelease: null });
     }
+
+    // Add sorting function
+    sortReleasesByDate = (releases) => {
+        return [...releases].sort((a, b) => {
+            const dateA = new Date(a.createdAt || 0);
+            const dateB = new Date(b.createdAt || 0);
+            return dateB - dateA; // Sort in reverse chronological order
+        });
+    };
 
     onAddComment = (releaseId, newComment) => {
         if (this.props.onAddComment) {
@@ -75,14 +85,21 @@ class NewReleases extends React.Component {
     handleAddRelease = () => {
         const { newRelease } = this.state;
         if (newRelease.title && newRelease.artist) {
-            this.props.onAddRelease(newRelease);
+            // Add timestamp when creating a new release
+            const releaseWithTimestamp = {
+                ...newRelease,
+                createdAt: new Date().toISOString()
+            };
+
+            this.props.onAddRelease(releaseWithTimestamp);
             this.setState({
                 showAddReleasePanel: false,
                 newRelease: {
                     title: "",
                     artist: "",
-                    imageUrl: "",
+                    image: "",
                     hashtags: [],
+                    createdAt: new Date().toISOString()
                 }
             });
         } else {
@@ -109,6 +126,9 @@ class NewReleases extends React.Component {
         const { selectedRelease, showAddReleasePanel, newRelease } = this.state;
         const { releases, currentUser } = this.props;
 
+        // Sort releases before rendering
+        const sortedReleases = this.sortReleasesByDate(releases);
+
         return (
             <div className="mt-8">
                 {/* Header Section */}
@@ -124,9 +144,9 @@ class NewReleases extends React.Component {
 
                 {/* Releases Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-                    {releases.map((release, index) => (
+                {sortedReleases.map((release, index) => (
                         <div
-                            key={index}
+                            key={release._id || index}
                             className="bg-neutral-800 rounded-lg overflow-hidden cursor-pointer transform transition-transform duration-200 hover:scale-105"
                             onClick={() => this.handleReleaseClick(release)}
                         >
@@ -138,6 +158,10 @@ class NewReleases extends React.Component {
                             <div className="p-2.5">
                                 <div className="font-bold mb-1">{release.title}</div>
                                 <div className="text-sm text-gray-400">{release.artist}</div>
+                                {/* Optionally show date */}
+                                <div className="text-xs text-gray-500 mt-1">
+                                    {new Date(release.createdAt).toLocaleDateString()}
+                                </div>
                             </div>
                         </div>
                     ))}

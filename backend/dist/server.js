@@ -41,7 +41,11 @@ var userSchema = new mongoose.Schema({
   friendRequests: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }]
+  }],
+  profileImage: {
+    type: String,
+    "default": '/assets/images/user/user.jpg'
+  }
 });
 var newReleaseSchema = new mongoose.Schema({
   title: String,
@@ -54,7 +58,11 @@ var newReleaseSchema = new mongoose.Schema({
     text: String,
     likes: Number,
     dislikes: Number
-  }]
+  }],
+  createdAt: {
+    type: Date,
+    "default": Date.now // Automatically set the date when creating new releases
+  }
 });
 var personalPlaylistSchema = new mongoose.Schema({
   title: String,
@@ -274,7 +282,9 @@ app.get('/api/newReleases', /*#__PURE__*/function () {
         case 0:
           _context5.prev = 0;
           _context5.next = 3;
-          return NewRelease.find();
+          return NewRelease.find().sort({
+            createdAt: -1
+          });
         case 3:
           newReleases = _context5.sent;
           res.json(newReleases);
@@ -1032,6 +1042,160 @@ app.get('/api/users/:username/friends', /*#__PURE__*/function () {
   }));
   return function (_x39, _x40) {
     return _ref20.apply(this, arguments);
+  };
+}());
+
+// Add these new routes to handle profile image updates
+app.get('/api/users/:username', /*#__PURE__*/function () {
+  var _ref21 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee21(req, res) {
+    var user;
+    return _regeneratorRuntime().wrap(function _callee21$(_context21) {
+      while (1) switch (_context21.prev = _context21.next) {
+        case 0:
+          _context21.prev = 0;
+          _context21.next = 3;
+          return User.findOne({
+            username: req.params.username
+          });
+        case 3:
+          user = _context21.sent;
+          if (user) {
+            _context21.next = 6;
+            break;
+          }
+          return _context21.abrupt("return", res.status(404).json({
+            message: 'User not found'
+          }));
+        case 6:
+          res.json({
+            username: user.username,
+            profileImage: user.profileImage
+          });
+          _context21.next = 13;
+          break;
+        case 9:
+          _context21.prev = 9;
+          _context21.t0 = _context21["catch"](0);
+          console.error('Error fetching user profile:', _context21.t0);
+          res.status(500).json({
+            message: 'Internal server error',
+            error: _context21.t0.message
+          });
+        case 13:
+        case "end":
+          return _context21.stop();
+      }
+    }, _callee21, null, [[0, 9]]);
+  }));
+  return function (_x41, _x42) {
+    return _ref21.apply(this, arguments);
+  };
+}());
+app.post('/api/users/:username/profile-image', /*#__PURE__*/function () {
+  var _ref22 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee22(req, res) {
+    var image, username, user;
+    return _regeneratorRuntime().wrap(function _callee22$(_context22) {
+      while (1) switch (_context22.prev = _context22.next) {
+        case 0:
+          _context22.prev = 0;
+          image = req.body.image;
+          username = req.params.username;
+          if (image) {
+            _context22.next = 5;
+            break;
+          }
+          return _context22.abrupt("return", res.status(400).json({
+            message: 'No image provided'
+          }));
+        case 5:
+          _context22.next = 7;
+          return User.findOne({
+            username: username
+          });
+        case 7:
+          user = _context22.sent;
+          if (user) {
+            _context22.next = 10;
+            break;
+          }
+          return _context22.abrupt("return", res.status(404).json({
+            message: 'User not found'
+          }));
+        case 10:
+          // Update user's profile image
+          user.profileImage = image;
+          _context22.next = 13;
+          return user.save();
+        case 13:
+          res.json({
+            message: 'Profile image updated successfully',
+            imageUrl: image
+          });
+          _context22.next = 20;
+          break;
+        case 16:
+          _context22.prev = 16;
+          _context22.t0 = _context22["catch"](0);
+          console.error('Error updating profile image:', _context22.t0);
+          res.status(500).json({
+            message: 'Error updating image',
+            error: _context22.t0.message
+          });
+        case 20:
+        case "end":
+          return _context22.stop();
+      }
+    }, _callee22, null, [[0, 16]]);
+  }));
+  return function (_x43, _x44) {
+    return _ref22.apply(this, arguments);
+  };
+}());
+
+// Update the login route to include profile image
+app.post('/api/users/login', /*#__PURE__*/function () {
+  var _ref23 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee23(req, res) {
+    var _req$body6, username, password, user;
+    return _regeneratorRuntime().wrap(function _callee23$(_context23) {
+      while (1) switch (_context23.prev = _context23.next) {
+        case 0:
+          _context23.prev = 0;
+          _req$body6 = req.body, username = _req$body6.username, password = _req$body6.password;
+          _context23.next = 4;
+          return User.findOne({
+            username: username,
+            password: password
+          });
+        case 4:
+          user = _context23.sent;
+          if (user) {
+            res.json({
+              message: 'Login successful',
+              username: user.username,
+              profileImage: user.profileImage
+            });
+          } else {
+            res.status(401).json({
+              message: 'Invalid credentials'
+            });
+          }
+          _context23.next = 11;
+          break;
+        case 8:
+          _context23.prev = 8;
+          _context23.t0 = _context23["catch"](0);
+          res.status(500).json({
+            message: 'Error during login',
+            error: _context23.t0.message
+          });
+        case 11:
+        case "end":
+          return _context23.stop();
+      }
+    }, _callee23, null, [[0, 8]]);
+  }));
+  return function (_x45, _x46) {
+    return _ref23.apply(this, arguments);
   };
 }());
 

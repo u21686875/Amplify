@@ -21,8 +21,8 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
-
+    friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    profileImage: { type: String, default: '/assets/images/user/user.jpg' }
 });
 
 const newReleaseSchema = new mongoose.Schema({
@@ -36,7 +36,11 @@ const newReleaseSchema = new mongoose.Schema({
         text: String,
         likes: Number,
         dislikes: Number
-    }]
+    }],
+    createdAt: { 
+        type: Date, 
+        default: Date.now // Automatically set the date when creating new releases
+    }
 });
 
 const personalPlaylistSchema = new mongoose.Schema({
@@ -137,7 +141,8 @@ app.put('/api/users', async (req, res) => {
 // Songs and Playlist
 app.get('/api/newReleases', async (req, res) => {
     try {
-        const newReleases = await NewRelease.find();
+        const newReleases = await NewRelease.find()
+            .sort({ createdAt: -1 }); 
         res.json(newReleases);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -447,6 +452,74 @@ app.get('/api/users/:username/friends', async (req, res) => {
     } catch (error) {
         console.error('Error fetching friends:', error);
         res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+});
+
+
+
+
+// Add these new routes to handle profile image updates
+app.get('/api/users/:username', async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.params.username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json({
+            username: user.username,
+            profileImage: user.profileImage
+        });
+    } catch (error) {
+        console.error('Error fetching user profile:', error);
+        res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+});
+
+app.post('/api/users/:username/profile-image', async (req, res) => {
+    try {
+        const { image } = req.body;
+        const { username } = req.params;
+
+        if (!image) {
+            return res.status(400).json({ message: 'No image provided' });
+        }
+
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Update user's profile image
+        user.profileImage = image;
+        await user.save();
+
+        res.json({
+            message: 'Profile image updated successfully',
+            imageUrl: image
+        });
+    } catch (error) {
+        console.error('Error updating profile image:', error);
+        res.status(500).json({ message: 'Error updating image', error: error.message });
+    }
+});
+
+
+// Update the login route to include profile image
+app.post('/api/users/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const user = await User.findOne({ username, password });
+        if (user) {
+            res.json({ 
+                message: 'Login successful',
+                username: user.username,
+                profileImage: user.profileImage
+            });
+        } else {
+            res.status(401).json({ message: 'Invalid credentials' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Error during login', error: error.message });
     }
 });
 
