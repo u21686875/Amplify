@@ -5158,30 +5158,33 @@ var FeaturedSong = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "relative h-[45%] mb-8 rounded-lg overflow-hidden"
+        className: "featured-song"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: "/assets/images/featured/BJA7RzO.jpeg",
-        alt: "Featured Song",
-        className: "w-full h-full object-cover"
+        alt: "Featured Song"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute bottom-0 right-0 p-10 bg-gradient-to-t from-black/80 via-transparent to-transparent"
+        className: "featured-song-info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "float-right font-medium mb-10"
+        className: "featured-song-label"
       }, "FEATURED SONGS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", {
-        className: "text-[29px] font-light"
+        className: "featured-song-title"
       }, "Doomer Scape"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-        className: "text-[46px]"
+        className: "featured-song-artist"
       }, "Zangetsu"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "float-right pt-10 flex items-center gap-10"
+        className: "featured-song-controls"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        className: "cursor-pointer",
+        className: "heart-icon",
         size: 24
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "flex items-center bg-green-500 text-white px-8 py-3 rounded-lg text-lg font-bold hover:bg-green-600 transition-colors"
+        className: "play-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
         size: 16,
-        className: "mr-1"
-      }), "Play"))));
+        style: {
+          marginRight: '5px'
+        }
+      }), " Play"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", {
+        jsx: true
+      }, "\n                            .featured-song {\n                            position: relative;\n                            height: 45%;\n                            margin-bottom: 30px;\n                            border-radius: 8px;\n                            overflow: hidden;\n                            }\n\n                            .featured-song img {\n                            width: 100%;\n                            height: 100%;\n                            object-fit: cover;\n                            }\n\n                            .featured-song-label {\n                                padding-bottom: 40px;\n                                font-weight: 500;\n                                float: right;\n                            }\n\n                            h3.featured-song-artist {\n                                font-size: 46px;\n                            }\n                            h4.featured-song-title {\n                                font-size: 29px;\n                                font-weight: lighter;\n                            }\n                            .featured-song-info {\n                            position: absolute;\n                            bottom: 0;\n                            right: 0;\n                            padding: 40px;\n                            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));\n                            }\n\n                            .play-button {\n                                background-color: #1db954;\n                                color: #fff;\n                                border: none;\n                                padding: 12px 32px;\n                                border-radius: 8px;\n                                cursor: pointer;\n                                font-size: 17px;\n                                font-weight: 700;   \n                            }\n\n                            .featured-song-controls {\n                                float: right;\n                                padding-top: 40px;\n                                display: flex;\n                                align-items: center;\n                                gap: 40px;\n                            }\n                        "));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
@@ -5352,33 +5355,30 @@ var NewReleases = /*#__PURE__*/function (_React$Component) {
         releases = _this$props.releases,
         currentUser = _this$props.currentUser;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "mt-8"
+        className: "new-releases"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex justify-between items-center mb-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-        className: "text-xl font-bold"
-      }, "NEW RELEASES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-        className: "text-[#F3777D] hover:text-[#f55963] cursor-pointer transition-colors",
+        className: "details"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "NEW RELEASES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+        className: "see-more",
         onClick: this.toggleAddReleasePanel
       }, "Add release")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4"
+        className: "releases-grid"
       }, releases.map(function (release, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           key: index,
-          className: "bg-neutral-800 rounded-lg overflow-hidden cursor-pointer transform transition-transform duration-200 hover:scale-105",
+          className: "release-card",
           onClick: function onClick() {
             return _this2.handleReleaseClick(release);
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
           src: release.image,
-          alt: release.title,
-          className: "w-full aspect-square object-cover"
+          alt: release.title
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "p-2.5"
+          className: "release-info"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "font-bold mb-1"
+          className: "release-title"
         }, release.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "text-sm text-gray-400"
+          className: "release-artist"
         }, release.artist)));
       })), selectedRelease && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_releasepopup_release__WEBPACK_IMPORTED_MODULE_1__["default"], {
         release: selectedRelease,
@@ -5386,57 +5386,57 @@ var NewReleases = /*#__PURE__*/function (_React$Component) {
         onAddComment: this.onAddComment,
         currentUser: currentUser
       }), showAddReleasePanel && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "fixed right-0 top-0 w-[300px] h-full bg-[#000807] p-8 overflow-y-auto border border-white rounded-l-[40px] shadow-lg"
+        className: "side-panel"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex justify-between items-center mb-5"
+        className: "header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-        className: "text-2xl font-bold"
+        className: "header-title"
       }, "Add New Release"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        className: "cursor-pointer hover:text-gray-300",
+        className: "close",
         onClick: this.toggleAddReleasePanel
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "text",
         name: "title",
         placeholder: "Release Title",
         value: newRelease.title,
-        onChange: this.handleInputChange,
-        className: "w-full p-2.5 mb-4 bg-neutral-800 border border-green-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+        onChange: this.handleInputChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "text",
         name: "artist",
         placeholder: "Artist Name",
         value: newRelease.artist,
-        onChange: this.handleInputChange,
-        className: "w-full p-2.5 mb-4 bg-neutral-800 border border-green-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+        onChange: this.handleInputChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "mb-4"
+        className: "image-upload"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
         htmlFor: "image-upload",
-        className: "inline-flex items-center bg-neutral-800 text-white px-4 py-2.5 rounded cursor-pointer hover:bg-neutral-700 transition-colors"
+        className: "image-upload-label"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        size: 20,
-        className: "mr-2"
+        size: 20
       }), newRelease.image ? 'Change Image' : 'Upload Image'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         id: "image-upload",
         type: "file",
         accept: "image/*",
         onChange: this.handleImageChange,
-        className: "hidden"
+        style: {
+          display: 'none'
+        }
       }), newRelease.image && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: newRelease.image,
         alt: "Preview",
-        className: "mt-2.5 max-w-full max-h-[200px] rounded"
+        className: "image-preview"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "text",
         name: "hashtags",
         placeholder: "Hashtags (comma-separated)",
         value: newRelease.hashtags.join(', '),
-        onChange: this.handleHashtagChange,
-        className: "w-full p-2.5 mb-4 bg-neutral-800 border border-green-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+        onChange: this.handleHashtagChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: this.handleAddRelease,
-        className: "w-full bg-green-500 text-white py-2.5 px-5 rounded-full text-base cursor-pointer hover:bg-green-600 transition-colors mt-5"
-      }, "Add Release")));
+        className: "done-button"
+      }, "Add Release")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", {
+        jsx: true
+      }, "\n                    h3.see-more:hover{\n                        cursor: pointer;\n                    }\n                    h3.see-more {\n                        color: #F3777D;\n                    }\n                        .image-upload {\n                        margin-bottom: 15px;\n                    }\n\n                    .image-upload-label {\n                        display: inline-flex;\n                        align-items: center;\n                        background-color: #333;\n                        color: #fff;\n                        padding: 10px 15px;\n                        border-radius: 5px;\n                        cursor: pointer;\n                        transition: background-color 0.3s;\n                    }\n\n                    .image-upload-label:hover {\n                        background-color: #444;\n                    }\n\n                    .image-upload-label svg {\n                        margin-right: 10px;\n                    }\n\n                    .image-preview {\n                        max-width: 100%;\n                        max-height: 200px;\n                        margin-top: 10px;\n                        border-radius: 5px;\n                    }\n                    .details {\n                        display: flex;\n                        flex-direction: row;\n                        justify-content: space-between;\n                        align-items: center;\n                        margin-bottom: 20px;\n                    }\n                    .new-releases {\n                        margin-top: 30px;\n                    }\n                    .releases-grid {\n                        display: grid;\n                        grid-template-columns: repeat(6, 1fr);\n                        gap: 15px;\n                    }\n                    .release-card {\n                        background-color: #222;\n                        border-radius: 8px;\n                        overflow: hidden;\n                        cursor: pointer;\n                        transition: transform 0.2s;\n                    }\n                    .release-card:hover {\n                        transform: scale(1.05);\n                    }\n                    .release-card img {\n                        width: 100%;\n                        aspect-ratio: 1;\n                        object-fit: cover;\n                    }\n                    .release-info {\n                        padding: 10px;\n                    }\n                    .release-title {\n                        font-weight: bold;\n                        margin-bottom: 5px;\n                    }\n                    .release-artist {\n                        font-size: 0.9em;\n                        color: #888;\n                    }\n                    .side-panel {\n                        position: fixed;\n                        right: -10px;\n                        top: 0;\n                        width: 300px;\n                        height: 100%;\n                        background-color: #000807;\n                        padding: 30px;\n                        overflow-y: auto;\n                        transition: transform 0.3s ease-in-out;\n                        border-radius: 40px 0px 0px 40px;\n                        border: 1px solid #fff;\n                    }\n\n                    .header {\n                        display: flex;\n                        justify-content: space-between;\n                        align-items: center;\n                        margin-bottom: 20px;\n                    }\n\n                    .header-title {\n                        font-size: 24px;\n                        margin: 0;\n                    }\n\n                    .close {\n                        cursor: pointer;\n                    }\n\n                    input {\n                        width: 100%;\n                        padding: 10px;\n                        margin-bottom: 15px;\n                        background-color: #333;\n                        border: 1px solid #00E469;\n                        color: #fff;\n                        border-radius: 5px;\n                    }\n\n                    .done-button {\n                        background-color: #1DB954;\n                        color: white;\n                        border: none;\n                        padding: 10px 20px;\n                        border-radius: 20px;\n                        cursor: pointer;\n                        font-size: 16px;\n                        width: 100%;\n                        margin-top: 20px;\n                    }\n                "));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
@@ -5889,23 +5889,11 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
   return _createClass(PlayList, [{
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      // Only update personalPlaylists if they've changed
       if (prevProps.personalPlaylists !== this.props.personalPlaylists) {
         this.setState({
           personalPlaylists: this.props.personalPlaylists || []
         });
       }
-
-      // Only fetch new releases if they've changed
-      if (prevProps.newReleases !== this.props.newReleases && !this.state.newReleases.length) {
-        this.fetchNewReleases();
-      }
-    }
-
-    // Move initial fetch to componentDidMount
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
       this.fetchNewReleases();
     }
   }, {
@@ -5923,173 +5911,149 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
         personalPlaylists = _this$state2.personalPlaylists,
         isDeleteMode = _this$state2.isDeleteMode;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex h-screen overflow-hidden bg-[#000807] text-white font-sans"
+        className: "playlist-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_sidebar_sideBar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex-1 ml-[300px] flex flex-col"
+        className: "main-content"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_search_searchBar__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex-1 overflow-y-auto"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "p-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex justify-between items-center mb-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-        className: "text-2xl"
-      }, "RELEASES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "releases-header"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "RELEASES"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: this.toggleDeleteMode,
-        className: "bg-red-600 text-white px-5 py-2 rounded-full text-base cursor-pointer hover:bg-red-700"
+        className: "delete-mode-btn"
       }, isDeleteMode ? 'Cancel' : 'Delete Releases')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mb-10"
+        className: "card-grid"
       }, newReleases.map(function (release) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           key: release._id,
-          className: "w-full relative group"
+          className: "card"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "relative w-full pt-[100%] overflow-hidden"
+          className: "card-image-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
           src: release.image,
-          alt: release.title,
-          className: "absolute top-0 left-0 w-full h-full object-cover"
+          alt: release.title
         }), isDeleteMode && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "absolute inset-0 bg-black/50 flex items-center justify-center cursor-pointer hover:bg-black/70",
+          className: "delete-overlay",
           onClick: function onClick() {
             return _this2.handleDeleteRelease(release._id);
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
           size: 24
-        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-          className: "text-sm mt-2 truncate"
-        }, release.title));
+        }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, release.title));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex justify-between items-center mb-5"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-        className: "text-2xl"
-      }, "PERSONAL"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "playlist-personal"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "PERSONAL"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: this.toggleSidePanel,
-        className: "bg-green-500 text-white px-5 py-2 rounded-full text-base cursor-pointer hover:bg-green-600"
+        className: "create-playlist-btn"
       }, "Create Playlist")), personalPlaylists.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "text-center py-10"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-        className: "mb-4"
-      }, "You have no playlists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "no-playlists"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "You have no playlists"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: this.toggleSidePanel,
-        className: "bg-green-500 text-white px-5 py-2 rounded-full text-base cursor-pointer hover:bg-green-600"
+        className: "create-playlist-btn"
       }, "Create Playlist")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"
+        className: "card-grid"
       }, personalPlaylists.map(function (playlist) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          key: playlist._id // Changed from playlist.id to playlist._id
-          ,
-          className: "w-full transform transition-transform duration-200 hover:scale-105 cursor-pointer",
+          key: playlist.id,
+          className: "card",
           onClick: function onClick() {
             return _this2.openSongSidePanel(playlist);
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "relative w-full pt-[100%]"
+          className: "card-image-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
           src: playlist.image,
-          alt: playlist.title,
-          className: "absolute top-0 left-0 w-full h-full object-cover"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-          className: "text-sm mt-2 truncate"
-        }, playlist.title));
-      }))))), showSidePanel && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "fixed right-0 top-0 w-1/2 h-full bg-[#000807] p-8 overflow-y-auto border border-neutral-700 flex flex-col"
+          alt: playlist.title
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, playlist.title));
+      }))), showSidePanel && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "side-panel"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex justify-between items-center mb-5"
+        className: "header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-        className: "text-2xl"
+        className: "header-title"
       }, "Add To Playlist"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        className: "cursor-pointer",
+        className: "close",
         onClick: this.toggleSidePanel
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "text",
         placeholder: "Playlist Name",
         value: newPlaylistName,
-        onChange: this.handlePlaylistNameChange,
-        className: "w-full p-2 mb-5 bg-neutral-800 border border-green-500 text-white rounded-2xl"
+        onChange: this.handlePlaylistNameChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "grid grid-cols-2 gap-4 mb-5"
+        className: "card-grid"
       }, newReleases.map(function (release) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           key: release.id,
-          className: "relative cursor-pointer ".concat(selectedReleases.includes(release) ? 'border-2 border-green-500' : ''),
+          className: "card ".concat(selectedReleases.includes(release) ? 'selected' : ''),
           onClick: function onClick() {
             return _this2.toggleReleaseSelection(release);
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "relative w-full pt-[100%]"
+          className: "card-image-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
           src: release.image,
-          alt: release.title,
-          className: "absolute top-0 left-0 w-full h-full object-cover"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-          className: "text-sm mt-2 truncate"
-        }, release.title), selectedReleases.includes(release) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "absolute top-2 right-2 w-8 h-8 bg-black/70 rounded-full flex items-center justify-center text-green-500"
+          alt: release.title
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, release.title), selectedReleases.includes(release) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "tick"
         }, "\u2713"));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: this.createPlaylist,
-        className: "w-full bg-green-500 text-white py-2 rounded-full mt-auto hover:bg-green-600"
+        className: "done-button"
       }, "Done")), showSongSidePanel && selectedPlaylist && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "fixed right-0 top-0 w-1/2 h-full bg-[#000807] p-8 overflow-y-auto border border-neutral-700"
+        className: "side-panel song-panel"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex justify-between items-center mb-5"
+        className: "header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-        className: "text-2xl"
+        className: "header-title"
       }, selectedPlaylist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        className: "cursor-pointer",
+        className: "close",
         onClick: this.closeSongSidePanel
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "relative mb-5"
+        className: "add-songs-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: this.toggleAddSongsDropdown,
-        className: "flex items-center justify-between w-full p-2 bg-green-500 text-white rounded hover:bg-green-600"
+        className: "add-songs-button"
       }, "Add Songs ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], null)), showAddSongsDropdown && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute top-full left-0 w-full max-h-72 overflow-y-auto bg-neutral-800 border border-neutral-700 rounded mt-1 z-10"
+        className: "add-songs-dropdown"
       }, newReleases.map(function (release) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           key: release.id,
-          className: "flex items-center p-2 hover:bg-neutral-700 cursor-pointer",
+          className: "add-song-item",
           onClick: function onClick() {
             return _this2.handleAddSongToPlaylist(release);
           }
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
           src: release.image,
           alt: release.title,
-          className: "w-10 h-10 object-cover mr-2"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-          className: "flex-grow"
-        }, release.title, " - ", release.artist), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
-          className: "ml-2"
+          className: "add-song-image"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, release.title, " - ", release.artist), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          className: "add-icon"
         }));
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "space-y-1"
+        className: "song-list"
       }, selectedPlaylist.songs && selectedPlaylist.songs.length > 0 ? selectedPlaylist.songs.map(function (song) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           key: song._id,
-          className: "flex justify-between items-center p-3 hover:bg-[#071816] group"
+          className: "song-item"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, song.title, " - ", song.artist || 'Unknown Artist'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "relative group"
+          className: "song-options"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-          className: "cursor-pointer"
+          className: "options-trigger"
         }, ":"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          className: "hidden group-hover:block absolute right-0 bg-neutral-800 border border-neutral-700 w-48"
+          className: "options-dropdown"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
           onClick: function onClick() {
             return _this2.handleRemoveSong(song);
-          },
-          className: "w-full px-4 py-2 text-left hover:bg-neutral-700"
+          }
         }, "Remove from playlist"))));
-      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-        className: "text-center py-4"
-      }, "No songs in this playlist yet.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute bottom-5 right-5"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "No songs in this playlist yet.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "delete-playlist-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: this.handleDeletePlaylist,
-        className: "w-10 h-10 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center"
+        className: "delete-playlist-btn"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
         size: 20
-      })))));
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", {
+        jsx: true
+      }, "\n                .delete-playlist-container {\n                    position: absolute;\n                    bottom: 20px;\n                    right: 20px;\n                }\n                .delete-playlist-btn {\n                    background-color: #e74c3c;\n                    color: white;\n                    border: none;\n                    border-radius: 50%;\n                    width: 40px;\n                    height: 40px;\n                    display: flex;\n                    align-items: center;\n                    justify-content: center;\n                    cursor: pointer;\n                    transition: background-color 0.2s;\n                }\n                .delete-playlist-btn:hover {\n                    background-color: #c0392b;\n                }\n                 .add-songs-container {\n                    margin-bottom: 20px;\n                    position: relative;\n                }\n                .releases-header {\n                    display: flex;\n                    justify-content: space-between;\n                    align-items: center;\n                    margin-bottom: 20px;\n                }\n                .delete-mode-btn {\n                    background-color: #e74c3c;\n                    color: white;\n                    border: none;\n                    padding: 10px 20px;\n                    border-radius: 20px;\n                    cursor: pointer;\n                    font-size: 16px;\n                }\n                .delete-overlay {\n                    position: absolute;\n                    top: 0;\n                    left: 0;\n                    width: 100%;\n                    height: 100%;\n                    background-color: rgba(0, 0, 0, 0.5);\n                    display: flex;\n                    justify-content: center;\n                    align-items: center;\n                    cursor: pointer;\n                }\n                .delete-overlay:hover {\n                    background-color: rgba(0, 0, 0, 0.7);\n                }\n                .add-songs-button {\n                    display: flex;\n                    align-items: center;\n                    justify-content: space-between;\n                    width: 100%;\n                    padding: 10px;\n                    background-color: #1DB954;\n                    color: white;\n                    border: none;\n                    border-radius: 5px;\n                    cursor: pointer;\n                }\n                .add-songs-dropdown {\n                    position: absolute;\n                    top: 100%;\n                    left: 0;\n                    width: 100%;\n                    max-height: 300px;\n                    overflow-y: auto;\n                    background-color: #282828;\n                    border: 1px solid #333;\n                    border-radius: 5px;\n                    z-index: 10;\n                }\n                .add-song-item {\n                    display: flex;\n                    align-items: center;\n                    padding: 10px;\n                    cursor: pointer;\n                    transition: background-color 0.2s;\n                }\n                .add-song-item:hover {\n                    background-color: #333;\n                }\n                .add-song-image {\n                    width: 40px;\n                    height: 40px;\n                    object-fit: cover;\n                    margin-right: 10px;\n                }\n                .add-icon {\n                    margin-left: auto;\n                }\n                .playlist-container {\n                        display: flex;\n                        background-color: #000;\n                        color: #fff;\n                        font-family: Arial, sans-serif;\n                    }\n                    .main-content {\n                        flex-grow: 1;\n                        padding: 20px 20px 20px 90px;\n                        overflow-y: auto;\n                        height: 100vh;\n                    }\n                    h1, h2 {\n                        font-size: 24px;\n                        margin-bottom: 20px;\n                    }\n                    .card-grid {\n                        display: grid;\n                        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));\n                        gap: 20px;\n                        margin-bottom: 40px;\n                    }\n                    .card, .side-panel-card {\n                        width: 100%;\n                        transition: transform 0.2s;\n                        cursor: pointer;\n                        position: relative;\n                    }\n                    .card:hover, .side-panel-card:hover {\n                        transform: scale(1.05);\n                    }\n                    .card-image-container {\n                        width: 100%;\n                        padding-top: 100%; /* 1:1 Aspect Ratio */\n                        position: relative;\n                        overflow: hidden;\n                    }\n                    .card img, .side-panel-card img {\n                        position: absolute;\n                        top: 0;\n                        left: 0;\n                        width: 100%;\n                        height: 100%;\n                        object-fit: cover;\n                    }\n                    .card h3, .side-panel-card h3 {\n                        font-size: 14px;\n                        margin-top: 10px;\n                        white-space: nowrap;\n                        overflow: hidden;\n                        text-overflow: ellipsis;\n                    }\n                    .playlist-personal {\n                        display: flex;\n                        justify-content: space-between;\n                        align-items: center;\n                        margin-bottom: 20px;\n                    }\n                    .create-playlist-btn, .done-button {\n                        background-color: #1DB954;\n                        color: white;\n                        border: none;\n                        padding: 10px 20px;\n                        border-radius: 20px;\n                        cursor: pointer;\n                        font-size: 16px;\n                    }\n                    .side-panel {\n                        position: fixed;\n                        right: 0;\n                        top: 0;\n                        width: 50%;\n                        height: 100%;\n                        background-color: #000807;\n                        padding: 30px;\n                        overflow-y: auto;\n                        border: 1px solid #333;\n                        display: flex;\n                        flex-direction: column;\n                    }\n                    .side-panel-grid {\n                        display: grid;\n                        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));\n                        gap: 15px;\n                        overflow-y: auto;\n                        max-height: calc(100vh - 200px);\n                        margin-bottom: 20px;\n                    }\n                    .header {\n                        display: flex;\n                        justify-content: space-between;\n                        align-items: center;\n                        margin-bottom: 20px;\n                    }\n                    .close:hover {\n                        cursor: pointer;\n                    }\n                    .header-title {\n                        font-size: 24px;\n                    }\n                    input {\n                        width: 100%;\n                        padding: 10px;\n                        margin-bottom: 20px;\n                        background-color: #333;\n                        border: 1px solid #00E469;\n                        color: #fff;\n                        border-radius: 15px;\n                    }\n                    .done-button {\n                        width: 100%;\n                        margin-top: auto;\n                    }\n                    .tick {\n                        position: absolute;\n                        top: 10px;\n                        right: 10px;\n                        background-color: rgba(0,0,0,0.7);\n                        border-radius: 50%;\n                        width: 30px;\n                        height: 30px;\n                        display: flex;\n                        align-items: center;\n                        justify-content: center;\n                        color: #1DB954;\n                    }\n                    .selected {\n                        border: 2px solid #1DB954;\n                    }\n                    .song-panel {\n                        width: 50%;\n                    }\n                    .song-list {\n                        margin-top: 20px;\n                    }\n                    .song-item {\n                        display: flex;\n                        justify-content: space-between;\n                        align-items: center;\n                        padding: 12px 10px;\n                        border-bottom: 1px solid #333;\n                    }\n                    .song-options {\n                        position: static;\n                        width: 3%;\n                    }\n                    .options-trigger {\n                        cursor: pointer;\n                    }\n                    .options-dropdown {\n                        display: none;\n                        position: absolute;\n                        right: 0;\n                        background-color: #222;\n                        border: 1px solid #444;\n                        z-index: 1;\n                    }\n                    .song-options:hover .options-dropdown {\n                        display: block;\n                    }\n                    .options-dropdown button {\n                        display: block;\n                        width: 100%;\n                        padding: 10px;\n                        text-align: left;\n                        background: none;\n                        border: none;\n                        color: white;\n                        cursor: pointer;\n                    }\n                    .options-dropdown button:hover {\n                        background-color: #333;\n                    }\n                    .song-item:hover {\n                        background-color: #071816;\n                    }\n                "));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
@@ -6546,61 +6510,59 @@ var SearchBar = function SearchBar() {
     setSelectedItem(null);
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex items-center justify-between p-4 w-full box-border"
+    className: "search-bar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "relative flex-grow"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "relative w-2/5"
+    className: "search-input-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    className: "absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+    className: "search-icon"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "text",
     placeholder: "Search playlists, releases, or users",
-    className: "w-full py-5 px-10 rounded-full border-none bg-neutral-800 text-white placeholder:text-lg placeholder:pl-4 focus:outline-none focus:ring-2 focus:ring-green-500",
+    className: "search-input",
     value: searchTerm,
     onChange: handleSearchInputChange
-  })), suggestions.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "absolute top-full left-0 right-0 w-2/5 bg-neutral-800 rounded-b-lg shadow-lg z-10 max-h-72 overflow-y-auto"
+  }), suggestions.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "search-suggestions"
   }, suggestions.map(function (suggestion, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       key: index,
-      className: "flex justify-between items-center px-4 py-3 hover:bg-neutral-700 cursor-pointer",
+      className: "suggestion-item",
       onClick: function onClick() {
         return handleSuggestionClick(suggestion);
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-      className: "text-white"
-    }, suggestion.title || suggestion.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-      className: "text-sm text-gray-400"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, suggestion.title || suggestion.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: "suggestion-type"
     }, suggestion.type));
   })), isModalOpen && selectedItem && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_releasepopup_release__WEBPACK_IMPORTED_MODULE_2__["default"], {
     release: selectedItem,
     onClose: handleCloseModal,
     onAddComment: function onAddComment(id, comment) {
+      // Implement comment addition logic here
       console.log('Adding comment to', id, comment);
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "relative"
+    className: "profile-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "w-14 h-14 rounded-full border-2 border-green-500 overflow-hidden cursor-pointer mr-10",
+    className: "profile-image",
     onClick: toggleDropdown
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: "/assets/images/user/user.jpg",
-    alt: "User image",
-    className: "w-full h-full object-cover"
+    alt: "User image"
   })), isDropdownOpen && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "absolute w-[126%] top-[104%] right-8 bg-neutral-800 rounded-lg shadow-lg z-10"
+    className: "dropdown"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "px-5 py-3 text-white cursor-pointer hover:bg-neutral-700",
+    className: "dropdown-option",
     onClick: function onClick() {
       return handleOptionClick('profile');
     }
   }, "Profile page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "px-5 py-3 text-white cursor-pointer hover:bg-neutral-700",
+    className: "dropdown-option",
     onClick: function onClick() {
       return handleOptionClick('logout');
     }
-  }, "Log out"))));
+  }, "Log out"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", {
+    jsx: true
+  }, "\n            .search-suggestions {\n                    position: absolute;\n                    top: 100%;\n                    left: 0;\n                    right: 0;\n                    background-color: #333;\n                    border-radius: 0 0 5px 5px;\n                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);\n                    z-index: 10;\n                    max-height: 300px;\n                    overflow-y: auto;\n                }\n                .suggestion-item {\n                    padding: 10px;\n                    cursor: pointer;\n                    display: flex;\n                    justify-content: space-between;\n                    align-items: center;\n                }\n                .suggestion-item:hover {\n                    background-color: #444;\n                }\n                .suggestion-type {\n                    font-size: 0.8em;\n                    color: #888;\n                }\n                .search-bar {\n                    display: flex;\n                    align-items: center;\n                    justify-content: space-between;\n                    padding: 15px;\n                    width: 100%;\n                    box-sizing: border-box;\n                }\n                .search-input-container {\n                    position: relative;\n                    flex-grow: 1;\n                }\n                .search-input {\n                    width: 40%;\n                    padding: 20px 10px 20px 40px;\n                    border-radius: 20px;\n                    border: none;\n                    background-color: #222;\n                    color: #fff;\n                }\n                .search-icon {\n                    position: absolute;\n                    left: 10px;\n                    top: 40%;\n                    transform: translateY(-50%);\n                    color: #888;\n                    margin-left: 10px;\n                }\n                .profile-container {\n                    position: relative;\n                }\n                .profile-image {\n                    width: 60px;\n                    height: 60px;\n                    border-radius: 50%;\n                    border: 2px solid #1db954;\n                    margin-right: 40px;\n                    overflow: hidden;\n                    cursor: pointer;\n                }\n                .profile-image img {\n                    width: 100%;\n                    height: 100%;\n                    object-fit: cover;\n                }\n                .dropdown {\n                    position: absolute;\n                    width: 126%;\n                    top: 104%;\n                    right: 30px;\n                    background-color: #333;\n                    border-radius: 5px;\n                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);\n                    z-index: 10;\n                }\n                .dropdown-option {\n                    padding: 10px 20px;\n                    color: #fff;\n                    cursor: pointer;\n                }\n                .dropdown-option:hover {\n                    background-color: #444;\n                }\n                ::placeholder {\n                    font-size: 17px;\n                    padding-left: 15px;\n                }\n                    .search-results {\n                    position: absolute;\n                    top: 100%;\n                    left: 0;\n                    right: 0;\n                    background-color: #333;\n                    border-radius: 0 0 5px 5px;\n                    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);\n                    z-index: 10;\n                    max-height: 300px;\n                    overflow-y: auto;\n                }\n                .search-result-item {\n                    padding: 10px;\n                    cursor: pointer;\n                    display: flex;\n                    justify-content: space-between;\n                    align-items: center;\n                }\n                .search-result-item:hover {\n                    background-color: #444;\n                }\n                .result-type {\n                    font-size: 0.8em;\n                    color: #888;\n                }\n            "));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchBar);
 
@@ -6656,6 +6618,7 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
       _this.props.navigate('/settings');
     });
     _defineProperty(_this, "handleRouting", function (route) {
+      // Dynamically navigate based on the route provided
       _this.props.navigate('/' + route);
     });
     return _this;
@@ -6666,67 +6629,93 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "fixed left-0 top-0 w-[300px] h-full bg-[#0F0F0F] p-5 overflow-y-auto"
+        className: "sidebar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex items-center mb-5"
+        className: "sidebar-header"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: "/assets/images/amplify.png",
         alt: "Amplify",
-        className: "h-8 mr-2.5"
+        className: "logo"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-        className: "text-2xl font-bold text-white"
+        className: "company-name"
       }, "Amplify")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", {
-        className: "h-[0.2px] border-0 bg-[#252727] my-6 w-4/5"
+        style: {
+          height: '0.2px',
+          borderWidth: '0',
+          color: '#252727',
+          backgroundColor: '#252727',
+          marginBottom: '25px',
+          marginTop: '25px',
+          width: '80%'
+        }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex items-center mb-2.5 text-green-500 cursor-pointer w-fit",
+        className: "nav-item active",
         onClick: function onClick() {
           return _this2.handleRouting('home');
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        className: "mr-2.5"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex items-center mb-2.5 text-gray-500 hover:text-gray-300 cursor-pointer w-fit",
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_1__["default"], null), " Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "nav-item",
         onClick: function onClick() {
           return _this2.handleRouting('playlist');
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        className: "mr-2.5"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Playlist"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", {
-        className: "h-[0.2px] border-0 bg-[#252727] my-6 w-4/5"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-        className: "text-white mb-2.5"
-      }, "DISCOVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex items-center mb-2.5 text-gray-500 hover:text-gray-300 cursor-pointer w-fit"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        className: "mr-2.5"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Trending")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex items-center mb-2.5 text-gray-500 hover:text-gray-300 cursor-pointer w-fit"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
-        className: "mr-2.5"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Popular")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", {
-        className: "h-[0.2px] border-0 bg-[#252727] my-6 w-4/5"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-        className: "text-white mb-2.5"
-      }, "MY PLAYLIST"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex items-center mb-2.5 text-gray-500"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_2__["default"], null), " Playlist")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", {
+        style: {
+          height: '0.2px',
+          borderWidth: '0',
+          color: '#252727',
+          backgroundColor: '#252727',
+          marginBottom: '25px',
+          marginTop: '25px',
+          width: '80%'
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "DISCOVERY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "nav-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], null), " Trending"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "nav-item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], null), " Popular"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", {
+        style: {
+          height: '0.2px',
+          borderWidth: '0',
+          color: '#252727',
+          backgroundColor: '#252727',
+          marginBottom: '25px',
+          marginTop: '25px',
+          width: '80%'
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "MY PLAYLIST"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "playlist-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-        className: "w-2 h-2 rounded-full bg-red-500 mr-2.5"
-      }), "Love"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex items-center mb-2.5 text-gray-500"
+        className: "playlist-color",
+        style: {
+          backgroundColor: 'red'
+        }
+      }), " Love"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "playlist-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-        className: "w-2 h-2 rounded-full bg-green-500 mr-2.5"
-      }), "Electro"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex items-center mb-2.5 text-gray-500"
+        className: "playlist-color",
+        style: {
+          backgroundColor: 'green'
+        }
+      }), " Electro"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "playlist-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-        className: "w-2 h-2 rounded-full bg-yellow-500 mr-2.5"
-      }), "Funk"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex items-center mb-2.5 text-gray-500"
+        className: "playlist-color",
+        style: {
+          backgroundColor: 'yellow'
+        }
+      }), " Funk"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "playlist-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-        className: "w-2 h-2 rounded-full bg-purple-500 mr-2.5"
-      }), "EDM"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute bottom-10 left-5 flex items-center gap-2 text-gray-500 hover:text-gray-300 cursor-pointer",
+        className: "playlist-color",
+        style: {
+          backgroundColor: 'purple'
+        }
+      }), " EDM"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "settings",
         onClick: this.handleSettingsClick
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Settings")));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], null), "Settings"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", {
+        jsx: true
+      }, "\n                            .sidebar {\n                            background-color: #0F0F0F;\n                            padding: 20px;\n                            width: 300px;\n                            font-family: Arial, sans-serif;\n                            height: 900px;\n                            }\n\n                            h3{\n                                color: white;\n                            }\n\n                            .settings {\n                                display: flex;\n                                align-items: center;\n                                gap: 7px;\n                                position: absolute;\n                                bottom: 0;\n                                margin-bottom: 40px;\n                                color: grey;\n                            }\n\n                            .sidebar-header {\n                            display: flex;\n                            align-items: center;\n                            margin-bottom: 20px;\n                            }\n\n                            .logo {\n                            height: 30px;\n                            margin-right: 10px;\n                            }\n\n                            .company-name {\n                            font-size: 24px;\n                            font-weight: bold;\n                            color: #fff;\n                            }\n\n                           .nav-item {\n                                display: flex;\n                                align-items: center;\n                                margin-bottom: 10px;\n                                color: #888;\n                                cursor: pointer;\n                                width: fit-content;\n                            }\n\n                            .nav-item.active {\n                            color: #1db954;\n                            }\n\n                            .nav-item svg {\n                            margin-right: 10px;\n                            }\n\n                            .playlist-item {\n                            display: flex;\n                            align-items: center;\n                            margin-bottom: 10px;\n                            color: #888;\n                            }\n\n                            .playlist-color {\n                            width: 8px;\n                            height: 8px;\n                            border-radius: 50%;\n                            margin-right: 10px;\n                            }\n                        "));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component)); // Wrapper function to use hooks with class component
@@ -6781,9 +6770,7 @@ var SplashPage = /*#__PURE__*/function (_React$Component) {
     _this = _callSuper(this, SplashPage, [props]);
     _defineProperty(_this, "handleAuth", function (isLogin) {
       _this.props.navigate('/auth', {
-        state: {
-          isLogin: isLogin
-        }
+        isLogin: isLogin
       });
     });
     _this.state = {
@@ -6815,47 +6802,39 @@ var SplashPage = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
       var fontFamily = this.state.fontLoaded ? "'Devil Breeze Demi', sans-serif" : "sans-serif";
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "relative flex min-h-screen w-full bg-black text-white overflow-hidden md:flex-row flex-col"
+        className: "splash-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex-1 flex justify-center items-center md:pl-60 p-8"
+        className: "logo-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "relative w-[95%] md:w-[95%] aspect-square flex justify-center items-center"
+        className: "logo"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute inset-[-10%] rounded-full bg-gradient-to-tr from-cyan-400 via-green-400 to-emerald-400 opacity-20 blur-3xl"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute inset-[-5%] rounded-full bg-gradient-to-r from-cyan-500 via-green-500 to-emerald-500 opacity-30 blur-2xl"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute inset-0 rounded-full border-2 border-cyan-500/30"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute inset-[-3%] rounded-full border-2 border-emerald-500/20"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute inset-[-6%] rounded-full border-2 border-green-500/10"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute inset-0 rounded-full bg-[radial-gradient(circle,#00d4ff_0%,#00ff8830_40%,transparent_70%)]"
+        className: "logo-gradient"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: "/assets/images/amplify.png",
         alt: "Amplify Logo",
-        className: "w-full h-auto object-contain z-10 p-4"
+        className: "logo-image"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex-1 flex flex-col justify-center items-center p-8"
+        className: "content-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-        className: "text-4xl md:text-6xl font-bold mb-8 text-center",
+        className: "company-name",
         style: {
           fontFamily: fontFamily
         }
       }, "AMPLIFY"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex flex-col gap-4 w-48"
+        className: "button-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "login-button",
         onClick: function onClick() {
           return _this3.handleAuth(true);
-        },
-        className: "w-full py-2.5 px-4 text-base bg-gradient-to-r from-cyan-500 to-green-500 \r text-black rounded-md cursor-pointer transition-all duration-300\r hover:from-cyan-400 hover:to-green-400 hover:shadow-lg hover:shadow-cyan-500/30\r active:scale-95"
+        }
       }, "Log in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "signin-button",
         onClick: function onClick() {
           return _this3.handleAuth(false);
-        },
-        className: "w-full py-2.5 px-4 text-base bg-gradient-to-r from-red-900 to-red-800\r text-white rounded-md cursor-pointer transition-all duration-300\r hover:from-red-800 hover:to-red-700 hover:shadow-lg hover:shadow-red-900/30\r active:scale-95"
-      }, "Sign in"))));
+        }
+      }, "Sign in"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", {
+        jsx: true
+      }, "\n                    * {\n                        margin: 0;\n                        padding: 0;\n                        box-sizing: border-box;\n                    }\n\n                    body, html {\n                        height: 100%;\n                        width: 100%;\n                        overflow: hidden;\n                    }\n\n                    .splash-container {\n                        position: relative;\n                        display: flex;\n                        height: 100vh;\n                        width: 100vw;\n                        background-color: #000;\n                        color: #fff;\n                    }\n\n                    .logo-gradient {\n                        position: absolute;\n                        top: -5%;\n                        left: -5%;\n                        right: -5%;\n                        bottom: -5%;\n                        border-radius: 50%;\n                        background: linear-gradient(135deg, #00FF87 100%, #60EFFF 0%);\n                        filter: blur(30px);\n                        opacity: 0.8;\n                    }\n\n                    .logo-container {\n                        flex: 1;\n                        display: flex;\n                        justify-content: center;\n                        align-items: center;\n                        padding-left: 15rem;\n                    }\n\n                    .logo {\n                        width: 95%;\n                        aspect-ratio: 1;\n                        display: flex;\n                        justify-content: center;\n                        align-items: center;\n                        background: radial-gradient(circle, #0f0 0%, #0f0 30%, transparent 70%);\n                        border-radius: 50%;\n                        position: relative;\n                    }\n\n                    // .logo::before {\n                    //     content: '';\n                    //     position: absolute;\n                    //     top: -5px;\n                    //     left: -5px;\n                    //     right: -5px;\n                    //     bottom: -5px;\n                    //     background: radial-gradient(circle, transparent 60%, #0f0 61%, transparent 70%);\n                    //     border-radius: 50%;\n                    // }\n\n                    // .logo::after {\n                    //     content: '';\n                    //     position: absolute;\n                    //     top: -10px;\n                    //     left: -10px;\n                    //     right: -10px;\n                    //     bottom: -10px;\n                    //     background: radial-gradient(circle, transparent 65%, #0f0 66%, transparent 75%);\n                    //     border-radius: 50%;\n                    // }\n\n                    .logo-image {\n                        width: 100%;\n                        height: auto;\n                        object-fit: contain;\n                        z-index: 1;\n                    }\n\n                    .content-container {\n                        flex: 1;\n                        display: flex;\n                        flex-direction: column;\n                        justify-content: center;\n                        align-items: center;\n                        padding: 2rem;\n                    }\n\n                    .company-name {\n                        font-size: 4rem;\n                        font-weight: bold;\n                        margin-bottom: 2rem;\n                        text-align: center;\n                    }\n\n                    .button-container {\n                        display: flex;\n                        flex-direction: column;\n                        gap: 1rem;\n                        width: 200px;\n                    }\n\n                    .login-button, .signin-button {\n                        padding: 0.5rem 1rem;\n                        font-size: 1rem;\n                        border: none;\n                        border-radius: 5px;\n                        cursor: pointer;\n                        transition: background-color 0.3s;\n                        width: 100%;\n                    }\n\n                    .login-button {\n                        background-color: #0f0;\n                        color: #000;\n                    }\n\n                    .signin-button {\n                        background-color: #500;\n                        color: #fff;\n                    }\n\n                    .login-button:hover {\n                        background-color: #0d0;\n                    }\n\n                    .signin-button:hover {\n                        background-color: #600;\n                    }\n\n                    @media (max-width: 768px) {\n                        .splash-container {\n                            flex-direction: column;\n                        }\n\n                        .logo-container, .content-container {\n                            flex: none;\n                        }\n\n                        .logo {\n                            width: 60%;\n                            margin: 2rem auto;\n                        }\n\n                        .company-name {\n                            font-size: 3rem;\n                        }\n                    }\n                "));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component)); // Wrapper function to use hooks with class component
@@ -6907,7 +6886,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 
-
+ // Adjust the import path as needed
 function hashPassword(password) {
   return (0,crypto_js__WEBPACK_IMPORTED_MODULE_1__.SHA256)(password).toString();
 }
@@ -6924,13 +6903,13 @@ var Auth = /*#__PURE__*/function (_React$Component) {
     });
     _defineProperty(_this, "handleSubmit", /*#__PURE__*/function () {
       var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(event) {
-        var _this$state, isLogin, username, password, confirmPassword, _this$props, login, navigate, hashedPassword, response, userData, errorData;
+        var _this$state, isLogin, username, password, confirmPassword, _this$props, login, navigate, hashedPassword, response, userData, errorData, _response, _userData, _errorData;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               event.preventDefault();
               _this$state = _this.state, isLogin = _this$state.isLogin, username = _this$state.username, password = _this$state.password, confirmPassword = _this$state.confirmPassword;
-              _this$props = _this.props, login = _this$props.login, navigate = _this$props.navigate;
+              _this$props = _this.props, login = _this$props.login, navigate = _this$props.navigate; // Destructure login and navigate from props
               if (!(!isLogin && password !== confirmPassword)) {
                 _context.next = 6;
                 break;
@@ -6941,10 +6920,14 @@ var Auth = /*#__PURE__*/function (_React$Component) {
               return _context.abrupt("return");
             case 6:
               hashedPassword = hashPassword(password);
-              _context.prev = 7;
-              _context.next = 10;
-              return fetch("http://localhost:3000/api/users/".concat(isLogin ? 'login' : ''), {
-                method: isLogin ? 'POST' : 'POST',
+              if (!isLogin) {
+                _context.next = 32;
+                break;
+              }
+              _context.prev = 8;
+              _context.next = 11;
+              return fetch('http://localhost:3000/api/users/login', {
+                method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
                 },
@@ -6953,45 +6936,95 @@ var Auth = /*#__PURE__*/function (_React$Component) {
                   password: hashedPassword
                 })
               });
-            case 10:
+            case 11:
               response = _context.sent;
               if (!response.ok) {
-                _context.next = 20;
+                _context.next = 21;
                 break;
               }
-              _context.next = 14;
+              _context.next = 15;
               return response.json();
-            case 14:
+            case 15:
               userData = _context.sent;
-              console.log("Received user data:", userData);
+              console.log("Received user data:", userData); // Debugging log
               login({
                 username: username
-              });
+              }); // Use the login function from AuthContext
               navigate('/home');
-              _context.next = 24;
+              _context.next = 25;
               break;
-            case 20:
-              _context.next = 22;
+            case 21:
+              _context.next = 23;
               return response.json();
-            case 22:
+            case 23:
               errorData = _context.sent;
               _this.setState({
-                error: errorData.message || "".concat(isLogin ? 'Login' : 'Sign up', " failed")
+                error: errorData.message || 'Login failed'
               });
-            case 24:
-              _context.next = 29;
+            case 25:
+              _context.next = 30;
               break;
-            case 26:
-              _context.prev = 26;
-              _context.t0 = _context["catch"](7);
+            case 27:
+              _context.prev = 27;
+              _context.t0 = _context["catch"](8);
               _this.setState({
                 error: 'Network error'
               });
-            case 29:
+            case 30:
+              _context.next = 54;
+              break;
+            case 32:
+              _context.prev = 32;
+              _context.next = 35;
+              return fetch('http://localhost:3000/api/users', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  username: username,
+                  password: hashedPassword
+                })
+              });
+            case 35:
+              _response = _context.sent;
+              if (!_response.ok) {
+                _context.next = 45;
+                break;
+              }
+              _context.next = 39;
+              return _response.json();
+            case 39:
+              _userData = _context.sent;
+              console.log("Received user data:", _userData); // Debugging log
+              login({
+                username: username
+              }); // Use the login function from AuthContext
+              navigate('/home');
+              _context.next = 49;
+              break;
+            case 45:
+              _context.next = 47;
+              return _response.json();
+            case 47:
+              _errorData = _context.sent;
+              _this.setState({
+                error: _errorData.message || 'Sign up failed'
+              });
+            case 49:
+              _context.next = 54;
+              break;
+            case 51:
+              _context.prev = 51;
+              _context.t1 = _context["catch"](32);
+              _this.setState({
+                error: 'Network error'
+              });
+            case 54:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[7, 26]]);
+        }, _callee, null, [[8, 27], [32, 51]]);
       }));
       return function (_x) {
         return _ref.apply(this, arguments);
@@ -7027,58 +7060,45 @@ var Auth = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$state2 = this.state,
-        isLogin = _this$state2.isLogin,
-        error = _this$state2.error;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex h-screen w-screen bg-black text-white font-sans"
+        className: "auth-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "w-1/2 h-full relative overflow-hidden"
+        className: "left-column"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "absolute -top-[40%] -left-[121%] w-[200%] h-[190%] border-2 border-[#1c570d] rounded-full shadow-[0_0_142px_#00ff871f]"
+        className: "semi-circle"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "w-1/2 flex flex-col justify-center items-center"
+        className: "right-column"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "w-2/3"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-        className: "text-[4.5rem] font-bold mb-8 text-center leading-tight"
-      }, "Lets Amp it up ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), " with AMPLIFY"), error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-        className: "text-red-500 mt-4"
-      }, error), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-        onSubmit: this.handleSubmit,
-        className: "flex flex-col gap-4"
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Lets Amp it up ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), " with AMPLIFY"), this.state.error && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+        className: "error"
+      }, this.state.error), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+        onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "text",
         name: "username",
         placeholder: "User name",
         value: this.state.username,
-        onChange: this.handleInputChange,
-        className: "w-full p-6 bg-neutral-800 rounded-[17px] text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+        onChange: this.handleInputChange
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "password",
         name: "password",
         placeholder: "Password",
         value: this.state.password,
-        onChange: this.handleInputChange,
-        className: "w-full p-6 bg-neutral-800 rounded-[17px] text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-      }), !isLogin && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        onChange: this.handleInputChange
+      }), !this.state.isLogin && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "password",
         name: "confirmPassword",
         placeholder: "Confirm Password",
         value: this.state.confirmPassword,
-        onChange: this.handleInputChange,
-        className: "w-full p-6 bg-neutral-800 rounded-[17px] text-white focus:outline-none focus:ring-2 focus:ring-green-500"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex justify-center mt-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        type: "submit",
-        className: "w-[40%] py-3.5 bg-green-500 text-black rounded-[17px] cursor-pointer text-[29px] hover:bg-green-400 transition-colors"
-      }, isLogin ? 'Login' : 'Sign Up'))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex justify-center mt-4"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-        onClick: this.toggleAuthMode,
-        className: "text-green-500 cursor-pointer hover:text-green-400 transition-colors"
-      }, isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login")))));
+        onChange: this.handleInputChange
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        type: "submit"
+      }, this.state.isLogin ? 'Login' : 'Sign Up')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+        onClick: this.toggleAuthMode
+      }, this.state.isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", {
+        jsx: true
+      }, "\n                .auth-container {\n                    display: flex;\n                    height: 100vh;\n                    width: 100vw;\n                    background-color: black;\n                    color: white;\n                    font-family: Arial, sans-serif;\n                }\n                .error {\n                    color: red;\n                    margin-top: 1rem;\n                }\n                .left-column {\n                    width: 50%;\n                    height: 100%;\n                    position: relative;\n                    overflow: hidden;\n                }\n                .semi-circle {\n                    position: absolute;\n                    top: -40%;\n                    left: -121%;\n                    width: 200%;\n                    height: 190%;\n                    border: 2px solid #1c570d;\n                    border-radius: 50%;\n                    box-shadow: 0 0 142px #00ff871f;\n                }\n                .right-column {\n                    width: 50%;\n                    display: flex;\n                    flex-direction: column;\n                    justify-content: center;\n                    align-items: center;\n                }\n                .content {\n                    width: 66%;\n                }\n                h1 {\n                    font-size: 4.5rem;\n                    font-weight: bold;\n                    margin-bottom: 2rem;\n                    text-align: center;\n                }\n                form {\n                    display: flex;\n                    flex-direction: column;\n                    gap: 1rem;\n                }\n                input {\n                    width: 100%;\n                    padding: 1.5rem;\n                    background-color: #333;\n                    border: none;\n                    border-radius: 17px;\n                    color: #ffffff;\n                }\n                button {\n                    width: 40%;\n                    padding: 0.9rem;\n                    background-color: #00ff00;\n                    color: black;\n                    border: none;\n                    border-radius: 17px;\n                    cursor: pointer;\n                    position: relative;\n                    left: 30%;\n                    right: 50%;\n                    font-size: 29px;\n                }\n                p {\n                    margin-top: 1rem;\n                    cursor: pointer;\n                    color: #00ff00;\n                    width: fit-content;\n                }\n                "));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component)); // Wrapper function to use hooks with class component
@@ -7127,7 +7147,6 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
 function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-// Home.js
 
 
 
@@ -7143,18 +7162,20 @@ var Home = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex h-screen overflow-hidden bg-[#000807] text-white font-sans"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_sidebar_sideBar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex-1 ml-[300px] flex flex-col"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_search_searchBar__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "flex-1 overflow-y-auto"
+        className: "app-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "p-5"
+        className: "main-content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_search_searchBar__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        style: {
+          padding: '20px'
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_featuredsong_feature__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_newrelease_release__WEBPACK_IMPORTED_MODULE_4__["default"], {
         releases: this.props.newReleases,
         onAddRelease: this.props.onAddRelease,
         onAddComment: this.props.onAddComment
-      })))));
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_sidebar_sideBar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", {
+        jsx: true
+      }, "\n                            body, html {\n                                height: 100%;\n                                font-family: Arial, sans-serif;\n                                background-color: #000807;\n                                color: #fff;\n                            }\n\n                            .app-container {\n                                display: flex;\n                                height: 100vh;\n                                flex-direction: row-reverse;\n                            }\n\n                            .main-content {\n                            flex-grow: 1;\n                            display: flex;\n                            flex-direction: column;\n                            height: 100vh;\n                            overflow: auto;\n                            }\n\n                            .content-area {\n                            flex-grow: 1;\n                            overflow-y: auto;\n                            padding: 20px;\n                            }\n                        "));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
@@ -7179,7 +7200,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/user-plus.js");
 /* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/user-minus.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/x.js");
 /* harmony import */ var _components_sidebar_sideBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/sidebar/sideBar */ "./frontend/components/sidebar/sideBar.js");
 /* harmony import */ var _components_AuthContext_authContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/AuthContext/authContext */ "./frontend/components/AuthContext/authContext.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -7226,65 +7246,17 @@ var ProfileSettings = function ProfileSettings() {
     _useState8 = _slicedToArray(_useState7, 2),
     friendRequests = _useState8[0],
     setFriendRequests = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    showDeleteConfirmation = _useState10[0],
-    setShowDeleteConfirmation = _useState10[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    console.log("Current user in AuthContext:", user); // Keep this log
     if (user && user.username) {
       setFormData({
         username: user.username
       });
       fetchFriendsData();
+    } else {
+      console.error("User or username is missing in AuthContext");
     }
   }, [user]);
-  var fetchFriendsData = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var response, data;
-      return _regeneratorRuntime().wrap(function _callee$(_context) {
-        while (1) switch (_context.prev = _context.next) {
-          case 0:
-            _context.prev = 0;
-            _context.next = 3;
-            return fetch("/api/users/".concat(user.username, "/friends"));
-          case 3:
-            response = _context.sent;
-            if (!response.ok) {
-              _context.next = 12;
-              break;
-            }
-            _context.next = 7;
-            return response.json();
-          case 7:
-            data = _context.sent;
-            setFriends(data.friends);
-            setFriendRequests(data.friendRequests);
-            _context.next = 17;
-            break;
-          case 12:
-            _context.t0 = console;
-            _context.next = 15;
-            return response.text();
-          case 15:
-            _context.t1 = _context.sent;
-            _context.t0.error.call(_context.t0, 'Error fetching friends data:', _context.t1);
-          case 17:
-            _context.next = 22;
-            break;
-          case 19:
-            _context.prev = 19;
-            _context.t2 = _context["catch"](0);
-            console.error('Error fetching friends data:', _context.t2);
-          case 22:
-          case "end":
-            return _context.stop();
-        }
-      }, _callee, null, [[0, 19]]);
-    }));
-    return function fetchFriendsData() {
-      return _ref.apply(this, arguments);
-    };
-  }();
   var toggleSection = function toggleSection(section, event) {
     if (event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'select' || event.target.tagName.toLowerCase() === 'button') {
       return;
@@ -7293,6 +7265,54 @@ var ProfileSettings = function ProfileSettings() {
       return prevSection === section ? null : section;
     });
   };
+  var handleDeleteAccount = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var response;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            if (!window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+              _context.next = 15;
+              break;
+            }
+            _context.prev = 1;
+            _context.next = 4;
+            return fetch('/api/users', {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                username: user.username
+              })
+            });
+          case 4:
+            response = _context.sent;
+            if (response.ok) {
+              _context.next = 7;
+              break;
+            }
+            throw new Error('Failed to delete user account');
+          case 7:
+            logout();
+            navigate('/auth');
+            _context.next = 15;
+            break;
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context["catch"](1);
+            console.error('Error deleting user account:', _context.t0);
+            alert('Failed to delete account. Please try again.');
+          case 15:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[1, 11]]);
+    }));
+    return function handleDeleteAccount() {
+      return _ref.apply(this, arguments);
+    };
+  }();
   var handleInputChange = function handleInputChange(e) {
     setFormData(_objectSpread(_objectSpread({}, formData), {}, _defineProperty({}, e.target.name, e.target.value)));
   };
@@ -7327,7 +7347,7 @@ var ProfileSettings = function ProfileSettings() {
             return response.json();
           case 9:
             updatedData = _context2.sent;
-            login(updatedData);
+            login(updatedData); // Update the user data in AuthContext
             setExpandedSection(null);
             _context2.next = 17;
             break;
@@ -7345,54 +7365,55 @@ var ProfileSettings = function ProfileSettings() {
       return _ref2.apply(this, arguments);
     };
   }();
-  var handleCancel = function handleCancel() {
-    setExpandedSection(null);
-    if (user && user.username) {
-      setFormData({
-        username: user.username
-      });
-    }
-  };
-  var handleAcceptFriend = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(friendUsername) {
-      var response;
+  var fetchFriendsData = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var response, data;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
             _context3.prev = 0;
             _context3.next = 3;
-            return fetch('/api/users/accept-friend', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                username: user.username,
-                friendUsername: friendUsername
-              })
-            });
+            return fetch("/api/users/".concat(user.username, "/friends"));
           case 3:
             response = _context3.sent;
-            if (response.ok) {
-              fetchFriendsData();
+            if (!response.ok) {
+              _context3.next = 13;
+              break;
             }
-            _context3.next = 10;
-            break;
+            _context3.next = 7;
+            return response.json();
           case 7:
-            _context3.prev = 7;
-            _context3.t0 = _context3["catch"](0);
-            console.error('Error accepting friend request:', _context3.t0);
-          case 10:
+            data = _context3.sent;
+            console.log('Friends data:', data); // Add this log
+            setFriends(data.friends);
+            setFriendRequests(data.friendRequests);
+            _context3.next = 18;
+            break;
+          case 13:
+            _context3.t0 = console;
+            _context3.next = 16;
+            return response.text();
+          case 16:
+            _context3.t1 = _context3.sent;
+            _context3.t0.error.call(_context3.t0, 'Error fetching friends data:', _context3.t1);
+          case 18:
+            _context3.next = 23;
+            break;
+          case 20:
+            _context3.prev = 20;
+            _context3.t2 = _context3["catch"](0);
+            console.error('Error fetching friends data:', _context3.t2);
+          case 23:
           case "end":
             return _context3.stop();
         }
-      }, _callee3, null, [[0, 7]]);
+      }, _callee3, null, [[0, 20]]);
     }));
-    return function handleAcceptFriend(_x2) {
+    return function fetchFriendsData() {
       return _ref3.apply(this, arguments);
     };
   }();
-  var handleUnfriend = /*#__PURE__*/function () {
+  var handleAcceptFriend = /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(friendUsername) {
       var response;
       return _regeneratorRuntime().wrap(function _callee4$(_context4) {
@@ -7400,7 +7421,7 @@ var ProfileSettings = function ProfileSettings() {
           case 0:
             _context4.prev = 0;
             _context4.next = 3;
-            return fetch('/api/users/unfriend', {
+            return fetch('/api/users/accept-friend', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -7413,242 +7434,175 @@ var ProfileSettings = function ProfileSettings() {
           case 3:
             response = _context4.sent;
             if (response.ok) {
-              fetchFriendsData();
+              fetchFriendsData(); // Refresh friends list
             }
             _context4.next = 10;
             break;
           case 7:
             _context4.prev = 7;
             _context4.t0 = _context4["catch"](0);
-            console.error('Error unfriending user:', _context4.t0);
+            console.error('Error accepting friend request:', _context4.t0);
           case 10:
           case "end":
             return _context4.stop();
         }
       }, _callee4, null, [[0, 7]]);
     }));
-    return function handleUnfriend(_x3) {
+    return function handleAcceptFriend(_x2) {
       return _ref4.apply(this, arguments);
     };
   }();
-  var openDeleteConfirmation = function openDeleteConfirmation() {
-    setShowDeleteConfirmation(true);
-  };
-  var closeDeleteConfirmation = function closeDeleteConfirmation() {
-    setShowDeleteConfirmation(false);
-  };
-  var handleDeleteAccount = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+  var handleUnfriend = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(friendUsername) {
       var response;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) switch (_context5.prev = _context5.next) {
           case 0:
             _context5.prev = 0;
             _context5.next = 3;
-            return fetch('/api/users', {
-              method: 'DELETE',
+            return fetch('/api/users/unfriend', {
+              method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify({
-                username: user.username
+                username: user.username,
+                friendUsername: friendUsername
               })
             });
           case 3:
             response = _context5.sent;
             if (response.ok) {
-              _context5.next = 6;
-              break;
+              fetchFriendsData(); // Refresh friends list
             }
-            throw new Error('Failed to delete user account');
-          case 6:
-            logout();
-            navigate('/auth');
-            _context5.next = 14;
+            _context5.next = 10;
             break;
-          case 10:
-            _context5.prev = 10;
+          case 7:
+            _context5.prev = 7;
             _context5.t0 = _context5["catch"](0);
-            console.error('Error deleting user account:', _context5.t0);
-            alert('Failed to delete account. Please try again.');
-          case 14:
-            _context5.prev = 14;
-            closeDeleteConfirmation();
-            return _context5.finish(14);
-          case 17:
+            console.error('Error unfriending user:', _context5.t0);
+          case 10:
           case "end":
             return _context5.stop();
         }
-      }, _callee5, null, [[0, 10, 14, 17]]);
+      }, _callee5, null, [[0, 7]]);
     }));
-    return function handleDeleteAccount() {
+    return function handleUnfriend(_x3) {
       return _ref5.apply(this, arguments);
     };
   }();
+  var handleCancel = function handleCancel() {
+    setExpandedSection(null);
+    // Reset form data to current user data
+    if (user && user.username) {
+      setFormData({
+        username: user.username
+      });
+    }
+  };
   var goBack = function goBack() {
     navigate('/home');
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex h-screen overflow-hidden bg-[#000807] text-white font-sans"
+    className: "page-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_sidebar_sideBar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex-1 ml-[320px] flex flex-col"
+    className: "profile-settings"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex-1 overflow-y-auto"
+    className: "header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "p-6"
+    className: "back-button",
+    onClick: goBack
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Account Settings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "content-wrapper"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex items-center gap-4 mb-8"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: goBack,
-    className: "p-2 hover:bg-neutral-800 rounded-full transition-colors"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    size: 24
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-    className: "text-2xl font-semibold"
-  }, "Account Settings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex gap-8"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "w-64 flex flex-col items-center border-r border-neutral-800 pr-6"
+    className: "user-info-sidebar"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: "/assets/images/user/user.jpg",
     alt: "User",
-    className: "w-48 h-48 rounded-full border-2 border-green-500 mb-4"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-    className: "text-lg font-medium"
-  }, user ? user.username : 'Loading...')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex-1 max-w-2xl"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "space-y-4"
+    className: "user-image"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, user ? user.username : 'Loading...')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "settings-list"
   }, [{
     name: 'Personal information',
-    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "space-y-4"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
       type: "text",
       name: "username",
       placeholder: "Full Name",
+      className: "input-field",
       value: formData.username,
-      onChange: handleInputChange,
-      className: "w-full p-3 bg-neutral-800 border border-green-500 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+      onChange: handleInputChange
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "flex gap-4"
+      className: "button-group"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       onClick: function onClick() {
         return handleSave('Personal information');
       },
-      className: "px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+      className: "save-button"
     }, "Save"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       onClick: handleCancel,
-      className: "px-6 py-2 bg-neutral-800 text-white rounded-lg hover:bg-neutral-700 transition-colors"
+      className: "cancel-button"
     }, "Cancel")))
   }, {
     name: 'Friends',
     content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "space-y-6"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", {
-      className: "text-lg font-medium mb-3"
-    }, "Friend Requests"), friendRequests.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-      className: "text-neutral-400"
-    }, "No pending friend requests.") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "space-y-2"
-    }, friendRequests.map(function (friend, index) {
+      className: "friends-list"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Friend Requests"), friendRequests.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "No pending friend requests.") : friendRequests.map(function (friend, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         key: index,
-        className: "flex items-center justify-between p-3 bg-neutral-900 rounded-lg"
+        className: "friend-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, friend), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: function onClick() {
           return handleAcceptFriend(friend);
         },
-        className: "flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+        className: "accept-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
         size: 16
-      }), "Accept"));
-    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", {
-      className: "text-lg font-medium mb-3"
-    }, "Friends"), friends.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-      className: "text-neutral-400"
-    }, "You have no friends yet.") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "space-y-2"
-    }, friends.map(function (friend, index) {
+      }), " Accept"));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Friends"), friends.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "You have no friends yet.") : friends.map(function (friend, index) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         key: index,
-        className: "flex items-center justify-between p-3 bg-neutral-900 rounded-lg"
+        className: "friend-item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, friend), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: function onClick() {
           return handleUnfriend(friend);
         },
-        className: "flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+        className: "unfriend-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
         size: 16
-      }), "Unfriend"));
-    }))))
+      }), " Unfriend"));
+    }))
   }, {
     name: 'Settings',
-    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "space-y-4"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-      className: "flex items-center gap-3 text-lg"
+    content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+      className: "checkbox-container"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      type: "checkbox",
-      className: "w-5 h-5 rounded bg-neutral-800 border-neutral-600"
-    }), "Dark Mode"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-      className: "w-full p-3 bg-neutral-800 rounded-lg text-white border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+      type: "checkbox"
+    }), " Dark Mode"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+      className: "input-field"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "English"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Spanish"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "French")))
   }].map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       key: index,
-      className: "border-b border-neutral-800 last:border-none"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "flex justify-between items-center py-4 cursor-pointer",
+      className: "settings-item",
       onClick: function onClick(e) {
         return toggleSection(item.name, e);
       }
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-      className: "text-lg font-medium"
-    }, item.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-      className: "text-sm"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "settings-item-header"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, item.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+      className: "arrow"
     }, expandedSection === item.name ? '▼' : '▶')), expandedSection === item.name && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "pb-6"
+      className: "settings-item-content"
     }, item.content));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "space-y-3 mt-8"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: logout,
-    className: "w-full py-3 bg-red-900 hover:bg-red-800 text-white rounded-full transition-colors"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "logout-button",
+    onClick: logout
   }, "LOG OUT"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: openDeleteConfirmation,
-    className: "w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-full transition-colors"
-  }, "DELETE ACCOUNT")))))), showDeleteConfirmation && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "fixed inset-0 bg-black/70 backdrop-blur-sm z-50",
-    onClick: closeDeleteConfirmation
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[#121212] rounded-xl shadow-xl z-50 overflow-hidden"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex justify-between items-center p-6 border-b border-neutral-800"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
-    className: "text-xl font-semibold"
-  }, "Delete Account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: closeDeleteConfirmation,
-    className: "p-2 hover:bg-neutral-800 rounded-full transition-colors"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    size: 20
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "p-6"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "text-neutral-300 mb-2"
-  }, "Are you sure you want to delete your account?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: "text-neutral-400 text-sm mb-6"
-  }, "This will permanently delete the account for ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    className: "text-white font-medium"
-  }, user === null || user === void 0 ? void 0 : user.username), ". This action cannot be undone."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "flex gap-3"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: closeDeleteConfirmation,
-    className: "flex-1 px-4 py-2 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg transition-colors"
-  }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: handleDeleteAccount,
-    className: "flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors"
-  }, "Delete Account")))))));
+    className: "delete-account-button",
+    onClick: handleDeleteAccount
+  }, "DELETE ACCOUNT")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", {
+    jsx: true
+  }, "\n                .friends-list {\n                    margin-top: 10px;\n                }\n\n                .friend-item {\n                    display: flex;\n                    justify-content: space-between;\n                    align-items: center;\n                    padding: 10px 0;\n                    border-bottom: 1px solid #333;\n                }\n\n                .accept-button, .unfriend-button {\n                    display: flex;\n                    align-items: center;\n                    padding: 5px 10px;\n                    border: none;\n                    border-radius: 5px;\n                    cursor: pointer;\n                    font-size: 14px;\n                }\n\n                .accept-button {\n                    background-color: #1DB954;\n                    color: white;\n                }\n\n                .unfriend-button {\n                    background-color: #FF4136;\n                    color: white;\n                }\n\n                .accept-button svg, .unfriend-button svg {\n                    margin-right: 5px;\n                }\n                .page-container {\n                    display: flex;\n                    height: 100vh;\n                    background-color: #121212;\n                }\n                .delete-account-button {\n                    background-color: #FF4136;\n                    color: white;\n                    border: none;\n                    padding: 15px 30px;\n                    font-size: 16px;\n                    border-radius: 25px;\n                    cursor: pointer;\n                    width: 100%;\n                    margin-top: 10px;\n                }\n                .profile-settings {\n                    flex-grow: 1;\n                    padding: 20px;\n                    color: white;\n                    font-family: Arial, sans-serif;\n                    overflow-y: auto;\n                }\n                .header {\n                    display: flex;\n                    align-items: center;\n                    margin-bottom: 20px;\n                }\n                .back-button {\n                    font-size: 24px;\n                    margin-right: 20px;\n                    cursor: pointer;\n                }\n                .content-wrapper {\n                    display: flex;\n                }\n                .user-info-sidebar {\n                    width: 25%;\n                    padding-right: 20px;\n                    border-right: 1px solid #333;\n                }\n                .user-image {\n                    width: 250px;\n                    height: 250px;\n                    border-radius: 50%;\n                    margin-bottom: 15px;\n                    border: 2px solid #1DB954;\n                }\n                .settings-list {\n                    flex-grow: 1;\n                    padding-left: 30px;\n                }\n                h2, h3 {\n                    margin: 0 0 10px 0;\n                }\n                p {\n                    margin: 5px 0;\n                    color: #888;\n                }\n                .settings-item {\n                    margin-bottom: 15px;\n                    cursor: pointer;\n                }\n                .settings-item-header {\n                    display: flex;\n                    justify-content: space-between;\n                    align-items: center;\n                    padding: 10px 0;\n                    border-bottom: 1px solid #333;\n                }\n                .arrow {\n                    font-size: 12px;\n                }\n                .settings-item-content {\n                    padding: 10px 0;\n                    font-size: 14px;\n                }\n                .logout-button {\n                    background-color: #8B0000;\n                    color: white;\n                    border: none;\n                    padding: 15px 30px;\n                    font-size: 16px;\n                    border-radius: 25px;\n                    cursor: pointer;\n                    width: 100%;\n                    margin-top: 20px;\n                }\n                .input-field {\n                    width: 100%;\n                    padding: 10px;\n                    margin-bottom: 10px;\n                    background-color: #333;\n                    border: none;\n                    border-radius: 5px;\n                    color: white;\n                }\n                .checkbox-container {\n                    display: block;\n                    margin-bottom: 10px;\n                }\n                select.input-field {\n                    appearance: none;\n                    background-image: url('data:image/svg+xml;utf8,<svg fill=\"white\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M7 10l5 5 5-5z\"/><path d=\"M0 0h24v24H0z\" fill=\"none\"/></svg>');\n                    background-repeat: no-repeat;\n                    background-position-x: 98%;\n                    background-position-y: 50%;\n                }\n                .button-group {\n                    display: flex;\n                    margin-top: 10px;\n                    gap: 30px;\n                }\n                .save-button, .cancel-button {\n                    padding: 10px 20px;\n                    border: none;\n                    border-radius: 5px;\n                    cursor: pointer;\n                    font-weight: bold;\n                }\n                .save-button {\n                    background-color: #1DB954;\n                    color: white;\n                }\n                .cancel-button {\n                    background-color: #333;\n                    color: white;\n                }\n            "));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProfileSettings);
 
@@ -15423,1743 +15377,6 @@ var App = /*#__PURE__*/function (_React$Component) {
 	return CryptoJS;
 
 }));
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./frontend/src/index.css":
-/*!********************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./frontend/src/index.css ***!
-  \********************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-// Imports
-
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, `*, ::before, ::after {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position:  ;
-  --tw-gradient-via-position:  ;
-  --tw-gradient-to-position:  ;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
-  --tw-contain-size:  ;
-  --tw-contain-layout:  ;
-  --tw-contain-paint:  ;
-  --tw-contain-style:  ;
-}
-
-::backdrop {
-  --tw-border-spacing-x: 0;
-  --tw-border-spacing-y: 0;
-  --tw-translate-x: 0;
-  --tw-translate-y: 0;
-  --tw-rotate: 0;
-  --tw-skew-x: 0;
-  --tw-skew-y: 0;
-  --tw-scale-x: 1;
-  --tw-scale-y: 1;
-  --tw-pan-x:  ;
-  --tw-pan-y:  ;
-  --tw-pinch-zoom:  ;
-  --tw-scroll-snap-strictness: proximity;
-  --tw-gradient-from-position:  ;
-  --tw-gradient-via-position:  ;
-  --tw-gradient-to-position:  ;
-  --tw-ordinal:  ;
-  --tw-slashed-zero:  ;
-  --tw-numeric-figure:  ;
-  --tw-numeric-spacing:  ;
-  --tw-numeric-fraction:  ;
-  --tw-ring-inset:  ;
-  --tw-ring-offset-width: 0px;
-  --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  --tw-blur:  ;
-  --tw-brightness:  ;
-  --tw-contrast:  ;
-  --tw-grayscale:  ;
-  --tw-hue-rotate:  ;
-  --tw-invert:  ;
-  --tw-saturate:  ;
-  --tw-sepia:  ;
-  --tw-drop-shadow:  ;
-  --tw-backdrop-blur:  ;
-  --tw-backdrop-brightness:  ;
-  --tw-backdrop-contrast:  ;
-  --tw-backdrop-grayscale:  ;
-  --tw-backdrop-hue-rotate:  ;
-  --tw-backdrop-invert:  ;
-  --tw-backdrop-opacity:  ;
-  --tw-backdrop-saturate:  ;
-  --tw-backdrop-sepia:  ;
-  --tw-contain-size:  ;
-  --tw-contain-layout:  ;
-  --tw-contain-paint:  ;
-  --tw-contain-style:  ;
-}/*
-! tailwindcss v3.4.14 | MIT License | https://tailwindcss.com
-*//*
-1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
-2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
-*/
-
-*,
-::before,
-::after {
-  box-sizing: border-box; /* 1 */
-  border-width: 0; /* 2 */
-  border-style: solid; /* 2 */
-  border-color: #e5e7eb; /* 2 */
-}
-
-::before,
-::after {
-  --tw-content: '';
-}
-
-/*
-1. Use a consistent sensible line-height in all browsers.
-2. Prevent adjustments of font size after orientation changes in iOS.
-3. Use a more readable tab size.
-4. Use the user's configured \`sans\` font-family by default.
-5. Use the user's configured \`sans\` font-feature-settings by default.
-6. Use the user's configured \`sans\` font-variation-settings by default.
-7. Disable tap highlights on iOS
-*/
-
-html,
-:host {
-  line-height: 1.5; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-  -moz-tab-size: 4; /* 3 */
-  -o-tab-size: 4;
-     tab-size: 4; /* 3 */
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
-  font-feature-settings: normal; /* 5 */
-  font-variation-settings: normal; /* 6 */
-  -webkit-tap-highlight-color: transparent; /* 7 */
-}
-
-/*
-1. Remove the margin in all browsers.
-2. Inherit line-height from \`html\` so users can set them as a class directly on the \`html\` element.
-*/
-
-body {
-  margin: 0; /* 1 */
-  line-height: inherit; /* 2 */
-}
-
-/*
-1. Add the correct height in Firefox.
-2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
-3. Ensure horizontal rules are visible by default.
-*/
-
-hr {
-  height: 0; /* 1 */
-  color: inherit; /* 2 */
-  border-top-width: 1px; /* 3 */
-}
-
-/*
-Add the correct text decoration in Chrome, Edge, and Safari.
-*/
-
-abbr:where([title]) {
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
-}
-
-/*
-Remove the default font size and weight for headings.
-*/
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
-
-/*
-Reset links to optimize for opt-in styling instead of opt-out.
-*/
-
-a {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-/*
-Add the correct font weight in Edge and Safari.
-*/
-
-b,
-strong {
-  font-weight: bolder;
-}
-
-/*
-1. Use the user's configured \`mono\` font-family by default.
-2. Use the user's configured \`mono\` font-feature-settings by default.
-3. Use the user's configured \`mono\` font-variation-settings by default.
-4. Correct the odd \`em\` font sizing in all browsers.
-*/
-
-code,
-kbd,
-samp,
-pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
-  font-feature-settings: normal; /* 2 */
-  font-variation-settings: normal; /* 3 */
-  font-size: 1em; /* 4 */
-}
-
-/*
-Add the correct font size in all browsers.
-*/
-
-small {
-  font-size: 80%;
-}
-
-/*
-Prevent \`sub\` and \`sup\` elements from affecting the line height in all browsers.
-*/
-
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
-sup {
-  top: -0.5em;
-}
-
-/*
-1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
-2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
-3. Remove gaps between table borders by default.
-*/
-
-table {
-  text-indent: 0; /* 1 */
-  border-color: inherit; /* 2 */
-  border-collapse: collapse; /* 3 */
-}
-
-/*
-1. Change the font styles in all browsers.
-2. Remove the margin in Firefox and Safari.
-3. Remove default padding in all browsers.
-*/
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit; /* 1 */
-  font-feature-settings: inherit; /* 1 */
-  font-variation-settings: inherit; /* 1 */
-  font-size: 100%; /* 1 */
-  font-weight: inherit; /* 1 */
-  line-height: inherit; /* 1 */
-  letter-spacing: inherit; /* 1 */
-  color: inherit; /* 1 */
-  margin: 0; /* 2 */
-  padding: 0; /* 3 */
-}
-
-/*
-Remove the inheritance of text transform in Edge and Firefox.
-*/
-
-button,
-select {
-  text-transform: none;
-}
-
-/*
-1. Correct the inability to style clickable types in iOS and Safari.
-2. Remove default button styles.
-*/
-
-button,
-input:where([type='button']),
-input:where([type='reset']),
-input:where([type='submit']) {
-  -webkit-appearance: button; /* 1 */
-  background-color: transparent; /* 2 */
-  background-image: none; /* 2 */
-}
-
-/*
-Use the modern Firefox focus style for all focusable elements.
-*/
-
-:-moz-focusring {
-  outline: auto;
-}
-
-/*
-Remove the additional \`:invalid\` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
-*/
-
-:-moz-ui-invalid {
-  box-shadow: none;
-}
-
-/*
-Add the correct vertical alignment in Chrome and Firefox.
-*/
-
-progress {
-  vertical-align: baseline;
-}
-
-/*
-Correct the cursor style of increment and decrement buttons in Safari.
-*/
-
-::-webkit-inner-spin-button,
-::-webkit-outer-spin-button {
-  height: auto;
-}
-
-/*
-1. Correct the odd appearance in Chrome and Safari.
-2. Correct the outline style in Safari.
-*/
-
-[type='search'] {
-  -webkit-appearance: textfield; /* 1 */
-  outline-offset: -2px; /* 2 */
-}
-
-/*
-Remove the inner padding in Chrome and Safari on macOS.
-*/
-
-::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-/*
-1. Correct the inability to style clickable types in iOS and Safari.
-2. Change font properties to \`inherit\` in Safari.
-*/
-
-::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
-  font: inherit; /* 2 */
-}
-
-/*
-Add the correct display in Chrome and Safari.
-*/
-
-summary {
-  display: list-item;
-}
-
-/*
-Removes the default spacing and border for appropriate elements.
-*/
-
-blockquote,
-dl,
-dd,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-figure,
-p,
-pre {
-  margin: 0;
-}
-
-fieldset {
-  margin: 0;
-  padding: 0;
-}
-
-legend {
-  padding: 0;
-}
-
-ol,
-ul,
-menu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/*
-Reset default styling for dialogs.
-*/
-dialog {
-  padding: 0;
-}
-
-/*
-Prevent resizing textareas horizontally by default.
-*/
-
-textarea {
-  resize: vertical;
-}
-
-/*
-1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
-2. Set the default placeholder color to the user's configured gray 400 color.
-*/
-
-input::-moz-placeholder, textarea::-moz-placeholder {
-  opacity: 1; /* 1 */
-  color: #9ca3af; /* 2 */
-}
-
-input::placeholder,
-textarea::placeholder {
-  opacity: 1; /* 1 */
-  color: #9ca3af; /* 2 */
-}
-
-/*
-Set the default cursor for buttons.
-*/
-
-button,
-[role="button"] {
-  cursor: pointer;
-}
-
-/*
-Make sure disabled buttons don't get the pointer cursor.
-*/
-:disabled {
-  cursor: default;
-}
-
-/*
-1. Make replaced elements \`display: block\` by default. (https://github.com/mozdevs/cssremedy/issues/14)
-2. Add \`vertical-align: middle\` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
-   This can trigger a poorly considered lint error in some tools but is included by design.
-*/
-
-img,
-svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object {
-  display: block; /* 1 */
-  vertical-align: middle; /* 2 */
-}
-
-/*
-Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
-*/
-
-img,
-video {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Make elements with the HTML hidden attribute stay hidden by default */
-[hidden]:where(:not([hidden="until-found"])) {
-  display: none;
-}
-
-  html,
-  body {
-  height: 100%;
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 8 7 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.fixed {
-  position: fixed;
-}
-.absolute {
-  position: absolute;
-}
-.relative {
-  position: relative;
-}
-.inset-0 {
-  inset: 0px;
-}
-.inset-\\[-5\\%\\] {
-  inset: -5%;
-}
-.inset-\\[-10\\%\\] {
-  inset: -10%;
-}
-.inset-\\[-3\\%\\] {
-  inset: -3%;
-}
-.inset-\\[-6\\%\\] {
-  inset: -6%;
-}
-.bottom-0 {
-  bottom: 0px;
-}
-.bottom-10 {
-  bottom: 2.5rem;
-}
-.bottom-5 {
-  bottom: 1.25rem;
-}
-.left-0 {
-  left: 0px;
-}
-.left-4 {
-  left: 1rem;
-}
-.right-0 {
-  right: 0px;
-}
-.right-2 {
-  right: 0.5rem;
-}
-.right-5 {
-  right: 1.25rem;
-}
-.right-8 {
-  right: 2rem;
-}
-.top-0 {
-  top: 0px;
-}
-.top-1\\/2 {
-  top: 50%;
-}
-.top-2 {
-  top: 0.5rem;
-}
-.top-\\[104\\%\\] {
-  top: 104%;
-}
-.top-full {
-  top: 100%;
-}
-.left-5 {
-  left: 1.25rem;
-}
-.left-1\\/2 {
-  left: 50%;
-}
-.-left-\\[121\\%\\] {
-  left: -121%;
-}
-.-top-\\[40\\%\\] {
-  top: -40%;
-}
-.z-10 {
-  z-index: 10;
-}
-.z-50 {
-  z-index: 50;
-}
-.float-right {
-  float: right;
-}
-.my-6 {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-.mb-2\\.5 {
-  margin-bottom: 0.625rem;
-}
-.mb-4 {
-  margin-bottom: 1rem;
-}
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
-.mb-8 {
-  margin-bottom: 2rem;
-}
-.ml-2 {
-  margin-left: 0.5rem;
-}
-.mr-1 {
-  margin-right: 0.25rem;
-}
-.mr-10 {
-  margin-right: 2.5rem;
-}
-.mr-2 {
-  margin-right: 0.5rem;
-}
-.mr-2\\.5 {
-  margin-right: 0.625rem;
-}
-.mt-1 {
-  margin-top: 0.25rem;
-}
-.mt-2 {
-  margin-top: 0.5rem;
-}
-.mt-2\\.5 {
-  margin-top: 0.625rem;
-}
-.mt-5 {
-  margin-top: 1.25rem;
-}
-.mt-8 {
-  margin-top: 2rem;
-}
-.mt-auto {
-  margin-top: auto;
-}
-.ml-\\[300px\\] {
-  margin-left: 300px;
-}
-.ml-\\[340px\\] {
-  margin-left: 340px;
-}
-.ml-\\[320px\\] {
-  margin-left: 320px;
-}
-.mb-3 {
-  margin-bottom: 0.75rem;
-}
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-.mb-6 {
-  margin-bottom: 1.5rem;
-}
-.mt-4 {
-  margin-top: 1rem;
-}
-.box-border {
-  box-sizing: border-box;
-}
-.block {
-  display: block;
-}
-.flex {
-  display: flex;
-}
-.inline-flex {
-  display: inline-flex;
-}
-.grid {
-  display: grid;
-}
-.hidden {
-  display: none;
-}
-.aspect-square {
-  aspect-ratio: 1 / 1;
-}
-.h-10 {
-  height: 2.5rem;
-}
-.h-14 {
-  height: 3.5rem;
-}
-.h-2 {
-  height: 0.5rem;
-}
-.h-8 {
-  height: 2rem;
-}
-.h-\\[0\\.2px\\] {
-  height: 0.2px;
-}
-.h-\\[45\\%\\] {
-  height: 45%;
-}
-.h-\\[900px\\] {
-  height: 900px;
-}
-.h-full {
-  height: 100%;
-}
-.h-screen {
-  height: 100vh;
-}
-.h-48 {
-  height: 12rem;
-}
-.h-5 {
-  height: 1.25rem;
-}
-.h-\\[190\\%\\] {
-  height: 190%;
-}
-.h-auto {
-  height: auto;
-}
-.max-h-72 {
-  max-height: 18rem;
-}
-.max-h-\\[200px\\] {
-  max-height: 200px;
-}
-.min-h-screen {
-  min-height: 100vh;
-}
-.w-1\\/2 {
-  width: 50%;
-}
-.w-10 {
-  width: 2.5rem;
-}
-.w-14 {
-  width: 3.5rem;
-}
-.w-2 {
-  width: 0.5rem;
-}
-.w-2\\/5 {
-  width: 40%;
-}
-.w-4\\/5 {
-  width: 80%;
-}
-.w-48 {
-  width: 12rem;
-}
-.w-8 {
-  width: 2rem;
-}
-.w-\\[126\\%\\] {
-  width: 126%;
-}
-.w-\\[300px\\] {
-  width: 300px;
-}
-.w-fit {
-  width: -moz-fit-content;
-  width: fit-content;
-}
-.w-full {
-  width: 100%;
-}
-.w-5 {
-  width: 1.25rem;
-}
-.w-64 {
-  width: 16rem;
-}
-.w-2\\/3 {
-  width: 66.666667%;
-}
-.w-\\[200\\%\\] {
-  width: 200%;
-}
-.w-\\[40\\%\\] {
-  width: 40%;
-}
-.w-screen {
-  width: 100vw;
-}
-.w-\\[95\\%\\] {
-  width: 95%;
-}
-.max-w-full {
-  max-width: 100%;
-}
-.max-w-2xl {
-  max-width: 42rem;
-}
-.max-w-md {
-  max-width: 28rem;
-}
-.flex-1 {
-  flex: 1 1 0%;
-}
-.flex-grow {
-  flex-grow: 1;
-}
-.-translate-y-1\\/2 {
-  --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-.-translate-x-1\\/2 {
-  --tw-translate-x: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-.transform {
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-.cursor-pointer {
-  cursor: pointer;
-}
-.grid-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-.flex-row-reverse {
-  flex-direction: row-reverse;
-}
-.flex-col {
-  flex-direction: column;
-}
-.items-center {
-  align-items: center;
-}
-.justify-center {
-  justify-content: center;
-}
-.justify-between {
-  justify-content: space-between;
-}
-.gap-10 {
-  gap: 2.5rem;
-}
-.gap-2 {
-  gap: 0.5rem;
-}
-.gap-4 {
-  gap: 1rem;
-}
-.gap-5 {
-  gap: 1.25rem;
-}
-.gap-3 {
-  gap: 0.75rem;
-}
-.gap-8 {
-  gap: 2rem;
-}
-.space-y-1 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
-}
-.space-y-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
-}
-.space-y-3 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
-}
-.space-y-4 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-.space-y-6 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
-}
-.overflow-auto {
-  overflow: auto;
-}
-.overflow-hidden {
-  overflow: hidden;
-}
-.overflow-y-auto {
-  overflow-y: auto;
-}
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.rounded {
-  border-radius: 0.25rem;
-}
-.rounded-2xl {
-  border-radius: 1rem;
-}
-.rounded-full {
-  border-radius: 9999px;
-}
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-.rounded-xl {
-  border-radius: 0.75rem;
-}
-.rounded-\\[17px\\] {
-  border-radius: 17px;
-}
-.rounded-md {
-  border-radius: 0.375rem;
-}
-.rounded-b-lg {
-  border-bottom-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-}
-.rounded-l-\\[40px\\] {
-  border-top-left-radius: 40px;
-  border-bottom-left-radius: 40px;
-}
-.border {
-  border-width: 1px;
-}
-.border-0 {
-  border-width: 0px;
-}
-.border-2 {
-  border-width: 2px;
-}
-.border-b {
-  border-bottom-width: 1px;
-}
-.border-r {
-  border-right-width: 1px;
-}
-.border-none {
-  border-style: none;
-}
-.border-green-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(29 185 84 / var(--tw-border-opacity));
-}
-.border-neutral-700 {
-  --tw-border-opacity: 1;
-  border-color: rgb(64 64 64 / var(--tw-border-opacity));
-}
-.border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-.border-neutral-600 {
-  --tw-border-opacity: 1;
-  border-color: rgb(82 82 82 / var(--tw-border-opacity));
-}
-.border-neutral-800 {
-  --tw-border-opacity: 1;
-  border-color: rgb(38 38 38 / var(--tw-border-opacity));
-}
-.border-\\[\\#1c570d\\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(28 87 13 / var(--tw-border-opacity));
-}
-.border-cyan-500\\/30 {
-  border-color: rgb(6 182 212 / 0.3);
-}
-.border-emerald-500\\/20 {
-  border-color: rgb(16 185 129 / 0.2);
-}
-.border-green-500\\/10 {
-  border-color: rgb(29 185 84 / 0.1);
-}
-.bg-\\[\\#000807\\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 8 7 / var(--tw-bg-opacity));
-}
-.bg-\\[\\#0F0F0F\\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 15 15 / var(--tw-bg-opacity));
-}
-.bg-\\[\\#252727\\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 39 39 / var(--tw-bg-opacity));
-}
-.bg-black {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
-}
-.bg-black\\/50 {
-  background-color: rgb(0 0 0 / 0.5);
-}
-.bg-black\\/70 {
-  background-color: rgb(0 0 0 / 0.7);
-}
-.bg-green-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(29 185 84 / var(--tw-bg-opacity));
-}
-.bg-neutral-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(38 38 38 / var(--tw-bg-opacity));
-}
-.bg-purple-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(168 85 247 / var(--tw-bg-opacity));
-}
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-.bg-red-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity));
-}
-.bg-yellow-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
-}
-.bg-neutral-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(23 23 23 / var(--tw-bg-opacity));
-}
-.bg-red-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(127 29 29 / var(--tw-bg-opacity));
-}
-.bg-\\[\\#121212\\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(18 18 18 / var(--tw-bg-opacity));
-}
-.bg-gradient-to-t {
-  background-image: linear-gradient(to top, var(--tw-gradient-stops));
-}
-.bg-\\[radial-gradient\\(circle\\2c \\#00ff00_0\\%\\2c \\#00ff00_30\\%\\2c transparent_70\\%\\)\\] {
-  background-image: radial-gradient(circle,#00ff00 0%,#00ff00 30%,transparent 70%);
-}
-.bg-gradient-to-tr {
-  background-image: linear-gradient(to top right, var(--tw-gradient-stops));
-}
-.bg-\\[radial-gradient\\(circle\\2c \\#00d4ff_0\\%\\2c \\#00ff8830_40\\%\\2c transparent_70\\%\\)\\] {
-  background-image: radial-gradient(circle,#00d4ff 0%,#00ff8830 40%,transparent 70%);
-}
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-.from-black\\/80 {
-  --tw-gradient-from: rgb(0 0 0 / 0.8) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-\\[\\#00FF87\\] {
-  --tw-gradient-from: #00FF87 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(0 255 135 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-cyan-400 {
-  --tw-gradient-from: #22d3ee var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(34 211 238 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-cyan-500 {
-  --tw-gradient-from: #06b6d4 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(6 182 212 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.from-red-900 {
-  --tw-gradient-from: #7f1d1d var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(127 29 29 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-.via-transparent {
-  --tw-gradient-to: rgb(0 0 0 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.via-green-400 {
-  --tw-gradient-to: rgb(74 222 128 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), #4ade80 var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.via-green-500 {
-  --tw-gradient-to: rgb(29 185 84 / 0)  var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), #1db954 var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.to-transparent {
-  --tw-gradient-to: transparent var(--tw-gradient-to-position);
-}
-.to-\\[\\#60EFFF\\] {
-  --tw-gradient-to: #60EFFF var(--tw-gradient-to-position);
-}
-.to-emerald-400 {
-  --tw-gradient-to: #34d399 var(--tw-gradient-to-position);
-}
-.to-emerald-500 {
-  --tw-gradient-to: #10b981 var(--tw-gradient-to-position);
-}
-.to-green-500 {
-  --tw-gradient-to: #1db954 var(--tw-gradient-to-position);
-}
-.to-red-800 {
-  --tw-gradient-to: #991b1b var(--tw-gradient-to-position);
-}
-.object-contain {
-  -o-object-fit: contain;
-     object-fit: contain;
-}
-.object-cover {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.p-10 {
-  padding: 2.5rem;
-}
-.p-2 {
-  padding: 0.5rem;
-}
-.p-2\\.5 {
-  padding: 0.625rem;
-}
-.p-3 {
-  padding: 0.75rem;
-}
-.p-4 {
-  padding: 1rem;
-}
-.p-5 {
-  padding: 1.25rem;
-}
-.p-8 {
-  padding: 2rem;
-}
-.p-6 {
-  padding: 1.5rem;
-}
-.px-10 {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
-}
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-.px-5 {
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-}
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-.py-10 {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-.py-2\\.5 {
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-}
-.py-3 {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-.py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-}
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-.py-3\\.5 {
-  padding-top: 0.875rem;
-  padding-bottom: 0.875rem;
-}
-.pl-24 {
-  padding-left: 6rem;
-}
-.pt-10 {
-  padding-top: 2.5rem;
-}
-.pt-\\[100\\%\\] {
-  padding-top: 100%;
-}
-.pb-6 {
-  padding-bottom: 1.5rem;
-}
-.pr-6 {
-  padding-right: 1.5rem;
-}
-.pl-60 {
-  padding-left: 15rem;
-}
-.text-left {
-  text-align: left;
-}
-.text-center {
-  text-align: center;
-}
-.font-sans {
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-.text-\\[29px\\] {
-  font-size: 29px;
-}
-.text-\\[46px\\] {
-  font-size: 46px;
-}
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-.text-\\[4\\.5rem\\] {
-  font-size: 4.5rem;
-}
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-.font-bold {
-  font-weight: 700;
-}
-.font-light {
-  font-weight: 300;
-}
-.font-medium {
-  font-weight: 500;
-}
-.font-semibold {
-  font-weight: 600;
-}
-.leading-tight {
-  line-height: 1.25;
-}
-.text-\\[\\#F3777D\\] {
-  --tw-text-opacity: 1;
-  color: rgb(243 119 125 / var(--tw-text-opacity));
-}
-.text-gray-400 {
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
-}
-.text-gray-500 {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-.text-green-500 {
-  --tw-text-opacity: 1;
-  color: rgb(29 185 84 / var(--tw-text-opacity));
-}
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.text-neutral-400 {
-  --tw-text-opacity: 1;
-  color: rgb(163 163 163 / var(--tw-text-opacity));
-}
-.text-neutral-300 {
-  --tw-text-opacity: 1;
-  color: rgb(212 212 212 / var(--tw-text-opacity));
-}
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-.text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
-}
-.underline {
-  text-decoration-line: underline;
-}
-.opacity-80 {
-  opacity: 0.8;
-}
-.opacity-20 {
-  opacity: 0.2;
-}
-.opacity-30 {
-  opacity: 0.3;
-}
-.shadow-lg {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.shadow-xl {
-  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.shadow-\\[0_0_142px_\\#00ff871f\\] {
-  --tw-shadow: 0 0 142px #00ff871f;
-  --tw-shadow-colored: 0 0 142px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.blur {
-  --tw-blur: blur(8px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-.blur-2xl {
-  --tw-blur: blur(40px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-.blur-3xl {
-  --tw-blur: blur(64px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-.filter {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-.backdrop-blur-sm {
-  --tw-backdrop-blur: blur(4px);
-  -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-}
-.transition {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-.transition-colors {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-.transition-transform {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-.duration-200 {
-  transition-duration: 200ms;
-}
-.duration-300 {
-  transition-duration: 300ms;
-}
-
-.placeholder\\:pl-4::-moz-placeholder {
-  padding-left: 1rem;
-}
-
-.placeholder\\:pl-4::placeholder {
-  padding-left: 1rem;
-}
-
-.placeholder\\:text-lg::-moz-placeholder {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.placeholder\\:text-lg::placeholder {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.last\\:border-none:last-child {
-  border-style: none;
-}
-
-.hover\\:scale-105:hover {
-  --tw-scale-x: 1.05;
-  --tw-scale-y: 1.05;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.hover\\:bg-\\[\\#071816\\]:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(7 24 22 / var(--tw-bg-opacity));
-}
-
-.hover\\:bg-black\\/70:hover {
-  background-color: rgb(0 0 0 / 0.7);
-}
-
-.hover\\:bg-green-600:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
-}
-
-.hover\\:bg-neutral-700:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 64 64 / var(--tw-bg-opacity));
-}
-
-.hover\\:bg-red-700:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity));
-}
-
-.hover\\:bg-neutral-800:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(38 38 38 / var(--tw-bg-opacity));
-}
-
-.hover\\:bg-red-800:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(153 27 27 / var(--tw-bg-opacity));
-}
-
-.hover\\:bg-green-400:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
-}
-
-.hover\\:from-cyan-400:hover {
-  --tw-gradient-from: #22d3ee var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(34 211 238 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.hover\\:from-red-800:hover {
-  --tw-gradient-from: #991b1b var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(153 27 27 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.hover\\:to-green-400:hover {
-  --tw-gradient-to: #4ade80 var(--tw-gradient-to-position);
-}
-
-.hover\\:to-red-700:hover {
-  --tw-gradient-to: #b91c1c var(--tw-gradient-to-position);
-}
-
-.hover\\:text-\\[\\#f55963\\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(245 89 99 / var(--tw-text-opacity));
-}
-
-.hover\\:text-gray-300:hover {
-  --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-
-.hover\\:text-green-400:hover {
-  --tw-text-opacity: 1;
-  color: rgb(74 222 128 / var(--tw-text-opacity));
-}
-
-.hover\\:shadow-lg:hover {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.hover\\:shadow-cyan-500\\/30:hover {
-  --tw-shadow-color: rgb(6 182 212 / 0.3);
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.hover\\:shadow-red-900\\/30:hover {
-  --tw-shadow-color: rgb(127 29 29 / 0.3);
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.focus\\:outline-none:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-
-.focus\\:ring-2:focus {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-}
-
-.focus\\:ring-green-500:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(29 185 84 / var(--tw-ring-opacity));
-}
-
-.active\\:scale-95:active {
-  --tw-scale-x: .95;
-  --tw-scale-y: .95;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.group:hover .group-hover\\:block {
-  display: block;
-}
-
-@media (min-width: 640px) {
-
-  .sm\\:grid-cols-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .sm\\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 768px) {
-
-  .md\\:w-\\[95\\%\\] {
-    width: 95%;
-  }
-
-  .md\\:grid-cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .md\\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .md\\:flex-row {
-    flex-direction: row;
-  }
-
-  .md\\:pl-60 {
-    padding-left: 15rem;
-  }
-
-  .md\\:text-6xl {
-    font-size: 3.75rem;
-    line-height: 1;
-  }
-}
-
-@media (min-width: 1024px) {
-
-  .lg\\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .lg\\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1280px) {
-
-  .xl\\:grid-cols-5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-
-  .xl\\:grid-cols-6 {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-}`, "",{"version":3,"sources":["webpack://./frontend/src/index.css"],"names":[],"mappings":"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;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,uBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,uBAAmB;EAAnB,+DAAmB;EAAnB;AAAmB;AAAnB;EAAA,uBAAmB;EAAnB,8DAAmB;EAAnB;AAAmB;AAAnB;EAAA,uBAAmB;EAAnB,+DAAmB;EAAnB;AAAmB;AAAnB;EAAA,uBAAmB;EAAnB,4DAAmB;EAAnB;AAAmB;AAAnB;EAAA,uBAAmB;EAAnB,8DAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,gBAAmB;EAAnB,uBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,kCAAmB;EAAnB;AAAmB;AAAnB;EAAA,4BAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA,sBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,qEAAmB;EAAnB,+DAAmB;EAAnB;AAAmB;AAAnB;EAAA,4DAAmB;EAAnB,mEAAmB;EAAnB;AAAmB;AAAnB;EAAA,4DAAmB;EAAnB,oEAAmB;EAAnB;AAAmB;AAAnB;EAAA,4DAAmB;EAAnB,mEAAmB;EAAnB;AAAmB;AAAnB;EAAA,4DAAmB;EAAnB,mEAAmB;EAAnB;AAAmB;AAAnB;EAAA,gEAAmB;EAAnB;AAAmB;AAAnB;EAAA,qEAAmB;EAAnB;AAAmB;AAAnB;EAAA,oEAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,sBAAmB;KAAnB;AAAmB;AAAnB;EAAA,oBAAmB;KAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,qBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,mBAAmB;EAAnB;AAAmB;AAAnB;EAAA,mBAAmB;EAAnB;AAAmB;AAAnB;EAAA,qBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,iBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,qBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,iBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,eAAmB;EAAnB;AAAmB;AAAnB;EAAA,mBAAmB;EAAnB;AAAmB;AAAnB;EAAA,mBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,+EAAmB;EAAnB,mGAAmB;EAAnB;AAAmB;AAAnB;EAAA,gFAAmB;EAAnB,oGAAmB;EAAnB;AAAmB;AAAnB;EAAA,gCAAmB;EAAnB,qDAAmB;EAAnB;AAAmB;AAAnB;EAAA,oBAAmB;EAAnB;AAAmB;AAAnB;EAAA,qBAAmB;EAAnB;AAAmB;AAAnB;EAAA,qBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,6BAAmB;EAAnB,+QAAmB;EAAnB;AAAmB;AAAnB;EAAA,gKAAmB;EAAnB,wJAAmB;EAAnB,iLAAmB;EAAnB,wDAAmB;EAAnB;AAAmB;AAAnB;EAAA,+FAAmB;EAAnB,wDAAmB;EAAnB;AAAmB;AAAnB;EAAA,8BAAmB;EAAnB,wDAAmB;EAAnB;AAAmB;AAAnB;EAAA,wBAAmB;EAAnB,wDAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;;AAFnB;EAAA;AAUC;;AAVD;EAAA;AAUC;;AAVD;EAAA,mBAUC;EAVD;AAUC;;AAVD;EAAA,mBAUC;EAVD;AAUC;;AAVD;EAAA;AAUC;;AAVD;EAAA,kBAUC;EAVD,kBAUC;EAVD;AAUC;;AAVD;EAAA,kBAUC;EAVD;AAUC;;AAVD;EAAA;AAUC;;AAVD;EAAA,kBAUC;EAVD;AAUC;;AAVD;EAAA,kBAUC;EAVD;AAUC;;AAVD;EAAA,kBAUC;EAVD;AAUC;;AAVD;EAAA,kBAUC;EAVD;AAUC;;AAVD;EAAA,kBAUC;EAVD;AAUC;;AAVD;EAAA,kBAUC;EAVD;AAUC;;AAVD;EAAA,4DAUC;EAVD,oEAUC;EAVD;AAUC;;AAVD;EAAA,4DAUC;EAVD,mEAUC;EAVD;AAUC;;AAVD;EAAA;AAUC;;AAVD;EAAA;AAUC;;AAVD;EAAA,oBAUC;EAVD;AAUC;;AAVD;EAAA,oBAUC;EAVD;AAUC;;AAVD;EAAA,oBAUC;EAVD;AAUC;;AAVD;EAAA,+EAUC;EAVD,mGAUC;EAVD;AAUC;;AAVD;EAAA,uCAUC;EAVD;AAUC;;AAVD;EAAA,uCAUC;EAVD;AAUC;;AAVD;EAAA,8BAUC;EAVD;AAUC;;AAVD;EAAA,2GAUC;EAVD,yGAUC;EAVD;AAUC;;AAVD;EAAA,oBAUC;EAVD;AAUC;;AAVD;EAAA,iBAUC;EAVD,iBAUC;EAVD;AAUC;;AAVD;EAAA;AAUC;;AAVD;;EAAA;IAAA;EAUC;;EAVD;IAAA;EAUC;AAAA;;AAVD;;EAAA;IAAA;EAUC;;EAVD;IAAA;EAUC;;EAVD;IAAA;EAUC;;EAVD;IAAA;EAUC;;EAVD;IAAA;EAUC;;EAVD;IAAA,kBAUC;IAVD;EAUC;AAAA;;AAVD;;EAAA;IAAA;EAUC;;EAVD;IAAA;EAUC;AAAA;;AAVD;;EAAA;IAAA;EAUC;;EAVD;IAAA;EAUC;AAAA","sourcesContent":["@tailwind base;\r\n@tailwind components;\r\n@tailwind utilities;\r\n\r\n@layer base {\r\n\r\n  html,\r\n  body {\r\n    @apply h-full bg-[#000807] text-white;\r\n  }\r\n}"],"sourceRoot":""}]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/api.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-*/
-module.exports = function (cssWithMappingToString) {
-  var list = [];
-
-  // return the list of modules as css string
-  list.toString = function toString() {
-    return this.map(function (item) {
-      var content = "";
-      var needLayer = typeof item[5] !== "undefined";
-      if (item[4]) {
-        content += "@supports (".concat(item[4], ") {");
-      }
-      if (item[2]) {
-        content += "@media ".concat(item[2], " {");
-      }
-      if (needLayer) {
-        content += "@layer".concat(item[5].length > 0 ? " ".concat(item[5]) : "", " {");
-      }
-      content += cssWithMappingToString(item);
-      if (needLayer) {
-        content += "}";
-      }
-      if (item[2]) {
-        content += "}";
-      }
-      if (item[4]) {
-        content += "}";
-      }
-      return content;
-    }).join("");
-  };
-
-  // import a list of modules into the list
-  list.i = function i(modules, media, dedupe, supports, layer) {
-    if (typeof modules === "string") {
-      modules = [[null, modules, undefined]];
-    }
-    var alreadyImportedModules = {};
-    if (dedupe) {
-      for (var k = 0; k < this.length; k++) {
-        var id = this[k][0];
-        if (id != null) {
-          alreadyImportedModules[id] = true;
-        }
-      }
-    }
-    for (var _k = 0; _k < modules.length; _k++) {
-      var item = [].concat(modules[_k]);
-      if (dedupe && alreadyImportedModules[item[0]]) {
-        continue;
-      }
-      if (typeof layer !== "undefined") {
-        if (typeof item[5] === "undefined") {
-          item[5] = layer;
-        } else {
-          item[1] = "@layer".concat(item[5].length > 0 ? " ".concat(item[5]) : "", " {").concat(item[1], "}");
-          item[5] = layer;
-        }
-      }
-      if (media) {
-        if (!item[2]) {
-          item[2] = media;
-        } else {
-          item[1] = "@media ".concat(item[2], " {").concat(item[1], "}");
-          item[2] = media;
-        }
-      }
-      if (supports) {
-        if (!item[4]) {
-          item[4] = "".concat(supports);
-        } else {
-          item[1] = "@supports (".concat(item[4], ") {").concat(item[1], "}");
-          item[4] = supports;
-        }
-      }
-      list.push(item);
-    }
-  };
-  return list;
-};
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/sourceMaps.js":
-/*!************************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/sourceMaps.js ***!
-  \************************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-module.exports = function (item) {
-  var content = item[1];
-  var cssMapping = item[3];
-  if (!cssMapping) {
-    return content;
-  }
-  if (typeof btoa === "function") {
-    var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(cssMapping))));
-    var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
-    var sourceMapping = "/*# ".concat(data, " */");
-    return [content].concat([sourceMapping]).join("\n");
-  }
-  return [content].join("\n");
-};
 
 /***/ }),
 
@@ -54475,332 +52692,6 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./frontend/src/index.css":
-/*!********************************!*\
-  !*** ./frontend/src/index.css ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_1_use_2_index_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./index.css */ "./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./frontend/src/index.css");
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-var options = {};
-
-options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
-options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
-options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
-options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
-options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_1_use_2_index_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
-
-
-
-
-       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_1_use_2_index_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_1_use_2_index_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_1_use_2_index_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
-/*!****************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
-  \****************************************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-var stylesInDOM = [];
-function getIndexByIdentifier(identifier) {
-  var result = -1;
-  for (var i = 0; i < stylesInDOM.length; i++) {
-    if (stylesInDOM[i].identifier === identifier) {
-      result = i;
-      break;
-    }
-  }
-  return result;
-}
-function modulesToDom(list, options) {
-  var idCountMap = {};
-  var identifiers = [];
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i];
-    var id = options.base ? item[0] + options.base : item[0];
-    var count = idCountMap[id] || 0;
-    var identifier = "".concat(id, " ").concat(count);
-    idCountMap[id] = count + 1;
-    var indexByIdentifier = getIndexByIdentifier(identifier);
-    var obj = {
-      css: item[1],
-      media: item[2],
-      sourceMap: item[3],
-      supports: item[4],
-      layer: item[5]
-    };
-    if (indexByIdentifier !== -1) {
-      stylesInDOM[indexByIdentifier].references++;
-      stylesInDOM[indexByIdentifier].updater(obj);
-    } else {
-      var updater = addElementStyle(obj, options);
-      options.byIndex = i;
-      stylesInDOM.splice(i, 0, {
-        identifier: identifier,
-        updater: updater,
-        references: 1
-      });
-    }
-    identifiers.push(identifier);
-  }
-  return identifiers;
-}
-function addElementStyle(obj, options) {
-  var api = options.domAPI(options);
-  api.update(obj);
-  var updater = function updater(newObj) {
-    if (newObj) {
-      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap && newObj.supports === obj.supports && newObj.layer === obj.layer) {
-        return;
-      }
-      api.update(obj = newObj);
-    } else {
-      api.remove();
-    }
-  };
-  return updater;
-}
-module.exports = function (list, options) {
-  options = options || {};
-  list = list || [];
-  var lastIdentifiers = modulesToDom(list, options);
-  return function update(newList) {
-    newList = newList || [];
-    for (var i = 0; i < lastIdentifiers.length; i++) {
-      var identifier = lastIdentifiers[i];
-      var index = getIndexByIdentifier(identifier);
-      stylesInDOM[index].references--;
-    }
-    var newLastIdentifiers = modulesToDom(newList, options);
-    for (var _i = 0; _i < lastIdentifiers.length; _i++) {
-      var _identifier = lastIdentifiers[_i];
-      var _index = getIndexByIdentifier(_identifier);
-      if (stylesInDOM[_index].references === 0) {
-        stylesInDOM[_index].updater();
-        stylesInDOM.splice(_index, 1);
-      }
-    }
-    lastIdentifiers = newLastIdentifiers;
-  };
-};
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/insertBySelector.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/insertBySelector.js ***!
-  \********************************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-var memo = {};
-
-/* istanbul ignore next  */
-function getTarget(target) {
-  if (typeof memo[target] === "undefined") {
-    var styleTarget = document.querySelector(target);
-
-    // Special case to return head of iframe instead of iframe itself
-    if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-      try {
-        // This will throw an exception if access to iframe is blocked
-        // due to cross-origin restrictions
-        styleTarget = styleTarget.contentDocument.head;
-      } catch (e) {
-        // istanbul ignore next
-        styleTarget = null;
-      }
-    }
-    memo[target] = styleTarget;
-  }
-  return memo[target];
-}
-
-/* istanbul ignore next  */
-function insertBySelector(insert, style) {
-  var target = getTarget(insert);
-  if (!target) {
-    throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
-  }
-  target.appendChild(style);
-}
-module.exports = insertBySelector;
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/insertStyleElement.js":
-/*!**********************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/insertStyleElement.js ***!
-  \**********************************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-/* istanbul ignore next  */
-function insertStyleElement(options) {
-  var element = document.createElement("style");
-  options.setAttributes(element, options.attributes);
-  options.insert(element, options.options);
-  return element;
-}
-module.exports = insertStyleElement;
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js":
-/*!**********************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js ***!
-  \**********************************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-/* istanbul ignore next  */
-function setAttributesWithoutAttributes(styleElement) {
-  var nonce =  true ? __webpack_require__.nc : 0;
-  if (nonce) {
-    styleElement.setAttribute("nonce", nonce);
-  }
-}
-module.exports = setAttributesWithoutAttributes;
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/styleDomAPI.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/styleDomAPI.js ***!
-  \***************************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-/* istanbul ignore next  */
-function apply(styleElement, options, obj) {
-  var css = "";
-  if (obj.supports) {
-    css += "@supports (".concat(obj.supports, ") {");
-  }
-  if (obj.media) {
-    css += "@media ".concat(obj.media, " {");
-  }
-  var needLayer = typeof obj.layer !== "undefined";
-  if (needLayer) {
-    css += "@layer".concat(obj.layer.length > 0 ? " ".concat(obj.layer) : "", " {");
-  }
-  css += obj.css;
-  if (needLayer) {
-    css += "}";
-  }
-  if (obj.media) {
-    css += "}";
-  }
-  if (obj.supports) {
-    css += "}";
-  }
-  var sourceMap = obj.sourceMap;
-  if (sourceMap && typeof btoa !== "undefined") {
-    css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
-  }
-
-  // For old IE
-  /* istanbul ignore if  */
-  options.styleTagTransform(css, styleElement, options.options);
-}
-function removeStyleElement(styleElement) {
-  // istanbul ignore if
-  if (styleElement.parentNode === null) {
-    return false;
-  }
-  styleElement.parentNode.removeChild(styleElement);
-}
-
-/* istanbul ignore next  */
-function domAPI(options) {
-  if (typeof document === "undefined") {
-    return {
-      update: function update() {},
-      remove: function remove() {}
-    };
-  }
-  var styleElement = options.insertStyleElement(options);
-  return {
-    update: function update(obj) {
-      apply(styleElement, options, obj);
-    },
-    remove: function remove() {
-      removeStyleElement(styleElement);
-    }
-  };
-}
-module.exports = domAPI;
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/runtime/styleTagTransform.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/style-loader/dist/runtime/styleTagTransform.js ***!
-  \*********************************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-/* istanbul ignore next  */
-function styleTagTransform(css, styleElement) {
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css;
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild);
-    }
-    styleElement.appendChild(document.createTextNode(css));
-  }
-}
-module.exports = styleTagTransform;
-
-/***/ }),
-
 /***/ "./node_modules/webfontloader/webfontloader.js":
 /*!*****************************************************!*\
   !*** ./node_modules/webfontloader/webfontloader.js ***!
@@ -54960,11 +52851,6 @@ g,0<d.length&&(d=za[d[0]])&&(a.c[e]=d))}a.c[e]||(d=za[e])&&(a.c[e]=d);for(d=0;d<
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/nonce */
-/******/ 	(() => {
-/******/ 		__webpack_require__.nc = undefined;
-/******/ 	})();
-/******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
@@ -54978,12 +52864,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App */ "./frontend/src/App.js");
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./index.css */ "./frontend/src/index.css");
 
 
 
-
-react_dom__WEBPACK_IMPORTED_MODULE_1__.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().StrictMode), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null)), document.getElementById('root'));
+react_dom__WEBPACK_IMPORTED_MODULE_1__.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_App__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('root'));
 })();
 
 /******/ })()

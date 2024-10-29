@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Your custom CSS goes here */
-body, html {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
+@layer base {
+
+  html,
+  body {
+    @apply h-full bg-[#000807] text-white;
+  }
 }

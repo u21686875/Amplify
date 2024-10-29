@@ -3,7 +3,6 @@ import WebFont from 'webfontloader';
 import { useNavigate } from 'react-router-dom';
 
 class SplashPage extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +11,7 @@ class SplashPage extends React.Component {
     }
 
     handleAuth = (isLogin) => {
-        this.props.navigate('/auth', { isLogin });
+        this.props.navigate('/auth', { state: { isLogin } });
     }
 
     componentDidMount() {
@@ -30,173 +29,64 @@ class SplashPage extends React.Component {
 
     render() {
         const fontFamily = this.state.fontLoaded ? "'Devil Breeze Demi', sans-serif" : "sans-serif";
+
         return (
-            <div className="splash-container">
-                <div className="logo-container">
-                    <div className="logo">
-                    <div className="logo-gradient"></div>
-                    <img src="/assets/images/amplify.png" alt="Amplify Logo" className="logo-image" />
+            <div className="relative flex min-h-screen w-full bg-black text-white overflow-hidden md:flex-row flex-col">
+                {/* Logo Section */}
+                <div className="flex-1 flex justify-center items-center md:pl-60 p-8">
+                    <div className="relative w-[95%] md:w-[95%] aspect-square flex justify-center items-center">
+                        {/* Multi-layered glowing effect */}
+                        <div className="absolute inset-[-10%] rounded-full bg-gradient-to-tr from-cyan-400 via-green-400 to-emerald-400 opacity-20 blur-3xl" />
+                        <div className="absolute inset-[-5%] rounded-full bg-gradient-to-r from-cyan-500 via-green-500 to-emerald-500 opacity-30 blur-2xl" />
+
+                        {/* Circular rings */}
+                        <div className="absolute inset-0 rounded-full border-2 border-cyan-500/30" />
+                        <div className="absolute inset-[-3%] rounded-full border-2 border-emerald-500/20" />
+                        <div className="absolute inset-[-6%] rounded-full border-2 border-green-500/10" />
+
+                        {/* Inner glow and gradient */}
+                        <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,#00d4ff_0%,#00ff8830_40%,transparent_70%)]" />
+
+                        {/* Logo Image */}
+                        <img
+                            src="/assets/images/amplify.png"
+                            alt="Amplify Logo"
+                            className="w-full h-auto object-contain z-10 p-4"
+                        />
                     </div>
                 </div>
-                <div className="content-container">
-                    <h1 className="company-name" style={{ fontFamily }}>AMPLIFY</h1>
-                    <div className="button-container">
-                        <button className="login-button" onClick={() => this.handleAuth(true)}>Log in</button>
-                        <button className="signin-button"onClick={() => this.handleAuth(false)}>Sign in</button>
+
+                {/* Content Section */}
+                <div className="flex-1 flex flex-col justify-center items-center p-8">
+                    <h1
+                        className="text-4xl md:text-6xl font-bold mb-8 text-center"
+                        style={{ fontFamily }}
+                    >
+                        AMPLIFY
+                    </h1>
+
+                    {/* Buttons Container */}
+                    <div className="flex flex-col gap-4 w-48">
+                        <button
+                            onClick={() => this.handleAuth(true)}
+                            className="w-full py-2.5 px-4 text-base bg-gradient-to-r from-cyan-500 to-green-500 
+                                     text-black rounded-md cursor-pointer transition-all duration-300
+                                     hover:from-cyan-400 hover:to-green-400 hover:shadow-lg hover:shadow-cyan-500/30
+                                     active:scale-95"
+                        >
+                            Log in
+                        </button>
+                        <button
+                            onClick={() => this.handleAuth(false)}
+                            className="w-full py-2.5 px-4 text-base bg-gradient-to-r from-red-900 to-red-800
+                                     text-white rounded-md cursor-pointer transition-all duration-300
+                                     hover:from-red-800 hover:to-red-700 hover:shadow-lg hover:shadow-red-900/30
+                                     active:scale-95"
+                        >
+                            Sign in
+                        </button>
                     </div>
                 </div>
-                <style jsx>{`
-                    * {
-                        margin: 0;
-                        padding: 0;
-                        box-sizing: border-box;
-                    }
-
-                    body, html {
-                        height: 100%;
-                        width: 100%;
-                        overflow: hidden;
-                    }
-
-                    .splash-container {
-                        position: relative;
-                        display: flex;
-                        height: 100vh;
-                        width: 100vw;
-                        background-color: #000;
-                        color: #fff;
-                    }
-
-                    .logo-gradient {
-                        position: absolute;
-                        top: -5%;
-                        left: -5%;
-                        right: -5%;
-                        bottom: -5%;
-                        border-radius: 50%;
-                        background: linear-gradient(135deg, #00FF87 100%, #60EFFF 0%);
-                        filter: blur(30px);
-                        opacity: 0.8;
-                    }
-
-                    .logo-container {
-                        flex: 1;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        padding-left: 15rem;
-                    }
-
-                    .logo {
-                        width: 95%;
-                        aspect-ratio: 1;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        background: radial-gradient(circle, #0f0 0%, #0f0 30%, transparent 70%);
-                        border-radius: 50%;
-                        position: relative;
-                    }
-
-                    // .logo::before {
-                    //     content: '';
-                    //     position: absolute;
-                    //     top: -5px;
-                    //     left: -5px;
-                    //     right: -5px;
-                    //     bottom: -5px;
-                    //     background: radial-gradient(circle, transparent 60%, #0f0 61%, transparent 70%);
-                    //     border-radius: 50%;
-                    // }
-
-                    // .logo::after {
-                    //     content: '';
-                    //     position: absolute;
-                    //     top: -10px;
-                    //     left: -10px;
-                    //     right: -10px;
-                    //     bottom: -10px;
-                    //     background: radial-gradient(circle, transparent 65%, #0f0 66%, transparent 75%);
-                    //     border-radius: 50%;
-                    // }
-
-                    .logo-image {
-                        width: 100%;
-                        height: auto;
-                        object-fit: contain;
-                        z-index: 1;
-                    }
-
-                    .content-container {
-                        flex: 1;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        padding: 2rem;
-                    }
-
-                    .company-name {
-                        font-size: 4rem;
-                        font-weight: bold;
-                        margin-bottom: 2rem;
-                        text-align: center;
-                    }
-
-                    .button-container {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 1rem;
-                        width: 200px;
-                    }
-
-                    .login-button, .signin-button {
-                        padding: 0.5rem 1rem;
-                        font-size: 1rem;
-                        border: none;
-                        border-radius: 5px;
-                        cursor: pointer;
-                        transition: background-color 0.3s;
-                        width: 100%;
-                    }
-
-                    .login-button {
-                        background-color: #0f0;
-                        color: #000;
-                    }
-
-                    .signin-button {
-                        background-color: #500;
-                        color: #fff;
-                    }
-
-                    .login-button:hover {
-                        background-color: #0d0;
-                    }
-
-                    .signin-button:hover {
-                        background-color: #600;
-                    }
-
-                    @media (max-width: 768px) {
-                        .splash-container {
-                            flex-direction: column;
-                        }
-
-                        .logo-container, .content-container {
-                            flex: none;
-                        }
-
-                        .logo {
-                            width: 60%;
-                            margin: 2rem auto;
-                        }
-
-                        .company-name {
-                            font-size: 3rem;
-                        }
-                    }
-                `}</style>
             </div>
         );
     }

@@ -2,120 +2,98 @@ import React from 'react';
 import { Home, Music, Album, TrendingUp, Star, Settings } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+
 class Sidebar extends React.Component {
     handleSettingsClick = () => {
         this.props.navigate('/settings');
     }
 
     handleRouting = (route) => {
-        // Dynamically navigate based on the route provided
         this.props.navigate('/' + route);
     }
 
     render() {
         return (
-            <div className="sidebar">
-                <div className="sidebar-header">
-                    <img src="/assets/images/amplify.png" alt="Amplify" className="logo" />
-                    <span className="company-name">Amplify</span>
+            <div className="fixed left-0 top-0 w-[300px] h-full bg-[#0F0F0F] p-5 overflow-y-auto">
+                {/* Header */}
+                <div className="flex items-center mb-5">
+                    <img
+                        src="/assets/images/amplify.png"
+                        alt="Amplify"
+                        className="h-8 mr-2.5"
+                    />
+                    <span className="text-2xl font-bold text-white">
+                        Amplify
+                    </span>
                 </div>
-                <hr style={{height: '0.2px', borderWidth: '0', color: '#252727', backgroundColor: '#252727', marginBottom: '25px', marginTop: '25px', width: '80%'}}/>
+
+                {/* Divider */}
+                <hr className="h-[0.2px] border-0 bg-[#252727] my-6 w-4/5" />
+
+                {/* Navigation */}
                 <nav>
-                    <div className="nav-item active" onClick={() => this.handleRouting('home')}><Home /> Home</div>
-                    <div className="nav-item" onClick={() => this.handleRouting('playlist')}><Music /> Playlist</div>
+                    <div
+                        className="flex items-center mb-2.5 text-green-500 cursor-pointer w-fit"
+                        onClick={() => this.handleRouting('home')}
+                    >
+                        <Home className="mr-2.5" />
+                        <span>Home</span>
+                    </div>
+                    <div
+                        className="flex items-center mb-2.5 text-gray-500 hover:text-gray-300 cursor-pointer w-fit"
+                        onClick={() => this.handleRouting('playlist')}
+                    >
+                        <Music className="mr-2.5" />
+                        <span>Playlist</span>
+                    </div>
                 </nav>
 
-                <hr style={{height: '0.2px', borderWidth: '0', color: '#252727', backgroundColor: '#252727', marginBottom: '25px', marginTop: '25px', width: '80%'}}/>
+                {/* Divider */}
+                <hr className="h-[0.2px] border-0 bg-[#252727] my-6 w-4/5" />
 
-                <h3>DISCOVERY</h3>
-                <div className="nav-item"><TrendingUp /> Trending</div>
-                <div className="nav-item"><Star /> Popular</div>
+                {/* Discovery Section */}
+                <h3 className="text-white mb-2.5">DISCOVERY</h3>
+                <div className="flex items-center mb-2.5 text-gray-500 hover:text-gray-300 cursor-pointer w-fit">
+                    <TrendingUp className="mr-2.5" />
+                    <span>Trending</span>
+                </div>
+                <div className="flex items-center mb-2.5 text-gray-500 hover:text-gray-300 cursor-pointer w-fit">
+                    <Star className="mr-2.5" />
+                    <span>Popular</span>
+                </div>
 
+                {/* Divider */}
+                <hr className="h-[0.2px] border-0 bg-[#252727] my-6 w-4/5" />
 
-                <hr style={{height: '0.2px', borderWidth: '0', color: '#252727', backgroundColor: '#252727', marginBottom: '25px', marginTop: '25px', width: '80%'}}/>
+                {/* Playlist Section */}
+                <h3 className="text-white mb-2.5">MY PLAYLIST</h3>
 
+                {/* Playlist Items */}
+                <div className="flex items-center mb-2.5 text-gray-500">
+                    <span className="w-2 h-2 rounded-full bg-red-500 mr-2.5"></span>
+                    Love
+                </div>
+                <div className="flex items-center mb-2.5 text-gray-500">
+                    <span className="w-2 h-2 rounded-full bg-green-500 mr-2.5"></span>
+                    Electro
+                </div>
+                <div className="flex items-center mb-2.5 text-gray-500">
+                    <span className="w-2 h-2 rounded-full bg-yellow-500 mr-2.5"></span>
+                    Funk
+                </div>
+                <div className="flex items-center mb-2.5 text-gray-500">
+                    <span className="w-2 h-2 rounded-full bg-purple-500 mr-2.5"></span>
+                    EDM
+                </div>
 
-                <h3>MY PLAYLIST</h3>
-                <div className="playlist-item"><span className="playlist-color" style={{ backgroundColor: 'red' }}></span> Love</div>
-                <div className="playlist-item"><span className="playlist-color" style={{ backgroundColor: 'green' }}></span> Electro</div>
-                <div className="playlist-item"><span className="playlist-color" style={{ backgroundColor: 'yellow' }}></span> Funk</div>
-                <div className="playlist-item"><span className="playlist-color" style={{ backgroundColor: 'purple' }}></span> EDM</div>
-                <div className="settings" onClick={this.handleSettingsClick}><Settings />Settings</div>
-                <style jsx>
-                    {
-                        `
-                            .sidebar {
-                            background-color: #0F0F0F;
-                            padding: 20px;
-                            width: 300px;
-                            font-family: Arial, sans-serif;
-                            height: 900px;
-                            }
-
-                            h3{
-                                color: white;
-                            }
-
-                            .settings {
-                                display: flex;
-                                align-items: center;
-                                gap: 7px;
-                                position: absolute;
-                                bottom: 0;
-                                margin-bottom: 40px;
-                                color: grey;
-                            }
-
-                            .sidebar-header {
-                            display: flex;
-                            align-items: center;
-                            margin-bottom: 20px;
-                            }
-
-                            .logo {
-                            height: 30px;
-                            margin-right: 10px;
-                            }
-
-                            .company-name {
-                            font-size: 24px;
-                            font-weight: bold;
-                            color: #fff;
-                            }
-
-                           .nav-item {
-                                display: flex;
-                                align-items: center;
-                                margin-bottom: 10px;
-                                color: #888;
-                                cursor: pointer;
-                                width: fit-content;
-                            }
-
-                            .nav-item.active {
-                            color: #1db954;
-                            }
-
-                            .nav-item svg {
-                            margin-right: 10px;
-                            }
-
-                            .playlist-item {
-                            display: flex;
-                            align-items: center;
-                            margin-bottom: 10px;
-                            color: #888;
-                            }
-
-                            .playlist-color {
-                            width: 8px;
-                            height: 8px;
-                            border-radius: 50%;
-                            margin-right: 10px;
-                            }
-                        `
-                    }
-                </style>
+                {/* Settings */}
+                <div
+                    className="absolute bottom-10 left-5 flex items-center gap-2 text-gray-500 hover:text-gray-300 cursor-pointer"
+                    onClick={this.handleSettingsClick}
+                >
+                    <Settings />
+                    <span>Settings</span>
+                </div>
             </div>
         );
     }

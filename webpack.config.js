@@ -1,33 +1,37 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-    entry: path.join(__dirname, 'frontend', 'src', 'index.js'),
+    entry: './frontend/src/index.js',
     output: {
-        path: path.resolve("./frontend/public"),
-        filename: "bundle.js"
+        path: path.resolve(__dirname, 'frontend/public'),
+        filename: 'bundle.js',
+        publicPath: '/'
     },
-    mode: "development",
+    mode: 'development',
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader"
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react']
+                    }
                 }
             },
             {
                 test: /\.css$/,
                 use: [
-                    "style-loader",
-                    "css-loader",
+                    'style-loader',
+                    'css-loader',
                     {
-                        loader: "postcss-loader",
+                        loader: 'postcss-loader',
                         options: {
                             postcssOptions: {
                                 plugins: [
-                                    require('tailwindcss'),
-                                    require('autoprefixer'),
+                                    'tailwindcss',
+                                    'autoprefixer',
                                 ],
                             },
                         },
@@ -35,5 +39,14 @@ module.exports = {
                 ],
             }
         ]
-    }
+    },
+    resolve: {
+        extensions: ['.js', '.jsx'],
+        alias: {
+            '@components': path.resolve(__dirname, 'frontend/components'),
+            '@pages': path.resolve(__dirname, 'frontend/pages'),
+            '@public': path.resolve(__dirname, 'frontend/public')
+        }
+    },
+    devtool: 'source-map'
 };
