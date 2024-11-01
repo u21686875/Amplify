@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search } from 'lucide-react';
+import { Search, Hash } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext/authContext';
 import ReleasePopup from '../releasepopup/release';
@@ -56,23 +56,47 @@ const SearchBar = () => {
             const releases = await releasesRes.json();
             const users = await usersRes.json();
     
-            console.log('the users found', users);
+            const searchTermLower = searchTerm.toLowerCase().trim();
+            const isHashtagSearch = searchTermLower.startsWith('#');
+            const cleanSearchTerm = isHashtagSearch ? searchTermLower.slice(1) : searchTermLower;
     
+            // Playlist suggestions (unchanged)
             const playlistSuggestions = Array.isArray(playlists) ? playlists
-                .filter(playlist => playlist.title.toLowerCase().includes(searchTerm.toLowerCase()))
+                .filter(playlist => playlist.title.toLowerCase().includes(cleanSearchTerm))
                 .map(playlist => ({ ...playlist, type: 'playlist' })) : [];
     
+            // Enhanced release suggestions with hashtag search
             const releaseSuggestions = Array.isArray(releases) ? releases
-                .filter(release => 
-                    release.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    release.artist.toLowerCase().includes(searchTerm.toLowerCase())
-                )
-                .map(release => ({ ...release, type: 'release' })) : [];
+                .filter(release => {
+                    if (isHashtagSearch) {
+                        // Search only in hashtags when search term starts with #
+                        return release.hashtags?.some(tag => 
+                            tag.toLowerCase().includes(cleanSearchTerm)
+                        );
+                    } else {
+                        // Search in title, artist, and hashtags for normal search
+                        return (
+                            release.title.toLowerCase().includes(cleanSearchTerm) ||
+                            release.artist.toLowerCase().includes(cleanSearchTerm) ||
+                            release.hashtags?.some(tag => 
+                                tag.toLowerCase().includes(cleanSearchTerm)
+                            )
+                        );
+                    }
+                })
+                .map(release => ({ 
+                    ...release, 
+                    type: 'release',
+                    // Add relevant hashtags that match the search
+                    matchingHashtags: release.hashtags?.filter(tag =>
+                        tag.toLowerCase().includes(cleanSearchTerm)
+                    )
+                })) : [];
     
-            // Handle both single user object and array of users
+            // User suggestions (unchanged)
             const userSuggestions = Array.isArray(users) 
-                ? users.filter(user => user.username.toLowerCase().includes(searchTerm.toLowerCase()))
-                : (users && users.username && users.username.toLowerCase().includes(searchTerm.toLowerCase()) ? [users] : []);
+                ? users.filter(user => user.username.toLowerCase().includes(cleanSearchTerm))
+                : (users && users.username && users.username.toLowerCase().includes(cleanSearchTerm) ? [users] : []);
     
             const mappedUserSuggestions = userSuggestions.map(user => ({ ...user, type: 'user' }));
     
@@ -82,6 +106,7 @@ const SearchBar = () => {
         }
         setIsSearching(false);
     };
+
 
     const handleSearchInputChange = (e) => {
         setSearchTerm(e.target.value);
@@ -123,10 +148,29 @@ const SearchBar = () => {
                                 className="flex justify-between items-center px-4 py-3 hover:bg-neutral-700 cursor-pointer"
                                 onClick={() => handleSuggestionClick(suggestion)}
                             >
-                                <span className="text-white">
-                                    {suggestion.title || suggestion.username}
-                                </span>
-                                <span className="text-sm text-gray-400">
+                                <div className="flex flex-col">
+                                    <span className="text-white">
+                                        {suggestion.title || suggestion.username}
+                                    </span>
+                                    {suggestion.type === 'release' && suggestion.matchingHashtags?.length > 0 && (
+                                        <div className="flex gap-2 mt-1">
+                                            {suggestion.matchingHashtags.map((tag, i) => (
+                                                <span 
+                                                    key={i} 
+                                                    className="text-xs text-cyan-400 flex items-center"
+                                                >
+                                                    <Hash size={12} className="mr-0.5" />
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                                <span className={`text-sm ${
+                                    suggestion.type === 'release' ? 'text-green-400' :
+                                    suggestion.type === 'playlist' ? 'text-cyan-400' :
+                                    'text-gray-400'
+                                }`}>
                                     {suggestion.type}
                                 </span>
                             </div>

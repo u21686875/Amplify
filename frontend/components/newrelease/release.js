@@ -1,20 +1,34 @@
 import React from "react";
 import ReleasePopup from "../releasepopup/release";
 import { X, Upload } from 'lucide-react';
+
+
+const CustomAlert = ({ message }) => (
+    <div className="bg-red-500/10 border border-red-500 text-red-500 px-4 py-3 rounded relative mb-4">
+        <span className="block sm:inline">{message}</span>
+    </div>
+);
+
 class NewReleases extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             selectedRelease: null,
             showAddReleasePanel: false,
+            error: '',
             newRelease: {
                 title: "",
                 artist: "",
                 image: "",
+                spotifyUrl: "", // Added for song link
                 hashtags: [],
-                createdAt: new Date().toISOString() // Add timestamp for new releases
+                createdAt: new Date().toISOString()
             }
         };
+    }
+
+    validateSpotifyUrl = (url) => {
+        return url && url.startsWith('https://open.spotify.com/track/');
     }
 
     handleReleaseClick = (release) => {
@@ -25,34 +39,25 @@ class NewReleases extends React.Component {
         this.setState({ selectedRelease: null });
     }
 
-    // Add sorting function
     sortReleasesByDate = (releases) => {
         return [...releases].sort((a, b) => {
             const dateA = new Date(a.createdAt || 0);
             const dateB = new Date(b.createdAt || 0);
-            return dateB - dateA; // Sort in reverse chronological order
+            return dateB - dateA;
         });
     };
 
     onAddComment = (releaseId, newComment) => {
-        if (this.props.onAddComment) {
-            // Ensure releaseId is not undefined
-            if (releaseId) {
-                this.props.onAddComment(releaseId, newComment);
-                // Update the selected release with the new comment
-                this.setState(prevState => ({
-                    selectedRelease: prevState.selectedRelease && prevState.selectedRelease._id === releaseId
-                        ? {
-                            ...prevState.selectedRelease,
-                            comments: [...(prevState.selectedRelease.comments || []), newComment]
-                        }
-                        : prevState.selectedRelease
-                }));
-            } else {
-                console.error("releaseId is undefined");
-            }
-        } else {
-            console.error("onAddComment prop is not defined");
+        if (this.props.onAddComment && releaseId) {
+            this.props.onAddComment(releaseId, newComment);
+            this.setState(prevState => ({
+                selectedRelease: prevState.selectedRelease && prevState.selectedRelease._id === releaseId
+                    ? {
+                        ...prevState.selectedRelease,
+                        comments: [...(prevState.selectedRelease.comments || []), newComment]
+                    }
+                    : prevState.selectedRelease
+            }));
         }
     }
 
@@ -84,31 +89,47 @@ class NewReleases extends React.Component {
 
     handleAddRelease = () => {
         const { newRelease } = this.state;
-        if (newRelease.title && newRelease.artist) {
-            // Add timestamp when creating a new release
-            const releaseWithTimestamp = {
-                ...newRelease,
-                createdAt: new Date().toISOString()
-            };
 
-            this.props.onAddRelease(releaseWithTimestamp);
-            this.setState({
-                showAddReleasePanel: false,
-                newRelease: {
-                    title: "",
-                    artist: "",
-                    image: "",
-                    hashtags: [],
-                    createdAt: new Date().toISOString()
-                }
-            });
-        } else {
-            alert('Please enter at least a title and an artist for the new release.');
+        // Validate required fields
+        if (!newRelease.title || !newRelease.artist) {
+            this.setState({ error: 'Please enter both a title and artist name.' });
+            return;
         }
+
+        // Validate Spotify URL if provided
+        if (newRelease.spotifyUrl && !this.validateSpotifyUrl(newRelease.spotifyUrl)) {
+            this.setState({ error: 'Please enter a valid Spotify track URL (https://open.spotify.com/track/...)' });
+            return;
+        }
+
+        // Create release with timestamp and user info
+        const releaseWithTimestamp = {
+            ...newRelease,
+            createdAt: new Date().toISOString(),
+            isDeleted: false,
+            addedBy: this.props.currentUser
+        };
+
+        this.props.onAddRelease(releaseWithTimestamp);
+        this.setState({
+            showAddReleasePanel: false,
+            error: '',
+            newRelease: {
+                title: "",
+                artist: "",
+                image: "",
+                spotifyUrl: "",
+                hashtags: [],
+                createdAt: new Date().toISOString()
+            }
+        });
     }
 
     toggleAddReleasePanel = () => {
-        this.setState(prevState => ({ showAddReleasePanel: !prevState.showAddReleasePanel }));
+        this.setState(prevState => ({
+            showAddReleasePanel: !prevState.showAddReleasePanel,
+            error: '' // Clear any existing errors
+        }));
     }
 
     handleInputChange = (event) => {
@@ -121,17 +142,20 @@ class NewReleases extends React.Component {
         }));
     }
 
+    getSpotifyEmbedUrl = (spotifyUrl) => {
+        if (!spotifyUrl) return null;
+        const trackId = spotifyUrl.split('/track/')[1]?.split('?')[0];
+        return trackId ? `https://open.spotify.com/embed/track/${trackId}` : null;
+    }
 
     render() {
-        const { selectedRelease, showAddReleasePanel, newRelease } = this.state;
+        const { selectedRelease, showAddReleasePanel, newRelease, error } = this.state;
         const { releases, currentUser } = this.props;
 
-        // Sort releases before rendering
         const sortedReleases = this.sortReleasesByDate(releases);
 
         return (
             <div className="mt-8">
-                {/* Header Section */}
                 <div className="flex justify-between items-center mb-5">
                     <h2 className="text-xl font-bold">NEW RELEASES</h2>
                     <h3
@@ -142,32 +166,44 @@ class NewReleases extends React.Component {
                     </h3>
                 </div>
 
-                {/* Releases Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-                {sortedReleases.map((release, index) => (
-                        <div
-                            key={release._id || index}
-                            className="bg-neutral-800 rounded-lg overflow-hidden cursor-pointer transform transition-transform duration-200 hover:scale-105"
-                            onClick={() => this.handleReleaseClick(release)}
-                        >
-                            <img
-                                src={release.image}
-                                alt={release.title}
-                                className="w-full aspect-square object-cover"
-                            />
-                            <div className="p-2.5">
-                                <div className="font-bold mb-1">{release.title}</div>
-                                <div className="text-sm text-gray-400">{release.artist}</div>
-                                {/* Optionally show date */}
-                                <div className="text-xs text-gray-500 mt-1">
-                                    {new Date(release.createdAt).toLocaleDateString()}
+                    {sortedReleases.map((release, index) => (
+                        !release.isDeleted && (
+                            <div
+                                key={release._id || index}
+                                className="bg-neutral-800 rounded-lg overflow-hidden cursor-pointer transform transition-transform duration-200 hover:scale-105"
+                                onClick={() => this.handleReleaseClick(release)}
+                            >
+                                <img
+                                    src={release.image}
+                                    alt={release.title}
+                                    className="w-full aspect-square object-cover"
+                                />
+                                <div className="p-2.5">
+                                    <div className="font-bold mb-1">{release.title}</div>
+                                    <div className="text-sm text-gray-400">{release.artist}</div>
+                                    <div className="text-xs text-gray-500 mt-1">
+                                        Added {new Date(release.createdAt).toLocaleDateString()}
+                                    </div>
+                                    {/* Spotify Embed */}
+                                    {release.spotifyUrl && (
+                                        <div className="mt-2">
+                                            <iframe
+                                                src={this.getSpotifyEmbedUrl(release.spotifyUrl)}
+                                                width="100%"
+                                                height="80"
+                                                frameBorder="0"
+                                                allow="encrypted-media"
+                                                className="rounded"
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
-                        </div>
+                        )
                     ))}
                 </div>
 
-                {/* Release Popup */}
                 {selectedRelease && (
                     <ReleasePopup
                         release={selectedRelease}
@@ -177,7 +213,6 @@ class NewReleases extends React.Component {
                     />
                 )}
 
-                {/* Add Release Side Panel */}
                 {showAddReleasePanel && (
                     <div className="fixed right-0 top-0 w-[300px] h-full bg-[#000807] p-8 overflow-y-auto border border-white rounded-l-[40px] shadow-lg">
                         <div className="flex justify-between items-center mb-5">
@@ -188,7 +223,8 @@ class NewReleases extends React.Component {
                             />
                         </div>
 
-                        {/* Input Fields */}
+                        {error && <CustomAlert message={error} />}
+
                         <input
                             type="text"
                             name="title"
@@ -207,7 +243,16 @@ class NewReleases extends React.Component {
                             className="w-full p-2.5 mb-4 bg-neutral-800 border border-green-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
 
-                        {/* Image Upload */}
+                        {/* Spotify URL Input */}
+                        <input
+                            type="url"
+                            name="spotifyUrl"
+                            placeholder="Spotify Track URL"
+                            value={newRelease.spotifyUrl}
+                            onChange={this.handleInputChange}
+                            className="w-full p-2.5 mb-4 bg-neutral-800 border border-green-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                        />
+
                         <div className="mb-4">
                             <label
                                 htmlFor="image-upload"
@@ -232,7 +277,6 @@ class NewReleases extends React.Component {
                             )}
                         </div>
 
-                        {/* Hashtags Input */}
                         <input
                             type="text"
                             name="hashtags"
@@ -242,7 +286,6 @@ class NewReleases extends React.Component {
                             className="w-full p-2.5 mb-4 bg-neutral-800 border border-green-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                         />
 
-                        {/* Add Button */}
                         <button
                             onClick={this.handleAddRelease}
                             className="w-full bg-green-500 text-white py-2.5 px-5 rounded-full text-base cursor-pointer hover:bg-green-600 transition-colors mt-5"
@@ -250,6 +293,15 @@ class NewReleases extends React.Component {
                             Add Release
                         </button>
                     </div>
+                )}
+
+                {selectedRelease && (
+                    <ReleasePopup
+                        release={selectedRelease}
+                        onClose={this.closePopup}
+                        onAddComment={this.onAddComment}
+                        currentUser={currentUser}
+                    />
                 )}
             </div>
         );

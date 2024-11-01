@@ -3,12 +3,19 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+require('dotenv').config();
+
+
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const bcrypt = require('bcryptjs');
+const cookie = require('cookie-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Connect to MongoDB
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/amplify_music_db';
+const mongoURI = process.env.MONGODB_URI;
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -16,6 +23,7 @@ mongoose.connect(mongoURI, {
 })
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Could not connect to MongoDB', err));
+
 // User model
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
@@ -23,6 +31,14 @@ const userSchema = new mongoose.Schema({
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     profileImage: { type: String, default: '/assets/images/user/user.jpg' }
+});
+
+// Add password hashing middleware
+userSchema.pre('save', async function (next) {
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
+    next();
 });
 
 const newReleaseSchema = new mongoose.Schema({
@@ -37,9 +53,9 @@ const newReleaseSchema = new mongoose.Schema({
         likes: Number,
         dislikes: Number
     }],
-    createdAt: { 
-        type: Date, 
-        default: Date.now // Automatically set the date when creating new releases
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 });
 
@@ -56,14 +72,81 @@ const User = mongoose.model('User', userSchema);
 const NewRelease = mongoose.model('NewRelease', newReleaseSchema);
 const PersonalPlaylist = mongoose.model('PersonalPlaylist', personalPlaylistSchema, 'personalplaylist');
 
+// Middleware
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-
-// Serve static files from the 'public' directory in the frontend folder
 app.use(express.static(path.join(__dirname, '..', '..', 'frontend', 'public')));
-
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000', // Replace with your frontend URL
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
+// Add these configurations after your existing mongoose connection
+app.use(cookie());
+// Session configuration
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI,
+    }),
+    cookie: {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 // 1 day
+    }
+}));
+
+
+
+// Authentication middleware
+const requireAuth = async (req, res, next) => {
+    if (!req.session.userId) {
+        return res.status(401).json({ message: 'Authentication required' });
+    }
+    try {
+        const user = await User.findById(req.session.userId);
+        if (!user) {
+            return res.status(401).json({ message: 'User not found' });
+        }
+        req.user = user;
+        next();
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+// Modified registration endpoint
+app.post('/api/users/register', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const existingUser = await User.findOne({ username });
+
+        if (existingUser) {
+            return res.status(400).json({ message: 'Username already exists' });
+        }
+
+        const user = new User({ username, password });
+        await user.save();
+
+        // Automatically log in after registration
+        req.session.userId = user._id;
+
+        res.status(201).json({
+            message: 'User created successfully',
+            user: {
+                username: user.username,
+                profileImage: user.profileImage
+            }
+        });
+    } catch (error) {
+        res.status(400).json({ message: 'Error creating user', error: error.message });
+    }
+});
+
 
 // User routes
 app.post('/api/users', async (req, res) => {
@@ -81,101 +164,104 @@ app.post('/api/users', async (req, res) => {
     }
 });
 
+
+// Logout endpoint
+app.post('/api/users/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error logging out' });
+        }
+        res.clearCookie('connect.sid');
+        res.json({ message: 'Logged out successfully' });
+    });
+});
+
+// Check session endpoint
+app.get('/api/users/session', async (req, res) => {
+    try {
+        if (!req.session.userId) {
+            return res.status(401).json({ message: 'No active session' });
+        }
+
+        const user = await User.findById(req.session.userId);
+        if (!user) {
+            return res.status(401).json({ message: 'User not found' });
+        }
+
+        res.json({
+            user: {
+                username: user.username,
+                profileImage: user.profileImage
+            }
+        });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
+// Modified login endpoint
 app.post('/api/users/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await User.findOne({ username, password });
-        if (user) {
-            res.json({ message: 'Login successful' });
-        } else {
-            res.status(401).json({ message: 'Invalid credentials' });
+        
+        // Validate that username is a string
+        if (typeof username !== 'string' || typeof password !== 'string') {
+            return res.status(400).json({ message: 'Invalid input format' });
         }
+
+        // Log the received data for debugging
+        console.log('Login attempt with:', { username, password: '****' });
+
+        const user = await User.findOne({ username: username.toString() });
+
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        const isValidPassword = await bcrypt.compare(password, user.password);
+        if (!isValidPassword) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        // Set session
+        req.session.userId = user._id;
+        
+        // Save session before sending response
+        req.session.save((err) => {
+            if (err) {
+                console.error('Session save error:', err);
+                return res.status(500).json({ message: 'Error saving session' });
+            }
+            
+            res.json({
+                message: 'Login successful',
+                user: {
+                    username: user.username,
+                    profileImage: user.profileImage
+                }
+            });
+        });
     } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({ message: 'Error during login', error: error.message });
     }
 });
 
-app.get('/api/users', async (req, res) => {
-    try {
-        // In a real application, you would get the user ID from the authenticated session
-        // For now, we'll just fetch the first user in the database
-        const user = await User.findOne();
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        res.json({
-            username: user.username
-        });
-    } catch (error) {
-        console.error('Error fetching user profile:', error);
-        res.status(500).json({ message: 'Internal server error', error: error.message });
-    }
-});
-
-
+// Combined user profile update endpoint
 app.put('/api/users', async (req, res) => {
     try {
-        // In a real application, you would get the user ID from the authenticated session
-        // For now, we'll just update the first user in the database
+        const { username } = req.body;
         const user = await User.findOne();
+
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const { username } = req.body;
-        user.username = username;
-
-        await user.save();
-
-        res.json({
-            username: user.username
-        });
-    } catch (error) {
-        console.error('Error updating user profile:', error);
-        res.status(500).json({ message: 'Internal server error', error: error.message });
-    }
-});
-
-
-
-// Songs and Playlist
-app.get('/api/newReleases', async (req, res) => {
-    try {
-        const newReleases = await NewRelease.find()
-            .sort({ createdAt: -1 }); 
-        res.json(newReleases);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-});
-
-app.post('/api/newReleases', async (req, res) => {
-    const newRelease = new NewRelease(req.body);
-    try {
-        const savedRelease = await newRelease.save();
-        res.status(201).json(savedRelease);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
-
-app.put('/api/users', async (req, res) => {
-    try {
-        // In a real application, you would get the user ID from the authenticated session
-        // For now, we'll just update the first user in the database
-        const user = await User.findOne();
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        const { username } = req.body;
-
-        // Add some basic validation
         if (!username || username.trim() === '') {
             return res.status(400).json({ message: 'Username cannot be empty' });
         }
 
-        // Check if the new username already exists (excluding the current user)
         const existingUser = await User.findOne({ username, _id: { $ne: user._id } });
         if (existingUser) {
             return res.status(400).json({ message: 'Username already taken' });
@@ -196,16 +282,12 @@ app.put('/api/users', async (req, res) => {
 
 app.delete('/api/users', async (req, res) => {
     try {
-        // In a real application, you would get the user ID from the authenticated session
-        // For this example, we'll use the username from the request body
         const { username } = req.body;
-
         if (!username) {
             return res.status(400).json({ message: 'Username is required' });
         }
 
         const deletedUser = await User.findOneAndDelete({ username });
-
         if (!deletedUser) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -214,6 +296,42 @@ app.delete('/api/users', async (req, res) => {
     } catch (error) {
         console.error('Error deleting user:', error);
         res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+});
+
+app.get('/api/users/:username', requireAuth, async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.params.username });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json({
+            username: user.username,
+            profileImage: user.profileImage
+        });
+    } catch (error) {
+        console.error('Error fetching user profile:', error);
+        res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+});
+
+// New Releases routes
+app.get('/api/newReleases', async (req, res) => {
+    try {
+        const newReleases = await NewRelease.find().sort({ createdAt: -1 });
+        res.json(newReleases);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+app.post('/api/newReleases', async (req, res) => {
+    const newRelease = new NewRelease(req.body);
+    try {
+        const savedRelease = await newRelease.save();
+        res.status(201).json(savedRelease);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
     }
 });
 
@@ -241,8 +359,7 @@ app.post('/api/newReleases/:id/comments', async (req, res) => {
     }
 
     try {
-        const release = await NewRelease.findById(releaseId); // using findById for direct lookup
-
+        const release = await NewRelease.findById(releaseId);
         if (!release) {
             return res.status(404).json({ message: 'Release not found' });
         }
@@ -263,28 +380,14 @@ app.post('/api/newReleases/:id/comments', async (req, res) => {
     }
 });
 
-
-
+// Personal Playlist routes
 app.get('/api/personalPlaylists', async (req, res) => {
     try {
         console.log('Fetching personal playlists...');
         const playlists = await PersonalPlaylist.find();
-        // console.log('Playlists fetched:', playlists);
-        if (playlists.length === 0) {
-            // console.log('No playlists found in the database.');
-        }
         res.json(playlists);
     } catch (error) {
         console.error('Error fetching playlists:', error);
-        res.status(500).json({ message: error.message });
-    }
-});
-
-app.get('/api/debug/personalPlaylists', async (req, res) => {
-    try {
-        const playlists = await mongoose.connection.db.collection('PersonalPlaylist').find().toArray();
-        res.json(playlists);
-    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
@@ -313,7 +416,6 @@ app.post('/api/personalPlaylists/:id/songs', async (req, res) => {
 app.delete('/api/personalPlaylists/:playlistId/songs/:songId', async (req, res) => {
     try {
         const { playlistId, songId } = req.params;
-
         const playlist = await PersonalPlaylist.findById(playlistId);
 
         if (!playlist) {
@@ -321,7 +423,6 @@ app.delete('/api/personalPlaylists/:playlistId/songs/:songId', async (req, res) 
         }
 
         playlist.songs = playlist.songs.filter(song => song._id.toString() !== songId);
-
         const updatedPlaylist = await playlist.save();
         res.json(updatedPlaylist);
     } catch (error) {
@@ -346,19 +447,10 @@ app.delete('/api/personalPlaylists/:id', async (req, res) => {
     }
 });
 
-
-
-
-
-
-
-
-
-// Send a friend request
+// Friend management routes
 app.post('/api/users/friend-request', async (req, res) => {
     try {
         const { fromUsername, toUsername } = req.body;
-
         const fromUser = await User.findOne({ username: fromUsername });
         const toUser = await User.findOne({ username: toUsername });
 
@@ -380,11 +472,9 @@ app.post('/api/users/friend-request', async (req, res) => {
     }
 });
 
-// Accept a friend request
 app.post('/api/users/accept-friend', async (req, res) => {
     try {
         const { username, friendUsername } = req.body;
-
         const user = await User.findOne({ username });
         const friend = await User.findOne({ username: friendUsername });
 
@@ -410,11 +500,9 @@ app.post('/api/users/accept-friend', async (req, res) => {
     }
 });
 
-// Unfriend a user
 app.post('/api/users/unfriend', async (req, res) => {
     try {
         const { username, friendUsername } = req.body;
-
         const user = await User.findOne({ username });
         const friend = await User.findOne({ username: friendUsername });
 
@@ -455,26 +543,7 @@ app.get('/api/users/:username/friends', async (req, res) => {
     }
 });
 
-
-
-
-// Add these new routes to handle profile image updates
-app.get('/api/users/:username', async (req, res) => {
-    try {
-        const user = await User.findOne({ username: req.params.username });
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        res.json({
-            username: user.username,
-            profileImage: user.profileImage
-        });
-    } catch (error) {
-        console.error('Error fetching user profile:', error);
-        res.status(500).json({ message: 'Internal server error', error: error.message });
-    }
-});
-
+// Profile image route
 app.post('/api/users/:username/profile-image', async (req, res) => {
     try {
         const { image } = req.body;
@@ -489,7 +558,6 @@ app.post('/api/users/:username/profile-image', async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        // Update user's profile image
         user.profileImage = image;
         await user.save();
 
@@ -503,35 +571,25 @@ app.post('/api/users/:username/profile-image', async (req, res) => {
     }
 });
 
-
-// Update the login route to include profile image
-app.post('/api/users/login', async (req, res) => {
+// Debug route (if needed during development)
+app.get('/api/debug/personalPlaylists', async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const user = await User.findOne({ username, password });
-        if (user) {
-            res.json({ 
-                message: 'Login successful',
-                username: user.username,
-                profileImage: user.profileImage
-            });
-        } else {
-            res.status(401).json({ message: 'Invalid credentials' });
-        }
+        const playlists = await mongoose.connection.db.collection('PersonalPlaylist').find().toArray();
+        res.json(playlists);
     } catch (error) {
-        res.status(500).json({ message: 'Error during login', error: error.message });
+        res.status(500).json({ message: error.message });
     }
 });
 
-
-// Serve static files from the frontend/public directory
+// Serve static files and handle all routes
 app.use(express.static(path.join(__dirname, '../../frontend/public')));
 
-// Serve the main HTML file for all routes
+// Catch-all route to serve the main HTML file
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', '..', 'frontend', 'public', 'index.html'));
 });
 
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
