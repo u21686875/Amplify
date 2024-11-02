@@ -388,37 +388,32 @@ app.post('/api/users/login', /*#__PURE__*/function () {
             message: 'Invalid input format'
           }));
         case 4:
-          // Log the received data for debugging
-          console.log('Login attempt with:', {
-            username: username,
-            password: '****'
-          });
-          _context6.next = 7;
+          _context6.next = 6;
           return User.findOne({
             username: username.toString()
           });
-        case 7:
+        case 6:
           user = _context6.sent;
           if (user) {
-            _context6.next = 10;
+            _context6.next = 9;
             break;
           }
           return _context6.abrupt("return", res.status(401).json({
             message: 'Invalid credentials'
           }));
-        case 10:
-          _context6.next = 12;
+        case 9:
+          _context6.next = 11;
           return bcrypt.compare(password, user.password);
-        case 12:
+        case 11:
           isValidPassword = _context6.sent;
           if (isValidPassword) {
-            _context6.next = 15;
+            _context6.next = 14;
             break;
           }
           return _context6.abrupt("return", res.status(401).json({
             message: 'Invalid credentials'
           }));
-        case 15:
+        case 14:
           // Set session
           req.session.userId = user._id;
 
@@ -438,21 +433,21 @@ app.post('/api/users/login', /*#__PURE__*/function () {
               }
             });
           });
-          _context6.next = 23;
+          _context6.next = 22;
           break;
-        case 19:
-          _context6.prev = 19;
+        case 18:
+          _context6.prev = 18;
           _context6.t0 = _context6["catch"](0);
           console.error('Login error:', _context6.t0);
           res.status(500).json({
             message: 'Error during login',
             error: _context6.t0.message
           });
-        case 23:
+        case 22:
         case "end":
           return _context6.stop();
       }
-    }, _callee6, null, [[0, 19]]);
+    }, _callee6, null, [[0, 18]]);
   }));
   return function (_x11, _x12) {
     return _ref6.apply(this, arguments);

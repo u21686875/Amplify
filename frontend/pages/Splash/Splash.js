@@ -1,7 +1,7 @@
 import React from 'react';
 import WebFont from 'webfontloader';
 import { useNavigate } from 'react-router-dom';
-
+import '../../public/assets/fonts/neon-club-music/neon-club-music.css';
 class SplashPage extends React.Component {
     constructor(props) {
         super(props);
@@ -21,16 +21,18 @@ class SplashPage extends React.Component {
     componentDidMount() {
         WebFont.load({
             custom: {
-                families: ['Devil Breeze Demi'],
-                urls: ['/assets/fonts/devil_breeze/Devil_Breeze_Demi.ttf']
+                families: ['Devil Breeze Demi', 'Neon Club Music'],
+                urls: [
+                    '../../public/assets/fonts/devil_breeze/Devil_Breeze_Demi.ttf',
+                    '../../public/assets/fonts/neon-club-music/neon-club-music.css'
+                ]
             },
             active: () => {
-                this.setState({ fontLoaded: true });
-                // Start typewriter immediately without waiting for setState callback
+                this.setState({ fontsLoaded: true });
                 this.typewriterTick();
             }
         });
-    }
+    }z
 
     componentWillUnmount() {
         if (this.typewriterTimeout) {
@@ -79,8 +81,9 @@ class SplashPage extends React.Component {
     }
 
     render() {
-        const fontFamily = this.state.fontLoaded ? "'Devil Breeze Demi', sans-serif" : "sans-serif";
-        const { typewriterText } = this.state;
+        const { fontsLoaded, typewriterText } = this.state;
+        const devilBreezeFont = fontsLoaded ? "'Devil Breeze Demi', sans-serif" : "sans-serif";
+        const neonClubFont = fontsLoaded ? "'Neon Club Music', sans-serif" : "sans-serif";
         
         return (
             <div className="relative flex min-h-screen w-full bg-black text-white overflow-hidden md:flex-row flex-col">
@@ -112,13 +115,13 @@ class SplashPage extends React.Component {
                 <div className="flex-1 flex flex-col justify-center items-center p-8">
                     <div className="text-center mb-8">
                         <h1
-                            className="text-4xl md:text-6xl font-bold mb-2"
-                            style={{ fontFamily }}
+                            className="font-neon text-4xl md:text-6xl font-bold mb-2"
+                            // style={{ fontFamily: neonClubFont }} // Using Neon Club Music for the title
                         >
                             AMPLIFY
                         </h1>
                         <div className="h-8 flex justify-center items-center min-h-[2rem]">
-                            <p className="text-lg md:text-xl whitespace-nowrap">
+                            <p className="text-lg md:text-xl whitespace-nowrap" style={{ fontFamily: devilBreezeFont }}>
                                 <span className="text-cyan-400">{this.constantPrefix}</span>
                                 <span className="text-green-400">{typewriterText}</span>
                                 <span className="animate-pulse ml-1 text-cyan-400">|</span>

@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Neon Club Music';
+    src: url('NEON_CLUB_MUSIC.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neon Club Music';
+    src: url('NEON_CLUB_MUSIC_bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neon Club Music';
+    src: url('NEON_CLUB_MUSIC_italic.otf') format('opentype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Neon Club Music';
+    src: url('NEON_CLUB_MUSIC_light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Neon Club Music';
+    src: url('NEON_CLUB_MUSIC_medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}

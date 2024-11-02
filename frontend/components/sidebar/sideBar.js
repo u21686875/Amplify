@@ -21,6 +21,7 @@ class Sidebar extends React.Component {
                         src="/assets/images/amplify.png"
                         alt="Amplify"
                         className="h-8 mr-2.5"
+                        onClick={() => this.handleRouting('home')}
                     />
                     <span className="text-2xl font-bold text-white">
                         Amplify
@@ -86,13 +87,12 @@ class Sidebar extends React.Component {
                     EDM
                 </div>
 
-                {/* Settings */}
+                {/* Logout */}
                 <div
                     className="absolute bottom-10 left-5 flex items-center gap-2 text-gray-500 hover:text-gray-300 cursor-pointer"
                     onClick={this.handleSettingsClick}
                 >
-                    <Settings />
-                    <span>Settings</span>
+                    <span>Logout</span>
                 </div>
             </div>
         );

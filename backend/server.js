@@ -211,7 +211,7 @@ app.post('/api/users/login', async (req, res) => {
         }
 
         // Log the received data for debugging
-        console.log('Login attempt with:', { username, password: '****' });
+        // console.log('Login attempt with:', { username, password: '****' });
 
         const user = await User.findOne({ username: username.toString() });
 

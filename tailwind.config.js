@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'neon': ['"Neon Club Music"', 'sans-serif'],
+        'devil': ['"Devil Breeze Demi"', 'sans-serif'],
+      },
       colors: {
         'custom-bg': '#000807',
         'sidebar-bg': '#0F0F0F',
