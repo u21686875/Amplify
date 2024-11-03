@@ -5,9 +5,9 @@ import SplashPage from '../pages/Splash/Splash';
 import Auth from '../pages/auth/Auth';
 import Home from '../pages/home/Home';
 import ProfileSettings from '../pages/profile/profile';
-import PlayList from '../components/playlist/playlist';
+import PlayListWithAuth from '../components/playlist/playlist';
 import PrivateRouteWithHooks from '../components/PrivateRoute/privateroute';
-
+import AdminPanel from '../pages/admin/admin';
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -150,6 +150,7 @@ class App extends React.Component {
 
 
     render() {
+        const { currentUser } = this.state;
         return (
             <AuthProvider>
                 <div>
@@ -158,7 +159,14 @@ class App extends React.Component {
                             {/* Public routes */}
                             <Route path="/" element={<SplashPage />} />
                             <Route path="/auth" element={<Auth />} />
-
+                            <Route
+                                path="/admin"
+                                element={
+                                    <PrivateRouteWithHooks>
+                                        <AdminPanel />
+                                    </PrivateRouteWithHooks>
+                                }
+                            />
                             {/* Protected routes */}
                             <Route
                                 path="/home"
@@ -184,7 +192,7 @@ class App extends React.Component {
                                 path="/playlist"
                                 element={
                                     <PrivateRouteWithHooks>
-                                        <PlayList
+                                        <PlayListWithAuth
                                             newReleases={this.state.newReleases}
                                             personalPlaylists={this.state.personalPlaylists}
                                             onCreatePlaylist={this.handleCreatePlaylist}

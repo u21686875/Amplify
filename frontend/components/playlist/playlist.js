@@ -1,7 +1,14 @@
 import React from 'react';
 import SideBarWithRouter from '../sidebar/sideBar';
+import { useAuth } from '../AuthContext/authContext';
 import SearchBar from '../search/searchBar';
 import { ChevronDown, Plus, X, Trash2, AlertTriangle, ChevronLeft, ChevronRight, Send } from 'lucide-react';
+
+
+const PlayListWithAuth = (props) => {
+    const auth = useAuth();
+    return <PlayList {...props} auth={auth} />;
+};
 
 const CustomAlert = ({ message, onConfirm, onCancel }) => (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -155,6 +162,7 @@ const CommentCarousel = ({ comments, currentIndex, onPrevious, onNext }) => (
 
 
 class PlayList extends React.Component {
+    static contextType = useAuth;
     constructor(props) {
         super(props);
         this.state = {
@@ -166,6 +174,8 @@ class PlayList extends React.Component {
             showAddSongsDropdown: false,
             newReleases: [],
             personalPlaylists: props.personalPlaylists || [],
+            userPlaylists: [],
+            loading: true,
             isDeleteMode: false,
             showDuplicateAlert: false,
             duplicateSongInfo: null,
@@ -174,8 +184,49 @@ class PlayList extends React.Component {
             comments: [], // Will store comments for the selected playlist
             isDeleteMode: false,
             deleteConfirm: null,
+            error: null,
         };
     }
+
+    renderUserPlaylists = () => {
+        const { loading, error, userPlaylists } = this.state;
+
+        if (loading) return <div className="text-center py-4">Loading playlists...</div>;
+        if (error) return <div className="text-center py-4 text-red-500">{error}</div>;
+
+        return (
+            <div className="mt-8">
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-xl font-semibold">My Playlists</h2>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                    {userPlaylists.map((playlist) => (
+                        <div
+                            key={playlist._id}
+                            className="group relative cursor-pointer hover:transform hover:scale-105 transition-all duration-200"
+                            onClick={() => this.openSongSidePanel(playlist)}
+                        >
+                            <div className="aspect-square overflow-hidden rounded-lg">
+                                <img
+                                    src={playlist.image || '/default-playlist.jpg'}
+                                    alt={playlist.title}
+                                    className="w-full h-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-200" />
+                            </div>
+                            <div className="mt-2">
+                                <h3 className="text-sm font-medium truncate">{playlist.title}</h3>
+                                <p className="text-xs text-neutral-400">
+                                    {playlist.songs?.length || 0} songs
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    };
 
     componentDidUpdate(prevProps) {
         // Only update personalPlaylists if they've changed
@@ -191,8 +242,40 @@ class PlayList extends React.Component {
 
     // Move initial fetch to componentDidMount
     componentDidMount() {
+        const { auth } = this.props;
+        if (!auth.user) {
+            console.log('No user found in auth context');
+        }
         this.fetchNewReleases();
+        this.fetchUserPlaylists();
     }
+
+
+    fetchUserPlaylists = async () => {
+        const { auth } = this.props;
+        if (!auth.user?.username) {
+            console.log('No username found in auth context');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/users/${auth.user.username}/playlists`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch playlists');
+            }
+            const data = await response.json();
+            this.setState({
+                userPlaylists: data,
+                loading: false
+            });
+        } catch (error) {
+            console.error('Error fetching playlists:', error);
+            this.setState({
+                error: 'Failed to load playlists',
+                loading: false
+            });
+        }
+    };
 
     generateDefaultPlaylistName = () => {
         const baseNamePrefix = "My Playlist";
@@ -506,13 +589,18 @@ class PlayList extends React.Component {
 
     createPlaylist = async () => {
         const { newPlaylistName, selectedReleases } = this.state;
+        const { auth } = this.props;
+
+        if (!auth.user) {
+            alert('Please log in to create a playlist');
+            return;
+        }
 
         if (selectedReleases.length === 0) {
             alert('Please select at least one release.');
             return;
         }
 
-        // Use default name if none provided
         const playlistName = newPlaylistName.trim() || this.generateDefaultPlaylistName();
 
         const newPlaylist = {
@@ -521,7 +609,8 @@ class PlayList extends React.Component {
             songs: selectedReleases.map(release => ({
                 title: release.title,
                 artist: release.artist
-            }))
+            })),
+            username: auth.user.username // Use username from auth context
         };
 
         try {
@@ -534,25 +623,28 @@ class PlayList extends React.Component {
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error('Failed to create playlist');
             }
 
             const savedPlaylist = await response.json();
 
-            this.setState({
+            // Update both personal and user playlists
+            this.setState(prevState => ({
+                personalPlaylists: [...prevState.personalPlaylists, savedPlaylist],
+                userPlaylists: [...prevState.userPlaylists, savedPlaylist],
                 showSidePanel: false,
                 selectedReleases: [],
                 newPlaylistName: ''
-            });
+            }));
 
-            if (this.props.onCreatePlaylist) {
-                this.props.onCreatePlaylist(savedPlaylist);
-            }
+            // Refetch user playlists to ensure consistency
+            this.fetchUserPlaylists();
         } catch (error) {
             console.error('Error creating playlist:', error);
             alert('Unable to create playlist. Please try again or contact support.');
         }
-    }
+    };
+
 
     checkForDuplicateSong = (release) => {
         const { selectedPlaylist } = this.state;
@@ -565,7 +657,7 @@ class PlayList extends React.Component {
     }
 
     render() {
-        const { newReleases } = this.props;
+        const { newReleases, user } = this.props;
         const {
             showSidePanel,
             showSongSidePanel,
@@ -578,6 +670,9 @@ class PlayList extends React.Component {
             showDuplicateAlert,
             duplicateSongInfo,
             deleteConfirm,
+            userPlaylists,
+            loading,
+            error
         } = this.state;
 
         return (
@@ -802,4 +897,4 @@ class PlayList extends React.Component {
     }
 }
 
-export default PlayList;
+export default PlayListWithAuth;

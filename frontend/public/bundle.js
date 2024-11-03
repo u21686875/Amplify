@@ -5073,6 +5073,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
@@ -5151,7 +5156,10 @@ var AuthProvider = function AuthProvider(_ref) {
           case 7:
             data = _context2.sent;
             if (data.user) {
-              setUser(data.user);
+              // Ensure isAdmin is included in user data
+              setUser(_objectSpread(_objectSpread({}, data.user), {}, {
+                isAdmin: data.user.isAdmin || false // Default to false if not set
+              }));
             }
             _context2.next = 15;
             break;
@@ -5205,8 +5213,10 @@ var AuthProvider = function AuthProvider(_ref) {
               _context3.next = 16;
               break;
             }
-            setUser(data.user);
-            // Wait a brief moment to ensure session is established
+            // Ensure isAdmin is included in user data
+            setUser(_objectSpread(_objectSpread({}, data.user), {}, {
+              isAdmin: data.user.isAdmin || false // Default to false if not set
+            }));
             _context3.next = 13;
             return new Promise(function (resolve) {
               return setTimeout(resolve, 100);
@@ -5361,7 +5371,8 @@ var AuthProvider = function AuthProvider(_ref) {
       login: login,
       logout: logout,
       register: register,
-      checkSession: checkSession
+      checkSession: checkSession,
+      isAdmin: (user === null || user === void 0 ? void 0 : user.isAdmin) || false // Add isAdmin to context value
     }
   }, children);
 };
@@ -5865,22 +5876,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _sidebar_sideBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sidebar/sideBar */ "./frontend/components/sidebar/sideBar.js");
-/* harmony import */ var _search_searchBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../search/searchBar */ "./frontend/components/search/searchBar.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/triangle-alert.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-right.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/trash-2.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/x.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-down.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
+/* harmony import */ var _AuthContext_authContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../AuthContext/authContext */ "./frontend/components/AuthContext/authContext.js");
+/* harmony import */ var _search_searchBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../search/searchBar */ "./frontend/components/search/searchBar.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/triangle-alert.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-right.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/trash-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/x.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-down.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
@@ -5896,10 +5908,18 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 
 
 
 
+
+var PlayListWithAuth = function PlayListWithAuth(props) {
+  var auth = (0,_AuthContext_authContext__WEBPACK_IMPORTED_MODULE_2__.useAuth)();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(PlayList, _extends({}, props, {
+    auth: auth
+  }));
+};
 var CustomAlert = function CustomAlert(_ref) {
   var message = _ref.message,
     onConfirm = _ref.onConfirm,
@@ -5910,7 +5930,7 @@ var CustomAlert = function CustomAlert(_ref) {
     className: "bg-neutral-800 p-6 rounded-lg max-w-md w-full mx-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex items-center gap-3 mb-4 text-yellow-500"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
     className: "text-lg font-semibold"
   }, "Duplicate Song")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
     className: "text-neutral-200 mb-6"
@@ -5937,7 +5957,7 @@ var DeleteAlert = function DeleteAlert(_ref2) {
     className: "bg-neutral-800 p-6 rounded-lg max-w-md w-full mx-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex items-center gap-3 mb-4 text-red-500"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
     className: "text-lg font-semibold"
   }, "Delete Release")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "mb-6"
@@ -6006,7 +6026,7 @@ var CommentCarousel = function CommentCarousel(_ref4) {
     onClick: onPrevious,
     className: "absolute left-0 z-10 p-2 bg-neutral-800 rounded-full hover:bg-neutral-700 transition-colors disabled:opacity-50",
     disabled: currentIndex === 0
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
     size: 20
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "w-full px-12"
@@ -6018,7 +6038,7 @@ var CommentCarousel = function CommentCarousel(_ref4) {
     onClick: onNext,
     className: "absolute right-0 z-10 p-2 bg-neutral-800 rounded-full hover:bg-neutral-700 transition-colors disabled:opacity-50",
     disabled: currentIndex === comments.length - 1
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
     size: 20
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "flex justify-center gap-1 mt-4"
@@ -6034,6 +6054,99 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
     var _this;
     _classCallCheck(this, PlayList);
     _this = _callSuper(this, PlayList, [props]);
+    _defineProperty(_this, "renderUserPlaylists", function () {
+      var _this$state = _this.state,
+        loading = _this$state.loading,
+        error = _this$state.error,
+        userPlaylists = _this$state.userPlaylists;
+      if (loading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "text-center py-4"
+      }, "Loading playlists...");
+      if (error) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "text-center py-4 text-red-500"
+      }, error);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "mt-8"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex justify-between items-center mb-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+        className: "text-xl font-semibold"
+      }, "My Playlists")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+      }, userPlaylists.map(function (playlist) {
+        var _playlist$songs;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          key: playlist._id,
+          className: "group relative cursor-pointer hover:transform hover:scale-105 transition-all duration-200",
+          onClick: function onClick() {
+            return _this.openSongSidePanel(playlist);
+          }
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "aspect-square overflow-hidden rounded-lg"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+          src: playlist.image || '/default-playlist.jpg',
+          alt: playlist.title,
+          className: "w-full h-full object-cover"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-200"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "mt-2"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+          className: "text-sm font-medium truncate"
+        }, playlist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+          className: "text-xs text-neutral-400"
+        }, ((_playlist$songs = playlist.songs) === null || _playlist$songs === void 0 ? void 0 : _playlist$songs.length) || 0, " songs")));
+      })));
+    });
+    _defineProperty(_this, "fetchUserPlaylists", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _auth$user;
+      var auth, response, data;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            auth = _this.props.auth;
+            if ((_auth$user = auth.user) !== null && _auth$user !== void 0 && _auth$user.username) {
+              _context.next = 4;
+              break;
+            }
+            console.log('No username found in auth context');
+            return _context.abrupt("return");
+          case 4:
+            _context.prev = 4;
+            _context.next = 7;
+            return fetch("/api/users/".concat(auth.user.username, "/playlists"));
+          case 7:
+            response = _context.sent;
+            if (response.ok) {
+              _context.next = 10;
+              break;
+            }
+            throw new Error('Failed to fetch playlists');
+          case 10:
+            _context.next = 12;
+            return response.json();
+          case 12:
+            data = _context.sent;
+            _this.setState({
+              userPlaylists: data,
+              loading: false
+            });
+            _context.next = 20;
+            break;
+          case 16:
+            _context.prev = 16;
+            _context.t0 = _context["catch"](4);
+            console.error('Error fetching playlists:', _context.t0);
+            _this.setState({
+              error: 'Failed to load playlists',
+              loading: false
+            });
+          case 20:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[4, 16]]);
+    })));
     _defineProperty(_this, "generateDefaultPlaylistName", function () {
       var baseNamePrefix = "My Playlist";
       var existingNames = _this.state.personalPlaylists.map(function (p) {
@@ -6058,21 +6171,21 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
       });
     });
     _defineProperty(_this, "handleCommentSubmit", /*#__PURE__*/function () {
-      var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
-        var _this$state, commentText, selectedPlaylist, response, newComment;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
+      var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
+        var _this$state2, commentText, selectedPlaylist, response, newComment;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
             case 0:
               e.preventDefault();
-              _this$state = _this.state, commentText = _this$state.commentText, selectedPlaylist = _this$state.selectedPlaylist;
+              _this$state2 = _this.state, commentText = _this$state2.commentText, selectedPlaylist = _this$state2.selectedPlaylist;
               if (commentText.trim()) {
-                _context.next = 4;
+                _context2.next = 4;
                 break;
               }
-              return _context.abrupt("return");
+              return _context2.abrupt("return");
             case 4:
-              _context.prev = 4;
-              _context.next = 7;
+              _context2.prev = 4;
+              _context2.next = 7;
               return fetch("/api/playlists/".concat(selectedPlaylist._id, "/comments"), {
                 method: 'POST',
                 headers: {
@@ -6085,17 +6198,17 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
                 })
               });
             case 7:
-              response = _context.sent;
+              response = _context2.sent;
               if (response.ok) {
-                _context.next = 10;
+                _context2.next = 10;
                 break;
               }
               throw new Error('Failed to add comment');
             case 10:
-              _context.next = 12;
+              _context2.next = 12;
               return response.json();
             case 12:
-              newComment = _context.sent;
+              newComment = _context2.sent;
               _this.setState(function (prevState) {
                 return {
                   comments: [].concat(_toConsumableArray(prevState.comments), [newComment]),
@@ -6103,21 +6216,21 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
                   currentCommentIndex: prevState.comments.length // Show the new comment
                 };
               });
-              _context.next = 20;
+              _context2.next = 20;
               break;
             case 16:
-              _context.prev = 16;
-              _context.t0 = _context["catch"](4);
-              console.error('Error adding comment:', _context.t0);
+              _context2.prev = 16;
+              _context2.t0 = _context2["catch"](4);
+              console.error('Error adding comment:', _context2.t0);
               alert('Failed to add comment. Please try again.');
             case 20:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
-        }, _callee, null, [[4, 16]]);
+        }, _callee2, null, [[4, 16]]);
       }));
       return function (_x) {
-        return _ref5.apply(this, arguments);
+        return _ref6.apply(this, arguments);
       };
     }());
     _defineProperty(_this, "handleNextComment", function () {
@@ -6140,56 +6253,6 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
       });
     });
     _defineProperty(_this, "handleDeleteConfirm", /*#__PURE__*/function () {
-      var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(releaseId) {
-        var response;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return fetch("/api/newReleases/".concat(releaseId), {
-                method: 'DELETE'
-              });
-            case 3:
-              response = _context2.sent;
-              if (response.ok) {
-                _context2.next = 6;
-                break;
-              }
-              throw new Error("HTTP error! status: ".concat(response.status));
-            case 6:
-              // Remove the deleted release from the state
-              _this.setState(function (prevState) {
-                return {
-                  newReleases: prevState.newReleases.filter(function (release) {
-                    return release._id !== releaseId;
-                  }),
-                  deleteConfirm: null
-                };
-              });
-              _context2.next = 13;
-              break;
-            case 9:
-              _context2.prev = 9;
-              _context2.t0 = _context2["catch"](0);
-              console.error('Error deleting release:', _context2.t0);
-              alert('Unable to delete release. Please try again or contact support.');
-            case 13:
-            case "end":
-              return _context2.stop();
-          }
-        }, _callee2, null, [[0, 9]]);
-      }));
-      return function (_x2) {
-        return _ref6.apply(this, arguments);
-      };
-    }());
-    _defineProperty(_this, "handleDeleteCancel", function () {
-      _this.setState({
-        deleteConfirm: null
-      });
-    });
-    _defineProperty(_this, "handleDeleteRelease", /*#__PURE__*/function () {
       var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(releaseId) {
         var response;
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
@@ -6213,61 +6276,111 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
                 return {
                   newReleases: prevState.newReleases.filter(function (release) {
                     return release._id !== releaseId;
+                  }),
+                  deleteConfirm: null
+                };
+              });
+              _context3.next = 13;
+              break;
+            case 9:
+              _context3.prev = 9;
+              _context3.t0 = _context3["catch"](0);
+              console.error('Error deleting release:', _context3.t0);
+              alert('Unable to delete release. Please try again or contact support.');
+            case 13:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, null, [[0, 9]]);
+      }));
+      return function (_x2) {
+        return _ref7.apply(this, arguments);
+      };
+    }());
+    _defineProperty(_this, "handleDeleteCancel", function () {
+      _this.setState({
+        deleteConfirm: null
+      });
+    });
+    _defineProperty(_this, "handleDeleteRelease", /*#__PURE__*/function () {
+      var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(releaseId) {
+        var response;
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return fetch("/api/newReleases/".concat(releaseId), {
+                method: 'DELETE'
+              });
+            case 3:
+              response = _context4.sent;
+              if (response.ok) {
+                _context4.next = 6;
+                break;
+              }
+              throw new Error("HTTP error! status: ".concat(response.status));
+            case 6:
+              // Remove the deleted release from the state
+              _this.setState(function (prevState) {
+                return {
+                  newReleases: prevState.newReleases.filter(function (release) {
+                    return release._id !== releaseId;
                   })
                 };
               });
               console.log('Release deleted successfully');
-              _context3.next = 14;
+              _context4.next = 14;
               break;
             case 10:
-              _context3.prev = 10;
-              _context3.t0 = _context3["catch"](0);
-              console.error('Error deleting release:', _context3.t0);
+              _context4.prev = 10;
+              _context4.t0 = _context4["catch"](0);
+              console.error('Error deleting release:', _context4.t0);
               alert('Unable to delete release. Please try again or contact support.');
             case 14:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
-        }, _callee3, null, [[0, 10]]);
+        }, _callee4, null, [[0, 10]]);
       }));
       return function (_x3) {
-        return _ref7.apply(this, arguments);
+        return _ref8.apply(this, arguments);
       };
     }());
-    _defineProperty(_this, "fetchNewReleases", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+    _defineProperty(_this, "fetchNewReleases", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
       var response, data;
-      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-        while (1) switch (_context4.prev = _context4.next) {
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
           case 0:
-            _context4.prev = 0;
-            _context4.next = 3;
+            _context5.prev = 0;
+            _context5.next = 3;
             return fetch('/api/newReleases');
           case 3:
-            response = _context4.sent;
+            response = _context5.sent;
             if (response.ok) {
-              _context4.next = 6;
+              _context5.next = 6;
               break;
             }
             throw new Error("HTTP error! status: ".concat(response.status));
           case 6:
-            _context4.next = 8;
+            _context5.next = 8;
             return response.json();
           case 8:
-            data = _context4.sent;
+            data = _context5.sent;
             _this.setState({
               newReleases: data
             });
-            _context4.next = 15;
+            _context5.next = 15;
             break;
           case 12:
-            _context4.prev = 12;
-            _context4.t0 = _context4["catch"](0);
-            console.error('Error fetching new releases:', _context4.t0);
+            _context5.prev = 12;
+            _context5.t0 = _context5["catch"](0);
+            console.error('Error fetching new releases:', _context5.t0);
           case 15:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
-      }, _callee4, null, [[0, 12]]);
+      }, _callee5, null, [[0, 12]]);
     })));
     _defineProperty(_this, "toggleSidePanel", function () {
       _this.setState(function (prevState) {
@@ -6283,25 +6396,25 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
         };
       });
     });
-    _defineProperty(_this, "handleDeletePlaylist", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+    _defineProperty(_this, "handleDeletePlaylist", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
       var selectedPlaylist, response;
-      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-        while (1) switch (_context5.prev = _context5.next) {
+      return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        while (1) switch (_context6.prev = _context6.next) {
           case 0:
             selectedPlaylist = _this.state.selectedPlaylist;
             if (!(selectedPlaylist && selectedPlaylist._id)) {
-              _context5.next = 17;
+              _context6.next = 17;
               break;
             }
-            _context5.prev = 2;
-            _context5.next = 5;
+            _context6.prev = 2;
+            _context6.next = 5;
             return fetch("/api/personalPlaylists/".concat(selectedPlaylist._id), {
               method: 'DELETE'
             });
           case 5:
-            response = _context5.sent;
+            response = _context6.sent;
             if (response.ok) {
-              _context5.next = 8;
+              _context6.next = 8;
               break;
             }
             throw new Error("HTTP error! status: ".concat(response.status));
@@ -6322,26 +6435,26 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
               _this.props.onDeletePlaylist(selectedPlaylist._id);
             }
             console.log('Playlist deleted successfully');
-            _context5.next = 17;
+            _context6.next = 17;
             break;
           case 13:
-            _context5.prev = 13;
-            _context5.t0 = _context5["catch"](2);
-            console.error('Error deleting playlist:', _context5.t0);
+            _context6.prev = 13;
+            _context6.t0 = _context6["catch"](2);
+            console.error('Error deleting playlist:', _context6.t0);
             alert('Unable to delete playlist. Please try again or contact support.');
           case 17:
           case "end":
-            return _context5.stop();
+            return _context6.stop();
         }
-      }, _callee5, null, [[2, 13]]);
+      }, _callee6, null, [[2, 13]]);
     })));
     _defineProperty(_this, "handleAddSongToPlaylist", /*#__PURE__*/function () {
-      var _ref10 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6(release) {
-        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-          while (1) switch (_context6.prev = _context6.next) {
+      var _ref11 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(release) {
+        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+          while (1) switch (_context7.prev = _context7.next) {
             case 0:
               if (!_this.checkForDuplicateSong(release)) {
-                _context6.next = 3;
+                _context7.next = 3;
                 break;
               }
               _this.setState({
@@ -6351,40 +6464,40 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
                   message: "\"".concat(release.title, "\" by ").concat(release.artist, " is already in this playlist.")
                 }
               });
-              return _context6.abrupt("return");
+              return _context7.abrupt("return");
             case 3:
-              _context6.next = 5;
+              _context7.next = 5;
               return _this.addSongToPlaylist(release);
             case 5:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
-        }, _callee6);
+        }, _callee7);
       }));
       return function (_x4) {
-        return _ref10.apply(this, arguments);
+        return _ref11.apply(this, arguments);
       };
     }());
     _defineProperty(_this, "addSongToPlaylist", /*#__PURE__*/function () {
-      var _ref11 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(release) {
+      var _ref12 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(release) {
         var selectedPlaylist, newSong, response, updatedPlaylist;
-        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-          while (1) switch (_context7.prev = _context7.next) {
+        return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+          while (1) switch (_context8.prev = _context8.next) {
             case 0:
               selectedPlaylist = _this.state.selectedPlaylist;
               if (!(!selectedPlaylist || !selectedPlaylist._id)) {
-                _context7.next = 4;
+                _context8.next = 4;
                 break;
               }
               console.error('No playlist selected');
-              return _context7.abrupt("return");
+              return _context8.abrupt("return");
             case 4:
               newSong = {
                 title: release.title,
                 artist: release.artist
               };
-              _context7.prev = 5;
-              _context7.next = 8;
+              _context8.prev = 5;
+              _context8.next = 8;
               return fetch("/api/personalPlaylists/".concat(selectedPlaylist._id, "/songs"), {
                 method: 'POST',
                 headers: {
@@ -6393,57 +6506,57 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
                 body: JSON.stringify(newSong)
               });
             case 8:
-              response = _context7.sent;
+              response = _context8.sent;
               if (response.ok) {
-                _context7.next = 11;
+                _context8.next = 11;
                 break;
               }
               throw new Error("HTTP error! status: ".concat(response.status));
             case 11:
-              _context7.next = 13;
+              _context8.next = 13;
               return response.json();
             case 13:
-              updatedPlaylist = _context7.sent;
+              updatedPlaylist = _context8.sent;
               _this.setState({
                 selectedPlaylist: updatedPlaylist,
                 showAddSongsDropdown: false,
                 showDuplicateAlert: false,
                 duplicateSongInfo: null
               });
-              _context7.next = 21;
+              _context8.next = 21;
               break;
             case 17:
-              _context7.prev = 17;
-              _context7.t0 = _context7["catch"](5);
-              console.error('Error adding song to playlist:', _context7.t0);
+              _context8.prev = 17;
+              _context8.t0 = _context8["catch"](5);
+              console.error('Error adding song to playlist:', _context8.t0);
               alert('Unable to add song to playlist. Please try again or contact support.');
             case 21:
             case "end":
-              return _context7.stop();
+              return _context8.stop();
           }
-        }, _callee7, null, [[5, 17]]);
+        }, _callee8, null, [[5, 17]]);
       }));
       return function (_x5) {
-        return _ref11.apply(this, arguments);
+        return _ref12.apply(this, arguments);
       };
     }());
-    _defineProperty(_this, "handleDuplicateConfirm", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+    _defineProperty(_this, "handleDuplicateConfirm", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
       var duplicateSongInfo;
-      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-        while (1) switch (_context8.prev = _context8.next) {
+      return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+        while (1) switch (_context9.prev = _context9.next) {
           case 0:
             duplicateSongInfo = _this.state.duplicateSongInfo;
             if (!duplicateSongInfo) {
-              _context8.next = 4;
+              _context9.next = 4;
               break;
             }
-            _context8.next = 4;
+            _context9.next = 4;
             return _this.addSongToPlaylist(duplicateSongInfo.release);
           case 4:
           case "end":
-            return _context8.stop();
+            return _context9.stop();
         }
-      }, _callee8);
+      }, _callee9);
     })));
     _defineProperty(_this, "handleDuplicateCancel", function () {
       _this.setState({
@@ -6487,73 +6600,80 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
       });
     });
     _defineProperty(_this, "handleRemoveSong", /*#__PURE__*/function () {
-      var _ref13 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9(song) {
+      var _ref14 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee10(song) {
         var selectedPlaylist, response, updatedPlaylist;
-        return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-          while (1) switch (_context9.prev = _context9.next) {
+        return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+          while (1) switch (_context10.prev = _context10.next) {
             case 0:
               selectedPlaylist = _this.state.selectedPlaylist;
               if (!(selectedPlaylist && selectedPlaylist._id && song && song._id)) {
-                _context9.next = 20;
+                _context10.next = 20;
                 break;
               }
-              _context9.prev = 2;
-              _context9.next = 5;
+              _context10.prev = 2;
+              _context10.next = 5;
               return fetch("/api/personalPlaylists/".concat(selectedPlaylist._id, "/songs/").concat(song._id), {
                 method: 'DELETE'
               });
             case 5:
-              response = _context9.sent;
+              response = _context10.sent;
               if (response.ok) {
-                _context9.next = 8;
+                _context10.next = 8;
                 break;
               }
               throw new Error("HTTP error! status: ".concat(response.status));
             case 8:
-              _context9.next = 10;
+              _context10.next = 10;
               return response.json();
             case 10:
-              updatedPlaylist = _context9.sent;
+              updatedPlaylist = _context10.sent;
               _this.setState({
                 selectedPlaylist: updatedPlaylist
               });
-              _context9.next = 18;
+              _context10.next = 18;
               break;
             case 14:
-              _context9.prev = 14;
-              _context9.t0 = _context9["catch"](2);
-              console.error('Error removing song from playlist:', _context9.t0);
+              _context10.prev = 14;
+              _context10.t0 = _context10["catch"](2);
+              console.error('Error removing song from playlist:', _context10.t0);
               alert('Unable to remove song from playlist. Please try again or contact support.');
             case 18:
-              _context9.next = 22;
+              _context10.next = 22;
               break;
             case 20:
               console.error('Unable to remove song: Missing playlist ID or song ID');
               alert('Unable to remove song from playlist. Please try again or contact support.');
             case 22:
             case "end":
-              return _context9.stop();
+              return _context10.stop();
           }
-        }, _callee9, null, [[2, 14]]);
+        }, _callee10, null, [[2, 14]]);
       }));
       return function (_x6) {
-        return _ref13.apply(this, arguments);
+        return _ref14.apply(this, arguments);
       };
     }());
-    _defineProperty(_this, "createPlaylist", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
-      var _this$state2, newPlaylistName, selectedReleases, playlistName, newPlaylist, response, savedPlaylist;
-      return _regeneratorRuntime().wrap(function _callee10$(_context10) {
-        while (1) switch (_context10.prev = _context10.next) {
+    _defineProperty(_this, "createPlaylist", /*#__PURE__*/_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee11() {
+      var _this$state3, newPlaylistName, selectedReleases, auth, playlistName, newPlaylist, response, savedPlaylist;
+      return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+        while (1) switch (_context11.prev = _context11.next) {
           case 0:
-            _this$state2 = _this.state, newPlaylistName = _this$state2.newPlaylistName, selectedReleases = _this$state2.selectedReleases;
+            _this$state3 = _this.state, newPlaylistName = _this$state3.newPlaylistName, selectedReleases = _this$state3.selectedReleases;
+            auth = _this.props.auth;
+            if (auth.user) {
+              _context11.next = 5;
+              break;
+            }
+            alert('Please log in to create a playlist');
+            return _context11.abrupt("return");
+          case 5:
             if (!(selectedReleases.length === 0)) {
-              _context10.next = 4;
+              _context11.next = 8;
               break;
             }
             alert('Please select at least one release.');
-            return _context10.abrupt("return");
-          case 4:
-            // Use default name if none provided
+            return _context11.abrupt("return");
+          case 8:
             playlistName = newPlaylistName.trim() || _this.generateDefaultPlaylistName();
             newPlaylist = {
               title: playlistName,
@@ -6563,10 +6683,11 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
                   title: release.title,
                   artist: release.artist
                 };
-              })
+              }),
+              username: auth.user.username // Use username from auth context
             };
-            _context10.prev = 6;
-            _context10.next = 9;
+            _context11.prev = 10;
+            _context11.next = 13;
             return fetch('/api/personalPlaylists', {
               method: 'POST',
               headers: {
@@ -6574,38 +6695,43 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
               },
               body: JSON.stringify(newPlaylist)
             });
-          case 9:
-            response = _context10.sent;
+          case 13:
+            response = _context11.sent;
             if (response.ok) {
-              _context10.next = 12;
+              _context11.next = 16;
               break;
             }
-            throw new Error("HTTP error! status: ".concat(response.status));
-          case 12:
-            _context10.next = 14;
+            throw new Error('Failed to create playlist');
+          case 16:
+            _context11.next = 18;
             return response.json();
-          case 14:
-            savedPlaylist = _context10.sent;
-            _this.setState({
-              showSidePanel: false,
-              selectedReleases: [],
-              newPlaylistName: ''
+          case 18:
+            savedPlaylist = _context11.sent;
+            // Update both personal and user playlists
+            _this.setState(function (prevState) {
+              return {
+                personalPlaylists: [].concat(_toConsumableArray(prevState.personalPlaylists), [savedPlaylist]),
+                userPlaylists: [].concat(_toConsumableArray(prevState.userPlaylists), [savedPlaylist]),
+                showSidePanel: false,
+                selectedReleases: [],
+                newPlaylistName: ''
+              };
             });
-            if (_this.props.onCreatePlaylist) {
-              _this.props.onCreatePlaylist(savedPlaylist);
-            }
-            _context10.next = 23;
+
+            // Refetch user playlists to ensure consistency
+            _this.fetchUserPlaylists();
+            _context11.next = 27;
             break;
-          case 19:
-            _context10.prev = 19;
-            _context10.t0 = _context10["catch"](6);
-            console.error('Error creating playlist:', _context10.t0);
-            alert('Unable to create playlist. Please try again or contact support.');
           case 23:
+            _context11.prev = 23;
+            _context11.t0 = _context11["catch"](10);
+            console.error('Error creating playlist:', _context11.t0);
+            alert('Unable to create playlist. Please try again or contact support.');
+          case 27:
           case "end":
-            return _context10.stop();
+            return _context11.stop();
         }
-      }, _callee10, null, [[6, 19]]);
+      }, _callee11, null, [[10, 23]]);
     })));
     _defineProperty(_this, "checkForDuplicateSong", function (release) {
       var selectedPlaylist = _this.state.selectedPlaylist;
@@ -6614,7 +6740,7 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
         return song.title.toLowerCase() === release.title.toLowerCase() && song.artist.toLowerCase() === release.artist.toLowerCase();
       });
     });
-    _this.state = _defineProperty(_defineProperty({
+    _this.state = _defineProperty(_defineProperty(_defineProperty({
       showSidePanel: false,
       showSongSidePanel: false,
       selectedReleases: [],
@@ -6623,13 +6749,15 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
       showAddSongsDropdown: false,
       newReleases: [],
       personalPlaylists: props.personalPlaylists || [],
+      userPlaylists: [],
+      loading: true,
       isDeleteMode: false,
       showDuplicateAlert: false,
       duplicateSongInfo: null,
       commentText: '',
       currentCommentIndex: 0,
       comments: []
-    }, "isDeleteMode", false), "deleteConfirm", null);
+    }, "isDeleteMode", false), "deleteConfirm", null), "error", null);
     return _this;
   }
   _inherits(PlayList, _React$Component);
@@ -6653,30 +6781,40 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      var auth = this.props.auth;
+      if (!auth.user) {
+        console.log('No user found in auth context');
+      }
       this.fetchNewReleases();
+      this.fetchUserPlaylists();
     }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
-      var newReleases = this.props.newReleases;
-      var _this$state4 = this.state,
-        showSidePanel = _this$state4.showSidePanel,
-        showSongSidePanel = _this$state4.showSongSidePanel,
-        selectedReleases = _this$state4.selectedReleases,
-        newPlaylistName = _this$state4.newPlaylistName,
-        selectedPlaylist = _this$state4.selectedPlaylist,
-        showAddSongsDropdown = _this$state4.showAddSongsDropdown,
-        personalPlaylists = _this$state4.personalPlaylists,
-        isDeleteMode = _this$state4.isDeleteMode,
-        showDuplicateAlert = _this$state4.showDuplicateAlert,
-        duplicateSongInfo = _this$state4.duplicateSongInfo,
-        deleteConfirm = _this$state4.deleteConfirm;
+      var _this$props = this.props,
+        newReleases = _this$props.newReleases,
+        user = _this$props.user;
+      var _this$state5 = this.state,
+        showSidePanel = _this$state5.showSidePanel,
+        showSongSidePanel = _this$state5.showSongSidePanel,
+        selectedReleases = _this$state5.selectedReleases,
+        newPlaylistName = _this$state5.newPlaylistName,
+        selectedPlaylist = _this$state5.selectedPlaylist,
+        showAddSongsDropdown = _this$state5.showAddSongsDropdown,
+        personalPlaylists = _this$state5.personalPlaylists,
+        isDeleteMode = _this$state5.isDeleteMode,
+        showDuplicateAlert = _this$state5.showDuplicateAlert,
+        duplicateSongInfo = _this$state5.duplicateSongInfo,
+        deleteConfirm = _this$state5.deleteConfirm,
+        userPlaylists = _this$state5.userPlaylists,
+        loading = _this$state5.loading,
+        error = _this$state5.error;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "flex h-screen overflow-hidden bg-[#000807] text-white font-sans"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_sidebar_sideBar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "flex-1 ml-[300px] flex flex-col"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_search_searchBar__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_search_searchBar__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "flex-1 overflow-y-auto"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "p-5"
@@ -6704,7 +6842,7 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             return _this2.handleDeleteClick(release);
           }
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
           className: "w-6 h-6 text-red-500"
         }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
           className: "text-sm mt-2 truncate"
@@ -6754,7 +6892,7 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
         className: "flex justify-between items-center mb-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
         className: "text-2xl"
-      }, "Add To Playlist"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }, "Add To Playlist"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
         className: "cursor-pointer",
         onClick: this.toggleSidePanel
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -6796,7 +6934,7 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
         className: "flex justify-between items-center mb-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
         className: "text-2xl"
-      }, selectedPlaylist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }, selectedPlaylist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
         className: "cursor-pointer",
         onClick: this.closeSongSidePanel
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -6804,7 +6942,7 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: this.toggleAddSongsDropdown,
         className: "flex items-center justify-between w-full p-2 bg-green-500 text-white rounded hover:bg-green-600"
-      }, "Add Songs ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], null)), showAddSongsDropdown && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, "Add Songs ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], null)), showAddSongsDropdown && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "absolute top-full left-0 w-full max-h-72 overflow-y-auto bg-neutral-800 border border-neutral-700 rounded mt-1 z-10"
       }, newReleases.map(function (release) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -6819,7 +6957,7 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
           className: "w-10 h-10 object-cover mr-2"
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
           className: "flex-grow"
-        }, release.title, " - ", release.artist), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        }, release.title, " - ", release.artist), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"], {
           className: "ml-2"
         }));
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -6847,13 +6985,14 @@ var PlayList = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: this.handleDeletePlaylist,
         className: "w-10 h-10 bg-red-600 hover:bg-red-700 text-white rounded-full flex items-center justify-center"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
         size: 20
       })))));
     }
   }]);
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PlayList);
+_defineProperty(PlayList, "contextType", _AuthContext_authContext__WEBPACK_IMPORTED_MODULE_2__.useAuth);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PlayListWithAuth);
 
 /***/ }),
 
@@ -7742,6 +7881,860 @@ function SplashPageWithRouter(props) {
 
 /***/ }),
 
+/***/ "./frontend/pages/admin/admin.js":
+/*!***************************************!*\
+  !*** ./frontend/pages/admin/admin.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _components_AuthContext_authContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/AuthContext/authContext */ "./frontend/components/AuthContext/authContext.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/square-pen.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/trash-2.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/x.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/triangle-alert.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/users.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/list-music.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/music.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/message-square.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/tag.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/search.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/filter.js");
+/* harmony import */ var _components_sidebar_sideBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/sidebar/sideBar */ "./frontend/components/sidebar/sideBar.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+
+
+var AdminPanel = function AdminPanel() {
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useNavigate)();
+  var _useAuth = (0,_components_AuthContext_authContext__WEBPACK_IMPORTED_MODULE_1__.useAuth)(),
+    user = _useAuth.user;
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('users'),
+    _useState2 = _slicedToArray(_useState, 2),
+    activeTab = _useState2[0],
+    setActiveTab = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState4 = _slicedToArray(_useState3, 2),
+    searchQuery = _useState4[0],
+    setSearchQuery = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState6 = _slicedToArray(_useState5, 2),
+    isLoading = _useState6[0],
+    setIsLoading = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState8 = _slicedToArray(_useState7, 2),
+    error = _useState8[0],
+    setError = _useState8[1];
+
+  // Data states
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState10 = _slicedToArray(_useState9, 2),
+    users = _useState10[0],
+    setUsers = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState12 = _slicedToArray(_useState11, 2),
+    playlists = _useState12[0],
+    setPlaylists = _useState12[1];
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState14 = _slicedToArray(_useState13, 2),
+    songs = _useState14[0],
+    setSongs = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState16 = _slicedToArray(_useState15, 2),
+    genres = _useState16[0],
+    setGenres = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState18 = _slicedToArray(_useState17, 2),
+    comments = _useState18[0],
+    setComments = _useState18[1];
+
+  // Edit states
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState20 = _slicedToArray(_useState19, 2),
+    editingItem = _useState20[0],
+    setEditingItem = _useState20[1];
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState22 = _slicedToArray(_useState21, 2),
+    showConfirmDialog = _useState22[0],
+    setShowConfirmDialog = _useState22[1];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState24 = _slicedToArray(_useState23, 2),
+    itemToDelete = _useState24[0],
+    setItemToDelete = _useState24[1];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    _useState26 = _slicedToArray(_useState25, 2),
+    newGenre = _useState26[0],
+    setNewGenre = _useState26[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // if (!user?.isAdmin) {
+    //     navigate('/home');
+    //     return;
+    // }
+    console.log('my user', user);
+    fetchData(activeTab);
+  }, [activeTab]);
+  var fetchData = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(tab) {
+      var response, data;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            setIsLoading(true);
+            setError(null);
+            _context.prev = 2;
+            _context.t0 = tab;
+            _context.next = _context.t0 === 'users' ? 6 : _context.t0 === 'playlists' ? 10 : _context.t0 === 'songs' ? 14 : _context.t0 === 'comments' ? 18 : _context.t0 === 'genres' ? 22 : 26;
+            break;
+          case 6:
+            _context.next = 8;
+            return fetch('/api/admin/users');
+          case 8:
+            response = _context.sent;
+            return _context.abrupt("break", 26);
+          case 10:
+            _context.next = 12;
+            return fetch('/api/admin/playlists');
+          case 12:
+            response = _context.sent;
+            return _context.abrupt("break", 26);
+          case 14:
+            _context.next = 16;
+            return fetch('/api/admin/newReleases');
+          case 16:
+            response = _context.sent;
+            return _context.abrupt("break", 26);
+          case 18:
+            _context.next = 20;
+            return fetch('/api/admin/comments');
+          case 20:
+            response = _context.sent;
+            return _context.abrupt("break", 26);
+          case 22:
+            _context.next = 24;
+            return fetch('/api/admin/genres');
+          case 24:
+            response = _context.sent;
+            return _context.abrupt("break", 26);
+          case 26:
+            if (response.ok) {
+              _context.next = 28;
+              break;
+            }
+            throw new Error('Failed to fetch data');
+          case 28:
+            _context.next = 30;
+            return response.json();
+          case 30:
+            data = _context.sent;
+            _context.t1 = tab;
+            _context.next = _context.t1 === 'users' ? 34 : _context.t1 === 'playlists' ? 36 : _context.t1 === 'songs' ? 38 : _context.t1 === 'comments' ? 40 : _context.t1 === 'genres' ? 42 : 44;
+            break;
+          case 34:
+            setUsers(data);
+            return _context.abrupt("break", 44);
+          case 36:
+            setPlaylists(data);
+            return _context.abrupt("break", 44);
+          case 38:
+            setSongs(data);
+            return _context.abrupt("break", 44);
+          case 40:
+            setComments(data);
+            return _context.abrupt("break", 44);
+          case 42:
+            setGenres(data);
+            return _context.abrupt("break", 44);
+          case 44:
+            _context.next = 49;
+            break;
+          case 46:
+            _context.prev = 46;
+            _context.t2 = _context["catch"](2);
+            setError(_context.t2.message);
+          case 49:
+            _context.prev = 49;
+            setIsLoading(false);
+            return _context.finish(49);
+          case 52:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[2, 46, 49, 52]]);
+    }));
+    return function fetchData(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  var handleDelete = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(type, id) {
+      var _itemToDelete$item, url, response;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            url = "/api/admin/".concat(type, "/").concat(id);
+            if (type === 'comments' && itemToDelete !== null && itemToDelete !== void 0 && (_itemToDelete$item = itemToDelete.item) !== null && _itemToDelete$item !== void 0 && _itemToDelete$item.releaseId) {
+              url = "/api/admin/comments/".concat(itemToDelete.item.releaseId, "/").concat(id);
+            }
+            _context2.next = 5;
+            return fetch(url, {
+              method: 'DELETE'
+            });
+          case 5:
+            response = _context2.sent;
+            if (response.ok) {
+              _context2.next = 8;
+              break;
+            }
+            throw new Error('Failed to delete item');
+          case 8:
+            fetchData(activeTab);
+            _context2.next = 14;
+            break;
+          case 11:
+            _context2.prev = 11;
+            _context2.t0 = _context2["catch"](0);
+            setError(_context2.t0.message);
+          case 14:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 11]]);
+    }));
+    return function handleDelete(_x2, _x3) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var handleSave = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(type, item) {
+      var url, response;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            url = "/api/admin/".concat(type, "/").concat(item._id);
+            if (type === 'comments' && item.releaseId) {
+              url = "/api/admin/comments/".concat(item.releaseId, "/").concat(item._id);
+            }
+            _context3.next = 5;
+            return fetch(url, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(item)
+            });
+          case 5:
+            response = _context3.sent;
+            if (response.ok) {
+              _context3.next = 8;
+              break;
+            }
+            throw new Error('Failed to update item');
+          case 8:
+            setEditingItem(null);
+            fetchData(activeTab);
+            _context3.next = 15;
+            break;
+          case 12:
+            _context3.prev = 12;
+            _context3.t0 = _context3["catch"](0);
+            setError(_context3.t0.message);
+          case 15:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[0, 12]]);
+    }));
+    return function handleSave(_x4, _x5) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+  var handleAddGenre = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var response;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            if (newGenre.trim()) {
+              _context4.next = 2;
+              break;
+            }
+            return _context4.abrupt("return");
+          case 2:
+            _context4.prev = 2;
+            _context4.next = 5;
+            return fetch('/api/admin/genres', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                name: newGenre
+              })
+            });
+          case 5:
+            response = _context4.sent;
+            if (response.ok) {
+              _context4.next = 8;
+              break;
+            }
+            throw new Error('Failed to add genre');
+          case 8:
+            setNewGenre('');
+            fetchData('genres');
+            _context4.next = 15;
+            break;
+          case 12:
+            _context4.prev = 12;
+            _context4.t0 = _context4["catch"](2);
+            setError(_context4.t0.message);
+          case 15:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4, null, [[2, 12]]);
+    }));
+    return function handleAddGenre() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+  var confirmDelete = function confirmDelete(item, type) {
+    setItemToDelete({
+      item: item,
+      type: type
+    });
+    setShowConfirmDialog(true);
+  };
+  var renderUsers = function renderUsers() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "space-y-4"
+    }, users.map(function (user) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        key: user._id,
+        className: "bg-neutral-800 p-4 rounded-lg"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex justify-between items-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+        className: "text-lg font-medium"
+      }, user.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+        className: "text-sm text-neutral-400"
+      }, user.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex gap-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return setEditingItem(user);
+        },
+        className: "p-2 hover:bg-neutral-700 rounded-full"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        size: 20
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return confirmDelete(user, 'users');
+        },
+        className: "p-2 hover:bg-red-600 rounded-full"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        size: 20
+      })))));
+    }));
+  };
+  var renderPlaylists = function renderPlaylists() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "space-y-4"
+    }, playlists.map(function (playlist) {
+      var _playlist$songs, _playlist$creator;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        key: playlist._id,
+        className: "bg-neutral-800 p-4 rounded-lg"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex justify-between items-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex gap-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: playlist.image || '/default-playlist.jpg',
+        alt: playlist.title,
+        className: "w-16 h-16 rounded object-cover"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+        className: "text-lg font-medium"
+      }, playlist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+        className: "text-sm text-neutral-400"
+      }, ((_playlist$songs = playlist.songs) === null || _playlist$songs === void 0 ? void 0 : _playlist$songs.length) || 0, " songs \u2022 Created by ", (_playlist$creator = playlist.creator) === null || _playlist$creator === void 0 ? void 0 : _playlist$creator.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex gap-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return setEditingItem(playlist);
+        },
+        className: "p-2 hover:bg-neutral-700 rounded-full"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        size: 20
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return confirmDelete(playlist, 'playlists');
+        },
+        className: "p-2 hover:bg-red-600 rounded-full"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        size: 20
+      })))));
+    }));
+  };
+  var renderSongs = function renderSongs() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "space-y-4"
+    }, songs.map(function (song) {
+      var _song$comments;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        key: song._id,
+        className: "bg-neutral-800 p-4 rounded-lg"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex justify-between items-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex gap-4"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: song.image,
+        alt: song.title,
+        className: "w-16 h-16 rounded object-cover"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+        className: "text-lg font-medium"
+      }, song.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+        className: "text-sm text-neutral-400"
+      }, song.artist), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+        className: "text-sm text-neutral-400"
+      }, "Comments: ", ((_song$comments = song.comments) === null || _song$comments === void 0 ? void 0 : _song$comments.length) || 0))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex gap-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return setEditingItem(song);
+        },
+        className: "p-2 hover:bg-neutral-700 rounded-full"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        size: 20
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return confirmDelete(song, 'newReleases');
+        },
+        className: "p-2 hover:bg-red-600 rounded-full"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        size: 20
+      })))));
+    }));
+  };
+  var renderComments = function renderComments() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "space-y-4"
+    }, comments.map(function (comment) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        key: comment._id,
+        className: "bg-neutral-800 p-4 rounded-lg"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex justify-between items-start"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex-1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex items-center gap-2 mb-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: comment.userImage || '/default-avatar.jpg',
+        alt: comment.userName,
+        className: "w-8 h-8 rounded-full object-cover"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        className: "font-medium"
+      }, comment.userName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+        className: "text-sm text-neutral-400 mb-2"
+      }, comment.text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "text-xs text-neutral-500"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Song: ", comment.songTitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Artist: ", comment.songArtist), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Likes: ", comment.likes || 0, " \u2022 Dislikes: ", comment.dislikes || 0))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "flex gap-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return setEditingItem(_objectSpread(_objectSpread({}, comment), {}, {
+            type: 'comments'
+          }));
+        },
+        className: "p-2 hover:bg-neutral-700 rounded-full"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        size: 20
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return confirmDelete(comment, 'comments');
+        },
+        className: "p-2 hover:bg-red-600 rounded-full"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        size: 20
+      })))));
+    }));
+  };
+  var renderGenres = function renderGenres() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "space-y-4"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "flex gap-2"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "text",
+      value: newGenre,
+      onChange: function onChange(e) {
+        return setNewGenre(e.target.value);
+      },
+      placeholder: "Add new genre...",
+      className: "flex-1 p-2 bg-neutral-700 rounded-lg"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: handleAddGenre,
+      className: "px-4 py-2 bg-green-500 hover:bg-green-600 rounded-lg"
+    }, "Add Genre")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
+    }, genres.map(function (genre) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        key: genre._id,
+        className: "bg-neutral-800 p-4 rounded-lg flex justify-between items-center"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, genre.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return confirmDelete(genre, 'genres');
+        },
+        className: "p-2 hover:bg-red-600 rounded-full"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        size: 16
+      })));
+    })));
+  };
+
+  // Update the EditModal component:
+  var EditModal = function EditModal(_ref5) {
+    var item = _ref5.item,
+      type = _ref5.type,
+      onSave = _ref5.onSave,
+      onClose = _ref5.onClose;
+    var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(item),
+      _useState28 = _slicedToArray(_useState27, 2),
+      editedItem = _useState28[0],
+      setEditedItem = _useState28[1];
+    var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState30 = _slicedToArray(_useState29, 2),
+      selectedSongs = _useState30[0],
+      setSelectedSongs = _useState30[1];
+    var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState32 = _slicedToArray(_useState31, 2),
+      songs = _useState32[0],
+      setSongs = _useState32[1];
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+      if (type === 'playlists') {
+        // Fetch songs for the dropdown
+        fetch('/api/admin/newReleases').then(function (res) {
+          return res.json();
+        }).then(function (data) {
+          return setSongs(data);
+        })["catch"](function (err) {
+          return console.error('Error fetching songs:', err);
+        });
+      }
+    }, [type]);
+    var handleSongSelection = function handleSongSelection(songId) {
+      var song = songs.find(function (s) {
+        return s._id === songId;
+      });
+      if (song) {
+        setEditedItem(function (prev) {
+          return _objectSpread(_objectSpread({}, prev), {}, {
+            songs: [].concat(_toConsumableArray(prev.songs || []), [{
+              title: song.title,
+              artist: song.artist
+            }])
+          });
+        });
+      }
+    };
+
+    // Filter out unnecessary fields
+    var excludeFields = ['_v', '_id', 'friends', 'friendRequests', 'createdAt', 'comments'];
+    var fieldKeys = Object.keys(editedItem).filter(function (key) {
+      return !excludeFields.includes(key);
+    });
+    var renderField = function renderField(key) {
+      var _editedItem$songs;
+      switch (key) {
+        case 'image':
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            key: key,
+            className: "space-y-2"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+            className: "text-sm text-neutral-400"
+          }, "Image Upload"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+            type: "file",
+            accept: "image/*",
+            onChange: function onChange(e) {
+              var file = e.target.files[0];
+              if (file) {
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                  setEditedItem(_objectSpread(_objectSpread({}, editedItem), {}, _defineProperty({}, key, reader.result)));
+                };
+                reader.readAsDataURL(file);
+              }
+            },
+            className: "w-full p-2 bg-neutral-800 rounded-lg"
+          }), editedItem[key] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+            src: editedItem[key],
+            alt: "Preview",
+            className: "w-20 h-20 object-cover rounded"
+          }));
+        case 'songs':
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            key: key,
+            className: "space-y-2"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+            className: "text-sm text-neutral-400"
+          }, "Songs"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+            onChange: function onChange(e) {
+              return handleSongSelection(e.target.value);
+            },
+            className: "w-full p-2 bg-neutral-800 rounded-lg"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+            value: ""
+          }, "Select a song to add"), songs.map(function (song) {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+              key: song._id,
+              value: song._id
+            }, song.title, " - ", song.artist);
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            className: "mt-2 space-y-2"
+          }, (_editedItem$songs = editedItem.songs) === null || _editedItem$songs === void 0 ? void 0 : _editedItem$songs.map(function (song, index) {
+            return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+              key: index,
+              className: "flex justify-between items-center bg-neutral-700 p-2 rounded"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, song.title, " - ", song.artist), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+              onClick: function onClick() {
+                var newSongs = _toConsumableArray(editedItem.songs);
+                newSongs.splice(index, 1);
+                setEditedItem(_objectSpread(_objectSpread({}, editedItem), {}, {
+                  songs: newSongs
+                }));
+              },
+              className: "text-red-500 hover:text-red-600"
+            }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+              size: 16
+            })));
+          })));
+        case 'isAdmin':
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            key: key,
+            className: "space-y-2"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+            className: "text-sm text-neutral-400"
+          }, "Is Admin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+            value: editedItem[key] || false,
+            onChange: function onChange(e) {
+              return setEditedItem(_objectSpread(_objectSpread({}, editedItem), {}, _defineProperty({}, key, e.target.value === 'true')));
+            },
+            className: "w-full p-2 bg-neutral-800 rounded-lg"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+            value: "false"
+          }, "No"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+            value: "true"
+          }, "Yes")));
+        case 'createdAt':
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            key: key,
+            className: "space-y-2"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+            className: "text-sm text-neutral-400"
+          }, key), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+            type: "datetime-local",
+            value: editedItem[key] ? new Date(editedItem[key]).toISOString().slice(0, 16) : '',
+            onChange: function onChange(e) {
+              return setEditedItem(_objectSpread(_objectSpread({}, editedItem), {}, _defineProperty({}, key, new Date(e.target.value).toISOString())));
+            },
+            className: "w-full p-2 bg-neutral-800 rounded-lg"
+          }));
+        default:
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            key: key,
+            className: "space-y-2"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+            className: "text-sm text-neutral-400"
+          }, key), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+            type: "text",
+            value: editedItem[key] || '',
+            onChange: function onChange(e) {
+              return setEditedItem(_objectSpread(_objectSpread({}, editedItem), {}, _defineProperty({}, key, e.target.value)));
+            },
+            className: "w-full p-2 bg-neutral-800 rounded-lg"
+          }));
+      }
+    };
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "bg-neutral-900 rounded-xl max-w-lg w-full p-6"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "flex justify-between items-center mb-4"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+      className: "text-xl font-semibold"
+    }, "Edit ", type), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: onClose,
+      className: "p-2 hover:bg-neutral-800 rounded-full"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      size: 20
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "space-y-4 max-h-[70vh] overflow-y-auto"
+    }, fieldKeys.map(function (key) {
+      return renderField(key);
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "flex justify-end gap-2 mt-6 pt-4 border-t border-neutral-800"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: onClose,
+      className: "px-4 py-2 bg-neutral-800 rounded-lg"
+    }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: function onClick() {
+        return onSave(type, editedItem);
+      },
+      className: "px-4 py-2 bg-green-500 hover:bg-green-600 rounded-lg"
+    }, "Save Changes"))));
+  };
+
+  // Delete Confirmation Dialog
+  var DeleteConfirmDialog = function DeleteConfirmDialog(_ref6) {
+    var item = _ref6.item,
+      type = _ref6.type,
+      onConfirm = _ref6.onConfirm,
+      onCancel = _ref6.onCancel;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "bg-neutral-900 rounded-xl max-w-md w-full p-6"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "flex items-center gap-3 text-red-500 mb-4"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+      className: "text-xl font-semibold"
+    }, "Confirm Delete")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+      className: "text-neutral-300 mb-6"
+    }, "Are you sure you want to delete this ", type.slice(0, -1), "? This action cannot be undone."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "flex justify-end gap-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: onCancel,
+      className: "px-4 py-2 bg-neutral-800 rounded-lg"
+    }, "Cancel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: function onClick() {
+        return onConfirm(type, item._id);
+      },
+      className: "px-4 py-2 bg-red-500 rounded-lg"
+    }, "Delete"))));
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex h-screen overflow-hidden bg-[#000807] text-white"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex-1 flex flex-col"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "p-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
+    className: "text-2xl font-bold mb-6"
+  }, "Admin Dashboard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex gap-4 mb-6 border-b border-neutral-700"
+  }, [{
+    id: 'users',
+    icon: lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"],
+    label: 'Users'
+  }, {
+    id: 'playlists',
+    icon: lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"],
+    label: 'Playlists'
+  }, {
+    id: 'songs',
+    icon: lucide_react__WEBPACK_IMPORTED_MODULE_10__["default"],
+    label: 'Songs'
+  }, {
+    id: 'comments',
+    icon: lucide_react__WEBPACK_IMPORTED_MODULE_11__["default"],
+    label: 'Comments'
+  }, {
+    id: 'genres',
+    icon: lucide_react__WEBPACK_IMPORTED_MODULE_12__["default"],
+    label: 'Genres'
+  }].map(function (tab) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      key: tab.id,
+      onClick: function onClick() {
+        return setActiveTab(tab.id);
+      },
+      className: "flex items-center gap-2 px-4 py-2 -mb-px ".concat(activeTab === tab.id ? 'border-b-2 border-green-500 text-green-500' : 'text-neutral-400 hover:text-white')
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(tab.icon, {
+      size: 20
+    }), tab.label);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex gap-4 mb-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex-1 relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    className: "absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400",
+    size: 20
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "text",
+    placeholder: "Search ".concat(activeTab, "..."),
+    value: searchQuery,
+    onChange: function onChange(e) {
+      return setSearchQuery(e.target.value);
+    },
+    className: "w-full pl-10 pr-4 py-2 bg-neutral-800 rounded-lg"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "flex items-center gap-2 px-4 py-2 bg-neutral-800 rounded-lg"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    size: 20
+  }), "Filter")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex-1 overflow-y-auto"
+  }, isLoading ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "flex items-center justify-center h-64"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"
+  })) : error ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "text-red-500 text-center py-8"
+  }, error) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, activeTab === 'users' && renderUsers(), activeTab === 'playlists' && renderPlaylists(), activeTab === 'songs' && renderSongs(), activeTab === 'comments' && renderComments(), activeTab === 'genres' && renderGenres()))), editingItem && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(EditModal, {
+    item: editingItem,
+    type: activeTab,
+    onSave: handleSave,
+    onClose: function onClose() {
+      return setEditingItem(null);
+    }
+  }), showConfirmDialog && itemToDelete && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(DeleteConfirmDialog, {
+    item: itemToDelete.item,
+    type: itemToDelete.type,
+    onConfirm: function onConfirm(type, id) {
+      handleDelete(type, id);
+      setShowConfirmDialog(false);
+      setItemToDelete(null);
+    },
+    onCancel: function onCancel() {
+      setShowConfirmDialog(false);
+      setItemToDelete(null);
+    }
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AdminPanel);
+
+/***/ }),
+
 /***/ "./frontend/pages/auth/Auth.js":
 /*!*************************************!*\
   !*** ./frontend/pages/auth/Auth.js ***!
@@ -8049,11 +9042,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/pencil.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/user-plus.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/user-minus.js");
-/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/x.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/plus.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/chevron-left.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/pencil.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/user-plus.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/user-minus.js");
+/* harmony import */ var lucide_react__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lucide-react */ "./node_modules/lucide-react/dist/esm/icons/x.js");
 /* harmony import */ var _components_sidebar_sideBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/sidebar/sideBar */ "./frontend/components/sidebar/sideBar.js");
 /* harmony import */ var _components_AuthContext_authContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/AuthContext/authContext */ "./frontend/components/AuthContext/authContext.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
@@ -8104,7 +9098,7 @@ var ProfileSettings = function ProfileSettings() {
     _useState10 = _slicedToArray(_useState9, 2),
     showDeleteConfirmation = _useState10[0],
     setShowDeleteConfirmation = _useState10[1];
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('/assets/images/user/user.jpg'),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("https://picsum.photos/seed/".concat(Math.floor(Math.random() * 1000) + 1, "/300/300")),
     _useState12 = _slicedToArray(_useState11, 2),
     profileImage = _useState12[0],
     setProfileImage = _useState12[1];
@@ -8112,100 +9106,159 @@ var ProfileSettings = function ProfileSettings() {
     _useState14 = _slicedToArray(_useState13, 2),
     isHovering = _useState14[0],
     setIsHovering = _useState14[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState16 = _slicedToArray(_useState15, 2),
+    userPlaylists = _useState16[0],
+    setUserPlaylists = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState18 = _slicedToArray(_useState17, 2),
+    playlistsLoading = _useState18[0],
+    setPlaylistsLoading = _useState18[1];
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState20 = _slicedToArray(_useState19, 2),
+    playlistsError = _useState20[0],
+    setPlaylistsError = _useState20[1];
   var fileInputRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    if (user && user.username) {
+    if (user !== null && user !== void 0 && user.username && user.username) {
       setFormData({
         username: user.username
       });
       fetchFriendsData();
       fetchUserProfile();
+      fetchUserPlaylists();
     }
   }, [user]);
-  var fetchUserProfile = /*#__PURE__*/function () {
+  var fetchUserPlaylists = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var response, userData;
+      var response, data;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            _context.next = 3;
-            return fetch("/api/users/".concat(user.username));
-          case 3:
+            setPlaylistsLoading(true);
+            _context.next = 4;
+            return fetch("/api/users/".concat(user.username, "/playlists"), {
+              credentials: 'include'
+            });
+          case 4:
             response = _context.sent;
-            if (!response.ok) {
-              _context.next = 9;
+            if (response.ok) {
+              _context.next = 7;
               break;
             }
-            _context.next = 7;
-            return response.json();
+            throw new Error('Failed to fetch playlists');
           case 7:
-            userData = _context.sent;
-            if (userData.profileImage) {
-              setProfileImage(userData.profileImage);
-            }
+            _context.next = 9;
+            return response.json();
           case 9:
-            _context.next = 14;
+            data = _context.sent;
+            setUserPlaylists(data);
+            _context.next = 17;
             break;
-          case 11:
-            _context.prev = 11;
+          case 13:
+            _context.prev = 13;
             _context.t0 = _context["catch"](0);
-            console.error('Error fetching user profile:', _context.t0);
-          case 14:
+            console.error('Error fetching playlists:', _context.t0);
+            setPlaylistsError('Failed to load playlists');
+          case 17:
+            _context.prev = 17;
+            setPlaylistsLoading(false);
+            return _context.finish(17);
+          case 20:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 11]]);
+      }, _callee, null, [[0, 13, 17, 20]]);
     }));
-    return function fetchUserProfile() {
+    return function fetchUserPlaylists() {
       return _ref.apply(this, arguments);
     };
   }();
-  var fetchFriendsData = /*#__PURE__*/function () {
+  var fetchUserProfile = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var response, data;
+      var response, userData;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
             _context2.next = 3;
-            return fetch("/api/users/".concat(user.username, "/friends"));
+            return fetch("/api/users/".concat(user.username));
           case 3:
             response = _context2.sent;
             if (!response.ok) {
-              _context2.next = 12;
+              _context2.next = 9;
               break;
             }
             _context2.next = 7;
             return response.json();
           case 7:
-            data = _context2.sent;
-            setFriends(data.friends);
-            setFriendRequests(data.friendRequests);
-            _context2.next = 17;
+            userData = _context2.sent;
+            if (userData.profileImage) {
+              setProfileImage(userData.profileImage);
+            }
+          case 9:
+            _context2.next = 14;
             break;
-          case 12:
-            _context2.t0 = console;
-            _context2.next = 15;
-            return response.text();
-          case 15:
-            _context2.t1 = _context2.sent;
-            _context2.t0.error.call(_context2.t0, 'Error fetching friends data:', _context2.t1);
-          case 17:
-            _context2.next = 22;
-            break;
-          case 19:
-            _context2.prev = 19;
-            _context2.t2 = _context2["catch"](0);
-            console.error('Error fetching friends data:', _context2.t2);
-          case 22:
+          case 11:
+            _context2.prev = 11;
+            _context2.t0 = _context2["catch"](0);
+            console.error('Error fetching user profile:', _context2.t0);
+          case 14:
           case "end":
             return _context2.stop();
         }
-      }, _callee2, null, [[0, 19]]);
+      }, _callee2, null, [[0, 11]]);
+    }));
+    return function fetchUserProfile() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var fetchFriendsData = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var response, data;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.prev = 0;
+            _context3.next = 3;
+            return fetch("/api/users/".concat(user.username, "/friends"));
+          case 3:
+            response = _context3.sent;
+            if (!response.ok) {
+              _context3.next = 12;
+              break;
+            }
+            _context3.next = 7;
+            return response.json();
+          case 7:
+            data = _context3.sent;
+            setFriends(data.friends);
+            setFriendRequests(data.friendRequests);
+            _context3.next = 17;
+            break;
+          case 12:
+            _context3.t0 = console;
+            _context3.next = 15;
+            return response.text();
+          case 15:
+            _context3.t1 = _context3.sent;
+            _context3.t0.error.call(_context3.t0, 'Error fetching friends data:', _context3.t1);
+          case 17:
+            _context3.next = 22;
+            break;
+          case 19:
+            _context3.prev = 19;
+            _context3.t2 = _context3["catch"](0);
+            console.error('Error fetching friends data:', _context3.t2);
+          case 22:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3, null, [[0, 19]]);
     }));
     return function fetchFriendsData() {
-      return _ref2.apply(this, arguments);
+      return _ref3.apply(this, arguments);
     };
   }();
   var convertToBase64 = function convertToBase64(file) {
@@ -8228,28 +9281,78 @@ var ProfileSettings = function ProfileSettings() {
       return prevSection === section ? null : section;
     });
   };
+  var handlePlaylistClick = function handlePlaylistClick(playlistId) {
+    navigate("/playlist?id=".concat(playlistId));
+  };
+  var renderUserPlaylists = function renderUserPlaylists() {
+    if (playlistsLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-center py-4"
+    }, "Loading playlists...");
+    if (playlistsError) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "text-center py-4 text-red-500"
+    }, playlistsError);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "border-t border-neutral-800 mt-8 pt-8"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "flex justify-between items-center mb-6"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: function onClick() {
+        return navigate('/playlist');
+      },
+      className: "flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-full transition-colors"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      size: 16
+    }), "Create Playlist")), userPlaylists.length === 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+      className: "text-neutral-400 text-center py-6"
+    }, "No playlists created yet") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"
+    }, userPlaylists.map(function (playlist) {
+      var _playlist$songs;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        key: playlist._id,
+        className: "group relative cursor-pointer hover:transform hover:scale-105 transition-all duration-200",
+        onClick: function onClick() {
+          return handlePlaylistClick(playlist._id);
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "aspect-square overflow-hidden rounded-lg"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: playlist.image || '/default-playlist.jpg',
+        alt: playlist.title,
+        className: "w-full h-full object-cover"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-200"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "mt-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", {
+        className: "text-sm font-medium truncate"
+      }, playlist.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+        className: "text-xs text-neutral-400"
+      }, ((_playlist$songs = playlist.songs) === null || _playlist$songs === void 0 ? void 0 : _playlist$songs.length) || 0, " songs")));
+    })));
+  };
   var handleInputChange = function handleInputChange(e) {
     setFormData(_objectSpread(_objectSpread({}, formData), {}, _defineProperty({}, e.target.name, e.target.value)));
   };
   var handleImageUpload = /*#__PURE__*/function () {
-    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(event) {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(event) {
       var file, base64, response, data;
-      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-        while (1) switch (_context3.prev = _context3.next) {
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
           case 0:
             file = event.target.files[0];
             if (file) {
-              _context3.next = 3;
+              _context4.next = 3;
               break;
             }
-            return _context3.abrupt("return");
+            return _context4.abrupt("return");
           case 3:
-            _context3.prev = 3;
-            _context3.next = 6;
+            _context4.prev = 3;
+            _context4.next = 6;
             return convertToBase64(file);
           case 6:
-            base64 = _context3.sent;
-            _context3.next = 9;
+            base64 = _context4.sent;
+            _context4.next = 9;
             return fetch("/api/users/".concat(user.username, "/profile-image"), {
               method: 'POST',
               headers: {
@@ -8260,39 +9363,39 @@ var ProfileSettings = function ProfileSettings() {
               })
             });
           case 9:
-            response = _context3.sent;
+            response = _context4.sent;
             if (!response.ok) {
-              _context3.next = 18;
+              _context4.next = 18;
               break;
             }
-            _context3.next = 13;
+            _context4.next = 13;
             return response.json();
           case 13:
-            data = _context3.sent;
+            data = _context4.sent;
             setProfileImage(data.imageUrl);
             // Update the user context
             login(_objectSpread(_objectSpread({}, user), {}, {
               profileImage: data.imageUrl
             }));
-            _context3.next = 19;
+            _context4.next = 19;
             break;
           case 18:
             console.error('Error uploading image');
           case 19:
-            _context3.next = 24;
+            _context4.next = 24;
             break;
           case 21:
-            _context3.prev = 21;
-            _context3.t0 = _context3["catch"](3);
-            console.error('Error processing image:', _context3.t0);
+            _context4.prev = 21;
+            _context4.t0 = _context4["catch"](3);
+            console.error('Error processing image:', _context4.t0);
           case 24:
           case "end":
-            return _context3.stop();
+            return _context4.stop();
         }
-      }, _callee3, null, [[3, 21]]);
+      }, _callee4, null, [[3, 21]]);
     }));
     return function handleImageUpload(_x) {
-      return _ref3.apply(this, arguments);
+      return _ref4.apply(this, arguments);
     };
   }();
   var triggerFileInput = function triggerFileInput() {
@@ -8303,17 +9406,17 @@ var ProfileSettings = function ProfileSettings() {
     navigate('/auth'); // Immediately navigate to auth page
   };
   var handleSave = /*#__PURE__*/function () {
-    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(section) {
+    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(section) {
       var response, updatedData;
-      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-        while (1) switch (_context4.prev = _context4.next) {
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
           case 0:
             if (!(section === 'Personal information')) {
-              _context4.next = 17;
+              _context5.next = 17;
               break;
             }
-            _context4.prev = 1;
-            _context4.next = 4;
+            _context5.prev = 1;
+            _context5.next = 4;
             return fetch('/api/users', {
               method: 'PUT',
               headers: {
@@ -8322,33 +9425,33 @@ var ProfileSettings = function ProfileSettings() {
               body: JSON.stringify(formData)
             });
           case 4:
-            response = _context4.sent;
+            response = _context5.sent;
             if (response.ok) {
-              _context4.next = 7;
+              _context5.next = 7;
               break;
             }
             throw new Error('Failed to update user data');
           case 7:
-            _context4.next = 9;
+            _context5.next = 9;
             return response.json();
           case 9:
-            updatedData = _context4.sent;
+            updatedData = _context5.sent;
             login(updatedData);
             setExpandedSection(null);
-            _context4.next = 17;
+            _context5.next = 17;
             break;
           case 14:
-            _context4.prev = 14;
-            _context4.t0 = _context4["catch"](1);
-            console.error('Error updating user data:', _context4.t0);
+            _context5.prev = 14;
+            _context5.t0 = _context5["catch"](1);
+            console.error('Error updating user data:', _context5.t0);
           case 17:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
-      }, _callee4, null, [[1, 14]]);
+      }, _callee5, null, [[1, 14]]);
     }));
     return function handleSave(_x2) {
-      return _ref4.apply(this, arguments);
+      return _ref5.apply(this, arguments);
     };
   }();
   var handleCancel = function handleCancel() {
@@ -8360,45 +9463,6 @@ var ProfileSettings = function ProfileSettings() {
     }
   };
   var handleAcceptFriend = /*#__PURE__*/function () {
-    var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(friendUsername) {
-      var response;
-      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-        while (1) switch (_context5.prev = _context5.next) {
-          case 0:
-            _context5.prev = 0;
-            _context5.next = 3;
-            return fetch('/api/users/accept-friend', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                username: user.username,
-                friendUsername: friendUsername
-              })
-            });
-          case 3:
-            response = _context5.sent;
-            if (response.ok) {
-              fetchFriendsData();
-            }
-            _context5.next = 10;
-            break;
-          case 7:
-            _context5.prev = 7;
-            _context5.t0 = _context5["catch"](0);
-            console.error('Error accepting friend request:', _context5.t0);
-          case 10:
-          case "end":
-            return _context5.stop();
-        }
-      }, _callee5, null, [[0, 7]]);
-    }));
-    return function handleAcceptFriend(_x3) {
-      return _ref5.apply(this, arguments);
-    };
-  }();
-  var handleUnfriend = /*#__PURE__*/function () {
     var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6(friendUsername) {
       var response;
       return _regeneratorRuntime().wrap(function _callee6$(_context6) {
@@ -8406,7 +9470,7 @@ var ProfileSettings = function ProfileSettings() {
           case 0:
             _context6.prev = 0;
             _context6.next = 3;
-            return fetch('/api/users/unfriend', {
+            return fetch('/api/users/accept-friend', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -8426,15 +9490,54 @@ var ProfileSettings = function ProfileSettings() {
           case 7:
             _context6.prev = 7;
             _context6.t0 = _context6["catch"](0);
-            console.error('Error unfriending user:', _context6.t0);
+            console.error('Error accepting friend request:', _context6.t0);
           case 10:
           case "end":
             return _context6.stop();
         }
       }, _callee6, null, [[0, 7]]);
     }));
-    return function handleUnfriend(_x4) {
+    return function handleAcceptFriend(_x3) {
       return _ref6.apply(this, arguments);
+    };
+  }();
+  var handleUnfriend = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(friendUsername) {
+      var response;
+      return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+        while (1) switch (_context7.prev = _context7.next) {
+          case 0:
+            _context7.prev = 0;
+            _context7.next = 3;
+            return fetch('/api/users/unfriend', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                username: user.username,
+                friendUsername: friendUsername
+              })
+            });
+          case 3:
+            response = _context7.sent;
+            if (response.ok) {
+              fetchFriendsData();
+            }
+            _context7.next = 10;
+            break;
+          case 7:
+            _context7.prev = 7;
+            _context7.t0 = _context7["catch"](0);
+            console.error('Error unfriending user:', _context7.t0);
+          case 10:
+          case "end":
+            return _context7.stop();
+        }
+      }, _callee7, null, [[0, 7]]);
+    }));
+    return function handleUnfriend(_x4) {
+      return _ref7.apply(this, arguments);
     };
   }();
   var openDeleteConfirmation = function openDeleteConfirmation() {
@@ -8444,13 +9547,13 @@ var ProfileSettings = function ProfileSettings() {
     setShowDeleteConfirmation(false);
   };
   var handleDeleteAccount = /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+    var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
       var response;
-      return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-        while (1) switch (_context7.prev = _context7.next) {
+      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+        while (1) switch (_context8.prev = _context8.next) {
           case 0:
-            _context7.prev = 0;
-            _context7.next = 3;
+            _context8.prev = 0;
+            _context8.next = 3;
             return fetch('/api/users', {
               method: 'DELETE',
               headers: {
@@ -8461,34 +9564,34 @@ var ProfileSettings = function ProfileSettings() {
               })
             });
           case 3:
-            response = _context7.sent;
+            response = _context8.sent;
             if (response.ok) {
-              _context7.next = 6;
+              _context8.next = 6;
               break;
             }
             throw new Error('Failed to delete user account');
           case 6:
             logout();
             navigate('/auth');
-            _context7.next = 14;
+            _context8.next = 14;
             break;
           case 10:
-            _context7.prev = 10;
-            _context7.t0 = _context7["catch"](0);
-            console.error('Error deleting user account:', _context7.t0);
+            _context8.prev = 10;
+            _context8.t0 = _context8["catch"](0);
+            console.error('Error deleting user account:', _context8.t0);
             alert('Failed to delete account. Please try again.');
           case 14:
-            _context7.prev = 14;
+            _context8.prev = 14;
             closeDeleteConfirmation();
-            return _context7.finish(14);
+            return _context8.finish(14);
           case 17:
           case "end":
-            return _context7.stop();
+            return _context8.stop();
         }
-      }, _callee7, null, [[0, 10, 14, 17]]);
+      }, _callee8, null, [[0, 10, 14, 17]]);
     }));
     return function handleDeleteAccount() {
-      return _ref7.apply(this, arguments);
+      return _ref8.apply(this, arguments);
     };
   }();
   var goBack = function goBack() {
@@ -8507,7 +9610,7 @@ var ProfileSettings = function ProfileSettings() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: goBack,
     className: "p-2 hover:bg-neutral-800 rounded-full transition-colors"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
     size: 24
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
     className: "text-2xl font-semibold"
@@ -8533,7 +9636,7 @@ var ProfileSettings = function ProfileSettings() {
     className: "w-full h-full rounded-full border-2 border-green-500 object-cover transition-opacity duration-200"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "absolute inset-0 bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: "w-6 h-6 text-white mb-2"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "text-white text-sm"
@@ -8590,7 +9693,7 @@ var ProfileSettings = function ProfileSettings() {
           return handleAcceptFriend(friend);
         },
         className: "flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
         size: 16
       }), "Accept"));
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", {
@@ -8608,22 +9711,15 @@ var ProfileSettings = function ProfileSettings() {
           return handleUnfriend(friend);
         },
         className: "flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
         size: 16
       }), "Unfriend"));
     }))))
   }, {
-    name: 'Settings',
+    name: 'My Playlists',
     content: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "space-y-4"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-      className: "flex items-center gap-3 text-lg"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      type: "checkbox",
-      className: "w-5 h-5 rounded bg-neutral-800 border-neutral-600"
-    }), "Dark Mode"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-      className: "w-full p-3 bg-neutral-800 rounded-lg text-white border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "English"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "Spanish"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", null, "French")))
+    }, renderUserPlaylists())
   }].map(function (item, index) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       key: index,
@@ -8661,7 +9757,7 @@ var ProfileSettings = function ProfileSettings() {
   }, "Delete Account"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: closeDeleteConfirmation,
     className: "p-2 hover:bg-neutral-800 rounded-full transition-colors"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(lucide_react__WEBPACK_IMPORTED_MODULE_9__["default"], {
     size: 20
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "p-6"
@@ -8698,8 +9794,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _components_AuthContext_authContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/AuthContext/authContext */ "./frontend/components/AuthContext/authContext.js");
 /* harmony import */ var _pages_Splash_Splash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/Splash/Splash */ "./frontend/pages/Splash/Splash.js");
 /* harmony import */ var _pages_auth_Auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/auth/Auth */ "./frontend/pages/auth/Auth.js");
@@ -8707,6 +9803,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_profile_profile__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../pages/profile/profile */ "./frontend/pages/profile/profile.js");
 /* harmony import */ var _components_playlist_playlist__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/playlist/playlist */ "./frontend/components/playlist/playlist.js");
 /* harmony import */ var _components_PrivateRoute_privateroute__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/PrivateRoute/privateroute */ "./frontend/components/PrivateRoute/privateroute.js");
+/* harmony import */ var _pages_admin_admin__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pages/admin/admin */ "./frontend/pages/admin/admin.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -8732,6 +9829,7 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
 
 
 
@@ -9069,23 +10167,27 @@ var App = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_AuthContext_authContext__WEBPACK_IMPORTED_MODULE_1__.AuthProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+      var currentUser = this.state.currentUser;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_AuthContext_authContext__WEBPACK_IMPORTED_MODULE_1__.AuthProvider, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_Splash_Splash__WEBPACK_IMPORTED_MODULE_2__["default"], null)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/auth",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_auth_Auth__WEBPACK_IMPORTED_MODULE_3__["default"], null)
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+        path: "/admin",
+        element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PrivateRoute_privateroute__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_admin_admin__WEBPACK_IMPORTED_MODULE_8__["default"], null))
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/home",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PrivateRoute_privateroute__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_home_Home__WEBPACK_IMPORTED_MODULE_4__["default"], {
           newReleases: this.state.newReleases,
           onAddRelease: this.handleAddRelease,
           onAddComment: this.handleAddComment
         }))
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/profile",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PrivateRoute_privateroute__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages_profile_profile__WEBPACK_IMPORTED_MODULE_5__["default"], null))
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/playlist",
         element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_PrivateRoute_privateroute__WEBPACK_IMPORTED_MODULE_7__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_playlist_playlist__WEBPACK_IMPORTED_MODULE_6__["default"], {
           newReleases: this.state.newReleases,
@@ -9094,9 +10196,9 @@ var App = /*#__PURE__*/function (_React$Component) {
           onRemoveSongFromPlaylist: this.handleRemoveSongFromPlaylist,
           onAddSongToPlaylist: this.handleAddSongToPlaylist
         }))
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "*",
-        element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Navigate, {
+        element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Navigate, {
           to: "/",
           replace: true
         })
@@ -17068,6 +18170,9 @@ video {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
+.static {
+  position: static;
+}
 .fixed {
   position: fixed;
 }
@@ -17145,6 +18250,9 @@ video {
 }
 .top-full {
   top: 100%;
+}
+.left-3 {
+  left: 0.75rem;
 }
 .z-10 {
   z-index: 10;
@@ -17242,6 +18350,12 @@ video {
 .mt-auto {
   margin-top: auto;
 }
+.mt-6 {
+  margin-top: 1.5rem;
+}
+.-mb-px {
+  margin-bottom: -1px;
+}
 .box-border {
   box-sizing: border-box;
 }
@@ -17305,11 +18419,20 @@ video {
 .h-screen {
   height: 100vh;
 }
+.h-16 {
+  height: 4rem;
+}
+.h-64 {
+  height: 16rem;
+}
 .max-h-72 {
   max-height: 18rem;
 }
 .max-h-\\[200px\\] {
   max-height: 200px;
+}
+.max-h-\\[70vh\\] {
+  max-height: 70vh;
 }
 .min-h-\\[2rem\\] {
   min-height: 2rem;
@@ -17381,6 +18504,9 @@ video {
 .w-screen {
   width: 100vw;
 }
+.w-16 {
+  width: 4rem;
+}
 .max-w-2xl {
   max-width: 42rem;
 }
@@ -17389,6 +18515,9 @@ video {
 }
 .max-w-md {
   max-width: 28rem;
+}
+.max-w-lg {
+  max-width: 32rem;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -17565,6 +18694,12 @@ video {
 .border-r {
   border-right-width: 1px;
 }
+.border-t {
+  border-top-width: 1px;
+}
+.border-b-2 {
+  border-bottom-width: 2px;
+}
 .border-none {
   border-style: none;
 }
@@ -17676,6 +18811,9 @@ video {
 }
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
+}
+.bg-opacity-0 {
+  --tw-bg-opacity: 0;
 }
 .bg-\\[radial-gradient\\(circle\\2c \\#00d4ff_0\\%\\2c \\#00ff8830_40\\%\\2c transparent_70\\%\\)\\] {
   background-image: radial-gradient(circle,#00d4ff 0%,#00ff8830 40%,transparent 70%);
@@ -17832,6 +18970,10 @@ video {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 .pb-6 {
   padding-bottom: 1.5rem;
 }
@@ -17843,6 +18985,18 @@ video {
 }
 .pt-\\[100\\%\\] {
   padding-top: 100%;
+}
+.pt-8 {
+  padding-top: 2rem;
+}
+.pl-10 {
+  padding-left: 2.5rem;
+}
+.pr-4 {
+  padding-right: 1rem;
+}
+.pt-4 {
+  padding-top: 1rem;
 }
 .text-left {
   text-align: left;
@@ -17960,6 +19114,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity));
 }
+.text-neutral-500 {
+  --tw-text-opacity: 1;
+  color: rgb(115 115 115 / var(--tw-text-opacity));
+}
 .underline {
   text-decoration-line: underline;
 }
@@ -18029,140 +19187,197 @@ video {
 .duration-300 {
   transition-duration: 300ms;
 }
+
 .placeholder\\:pl-4::-moz-placeholder {
   padding-left: 1rem;
 }
+
 .placeholder\\:pl-4::placeholder {
   padding-left: 1rem;
 }
+
 .placeholder\\:text-lg::-moz-placeholder {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
+
 .placeholder\\:text-lg::placeholder {
   font-size: 1.125rem;
   line-height: 1.75rem;
 }
+
 .last\\:border-none:last-child {
   border-style: none;
 }
+
 .hover\\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+
+.hover\\:transform:hover {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .hover\\:bg-\\[\\#071816\\]:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(7 24 22 / var(--tw-bg-opacity));
 }
+
 .hover\\:bg-black\\/70:hover {
   background-color: rgb(0 0 0 / 0.7);
 }
+
 .hover\\:bg-green-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
+
 .hover\\:bg-green-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
+
 .hover\\:bg-neutral-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(82 82 82 / var(--tw-bg-opacity));
 }
+
 .hover\\:bg-neutral-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(64 64 64 / var(--tw-bg-opacity));
 }
+
 .hover\\:bg-neutral-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(38 38 38 / var(--tw-bg-opacity));
 }
+
 .hover\\:bg-red-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
 }
+
 .hover\\:bg-red-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(185 28 28 / var(--tw-bg-opacity));
 }
+
 .hover\\:bg-red-800:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(153 27 27 / var(--tw-bg-opacity));
 }
+
 .hover\\:from-cyan-400:hover {
   --tw-gradient-from: #22d3ee var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(34 211 238 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
+
 .hover\\:from-red-800:hover {
   --tw-gradient-from: #991b1b var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(153 27 27 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
+
 .hover\\:to-green-400:hover {
   --tw-gradient-to: #4ade80 var(--tw-gradient-to-position);
 }
+
 .hover\\:to-red-700:hover {
   --tw-gradient-to: #b91c1c var(--tw-gradient-to-position);
 }
+
 .hover\\:text-\\[\\#f55963\\]:hover {
   --tw-text-opacity: 1;
   color: rgb(245 89 99 / var(--tw-text-opacity));
 }
+
 .hover\\:text-gray-300:hover {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
+
 .hover\\:text-green-400:hover {
   --tw-text-opacity: 1;
   color: rgb(74 222 128 / var(--tw-text-opacity));
 }
+
+.hover\\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\\:text-red-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
 .hover\\:shadow-lg:hover {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+
 .hover\\:shadow-cyan-500\\/30:hover {
   --tw-shadow-color: rgb(6 182 212 / 0.3);
   --tw-shadow: var(--tw-shadow-colored);
 }
+
 .hover\\:shadow-red-900\\/30:hover {
   --tw-shadow-color: rgb(127 29 29 / 0.3);
   --tw-shadow: var(--tw-shadow-colored);
 }
+
 .focus\\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+
 .focus\\:ring-2:focus {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
+
 .focus\\:ring-green-500:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(29 185 84 / var(--tw-ring-opacity));
 }
+
 .active\\:scale-95:active {
   --tw-scale-x: .95;
   --tw-scale-y: .95;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+
 .disabled\\:opacity-50:disabled {
   opacity: 0.5;
 }
+
 .group:hover .group-hover\\:block {
   display: block;
 }
+
 .group:hover .group-hover\\:scale-105 {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+
+.group:hover .group-hover\\:bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
+}
+
+.group:hover .group-hover\\:bg-opacity-40 {
+  --tw-bg-opacity: 0.4;
+}
+
 .group:hover .group-hover\\:opacity-100 {
   opacity: 1;
 }
+
 @media (min-width: 640px) {
 
   .sm\\:inline {
@@ -18177,6 +19392,7 @@ video {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
 @media (min-width: 768px) {
 
   .md\\:w-\\[95\\%\\] {
@@ -18209,6 +19425,7 @@ video {
     line-height: 1.75rem;
   }
 }
+
 @media (min-width: 1024px) {
 
   .lg\\:grid-cols-4 {
@@ -18219,6 +19436,7 @@ video {
     grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
+
 @media (min-width: 1280px) {
 
   .xl\\:grid-cols-5 {
@@ -18228,7 +19446,7 @@ video {
   .xl\\:grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
-}`, "",{"version":3,"sources":["webpack://./frontend/src/index.css"],"names":[],"mappings":"AAAA;EAAA,wBAAc;EAAd,wBAAc;EAAd,mBAAc;EAAd,mBAAc;EAAd,cAAc;EAAd,cAAc;EAAd,cAAc;EAAd,eAAc;EAAd,eAAc;EAAd,aAAc;EAAd,aAAc;EAAd,kBAAc;EAAd,sCAAc;EAAd,8BAAc;EAAd,6BAAc;EAAd,4BAAc;EAAd,eAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,kBAAc;EAAd,2BAAc;EAAd,4BAAc;EAAd,sCAAc;EAAd,kCAAc;EAAd,2BAAc;EAAd,sBAAc;EAAd,8BAAc;EAAd,YAAc;EAAd,kBAAc;EAAd,gBAAc;EAAd,iBAAc;EAAd,kBAAc;EAAd,cAAc;EAAd,gBAAc;EAAd,aAAc;EAAd,mBAAc;EAAd,qBAAc;EAAd,2BAAc;EAAd,yBAAc;EAAd,0BAAc;EAAd,2BAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,yBAAc;EAAd,sBAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,qBAAc;EAAd;AAAc;;AAAd;EAAA,wBAAc;EAAd,wBAAc;EAAd,mBAAc;EAAd,mBAAc;EAAd,cAAc;EAAd,cAAc;EAAd,cAAc;EAAd,eAAc;EAAd,eAAc;EAAd,aAAc;EAAd,aAAc;EAAd,kBAAc;EAAd,sCAAc;EAAd,8BAAc;EAAd,6BAAc;EAAd,4BAAc;EAAd,eAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,kBAAc;EAAd,2BAAc;EAAd,4BAAc;EAAd,sCAAc;EAAd,kCAAc;EAAd,2BAAc;EAAd,sBAAc;EAAd,8BAAc;EAAd,YAAc;EAAd,kBAAc;EAAd,gBAAc;EAAd,iBAAc;EAAd,kBAAc;EAAd,cAAc;EAAd,gBAAc;EAAd,aAAc;EAAd,mBAAc;EAAd,qBAAc;EAAd,2BAAc;EAAd,yBAAc;EAAd,0BAAc;EAAd,2BAAc;EAAd,uBAAc;EAAd,wBAAc;EAAd,yBAAc;EAAd,sBAAc;EAAd,oBAAc;EAAd,sBAAc;EAAd,qBAAc;EAAd;AAAc,CAAd;;CAAc,CAAd;;;CAAc;;AAAd;;;EAAA,sBAAc,EAAd,MAAc;EAAd,eAAc,EAAd,MAAc;EAAd,mBAAc,EAAd,MAAc;EAAd,qBAAc,EAAd,MAAc;AAAA;;AAAd;;EAAA,gBAAc;AAAA;;AAAd;;;;;;;;CAAc;;AAAd;;EAAA,gBAAc,EAAd,MAAc;EAAd,8BAAc,EAAd,MAAc;EAAd,gBAAc,EAAd,MAAc;EAAd,cAAc;KAAd,WAAc,EAAd,MAAc;EAAd,+HAAc,EAAd,MAAc;EAAd,6BAAc,EAAd,MAAc;EAAd,+BAAc,EAAd,MAAc;EAAd,wCAAc,EAAd,MAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,SAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;AAAA;;AAAd;;;;CAAc;;AAAd;EAAA,SAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;EAAd,qBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,yCAAc;UAAd,iCAAc;AAAA;;AAAd;;CAAc;;AAAd;;;;;;EAAA,kBAAc;EAAd,oBAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,cAAc;EAAd,wBAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,mBAAc;AAAA;;AAAd;;;;;CAAc;;AAAd;;;;EAAA,+GAAc,EAAd,MAAc;EAAd,6BAAc,EAAd,MAAc;EAAd,+BAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,cAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,cAAc;EAAd,cAAc;EAAd,kBAAc;EAAd,wBAAc;AAAA;;AAAd;EAAA,eAAc;AAAA;;AAAd;EAAA,WAAc;AAAA;;AAAd;;;;CAAc;;AAAd;EAAA,cAAc,EAAd,MAAc;EAAd,qBAAc,EAAd,MAAc;EAAd,yBAAc,EAAd,MAAc;AAAA;;AAAd;;;;CAAc;;AAAd;;;;;EAAA,oBAAc,EAAd,MAAc;EAAd,8BAAc,EAAd,MAAc;EAAd,gCAAc,EAAd,MAAc;EAAd,eAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;EAAd,uBAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;EAAd,SAAc,EAAd,MAAc;EAAd,UAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,oBAAc;AAAA;;AAAd;;;CAAc;;AAAd;;;;EAAA,0BAAc,EAAd,MAAc;EAAd,6BAAc,EAAd,MAAc;EAAd,sBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,aAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,gBAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,wBAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,YAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,6BAAc,EAAd,MAAc;EAAd,oBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,wBAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,0BAAc,EAAd,MAAc;EAAd,aAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,kBAAc;AAAA;;AAAd;;CAAc;;AAAd;;;;;;;;;;;;;EAAA,SAAc;AAAA;;AAAd;EAAA,SAAc;EAAd,UAAc;AAAA;;AAAd;EAAA,UAAc;AAAA;;AAAd;;;EAAA,gBAAc;EAAd,SAAc;EAAd,UAAc;AAAA;;AAAd;;CAAc;AAAd;EAAA,UAAc;AAAA;;AAAd;;CAAc;;AAAd;EAAA,gBAAc;AAAA;;AAAd;;;CAAc;;AAAd;EAAA,UAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;AAAA;;AAAd;;EAAA,UAAc,EAAd,MAAc;EAAd,cAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,eAAc;AAAA;;AAAd;;CAAc;AAAd;EAAA,eAAc;AAAA;;AAAd;;;;CAAc;;AAAd;;;;;;;;EAAA,cAAc,EAAd,MAAc;EAAd,sBAAc,EAAd,MAAc;AAAA;;AAAd;;CAAc;;AAAd;;EAAA,eAAc;EAAd,YAAc;AAAA;;AAAd,wEAAc;AAAd;EAAA,aAAc;AAAA;;EAAd;;EAAA,YAAc;EAAd,kBAAc;EAAd,mDAAc;EAAd,oBAAc;EAAd;AAAc;AAEd;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,iBAAmB;EAAnB;AAAmB;AAAnB;EAAA,iBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAn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","sourcesContent":["@tailwind base;\r\n@tailwind components;\r\n@tailwind utilities;\r\n\r\n@layer base {\r\n\r\n  html,\r\n  body {\r\n    @apply h-full bg-[#000807] text-white;\r\n  }\r\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./frontend/src/index.css"],"names":[],"mappings":"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;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA,iBAAmB;EAAnB;AAAmB;AAAnB;EAAA,iBAAmB;EAAnB;AAAmB;AAAnB;EAAA,kBAAmB;EAAnB;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAnB;EAAA;AAAmB;AAAn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","sourcesContent":["@tailwind base;\r\n@tailwind components;\r\n@tailwind utilities;\r\n\r\n@layer base {\r\n\r\n  html,\r\n  body {\r\n    @apply h-full bg-[#000807] text-white;\r\n  }\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18629,6 +19847,37 @@ const ChevronRight = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["defau
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/icons/filter.js":
+/*!************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/filter.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Filter)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.435.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const Filter = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Filter", [
+  ["polygon", { points: "22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3", key: "1yg77f" }]
+]);
+
+
+//# sourceMappingURL=filter.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/icons/hash.js":
 /*!**********************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/hash.js ***!
@@ -18734,6 +19983,72 @@ const House = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("
 
 
 //# sourceMappingURL=house.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/list-music.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/list-music.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ListMusic)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.435.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const ListMusic = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("ListMusic", [
+  ["path", { d: "M21 15V6", key: "h1cx4g" }],
+  ["path", { d: "M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z", key: "8saifv" }],
+  ["path", { d: "M12 12H3", key: "18klou" }],
+  ["path", { d: "M16 6H3", key: "1wxfjs" }],
+  ["path", { d: "M12 18H3", key: "11ftsu" }]
+]);
+
+
+//# sourceMappingURL=list-music.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/message-square.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/message-square.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ MessageSquare)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.435.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const MessageSquare = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("MessageSquare", [
+  ["path", { d: "M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z", key: "1lielz" }]
+]);
+
+
+//# sourceMappingURL=message-square.js.map
 
 
 /***/ }),
@@ -18936,6 +20251,44 @@ const Send = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("S
 
 /***/ }),
 
+/***/ "./node_modules/lucide-react/dist/esm/icons/square-pen.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/square-pen.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SquarePen)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.435.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const SquarePen = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("SquarePen", [
+  ["path", { d: "M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7", key: "1m0v6g" }],
+  [
+    "path",
+    {
+      d: "M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z",
+      key: "ohrbg2"
+    }
+  ]
+]);
+
+
+//# sourceMappingURL=square-pen.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/lucide-react/dist/esm/icons/star.js":
 /*!**********************************************************!*\
   !*** ./node_modules/lucide-react/dist/esm/icons/star.js ***!
@@ -18969,6 +20322,44 @@ const Star = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("S
 
 
 //# sourceMappingURL=star.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/tag.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/tag.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Tag)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.435.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const Tag = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Tag", [
+  [
+    "path",
+    {
+      d: "M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z",
+      key: "vktsd0"
+    }
+  ],
+  ["circle", { cx: "7.5", cy: "7.5", r: ".5", fill: "currentColor", key: "kqv944" }]
+]);
+
+
+//# sourceMappingURL=tag.js.map
 
 
 /***/ }),
@@ -19251,6 +20642,40 @@ const UserPlus = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"]
 
 
 //# sourceMappingURL=user-plus.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/lucide-react/dist/esm/icons/users.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/lucide-react/dist/esm/icons/users.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Users)
+/* harmony export */ });
+/* harmony import */ var _createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../createLucideIcon.js */ "./node_modules/lucide-react/dist/esm/createLucideIcon.js");
+/**
+ * @license lucide-react v0.435.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+
+
+
+const Users = (0,_createLucideIcon_js__WEBPACK_IMPORTED_MODULE_0__["default"])("Users", [
+  ["path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2", key: "1yyitq" }],
+  ["circle", { cx: "9", cy: "7", r: "4", key: "nufk8" }],
+  ["path", { d: "M22 21v-2a4 4 0 0 0-3-3.87", key: "kshegd" }],
+  ["path", { d: "M16 3.13a4 4 0 0 1 0 7.75", key: "1da9ce" }]
+]);
+
+
+//# sourceMappingURL=users.js.map
 
 
 /***/ }),

@@ -31,7 +31,11 @@ export const AuthProvider = ({ children }) => {
             });
             const data = await handleResponse(response);
             if (data.user) {
-                setUser(data.user);
+                // Ensure isAdmin is included in user data
+                setUser({
+                    ...data.user,
+                    isAdmin: data.user.isAdmin || false // Default to false if not set
+                });
             }
         } catch (error) {
             console.error('Session check failed:', error);
@@ -61,8 +65,11 @@ export const AuthProvider = ({ children }) => {
             const data = await handleResponse(response);
 
             if (data.user) {
-                setUser(data.user);
-                // Wait a brief moment to ensure session is established
+                // Ensure isAdmin is included in user data
+                setUser({
+                    ...data.user,
+                    isAdmin: data.user.isAdmin || false // Default to false if not set
+                });
                 await new Promise(resolve => setTimeout(resolve, 100));
                 await checkSession();
                 return { success: true };
@@ -145,7 +152,8 @@ export const AuthProvider = ({ children }) => {
             login,
             logout,
             register,
-            checkSession
+            checkSession,
+            isAdmin: user?.isAdmin || false // Add isAdmin to context value
         }}>
             {children}
         </AuthContext.Provider>

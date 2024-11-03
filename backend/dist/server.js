@@ -1,6 +1,17 @@
 "use strict";
 
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
@@ -51,6 +62,17 @@ var userSchema = new mongoose.Schema({
   profileImage: {
     type: String,
     "default": '/assets/images/user/user.jpg'
+  },
+  isAdmin: {
+    type: Boolean,
+    "default": false
+  }
+});
+var genreSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true
   }
 });
 
@@ -100,10 +122,19 @@ var newReleaseSchema = new mongoose.Schema({
 var personalPlaylistSchema = new mongoose.Schema({
   title: String,
   image: String,
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
   songs: [{
     title: String,
     artist: String
-  }]
+  }],
+  createdAt: {
+    type: Date,
+    "default": Date.now
+  }
 });
 var User = mongoose.model('User', userSchema);
 var NewRelease = mongoose.model('NewRelease', newReleaseSchema);
@@ -831,30 +862,50 @@ app.get('/api/personalPlaylists', /*#__PURE__*/function () {
 }());
 app.post('/api/personalPlaylists', /*#__PURE__*/function () {
   var _ref15 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee15(req, res) {
-    var playlist, savedPlaylist;
+    var _req$body4, title, image, songs, username, user, playlist, savedPlaylist;
     return _regeneratorRuntime().wrap(function _callee15$(_context15) {
       while (1) switch (_context15.prev = _context15.next) {
         case 0:
-          playlist = new PersonalPlaylist(req.body);
-          _context15.prev = 1;
+          _context15.prev = 0;
+          _req$body4 = req.body, title = _req$body4.title, image = _req$body4.image, songs = _req$body4.songs, username = _req$body4.username;
           _context15.next = 4;
-          return playlist.save();
+          return User.findOne({
+            username: username
+          });
         case 4:
+          user = _context15.sent;
+          if (user) {
+            _context15.next = 7;
+            break;
+          }
+          return _context15.abrupt("return", res.status(404).json({
+            message: 'User not found'
+          }));
+        case 7:
+          playlist = new PersonalPlaylist({
+            title: title,
+            image: image,
+            songs: songs,
+            creator: user._id
+          });
+          _context15.next = 10;
+          return playlist.save();
+        case 10:
           savedPlaylist = _context15.sent;
           res.status(201).json(savedPlaylist);
-          _context15.next = 11;
+          _context15.next = 17;
           break;
-        case 8:
-          _context15.prev = 8;
-          _context15.t0 = _context15["catch"](1);
+        case 14:
+          _context15.prev = 14;
+          _context15.t0 = _context15["catch"](0);
           res.status(400).json({
             message: _context15.t0.message
           });
-        case 11:
+        case 17:
         case "end":
           return _context15.stop();
       }
-    }, _callee15, null, [[1, 8]]);
+    }, _callee15, null, [[0, 14]]);
   }));
   return function (_x29, _x30) {
     return _ref15.apply(this, arguments);
@@ -991,12 +1042,12 @@ app["delete"]('/api/personalPlaylists/:id', /*#__PURE__*/function () {
 // Friend management routes
 app.post('/api/users/friend-request', /*#__PURE__*/function () {
   var _ref19 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee19(req, res) {
-    var _req$body4, fromUsername, toUsername, fromUser, toUser;
+    var _req$body5, fromUsername, toUsername, fromUser, toUser;
     return _regeneratorRuntime().wrap(function _callee19$(_context19) {
       while (1) switch (_context19.prev = _context19.next) {
         case 0:
           _context19.prev = 0;
-          _req$body4 = req.body, fromUsername = _req$body4.fromUsername, toUsername = _req$body4.toUsername;
+          _req$body5 = req.body, fromUsername = _req$body5.fromUsername, toUsername = _req$body5.toUsername;
           _context19.next = 4;
           return User.findOne({
             username: fromUsername
@@ -1054,12 +1105,12 @@ app.post('/api/users/friend-request', /*#__PURE__*/function () {
 }());
 app.post('/api/users/accept-friend', /*#__PURE__*/function () {
   var _ref20 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee20(req, res) {
-    var _req$body5, username, friendUsername, user, friend;
+    var _req$body6, username, friendUsername, user, friend;
     return _regeneratorRuntime().wrap(function _callee20$(_context20) {
       while (1) switch (_context20.prev = _context20.next) {
         case 0:
           _context20.prev = 0;
-          _req$body5 = req.body, username = _req$body5.username, friendUsername = _req$body5.friendUsername;
+          _req$body6 = req.body, username = _req$body6.username, friendUsername = _req$body6.friendUsername;
           _context20.next = 4;
           return User.findOne({
             username: username
@@ -1124,12 +1175,12 @@ app.post('/api/users/accept-friend', /*#__PURE__*/function () {
 }());
 app.post('/api/users/unfriend', /*#__PURE__*/function () {
   var _ref21 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee21(req, res) {
-    var _req$body6, username, friendUsername, user, friend;
+    var _req$body7, username, friendUsername, user, friend;
     return _regeneratorRuntime().wrap(function _callee21$(_context21) {
       while (1) switch (_context21.prev = _context21.next) {
         case 0:
           _context21.prev = 0;
-          _req$body6 = req.body, username = _req$body6.username, friendUsername = _req$body6.friendUsername;
+          _req$body7 = req.body, username = _req$body7.username, friendUsername = _req$body7.friendUsername;
           _context21.next = 4;
           return User.findOne({
             username: username
@@ -1296,35 +1347,667 @@ app.post('/api/users/:username/profile-image', /*#__PURE__*/function () {
   };
 }());
 
-// Debug route (if needed during development)
-app.get('/api/debug/personalPlaylists', /*#__PURE__*/function () {
+// Add new endpoint to fetch user's playlists
+app.get('/api/users/:username/playlists', /*#__PURE__*/function () {
   var _ref24 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee24(req, res) {
-    var playlists;
+    var user, playlists;
     return _regeneratorRuntime().wrap(function _callee24$(_context24) {
       while (1) switch (_context24.prev = _context24.next) {
         case 0:
           _context24.prev = 0;
           _context24.next = 3;
-          return mongoose.connection.db.collection('PersonalPlaylist').find().toArray();
+          return User.findOne({
+            username: req.params.username
+          });
         case 3:
+          user = _context24.sent;
+          if (user) {
+            _context24.next = 6;
+            break;
+          }
+          return _context24.abrupt("return", res.status(404).json({
+            message: 'User not found'
+          }));
+        case 6:
+          _context24.next = 8;
+          return PersonalPlaylist.find({
+            creator: user._id
+          }).sort({
+            createdAt: -1
+          });
+        case 8:
           playlists = _context24.sent;
           res.json(playlists);
-          _context24.next = 10;
+          _context24.next = 16;
           break;
-        case 7:
-          _context24.prev = 7;
+        case 12:
+          _context24.prev = 12;
           _context24.t0 = _context24["catch"](0);
+          console.error('Error fetching user playlists:', _context24.t0);
           res.status(500).json({
-            message: _context24.t0.message
+            message: 'Internal server error',
+            error: _context24.t0.message
           });
-        case 10:
+        case 16:
         case "end":
           return _context24.stop();
       }
-    }, _callee24, null, [[0, 7]]);
+    }, _callee24, null, [[0, 12]]);
   }));
   return function (_x47, _x48) {
     return _ref24.apply(this, arguments);
+  };
+}());
+
+// Debug route (if needed during development)
+app.get('/api/debug/personalPlaylists', /*#__PURE__*/function () {
+  var _ref25 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee25(req, res) {
+    var playlists;
+    return _regeneratorRuntime().wrap(function _callee25$(_context25) {
+      while (1) switch (_context25.prev = _context25.next) {
+        case 0:
+          _context25.prev = 0;
+          _context25.next = 3;
+          return mongoose.connection.db.collection('PersonalPlaylist').find().toArray();
+        case 3:
+          playlists = _context25.sent;
+          res.json(playlists);
+          _context25.next = 10;
+          break;
+        case 7:
+          _context25.prev = 7;
+          _context25.t0 = _context25["catch"](0);
+          res.status(500).json({
+            message: _context25.t0.message
+          });
+        case 10:
+        case "end":
+          return _context25.stop();
+      }
+    }, _callee25, null, [[0, 7]]);
+  }));
+  return function (_x49, _x50) {
+    return _ref25.apply(this, arguments);
+  };
+}());
+
+// Middleware to check if user is admin
+var isAdmin = /*#__PURE__*/function () {
+  var _ref26 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee26(req, res, next) {
+    var user;
+    return _regeneratorRuntime().wrap(function _callee26$(_context26) {
+      while (1) switch (_context26.prev = _context26.next) {
+        case 0:
+          _context26.prev = 0;
+          _context26.next = 3;
+          return User.findById(req.session.userId);
+        case 3:
+          user = _context26.sent;
+          if (user !== null && user !== void 0 && user.isAdmin) {
+            _context26.next = 6;
+            break;
+          }
+          return _context26.abrupt("return", res.status(403).json({
+            message: 'Admin access required'
+          }));
+        case 6:
+          next();
+          _context26.next = 12;
+          break;
+        case 9:
+          _context26.prev = 9;
+          _context26.t0 = _context26["catch"](0);
+          res.status(500).json({
+            message: 'Server error'
+          });
+        case 12:
+        case "end":
+          return _context26.stop();
+      }
+    }, _callee26, null, [[0, 9]]);
+  }));
+  return function isAdmin(_x51, _x52, _x53) {
+    return _ref26.apply(this, arguments);
+  };
+}();
+
+// Admin routes
+app.get('/api/admin/users', isAdmin, /*#__PURE__*/function () {
+  var _ref27 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee27(req, res) {
+    var users;
+    return _regeneratorRuntime().wrap(function _callee27$(_context27) {
+      while (1) switch (_context27.prev = _context27.next) {
+        case 0:
+          _context27.prev = 0;
+          _context27.next = 3;
+          return User.find().select('-password');
+        case 3:
+          users = _context27.sent;
+          res.json(users);
+          _context27.next = 10;
+          break;
+        case 7:
+          _context27.prev = 7;
+          _context27.t0 = _context27["catch"](0);
+          res.status(500).json({
+            message: 'Error fetching users'
+          });
+        case 10:
+        case "end":
+          return _context27.stop();
+      }
+    }, _callee27, null, [[0, 7]]);
+  }));
+  return function (_x54, _x55) {
+    return _ref27.apply(this, arguments);
+  };
+}());
+app.get('/api/admin/playlists', isAdmin, /*#__PURE__*/function () {
+  var _ref28 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee28(req, res) {
+    var playlists;
+    return _regeneratorRuntime().wrap(function _callee28$(_context28) {
+      while (1) switch (_context28.prev = _context28.next) {
+        case 0:
+          _context28.prev = 0;
+          _context28.next = 3;
+          return PersonalPlaylist.find().populate('creator', 'username');
+        case 3:
+          playlists = _context28.sent;
+          res.json(playlists);
+          _context28.next = 10;
+          break;
+        case 7:
+          _context28.prev = 7;
+          _context28.t0 = _context28["catch"](0);
+          res.status(500).json({
+            message: 'Error fetching playlists'
+          });
+        case 10:
+        case "end":
+          return _context28.stop();
+      }
+    }, _callee28, null, [[0, 7]]);
+  }));
+  return function (_x56, _x57) {
+    return _ref28.apply(this, arguments);
+  };
+}());
+app.get('/api/admin/songs', isAdmin, /*#__PURE__*/function () {
+  var _ref29 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee29(req, res) {
+    var songs;
+    return _regeneratorRuntime().wrap(function _callee29$(_context29) {
+      while (1) switch (_context29.prev = _context29.next) {
+        case 0:
+          _context29.prev = 0;
+          _context29.next = 3;
+          return Song.find();
+        case 3:
+          songs = _context29.sent;
+          res.json(songs);
+          _context29.next = 10;
+          break;
+        case 7:
+          _context29.prev = 7;
+          _context29.t0 = _context29["catch"](0);
+          res.status(500).json({
+            message: 'Error fetching songs'
+          });
+        case 10:
+        case "end":
+          return _context29.stop();
+      }
+    }, _callee29, null, [[0, 7]]);
+  }));
+  return function (_x58, _x59) {
+    return _ref29.apply(this, arguments);
+  };
+}());
+app.get('/api/admin/comments', isAdmin, /*#__PURE__*/function () {
+  var _ref30 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee30(req, res) {
+    var comments;
+    return _regeneratorRuntime().wrap(function _callee30$(_context30) {
+      while (1) switch (_context30.prev = _context30.next) {
+        case 0:
+          _context30.prev = 0;
+          _context30.next = 3;
+          return Comment.find().populate('user', 'username');
+        case 3:
+          comments = _context30.sent;
+          res.json(comments);
+          _context30.next = 10;
+          break;
+        case 7:
+          _context30.prev = 7;
+          _context30.t0 = _context30["catch"](0);
+          res.status(500).json({
+            message: 'Error fetching comments'
+          });
+        case 10:
+        case "end":
+          return _context30.stop();
+      }
+    }, _callee30, null, [[0, 7]]);
+  }));
+  return function (_x60, _x61) {
+    return _ref30.apply(this, arguments);
+  };
+}());
+app.get('/api/admin/genres', isAdmin, /*#__PURE__*/function () {
+  var _ref31 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee31(req, res) {
+    var genres;
+    return _regeneratorRuntime().wrap(function _callee31$(_context31) {
+      while (1) switch (_context31.prev = _context31.next) {
+        case 0:
+          _context31.prev = 0;
+          _context31.next = 3;
+          return Genre.find();
+        case 3:
+          genres = _context31.sent;
+          res.json(genres);
+          _context31.next = 10;
+          break;
+        case 7:
+          _context31.prev = 7;
+          _context31.t0 = _context31["catch"](0);
+          res.status(500).json({
+            message: 'Error fetching genres'
+          });
+        case 10:
+        case "end":
+          return _context31.stop();
+      }
+    }, _callee31, null, [[0, 7]]);
+  }));
+  return function (_x62, _x63) {
+    return _ref31.apply(this, arguments);
+  };
+}());
+
+// Update routes
+app.put('/api/admin/:type/:id', isAdmin, /*#__PURE__*/function () {
+  var _ref32 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee32(req, res) {
+    var _req$params2, type, id, Model, updated;
+    return _regeneratorRuntime().wrap(function _callee32$(_context32) {
+      while (1) switch (_context32.prev = _context32.next) {
+        case 0:
+          _context32.prev = 0;
+          _req$params2 = req.params, type = _req$params2.type, id = _req$params2.id;
+          _context32.t0 = type;
+          _context32.next = _context32.t0 === 'users' ? 5 : _context32.t0 === 'playlists' ? 7 : _context32.t0 === 'songs' ? 9 : _context32.t0 === 'comments' ? 11 : _context32.t0 === 'genres' ? 13 : 15;
+          break;
+        case 5:
+          Model = User;
+          return _context32.abrupt("break", 16);
+        case 7:
+          Model = PersonalPlaylist;
+          return _context32.abrupt("break", 16);
+        case 9:
+          Model = Song;
+          return _context32.abrupt("break", 16);
+        case 11:
+          Model = Comment;
+          return _context32.abrupt("break", 16);
+        case 13:
+          Model = Genre;
+          return _context32.abrupt("break", 16);
+        case 15:
+          throw new Error('Invalid type');
+        case 16:
+          _context32.next = 18;
+          return Model.findByIdAndUpdate(id, req.body, {
+            "new": true
+          });
+        case 18:
+          updated = _context32.sent;
+          res.json(updated);
+          _context32.next = 25;
+          break;
+        case 22:
+          _context32.prev = 22;
+          _context32.t1 = _context32["catch"](0);
+          res.status(500).json({
+            message: 'Error updating item'
+          });
+        case 25:
+        case "end":
+          return _context32.stop();
+      }
+    }, _callee32, null, [[0, 22]]);
+  }));
+  return function (_x64, _x65) {
+    return _ref32.apply(this, arguments);
+  };
+}());
+
+// Delete routes
+app["delete"]('/api/admin/:type/:id', isAdmin, /*#__PURE__*/function () {
+  var _ref33 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee33(req, res) {
+    var _req$params3, type, id, Model;
+    return _regeneratorRuntime().wrap(function _callee33$(_context33) {
+      while (1) switch (_context33.prev = _context33.next) {
+        case 0:
+          _context33.prev = 0;
+          _req$params3 = req.params, type = _req$params3.type, id = _req$params3.id;
+          _context33.t0 = type;
+          _context33.next = _context33.t0 === 'users' ? 5 : _context33.t0 === 'playlists' ? 7 : _context33.t0 === 'songs' ? 9 : _context33.t0 === 'comments' ? 11 : _context33.t0 === 'genres' ? 13 : 15;
+          break;
+        case 5:
+          Model = User;
+          return _context33.abrupt("break", 16);
+        case 7:
+          Model = PersonalPlaylist;
+          return _context33.abrupt("break", 16);
+        case 9:
+          Model = Song;
+          return _context33.abrupt("break", 16);
+        case 11:
+          Model = Comment;
+          return _context33.abrupt("break", 16);
+        case 13:
+          Model = Genre;
+          return _context33.abrupt("break", 16);
+        case 15:
+          throw new Error('Invalid type');
+        case 16:
+          _context33.next = 18;
+          return Model.findByIdAndDelete(id);
+        case 18:
+          res.json({
+            message: 'Item deleted successfully'
+          });
+          _context33.next = 24;
+          break;
+        case 21:
+          _context33.prev = 21;
+          _context33.t1 = _context33["catch"](0);
+          res.status(500).json({
+            message: 'Error deleting item'
+          });
+        case 24:
+        case "end":
+          return _context33.stop();
+      }
+    }, _callee33, null, [[0, 21]]);
+  }));
+  return function (_x66, _x67) {
+    return _ref33.apply(this, arguments);
+  };
+}());
+
+// Add genre
+app.post('/api/admin/genres', isAdmin, /*#__PURE__*/function () {
+  var _ref34 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee34(req, res) {
+    var genre;
+    return _regeneratorRuntime().wrap(function _callee34$(_context34) {
+      while (1) switch (_context34.prev = _context34.next) {
+        case 0:
+          _context34.prev = 0;
+          genre = new Genre(req.body);
+          _context34.next = 4;
+          return genre.save();
+        case 4:
+          res.status(201).json(genre);
+          _context34.next = 10;
+          break;
+        case 7:
+          _context34.prev = 7;
+          _context34.t0 = _context34["catch"](0);
+          res.status(500).json({
+            message: 'Error creating genre'
+          });
+        case 10:
+        case "end":
+          return _context34.stop();
+      }
+    }, _callee34, null, [[0, 7]]);
+  }));
+  return function (_x68, _x69) {
+    return _ref34.apply(this, arguments);
+  };
+}());
+var initializeAdmin = /*#__PURE__*/function () {
+  var _ref35 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee35(req, res) {
+    var existingAdmin, adminUser;
+    return _regeneratorRuntime().wrap(function _callee35$(_context35) {
+      while (1) switch (_context35.prev = _context35.next) {
+        case 0:
+          if (!(process.env.NODE_ENV === 'production')) {
+            _context35.next = 2;
+            break;
+          }
+          return _context35.abrupt("return", res.status(403).json({
+            message: 'Not available in production'
+          }));
+        case 2:
+          _context35.prev = 2;
+          _context35.next = 5;
+          return User.findOne({
+            username: process.env.ADMIN_USERNAME
+          });
+        case 5:
+          existingAdmin = _context35.sent;
+          if (!existingAdmin) {
+            _context35.next = 8;
+            break;
+          }
+          return _context35.abrupt("return", res.status(400).json({
+            message: 'Admin already exists'
+          }));
+        case 8:
+          // Create admin user
+          adminUser = new User({
+            username: 'admin',
+            password: 'admin123',
+            isAdmin: true
+          });
+          _context35.next = 11;
+          return adminUser.save();
+        case 11:
+          res.status(201).json({
+            message: 'Admin user created successfully'
+          });
+          _context35.next = 18;
+          break;
+        case 14:
+          _context35.prev = 14;
+          _context35.t0 = _context35["catch"](2);
+          console.error('Error creating admin:', _context35.t0);
+          res.status(500).json({
+            message: 'Error creating admin user'
+          });
+        case 18:
+        case "end":
+          return _context35.stop();
+      }
+    }, _callee35, null, [[2, 14]]);
+  }));
+  return function initializeAdmin(_x70, _x71) {
+    return _ref35.apply(this, arguments);
+  };
+}();
+app.post('/api/init-admin', initializeAdmin);
+
+// Modified song route to fetch from NewRelease collection
+app.get('/api/admin/newReleases', isAdmin, /*#__PURE__*/function () {
+  var _ref36 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee36(req, res) {
+    var songs;
+    return _regeneratorRuntime().wrap(function _callee36$(_context36) {
+      while (1) switch (_context36.prev = _context36.next) {
+        case 0:
+          _context36.prev = 0;
+          _context36.next = 3;
+          return NewRelease.find().sort({
+            createdAt: -1
+          });
+        case 3:
+          songs = _context36.sent;
+          res.json(songs);
+          _context36.next = 10;
+          break;
+        case 7:
+          _context36.prev = 7;
+          _context36.t0 = _context36["catch"](0);
+          res.status(500).json({
+            message: 'Error fetching songs'
+          });
+        case 10:
+        case "end":
+          return _context36.stop();
+      }
+    }, _callee36, null, [[0, 7]]);
+  }));
+  return function (_x72, _x73) {
+    return _ref36.apply(this, arguments);
+  };
+}());
+
+// New route to fetch all comments across all releases
+app.get('/api/admin/comments', isAdmin, /*#__PURE__*/function () {
+  var _ref37 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee37(req, res) {
+    var releases, allComments;
+    return _regeneratorRuntime().wrap(function _callee37$(_context37) {
+      while (1) switch (_context37.prev = _context37.next) {
+        case 0:
+          _context37.prev = 0;
+          _context37.next = 3;
+          return NewRelease.find();
+        case 3:
+          releases = _context37.sent;
+          allComments = releases.reduce(function (acc, release) {
+            var commentsWithMetadata = release.comments.map(function (comment) {
+              return _objectSpread(_objectSpread({}, comment.toObject()), {}, {
+                _id: comment._id,
+                songTitle: release.title,
+                songArtist: release.artist,
+                releaseId: release._id
+              });
+            });
+            return [].concat(_toConsumableArray(acc), _toConsumableArray(commentsWithMetadata));
+          }, []);
+          res.json(allComments);
+          _context37.next = 11;
+          break;
+        case 8:
+          _context37.prev = 8;
+          _context37.t0 = _context37["catch"](0);
+          res.status(500).json({
+            message: 'Error fetching comments'
+          });
+        case 11:
+        case "end":
+          return _context37.stop();
+      }
+    }, _callee37, null, [[0, 8]]);
+  }));
+  return function (_x74, _x75) {
+    return _ref37.apply(this, arguments);
+  };
+}());
+
+// Update delete routes to handle the nested structure
+app["delete"]('/api/admin/comments/:releaseId/:commentId', isAdmin, /*#__PURE__*/function () {
+  var _ref38 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee38(req, res) {
+    var _req$params4, releaseId, commentId, release;
+    return _regeneratorRuntime().wrap(function _callee38$(_context38) {
+      while (1) switch (_context38.prev = _context38.next) {
+        case 0:
+          _context38.prev = 0;
+          _req$params4 = req.params, releaseId = _req$params4.releaseId, commentId = _req$params4.commentId;
+          _context38.next = 4;
+          return NewRelease.findById(releaseId);
+        case 4:
+          release = _context38.sent;
+          if (release) {
+            _context38.next = 7;
+            break;
+          }
+          return _context38.abrupt("return", res.status(404).json({
+            message: 'Release not found'
+          }));
+        case 7:
+          release.comments = release.comments.filter(function (comment) {
+            return comment._id.toString() !== commentId;
+          });
+          _context38.next = 10;
+          return release.save();
+        case 10:
+          res.json({
+            message: 'Comment deleted successfully'
+          });
+          _context38.next = 16;
+          break;
+        case 13:
+          _context38.prev = 13;
+          _context38.t0 = _context38["catch"](0);
+          res.status(500).json({
+            message: 'Error deleting comment'
+          });
+        case 16:
+        case "end":
+          return _context38.stop();
+      }
+    }, _callee38, null, [[0, 13]]);
+  }));
+  return function (_x76, _x77) {
+    return _ref38.apply(this, arguments);
+  };
+}());
+
+// Update comment
+app.put('/api/admin/comments/:releaseId/:commentId', isAdmin, /*#__PURE__*/function () {
+  var _ref39 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee39(req, res) {
+    var _req$params5, releaseId, commentId, release, commentIndex;
+    return _regeneratorRuntime().wrap(function _callee39$(_context39) {
+      while (1) switch (_context39.prev = _context39.next) {
+        case 0:
+          _context39.prev = 0;
+          _req$params5 = req.params, releaseId = _req$params5.releaseId, commentId = _req$params5.commentId;
+          _context39.next = 4;
+          return NewRelease.findById(releaseId);
+        case 4:
+          release = _context39.sent;
+          if (release) {
+            _context39.next = 7;
+            break;
+          }
+          return _context39.abrupt("return", res.status(404).json({
+            message: 'Release not found'
+          }));
+        case 7:
+          commentIndex = release.comments.findIndex(function (comment) {
+            return comment._id.toString() === commentId;
+          });
+          if (!(commentIndex === -1)) {
+            _context39.next = 10;
+            break;
+          }
+          return _context39.abrupt("return", res.status(404).json({
+            message: 'Comment not found'
+          }));
+        case 10:
+          release.comments[commentIndex] = _objectSpread(_objectSpread(_objectSpread({}, release.comments[commentIndex].toObject()), req.body), {}, {
+            _id: commentId
+          });
+          _context39.next = 13;
+          return release.save();
+        case 13:
+          res.json(release.comments[commentIndex]);
+          _context39.next = 19;
+          break;
+        case 16:
+          _context39.prev = 16;
+          _context39.t0 = _context39["catch"](0);
+          res.status(500).json({
+            message: 'Error updating comment'
+          });
+        case 19:
+        case "end":
+          return _context39.stop();
+      }
+    }, _callee39, null, [[0, 16]]);
+  }));
+  return function (_x78, _x79) {
+    return _ref39.apply(this, arguments);
   };
 }());
 

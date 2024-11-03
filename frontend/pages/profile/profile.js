@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, UserMinus, UserPlus, X, Pencil } from 'lucide-react';
+import { ChevronLeft, UserMinus, UserPlus, X, Pencil, Plus } from 'lucide-react';
 import Sidebar from '../../components/sidebar/sideBar';
 import { useAuth } from '../../components/AuthContext/authContext';
 
@@ -14,17 +14,40 @@ const ProfileSettings = () => {
     const [friends, setFriends] = useState([]);
     const [friendRequests, setFriendRequests] = useState([]);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-    const [profileImage, setProfileImage] = useState('/assets/images/user/user.jpg');
+    const [profileImage, setProfileImage] = useState(`https://picsum.photos/seed/${Math.floor(Math.random() * 1000) + 1}/300/300`);
     const [isHovering, setIsHovering] = useState(false);
+    const [userPlaylists, setUserPlaylists] = useState([]);
+    const [playlistsLoading, setPlaylistsLoading] = useState(true);
+    const [playlistsError, setPlaylistsError] = useState(null);
     const fileInputRef = useRef(null);
 
     useEffect(() => {
-        if (user && user.username) {
+        if (user?.username && user.username) {
             setFormData({ username: user.username });
             fetchFriendsData();
             fetchUserProfile();
+            fetchUserPlaylists();
         }
     }, [user]);
+
+    const fetchUserPlaylists = async () => {
+        try {
+            setPlaylistsLoading(true);
+            const response = await fetch(`/api/users/${user.username}/playlists`, {
+                credentials: 'include'
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch playlists');
+            }
+            const data = await response.json();
+            setUserPlaylists(data);
+        } catch (error) {
+            console.error('Error fetching playlists:', error);
+            setPlaylistsError('Failed to load playlists');
+        } finally {
+            setPlaylistsLoading(false);
+        }
+    };
 
     const fetchUserProfile = async () => {
         try {
@@ -72,6 +95,60 @@ const ProfileSettings = () => {
         }
         setExpandedSection(prevSection => prevSection === section ? null : section);
     };
+
+    const handlePlaylistClick = (playlistId) => {
+        navigate(`/playlist?id=${playlistId}`);
+    };
+
+    const renderUserPlaylists = () => {
+        if (playlistsLoading) return <div className="text-center py-4">Loading playlists...</div>;
+        if (playlistsError) return <div className="text-center py-4 text-red-500">{playlistsError}</div>;
+
+        return (
+            <div className="border-t border-neutral-800 mt-8 pt-8">
+                <div className="flex justify-between items-center mb-6">
+                    {/* <h2 className="text-xl font-semibold">My Playlists</h2> */}
+                    <button
+                        onClick={() => navigate('/playlist')}
+                        className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-full transition-colors"
+                    >
+                        <Plus size={16} />
+                        Create Playlist
+                    </button>
+                </div>
+
+                {userPlaylists.length === 0 ? (
+                    <p className="text-neutral-400 text-center py-6">No playlists created yet</p>
+                ) : (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {userPlaylists.map((playlist) => (
+                            <div
+                                key={playlist._id}
+                                className="group relative cursor-pointer hover:transform hover:scale-105 transition-all duration-200"
+                                onClick={() => handlePlaylistClick(playlist._id)}
+                            >
+                                <div className="aspect-square overflow-hidden rounded-lg">
+                                    <img
+                                        src={playlist.image || '/default-playlist.jpg'}
+                                        alt={playlist.title}
+                                        className="w-full h-full object-cover"
+                                    />
+                                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-200" />
+                                </div>
+                                <div className="mt-2">
+                                    <h3 className="text-sm font-medium truncate">{playlist.title}</h3>
+                                    <p className="text-xs text-neutral-400">
+                                        {playlist.songs?.length || 0} songs
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+        );
+    };
+
 
     const handleInputChange = (e) => {
         setFormData({
@@ -358,18 +435,10 @@ const ProfileSettings = () => {
                                             )
                                         },
                                         {
-                                            name: 'Settings',
+                                            name: 'My Playlists',
                                             content: (
                                                 <div className="space-y-4">
-                                                    <label className="flex items-center gap-3 text-lg">
-                                                        <input type="checkbox" className="w-5 h-5 rounded bg-neutral-800 border-neutral-600" />
-                                                        Dark Mode
-                                                    </label>
-                                                    <select className="w-full p-3 bg-neutral-800 rounded-lg text-white border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-green-500">
-                                                        <option>English</option>
-                                                        <option>Spanish</option>
-                                                        <option>French</option>
-                                                    </select>
+                                                    {renderUserPlaylists()}
                                                 </div>
                                             )
                                         }
@@ -391,6 +460,8 @@ const ProfileSettings = () => {
                                         </div>
                                     ))}
                                 </div>
+
+                                
 
                                 {/* Bottom Buttons */}
                                 <div className="space-y-3 mt-8">
