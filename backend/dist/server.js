@@ -493,67 +493,78 @@ app.put('/api/users', /*#__PURE__*/function () {
       while (1) switch (_context7.prev = _context7.next) {
         case 0:
           _context7.prev = 0;
-          username = req.body.username;
-          _context7.next = 4;
-          return User.findOne();
-        case 4:
+          if (req.session.userId) {
+            _context7.next = 3;
+            break;
+          }
+          return _context7.abrupt("return", res.status(401).json({
+            message: 'Authentication required'
+          }));
+        case 3:
+          username = req.body.username; // Find the current user using the session ID
+          _context7.next = 6;
+          return User.findById(req.session.userId);
+        case 6:
           user = _context7.sent;
           if (user) {
-            _context7.next = 7;
+            _context7.next = 9;
             break;
           }
           return _context7.abrupt("return", res.status(404).json({
             message: 'User not found'
           }));
-        case 7:
+        case 9:
           if (!(!username || username.trim() === '')) {
-            _context7.next = 9;
+            _context7.next = 11;
             break;
           }
           return _context7.abrupt("return", res.status(400).json({
             message: 'Username cannot be empty'
           }));
-        case 9:
-          _context7.next = 11;
+        case 11:
+          _context7.next = 13;
           return User.findOne({
             username: username,
             _id: {
               $ne: user._id
             }
           });
-        case 11:
+        case 13:
           existingUser = _context7.sent;
           if (!existingUser) {
-            _context7.next = 14;
+            _context7.next = 16;
             break;
           }
           return _context7.abrupt("return", res.status(400).json({
             message: 'Username already taken'
           }));
-        case 14:
+        case 16:
+          // Update username
           user.username = username;
-          _context7.next = 17;
+          _context7.next = 19;
           return user.save();
-        case 17:
+        case 19:
+          // Send updated user data
           res.json({
             message: 'User updated successfully',
-            username: user.username
+            username: user.username,
+            profileImage: user.profileImage
           });
-          _context7.next = 24;
+          _context7.next = 26;
           break;
-        case 20:
-          _context7.prev = 20;
+        case 22:
+          _context7.prev = 22;
           _context7.t0 = _context7["catch"](0);
           console.error('Error updating user profile:', _context7.t0);
           res.status(500).json({
             message: 'Internal server error',
             error: _context7.t0.message
           });
-        case 24:
+        case 26:
         case "end":
           return _context7.stop();
       }
-    }, _callee7, null, [[0, 20]]);
+    }, _callee7, null, [[0, 22]]);
   }));
   return function (_x13, _x14) {
     return _ref7.apply(this, arguments);

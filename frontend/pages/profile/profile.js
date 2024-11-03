@@ -207,18 +207,33 @@ const ProfileSettings = () => {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData),
+                    credentials: 'include'
                 });
+    
                 if (!response.ok) {
-                    throw new Error('Failed to update user data');
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Failed to update user data');
                 }
+    
                 const updatedData = await response.json();
-                login(updatedData);
+                
+                // Update the auth context with the full user object
+                login({
+                    username: updatedData.username,
+                    profileImage: updatedData.profileImage || user.profileImage
+                });
+                
+                // Update local state
+                setFormData({ username: updatedData.username });
                 setExpandedSection(null);
             } catch (error) {
                 console.error('Error updating user data:', error);
+                // Show error to user
+                alert(error.message || 'Failed to update username');
             }
         }
     };
+    
 
     const handleCancel = () => {
         setExpandedSection(null);

@@ -106,8 +106,6 @@ app.use(session({
     }
 }));
 
-
-
 // Authentication middleware
 const requireAuth = async (req, res, next) => {
     if (!req.session.userId) {
@@ -258,28 +256,44 @@ app.post('/api/users/login', async (req, res) => {
 // Combined user profile update endpoint
 app.put('/api/users', async (req, res) => {
     try {
-        const { username } = req.body;
-        const user = await User.findOne();
+        // Check if user is authenticated via session
+        if (!req.session.userId) {
+            return res.status(401).json({ message: 'Authentication required' });
+        }
 
+        const { username } = req.body;
+        
+        // Find the current user using the session ID
+        const user = await User.findById(req.session.userId);
+        
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
+        // Validate username
         if (!username || username.trim() === '') {
             return res.status(400).json({ message: 'Username cannot be empty' });
         }
 
-        const existingUser = await User.findOne({ username, _id: { $ne: user._id } });
+        // Check if username is taken by another user
+        const existingUser = await User.findOne({
+            username: username,
+            _id: { $ne: user._id }
+        });
+
         if (existingUser) {
             return res.status(400).json({ message: 'Username already taken' });
         }
 
+        // Update username
         user.username = username;
         await user.save();
 
+        // Send updated user data
         res.json({
             message: 'User updated successfully',
-            username: user.username
+            username: user.username,
+            profileImage: user.profileImage
         });
     } catch (error) {
         console.error('Error updating user profile:', error);
