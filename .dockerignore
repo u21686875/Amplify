@@ -7,3 +7,5 @@ Dockerfile
 .gitignore
 README.md
 .env
+.DS_Store
+*.md

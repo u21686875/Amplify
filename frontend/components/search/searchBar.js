@@ -12,10 +12,42 @@ const SearchBar = () => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
-    const { user, logout } = useAuth(); // Add user from AuthContext
+    const { user, logout } = useAuth();
 
+    // Add the missing toggleDropdown function
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    // Add click outside handler to close dropdown
     useEffect(() => {
-        if (searchTerm) {
+        const handleClickOutside = (event) => {
+            if (isDropdownOpen && !event.target.closest('.profile-dropdown')) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isDropdownOpen]);
+
+    const handleOptionClick = (option) => {
+        switch (option) {
+            case 'profile':
+                navigate('/profile');
+                break;
+            case 'logout':
+                logout();
+                break;
+            default:
+                break;
+        }
+        setIsDropdownOpen(false);
+    };
+
+    // Rest of your existing code remains the same
+    useEffect(() => {
+        if (searchTerm.trim().length > 0) {
             const delayDebounceFn = setTimeout(() => {
                 fetchSuggestions();
             }, 300);
@@ -25,91 +57,105 @@ const SearchBar = () => {
         }
     }, [searchTerm]);
 
-    const toggleDropdown = () => {
-        setIsDropdownOpen(prevState => !prevState);
-    };
-
-    const handleOptionClick = (option) => {
-        setIsDropdownOpen(false);
-        if (option === 'profile') {
-            navigate('/profile');
-        } else if (option === 'logout') {
-            handleLogout();
-        }
-    };
-
-    const handleLogout = () => {
-        logout(); // Call the logout function from AuthContext
-        navigate('/auth'); // Redirect to the auth page after logout
-    };
-
     const fetchSuggestions = async () => {
+        if (searchTerm.trim().length === 0) return;
+    
         setIsSearching(true);
         try {
-            const [playlistsRes, releasesRes, usersRes] = await Promise.all([
-                fetch('/api/personalPlaylists'),
-                fetch('/api/newReleases'),
-                fetch('/api/users')
+            // Add validation for response type
+            const fetchWithValidation = async (url) => {
+                const response = await fetch(url, { credentials: 'include' });
+                const contentType = response.headers.get('content-type');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new Error('Server did not return JSON');
+                }
+                
+                return response;
+            };
+    
+            // Fetch data with validation
+            const [playlistsRes, releasesRes] = await Promise.all([
+                fetchWithValidation('/api/personalPlaylists'),
+                fetchWithValidation('/api/newReleases'),
+                // fetchWithValidation('/api/users')
             ]);
     
-            const playlists = await playlistsRes.json();
-            const releases = await releasesRes.json();
-            const users = await usersRes.json();
+            // Parse JSON responses
+            const [playlists, releases] = await Promise.all([
+                playlistsRes.json(),
+                releasesRes.json(),
+                // usersRes.json()
+            ]);
+
+            console.log('the fuck is in here:', [playlistsRes, releasesRes])
+    
+            // Add data validation
+            if (!Array.isArray(playlists) || !Array.isArray(releases)) {
+                throw new Error('Invalid data format received');
+            }
     
             const searchTermLower = searchTerm.toLowerCase().trim();
             const isHashtagSearch = searchTermLower.startsWith('#');
             const cleanSearchTerm = isHashtagSearch ? searchTermLower.slice(1) : searchTermLower;
     
-            // Playlist suggestions (unchanged)
-            const playlistSuggestions = Array.isArray(playlists) ? playlists
-                .filter(playlist => playlist.title.toLowerCase().includes(cleanSearchTerm))
-                .map(playlist => ({ ...playlist, type: 'playlist' })) : [];
+            // Process suggestions with null checks
+            const playlistSuggestions = playlists
+                .filter(playlist => playlist?.title?.toLowerCase().includes(cleanSearchTerm))
+                .map(playlist => ({ ...playlist, type: 'playlist' }));
     
-            // Enhanced release suggestions with hashtag search
-            const releaseSuggestions = Array.isArray(releases) ? releases
+            const releaseSuggestions = releases
                 .filter(release => {
                     if (isHashtagSearch) {
-                        // Search only in hashtags when search term starts with #
-                        return release.hashtags?.some(tag => 
+                        return release.hashtags?.some(tag =>
                             tag.toLowerCase().includes(cleanSearchTerm)
                         );
-                    } else {
-                        // Search in title, artist, and hashtags for normal search
-                        return (
-                            release.title.toLowerCase().includes(cleanSearchTerm) ||
-                            release.artist.toLowerCase().includes(cleanSearchTerm) ||
-                            release.hashtags?.some(tag => 
-                                tag.toLowerCase().includes(cleanSearchTerm)
-                            )
-                        );
                     }
+                    return (
+                        release.title?.toLowerCase().includes(cleanSearchTerm) ||
+                        release.artist?.toLowerCase().includes(cleanSearchTerm) ||
+                        release.hashtags?.some(tag =>
+                            tag.toLowerCase().includes(cleanSearchTerm)
+                        )
+                    );
                 })
-                .map(release => ({ 
-                    ...release, 
+                .map(release => ({
+                    ...release,
                     type: 'release',
-                    // Add relevant hashtags that match the search
                     matchingHashtags: release.hashtags?.filter(tag =>
                         tag.toLowerCase().includes(cleanSearchTerm)
                     )
-                })) : [];
+                }));
     
-            // User suggestions (unchanged)
-            const userSuggestions = Array.isArray(users) 
-                ? users.filter(user => user.username.toLowerCase().includes(cleanSearchTerm))
-                : (users && users.username && users.username.toLowerCase().includes(cleanSearchTerm) ? [users] : []);
+            // const userSuggestions = users
+            //     .filter(user => user?.username?.toLowerCase().includes(cleanSearchTerm))
+            //     .map(user => ({ ...user, type: 'user' }));
     
-            const mappedUserSuggestions = userSuggestions.map(user => ({ ...user, type: 'user' }));
+            setSuggestions([...playlistSuggestions, ...releaseSuggestions]);
     
-            setSuggestions([...playlistSuggestions, ...releaseSuggestions, ...mappedUserSuggestions]);
         } catch (error) {
-            console.error('Error fetching suggestions:', error);
+            console.error('Error fetching suggestions:', error.message);
+            setSuggestions([]);
+            
+            // Add user-friendly error handling
+            if (error.message.includes('Server did not return JSON')) {
+                console.log('API server might not be running or endpoints are not configured correctly');
+            }
+        } finally {
+            setIsSearching(false);
         }
-        setIsSearching(false);
     };
 
-
     const handleSearchInputChange = (e) => {
-        setSearchTerm(e.target.value);
+        const value = e.target.value;
+        setSearchTerm(value);
+        if (value.trim().length === 0) {
+            setSuggestions([]);
+        }
     };
 
     const handleSuggestionClick = (suggestion) => {
@@ -124,27 +170,31 @@ const SearchBar = () => {
         setSelectedItem(null);
     };
 
-
     return (
         <div className="flex items-center justify-between p-4 w-full box-border">
             <div className="relative flex-grow">
                 <div className="relative w-2/5">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                    <input 
-                        type="text" 
-                        placeholder="Search playlists, releases, or users" 
+                    <input
+                        type="text"
+                        placeholder="Search playlists, releases, or users"
                         className="w-full py-5 px-10 rounded-full border-none bg-neutral-800 text-white placeholder:text-lg placeholder:pl-4 focus:outline-none focus:ring-2 focus:ring-green-500"
                         value={searchTerm}
                         onChange={handleSearchInputChange}
                     />
                 </div>
 
-                {/* Search Suggestions Dropdown - Keep unchanged */}
-                {suggestions.length > 0 && (
+                {isSearching && (
+                    <div className="absolute top-full left-0 right-0 w-2/5 bg-neutral-800 rounded-b-lg shadow-lg z-10 p-4">
+                        <div className="text-white text-center">Loading...</div>
+                    </div>
+                )}
+
+                {!isSearching && suggestions.length > 0 && searchTerm.trim() !== '' && (
                     <div className="absolute top-full left-0 right-0 w-2/5 bg-neutral-800 rounded-b-lg shadow-lg z-10 max-h-72 overflow-y-auto">
                         {suggestions.map((suggestion, index) => (
-                            <div 
-                                key={index} 
+                            <div
+                                key={`${suggestion.type}-${index}`}
                                 className="flex justify-between items-center px-4 py-3 hover:bg-neutral-700 cursor-pointer"
                                 onClick={() => handleSuggestionClick(suggestion)}
                             >
@@ -155,8 +205,8 @@ const SearchBar = () => {
                                     {suggestion.type === 'release' && suggestion.matchingHashtags?.length > 0 && (
                                         <div className="flex gap-2 mt-1">
                                             {suggestion.matchingHashtags.map((tag, i) => (
-                                                <span 
-                                                    key={i} 
+                                                <span
+                                                    key={i}
                                                     className="text-xs text-cyan-400 flex items-center"
                                                 >
                                                     <Hash size={12} className="mr-0.5" />
@@ -166,11 +216,10 @@ const SearchBar = () => {
                                         </div>
                                     )}
                                 </div>
-                                <span className={`text-sm ${
-                                    suggestion.type === 'release' ? 'text-green-400' :
+                                <span className={`text-sm ${suggestion.type === 'release' ? 'text-green-400' :
                                     suggestion.type === 'playlist' ? 'text-cyan-400' :
-                                    'text-gray-400'
-                                }`}>
+                                        'text-gray-400'
+                                    }`}>
                                     {suggestion.type}
                                 </span>
                             </div>
@@ -178,7 +227,6 @@ const SearchBar = () => {
                     </div>
                 )}
 
-                {/* Modal - Keep unchanged */}
                 {isModalOpen && selectedItem && (
                     <ReleasePopup
                         release={selectedItem}
@@ -190,29 +238,27 @@ const SearchBar = () => {
                 )}
             </div>
 
-            {/* Profile Section - Updated with user profile image */}
-            <div className="relative">
-                <div 
+            <div className="relative profile-dropdown">
+                <div
                     className="w-14 h-14 rounded-full border-2 border-green-500 overflow-hidden cursor-pointer mr-10 group"
                     onClick={toggleDropdown}
                 >
-                    <img 
+                    <img
                         src={user?.profileImage || '/assets/images/user/user.jpg'}
                         alt="User image"
                         className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
                     />
                 </div>
 
-                {/* Profile Dropdown - Kept original structure */}
                 {isDropdownOpen && (
                     <div className="absolute w-[126%] top-[104%] right-8 bg-neutral-800 rounded-lg shadow-lg z-10">
-                        <div 
+                        <div
                             className="px-5 py-3 text-white cursor-pointer hover:bg-neutral-700"
                             onClick={() => handleOptionClick('profile')}
                         >
                             Profile page
                         </div>
-                        <div 
+                        <div
                             className="px-5 py-3 text-white cursor-pointer hover:bg-neutral-700"
                             onClick={() => handleOptionClick('logout')}
                         >
@@ -226,4 +272,3 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-

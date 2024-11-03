@@ -1,13 +1,22 @@
-version: '3'
+version: '3.8'
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
       - MONGODB_URI=mongodb://mongo:27017/amplify_music_db
+      - PORT=3000
+      - NODE_ENV=development
+      - SESSION_SECRET=2f3a76b1c4d8e9f0a5b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4
+    volumes:
+      - .:/app
+      - /app/node_modules
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
 
   mongo:
     image: mongo:latest
@@ -15,6 +24,15 @@ services:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+      - ./backend/exports:/docker-entrypoint-initdb.d/exports
+    command: mongod --quiet --logpath /dev/null
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
 volumes:
   mongodb_data:

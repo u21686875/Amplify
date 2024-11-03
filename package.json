@@ -4,7 +4,17 @@
   "main": "frontend/src/index.js",
   "scripts": {
     "build": "webpack && babel backend/server.js -d backend/dist",
-    "start": "npm run build && node backend/dist/server.js"
+    "start": "npm run build && node backend/dist/server.js",
+    "docker:build": "docker-compose build",
+    "docker:start": "docker-compose up",
+    "docker:stop": "docker-compose down",
+    "docker:restart": "docker-compose down && docker-compose up",
+    "docker:logs": "docker-compose logs -f",
+    "docker:clean": "docker-compose down -v && docker system prune -f",
+    "docker:save": "docker-compose build && docker save -o amplify-project.tar $(docker-compose images -q)",
+    "docker:shell:frontend": "docker-compose exec frontend sh",
+    "docker:shell:backend": "docker-compose exec backend sh",
+    "docker:test": "docker-compose -f docker-compose.yml -f docker-compose.test.yml up --abort-on-container-exit"
   },
   "keywords": [],
   "author": "",

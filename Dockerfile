@@ -1,20 +1,20 @@
-# Use a more recent Node.js version as the base image
-FROM node:16
+# Use Node 16 Alpine for a smaller image size
+FROM node:16-alpine
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package files
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Copy the rest of the application
 COPY . .
 
-# Expose the port the app runs on (adjust if your app uses a different port)
+# Expose port 3000
 EXPOSE 3000
 
-# Command to run the application
+# Start the application
 CMD ["npm", "start"]
